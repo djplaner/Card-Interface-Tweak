@@ -23,14 +23,19 @@ function cardsInterface($){
 	      row_element: "li" };
 	
 	/* Get the titles and descriptions of the items on the page */
-	titles = getTitles($);
+	var items = getCardItems($);
 	
 	/*** DOING - need to merge these into a single function and generate
 	 *   an array of objects with all the parsed elements, but only for
 	 *   items with Card: */
-	console.log( "TITLES: " + titles);
-	/*descriptions = getDescriptions($);
-	console.log( "Descriptions: " + descriptions);*/
+	items.forEach( function(idx) {
+	    //var value = items[idx];
+	    //console.log( "ITEM " + idx);
+	    console.log( "     title " + idx.title);
+	    console.log( "     picUrl " + idx.picUrl);
+	    console.log( "     description " + idx.description);
+	});
+	
 	
 	/* Parse the items (mostly descriptions) further */
 	
@@ -39,58 +44,45 @@ function cardsInterface($){
 
 /****
  * TO do
- * 1. Get only items with Card: at the start
+ * 1. Get only items with Card: at the start **DONE**
  * 2. Get the descriptions as well as titles
  * 3. Parse both and constract array of objects
  */
 
-function getTitles($) {
+function getCardItems($) {
     
 	/* Get the headers in a div with class item 
 	 * but only those containing Card: */      
 	var headers = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).children(".item").filter(":contains('Card:')");
-	var titles = [];
+	var items=[];
 	
-	alert('num headers ' + headers.length);
+	//alert('num headers ' + headers.length);
 	
 	headers.each( function(idx){
 	    
 	    /* Get heading text with edit on */
 	    /* TODO - will likely need changes to work without edit */
 	    var tspan = $(this).find("span")[2];
-	    titles.push( $(tspan).html() );
+	    var fullTitle = $(tspan).html();
+	    var title,picUrl;
 	    
-	    console.log( "Header " + idx + " - " + $(tspan).html())
+	    
+	    m = fullTitle.match(/^\s*[Cc]ard:(.*) Image:(.*)/m);
+	    title=m[1];  picUrl=m[2]
+
+	    /*console.log( "Header " + idx + " - " + $(tspan).html());
+	    console.log( "    TItle - " + title );
+	    console.log( "    picUrl - " + picUrl );*/
 	    /* Get the description */
-	    var desc = $(this).siblings(".details")/*.children('vtbegenerated')*/;
-	    console.log( "Description " + idx + " - " + $(desc).html());
+	    var desc = $(this).siblings(".details");
+	    var cont = $(desc).children('.vtbegenerated');
+	    //console.log( "Description " + idx + " - " + $(desc).html());
+	    console.log( "Cont " + idx + " - " + $(cont).html());
 	    
+	    // save the item for later
+	    var item = {title:fullTitle, picUrl:picUrl, description:$(cont).html()};
+	    items.push(item);
 	});
 	
-	return titles;
-}
-
-/*
- * Get an array containing the descriptions for each of the items on the
- * Blackboard page
- */
-
-function getDescriptions($) {
-    
-	/* Get the headers in a div with class item */      
-	/* Is the vtbegenerated class present on view? */
-	var headers = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).children(".details").children('.vtbegenerated');
-	var descriptions = [];
-	
-	alert('num headers ' + headers.length);
-	
-	headers.each( function(idx){
-	    /* Get heading text with edit on */
-	    /* TODO - will likely need changes to work without edit */
-	    /*var tspan = $(this).find("span")[2];*/
-	    titles.push( $(this).html() );
-	    
-	});
-	
-	return titles;
+	return items;
 }
