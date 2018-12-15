@@ -22,29 +22,34 @@ var interfaceHtmlTemplate = `
 
 var cardHtmlTemplate = `
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <div class="bg-cover h-48" style="background-image: url('{PIC_URL}');"></div>
       <div class="p-4 flex-1 flex flex-col">
-       <a class="hover:text-red" href="{LINK}">
+       <a href="{LINK}">
         Module {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="mb-4 hover:border-red text-grey-darker text-sm flex-1">
+        <div class="mb-4 text-grey-darker text-sm flex-1">
           {DESCRIPTION}
         </div>
         </a>
-        <a href="{LINK}" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide" style="text-align: right;">Engage</a>
+         {LINK_ITEM}
       </div>
     </div>
   </div>
 `;
 
+var linkItemHtmlTemplate = `
+        <p>&nbsp;<br /> &nbsp;</p>
+        <div class="p-4 absolute pin-r pin-b">
+           <a href="{LINK}"><button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+            Engage
+        </button></a>
+        </div>
+        `;
+
 /****
  * TO DO
- * 2. Make the whole card a link (but retain link as well) Consider new template for card interface that is more active (e.g. roll over)
  * 3. Rethink how images are provided. How many staff know how to source an image, place it online and get it's link? Should it be an image attachement? How to handle licencing?
- * 4. How to handle items that aren't folders/links? e.g. Project Week. Including not including a Module number
- * 5. remove the icon for the first item
- * 6. Implement some way to specify in which item the card interface should be inserted.
  */
 function cardsInterface($){
 	/* define variables based on Bb page type */
@@ -131,7 +136,12 @@ function getCardItems($) {
 	    cardHtml = cardHtml.replace('{PIC_URL}', idx.picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
 	    cardHtml = cardHtml.replace('{DESCRIPTION}', idx.description);
-	    cardHtml = cardHtml.replace('{LINK}', idx.link);
+	    if ( idx.link ) {
+	        cardHtml = cardHtml.replace('{LINK_ITEM}', linkItemHtmlTemplate );
+	    } else {
+	        cardHtml = cardHtml.replace('{LINK_ITEM}', '');
+	    }
+	    cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
 	    
 	    cards = cards.concat(cardHtml);
 	    moduleNum++;
