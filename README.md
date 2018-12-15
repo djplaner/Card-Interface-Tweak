@@ -19,8 +19,10 @@ When editing is turned off - the student view - the normal content items are hid
  
 ### How it works
 
-1. Add an item to the page and copy and paste the contents of the **tweak.js** file into the description. Choose any title.
+1. Add an item to the Blackboard content page on which to use the Card interface.
+1. Copy and paste the contents of the **tweak.js** file into the description of this new item. 
 1. For every item you wish to have as a card, specify an image for the card using the data format below.
+1. Whenever the page is viewed the tweak will insert the card interface (currently into the first item) based on the elements in the page
 
 ### Data format
  
