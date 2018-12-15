@@ -9,6 +9,8 @@ Interface kludge for Blackboard 9.1
 
 ### Example
 
+The following example is with editing turned on. With editing turned off the original Blackboard content items will be hidden.
+
 ![Example card interface](https://farm5.staticflickr.com/4822/46279789112_d030539f62.jpg)
  
 ### How it works
