@@ -5,51 +5,59 @@
  
  
  * data format
- * - Card title - heading of Blackboard item with Card: as the start
+ * - Card's indicating by "Card Image: URL" in the description, though the URL can be empty
+ * - Card title - heading of Blackboard item
  * - Module number - just the order in which they appear in the list
- * - picture - heading includes Image:**url**
+ * - picture - heading includes Card Image:**url**
  * - description - the rest of the description
  */
 
+// Interface design from https://codepen.io/njs/pen/BVdwZB
 var interfaceHtmlTemplate = `
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" /></p>
 <div class="flex flex-wrap -m-3">
  {CARDS}
 </div>
-`
+`;
 
 var cardHtmlTemplate = `
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
     <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
-          <div class="bg-cover h-48" style="background-image: url('{PIC_URL}');"></div>
-          <div class="p-4 flex-1 flex flex-col">
-          Module {MODULE_NUM}
-          <h3 class="mb-4 text-2xl">{TITLE}</h3>
-          <div class="mb-4 text-grey-darker text-sm flex-1">
+      <div class="bg-cover h-48" style="background-image: url('{PIC_URL}');"></div>
+      <div class="p-4 flex-1 flex flex-col">
+       <a class="hover:text-red" href="{LINK}">
+        Module {MODULE_NUM}
+        <h3 class="mb-4 text-2xl">{TITLE}</h3>
+        <div class="mb-4 hover:border-red text-grey-darker text-sm flex-1">
           {DESCRIPTION}
-
-          <a href="{LINK}" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide" style="text-align: right;">Engage</a>
-          </div>
         </div>
+        </a>
+        <a href="{LINK}" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide" style="text-align: right;">Engage</a>
+      </div>
     </div>
   </div>
-`
+`;
+
 /****
  * TO DO
- * 1. Finish getCardItems
- * 2. append the html to the Card Interface: item
- * 3. Remove the title icon and do something with any title for Card Interface item 
+ * 2. Make the whole card a link (but retain link as well) Consider new template for card interface that is more active (e.g. roll over)
+ * 3. Rethink how images are provided. How many staff know how to source an image, place it online and get it's link? Should it be an image attachement? How to handle licencing?
+ * 4. How to handle items that aren't folders/links? e.g. Project Week. Including not including a Module number
+ * 5. remove the icon for the first item
+ * 6. Implement some way to specify in which item the card interface should be inserted.
  */
 function cardsInterface($){
-	//alert('Hello');
-	
 	/* define variables based on Bb page type */
 	/* used to identify important components in html */
 	var tweak_bb_active_url_pattern = "listContent.jsp";
 	window.tweak_bb = { display_view: (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ), 
           page_id: "#content_listContainer",
 	      row_element: "li" };
-	
+	      
+	 if (location.href.indexOf("listContent.jsp") > 0) {
+           $(".gutweak").parents("li").hide(); 
+	 }
+
 	/* Get the titles and descriptions of the items on the page */
 	var items = getCardItems($);
 	
@@ -62,42 +70,38 @@ function cardsInterface($){
  * 1. Get only items with Card: at the start **DONE**
  * 2. Get the descriptions as well as titles **DONE**
  * 3. Parse both and constract array of objects **DONE**
- * 4. Get the link of the title 
+ * 4. Get the link of the title  **DONE**
  * 5. Throw an error or do something if there's no link?
  *    - remove the ENGAGE link?
  */
 
 function getCardItems($) {
-    
-	/* Get the headers in a div with class item 
-	 * but only those containing Card: */      
-	var headers = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).children(".item").filter(":contains('Card:')");
+	// Find all the items that containg Card Image: ??
+	var cards = jQuery(tweak_bb.page_id + " > " +tweak_bb.row_element).children(".details").children('.vtbegenerated').filter(":contains('Card Image:')");
 	var items=[];
 	
-	//alert('num headers ' + headers.length);
-	
-	headers.each( function(idx){
+	// Loop through each card and construct the items array with card data
+	cards.each( function(idx){
+        // Parse the description and remove the Card Image data	   
+	    var description = $(this).html();
+	    m = description.match(/[Cc]ard [Ii]mage: ([^ <]*)/ );
+	    var picUrl=m[1];
+	    description = description.replace( m[0], "");
 	    
-	    /* Get heading text with edit on */
-	    /* TODO - will likely need changes to work without edit */
-	    var tspan = $(this).find("span")[2];
-	    var fullTitle = $(tspan).html();
-	    var title,picUrl,link;
+	    // need to get back to the header which is up one div, a sibling, then span
+	    var header = $(this).parent().siblings(".item").find("span")[2];
+	    var title = $(header).html(),link;
+	    link = $(header).parent('a').attr('href');
 	    
-	    m = fullTitle.match(/^\s*[Cc]ard:(.*) Image:(.*)/m);
-	    title=m[1];  picUrl=m[2]
-
-	    /*console.log( "Header " + idx + " - " + $(tspan).html());
-	    console.log( "    TItle - " + title );
-	    console.log( "    picUrl - " + picUrl );*/
-	    /* Get the description */
-	    var desc = $(this).siblings(".details");
-	    var cont = $(desc).children('.vtbegenerated');
-	    //console.log( "Description " + idx + " - " + $(desc).html());
-	    console.log( "Cont " + idx + " - " + $(cont).html());
-	    
+	    // Hide the contentItem  TODO Only do this if display page
+	    var tweak_bb_active_url_pattern = "listContent.jsp";
+	    if (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ) { 
+	        var contentItem = $(this).parent().parent().hide();
+	        //console.log( "content item " + contentItem.html());
+	    }
 	    // save the item for later
-	    var item = {title:title, picUrl:picUrl, description:$(cont).html()};
+	    var item = {title:title, picUrl:picUrl, description:description,
+	        link:link};
 	    items.push(item);
 	});
 	
@@ -127,7 +131,7 @@ function getCardItems($) {
 	    cardHtml = cardHtml.replace('{PIC_URL}', idx.picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
 	    cardHtml = cardHtml.replace('{DESCRIPTION}', idx.description);
-	    cardHtml = cardHtml.replace('{LINK}', "TO DO");
+	    cardHtml = cardHtml.replace('{LINK}', idx.link);
 	    
 	    cards = cards.concat(cardHtml);
 	    moduleNum++;
