@@ -9,9 +9,13 @@ Interface kludge for Blackboard 9.1
 
 ### Example
 
-The following example is with editing turned on. With editing turned off the original Blackboard content items will be hidden.
+Editing a Blackboard content page with the card tweak looks like the following. Note the "normal" Blackboard content items after the cards. They are visible when editing.
 
-![Example card interface](https://farm5.staticflickr.com/4822/46279789112_d030539f62.jpg)
+![Editing card interface](https://farm5.staticflickr.com/4822/46279789112_a65b67243c.jpg)
+
+When editing is turned off - the student view - the normal content items are hidden to give the following.
+
+![Viewing card interface](https://farm5.staticflickr.com/4844/46280738772_932c7bf9f9.jpg)
  
 ### How it works
 
