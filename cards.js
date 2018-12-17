@@ -22,8 +22,8 @@ var interfaceHtmlTemplate = `
 
 var cardHtmlTemplate = `
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
-      <div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div>
+    <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
+      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
         Module {MODULE_NUM}
@@ -75,6 +75,7 @@ var dateHtmlTemplate = `
  * 2. Provide a "small" version of the card interface to 
  * 2. Provide a date CSS addition to the card **DONE**
  * 2. Make the whole card a link (but retain link as well) Consider new template for card interface that is more active (e.g. roll over)
+ *     - group hover tailwind https://codepen.io/adamwathan/pen/aVQbLM/
  * 2. Exclude content items from the Module naming
  */
  
@@ -114,7 +115,7 @@ function getCardItems($) {
 	
 	// Loop through each card and construct the items array with card data
 	cards.each( function(idx){
-        // Parse the description and remove the Card Image data	   
+        // Parse the description and remove the Card Image data	    
 	    var description = $(this).html(),picUrl;
 	    m = description.match(/[Cc]ard [Ii]mage: ([^ <]*)/ );
 	    if (m) {
@@ -180,10 +181,21 @@ function getCardItems($) {
 	    cardHtml = cardHtml.replace('{PIC_URL}', idx.picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
 	    cardHtml = cardHtml.replace('{DESCRIPTION}', idx.description);
+	    // Does the card link to another content item?
 	    if ( idx.link ) {
+	        // add the link
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', linkItemHtmlTemplate );
 	    } else {
+	        // remove the link
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', '');
+	        cardHtml = cardHtml.replace('<a href="{LINK}">','');
+	        cardHtml = cardHtml.replace('</a>','');
+	        // remove the shadow/border effect
+	        cardHtml = cardHtml.replace('hover:outline-none','');
+	        cardHtml = cardHtml.replace('hover:shadow-outline', '');
+	        // don't count it as a module
+	        cardHtml = cardHtml.replace('Module ' + moduleNum, '');
+	        moduleNum--;
 	    }
 	    cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
 	    
