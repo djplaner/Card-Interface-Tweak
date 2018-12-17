@@ -33,6 +33,7 @@ var cardHtmlTemplate = `
         </div>
         </a>
          {LINK_ITEM}
+         {DATE}
       </div>
     </div>
   </div>
@@ -46,9 +47,35 @@ var linkItemHtmlTemplate = `
         </button></a>
         </div>
         `;
+        
+var dateHtmlTemplate = `
+<div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24 absolute pin-t pin-r">
+          <div class="bg-black text-white py-1 text-xs">
+             Commencing
+          </div>
+          <div class="bg-red text-white py-1">
+      	     {MONTH}
+          </div>
+          <div class="pt-1 border-l border-r border-b">
+      	     <span class="text-2xl font-bold">{DATE}</span>
+          </div>
+          <!-- <div class="pb-2 px-2 border-l border-r border-b rounded-b flex justify-between">
+      	    <span class="text-xs font-bold">Fri</span>
+      	    <span class="text-xs font-bold">2018</span>
+          </div> -->
+        </div>
+`;
+
+/** <a href="{LINK}" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide" style="text-align: right;">Engage</a>
+ */
 
 /****
  * TO DO
+ * 1. How to provide a "contextual" card at the start
+ * 2. Provide a "small" version of the card interface to 
+ * 2. Provide a date CSS addition to the card
+ * 2. 
+ * 2. Make the whole card a link (but retain link as well) Consider new template for card interface that is more active (e.g. roll over)
  * 3. Rethink how images are provided. How many staff know how to source an image, place it online and get it's link? Should it be an image attachement? How to handle licencing?
  */
 function cardsInterface($){
@@ -93,6 +120,14 @@ function getCardItems($) {
 	    var picUrl=m[1];
 	    description = description.replace( m[0], "");
 	    
+	    // Parse the date for commencing
+	    var month,date,m = description.match(/[Cc]ard [Cc]ommencing: ([A-Za-z]*) ([0-9]*)/);
+	    if (m) {
+    	    month=m[1];
+    	    date=m[2];
+    	    description = description.replace(m[0],"");
+	    }
+	    
 	    // need to get back to the header which is up one div, a sibling, then span
 	    var header = $(this).parent().siblings(".item").find("span")[2];
 	    var title = $(header).html(),link;
@@ -106,7 +141,7 @@ function getCardItems($) {
 	    }
 	    // save the item for later
 	    var item = {title:title, picUrl:picUrl, description:description,
-	        link:link};
+	        link:link,month:month,date:date};
 	    items.push(item);
 	});
 	
@@ -143,6 +178,13 @@ function getCardItems($) {
 	    }
 	    cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
 	    
+	    if ( idx.month ) {
+	        cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate );
+	        cardHtml = cardHtml.replace(/{MONTH}/g, idx.month);
+	        cardHtml = cardHtml.replace(/{DATE}/g, idx.date);
+	    } else {
+	        cardHtml = cardHtml.replace('{DATE}', '');
+	    }
 	    cards = cards.concat(cardHtml);
 	    moduleNum++;
 	});
