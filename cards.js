@@ -23,7 +23,7 @@ var interfaceHtmlTemplate = `
 var cardHtmlTemplate = `
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
     <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
-      <div class="bg-cover h-48" style="background-image: url('{PIC_URL}');"></div>
+      <div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div>
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
         Module {MODULE_NUM}
@@ -73,11 +73,11 @@ var dateHtmlTemplate = `
  * TO DO
  * 1. How to provide a "contextual" card at the start
  * 2. Provide a "small" version of the card interface to 
- * 2. Provide a date CSS addition to the card
- * 2. 
+ * 2. Provide a date CSS addition to the card **DONE**
  * 2. Make the whole card a link (but retain link as well) Consider new template for card interface that is more active (e.g. roll over)
- * 3. Rethink how images are provided. How many staff know how to source an image, place it online and get it's link? Should it be an image attachement? How to handle licencing?
+ * 2. Exclude content items from the Module naming
  */
+ 
 function cardsInterface($){
 	/* define variables based on Bb page type */
 	/* used to identify important components in html */
@@ -115,10 +115,19 @@ function getCardItems($) {
 	// Loop through each card and construct the items array with card data
 	cards.each( function(idx){
         // Parse the description and remove the Card Image data	   
-	    var description = $(this).html();
+	    var description = $(this).html(),picUrl;
 	    m = description.match(/[Cc]ard [Ii]mage: ([^ <]*)/ );
-	    var picUrl=m[1];
-	    description = description.replace( m[0], "");
+	    if (m) {
+    	    picUrl=m[1];
+	        description = description.replace( m[0], "");
+	    }
+	    
+	    // Check to see if an image with title "Card Image" has been inserted
+	    var inlineImage = $(this).find('img').attr('title', 'Card Image');
+	    if (inlineImage.length) {
+	        picUrl=inlineImage[0].src;
+	        description = description.replace(inlineImage[0].outerHTML,"");
+	    }
 	    
 	    // Parse the date for commencing
 	    var month,date,m = description.match(/[Cc]ard [Cc]ommencing: ([A-Za-z]*) ([0-9]*)/);
