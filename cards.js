@@ -81,7 +81,7 @@ var dateHtmlTemplate = `
  * 1. How to provide a "contextual" card at the start  **DONE**
  *     - experiment with the content item approach
  * 2. Allow "Module" word to be changed  **DONE**
- * 2. Allow the date word (commencing) to change (Assessment==due)
+ * 2. Allow the date word (commencing) to change (Assessment==due) **DONE**
  * 2. Add a "right now" important way to highlight a card
  * 2. Configure the number of cards and width of cards (e.g. 2 for assessment)
  * 2. Fix issues with formatting within the card
@@ -157,10 +157,11 @@ function getCardItems($) {
 	    }
 	    
 	    // See if there's a different label for date
-	    m = description.match(/[Cc]ard [Dd]ate [Ll]abel *: (([^<]*)/);
+	    m = description.match(/[Cc]ard [Dd]ate [Ll]abel *: ([^<]*)/);
 	    var dateLabel='Commencing';
 	    if (m) {
 	        dateLabel=m[1];
+	        description = description.replace( m[0], "");
 	    }
 	    
 	    // See if the Course Label should be changed
@@ -168,6 +169,7 @@ function getCardItems($) {
 	    m = description.match(/[Cc]ard [Ll]abel *: *([^<]*)/ );
 	    if (m) {
 	        label=m[1];
+	        description = description.replace( m[0], "");
 	    }
 	    
 	    // need to get back to the header which is up one div, a sibling, then span
@@ -216,11 +218,6 @@ function getCardItems($) {
  	// Get the content area in which to insert the HTML
  	var firstItem = cardInterface.parent().siblings(".details");
     
-    console.log( "Num headers now is " + firstItem.length);
-    //console.log( "Num x now is " + x.length);
-    
-    
-   
  	// Use the card HTML template and the data in items to generate
  	// HTML for each card
     var cards = "" ;
@@ -233,7 +230,6 @@ function getCardItems($) {
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
 	    description = idx.description.replace(/<p/, '<p class="pb-2"');
 	    description = description.replace(/<a/, '<a class="underline"');
-	    console.log("Description " + description);
 	    cardHtml = cardHtml.replace('{DESCRIPTION}', description);
 	    // Does the card link to another content item?
 	    if ( idx.link ) {
