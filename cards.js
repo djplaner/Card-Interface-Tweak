@@ -28,12 +28,12 @@ var cardHtmlTemplate = `
        <a href="{LINK}">
         Module {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="mb-4 flex-1">
+        <div class="mb-4 p-4 flex-1">
           {DESCRIPTION}
         </div>
         </a>
          {LINK_ITEM}
-         {DATE}
+         {DATE} 
       </div>
     </div>
   </div>
@@ -71,12 +71,20 @@ var dateHtmlTemplate = `
 
 /****
  * TO DO
+ * 1. Specify the content item into which card interface should be inserted
  * 1. How to provide a "contextual" card at the start
+ *     - experiment with the content item approach
+ * 2. Allow "Module" word to be changed
+ * 2. Allow the date word (commencing) to change (Assessment==due)
+ * 2. Configure the number of cards and width of cards (e.g. 2 for assessment)
+ * 2. Fix issues with formatting within the card
  * 2. Provide a "small" version of the card interface to 
  * 2. Provide a date CSS addition to the card **DONE**
- * 2. Make the whole card a link (but retain link as well) Consider new template for card interface that is more active (e.g. roll over)
- *     - group hover tailwind https://codepen.io/adamwathan/pen/aVQbLM/
- * 2. Exclude content items from the Module naming
+ * 2. Make the whole card a link (but retain link as well) Consider new template for card interface that is more active (e.g. roll over)  **DONE***
+ * 2. Exclude content items from the Module naming  **DONE**
+ * 2. Add some instructions into the tweak HTML to point to documentation and help with setting up.
+ * 3. Explore the use of opacity to highlight the whole card?
+ *     i.e. an overview that goes over the top? or perhaps just shade bottom same blue as the border with white text
  */
  
 function cardsInterface($){
@@ -134,23 +142,9 @@ function getCardItems($) {
 	        var bb = $.parseHTML(description);
 	        // This will find the class
 	        console.log("Num classes = " + $(description).find('.contextMenuContainer').length);
-	        stringToRemove = $(description).find('.contextMenuContainer').clone().html();
-	        description = description.replace( stringToRemove, '');
-	        /*console.log(' END END HTML');
-	        var bbObj = $(bb);
-	        console.dir(bbObj);
-	        console.dir(bb);
-	        console.log("BEFORE -- " + bbObj.outerHTML);
-	        console.log(" BBBB -- " + bbObj.prop('outerHTML'));
-	        console.log("DESCRIPTION --" + description);
-	        $(bb).remove('.contextMenuContainer');
-	        //$bb.remove('script');
-	        //$bb.remove('input')
-	        console.log( "With it removed - " + $(bb)[0].outerHTML);
-	        console.dir(bb);
+	        stringToRemove = $(description).find('.contextMenuContainer').parent().clone().html();
 	        
-	        console.log("------------------------------------");*/
-	        //description = $(bb)[1].outerHTML;
+	        description = description.replace( stringToRemove, '');
 	    }
 	    
 	    // Parse the date for commencing
