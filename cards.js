@@ -28,7 +28,7 @@ var cardHtmlTemplate = `
        <a href="{LINK}">
         Module {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="mb-4 text-grey-darker text-sm flex-1">
+        <div class="mb-4 flex-1">
           {DESCRIPTION}
         </div>
         </a>
@@ -117,7 +117,7 @@ function getCardItems($) {
 	cards.each( function(idx){
         // Parse the description and remove the Card Image data	    
 	    var description = $(this).html(),picUrl;
-	    m = description.match(/[Cc]ard [Ii]mage: ([^ <]*)/ );
+	    m = description.match(/[Cc]ard [Ii]mage: *([^\s<]*)/ );
 	    if (m) {
     	    picUrl=m[1];
 	        description = description.replace( m[0], "");
@@ -127,7 +127,30 @@ function getCardItems($) {
 	    var inlineImage = $(this).find('img').attr('title', 'Card Image');
 	    if (inlineImage.length) {
 	        picUrl=inlineImage[0].src;
+	        //console.log("item html" + inlineImage[0].outerHTML);
 	        description = description.replace(inlineImage[0].outerHTML,"");
+	        // Bb also adds stuff when images inserted, remove it from 
+	        // description to be placed into card
+	        var bb = $.parseHTML(description);
+	        // This will find the class
+	        console.log("Num classes = " + $(description).find('.contextMenuContainer').length);
+	        stringToRemove = $(description).find('.contextMenuContainer').clone().html();
+	        description = description.replace( stringToRemove, '');
+	        /*console.log(' END END HTML');
+	        var bbObj = $(bb);
+	        console.dir(bbObj);
+	        console.dir(bb);
+	        console.log("BEFORE -- " + bbObj.outerHTML);
+	        console.log(" BBBB -- " + bbObj.prop('outerHTML'));
+	        console.log("DESCRIPTION --" + description);
+	        $(bb).remove('.contextMenuContainer');
+	        //$bb.remove('script');
+	        //$bb.remove('input')
+	        console.log( "With it removed - " + $(bb)[0].outerHTML);
+	        console.dir(bb);
+	        
+	        console.log("------------------------------------");*/
+	        //description = $(bb)[1].outerHTML;
 	    }
 	    
 	    // Parse the date for commencing
