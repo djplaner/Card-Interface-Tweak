@@ -11,6 +11,11 @@
  * - Module number - just the order in which they appear in the list
  * - picture - heading includes Card Image:**url** OR inserted image with title attribute = 'Card Image'
  * - description - the rest of the description
+ * - DATE
+ *   - Card Date: Mar 5
+ *     Specify the date to be displayed
+ *   - Card Date Label: Due
+ *     Specify the label for the date - default Commencing
  */
 
 // Interface design from https://codepen.io/njs/pen/BVdwZB
@@ -52,7 +57,7 @@ var linkItemHtmlTemplate = `
 var dateHtmlTemplate = `
 <div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24 absolute pin-t pin-r">
           <div class="bg-black text-white py-1 text-xs">
-             Commencing
+             {DATE_LABEL}
           </div>
           <div class="bg-red text-white py-1">
       	     {MONTH}
@@ -77,6 +82,7 @@ var dateHtmlTemplate = `
  *     - experiment with the content item approach
  * 2. Allow "Module" word to be changed  **DONE**
  * 2. Allow the date word (commencing) to change (Assessment==due)
+ * 2. Add a "right now" important way to highlight a card
  * 2. Configure the number of cards and width of cards (e.g. 2 for assessment)
  * 2. Fix issues with formatting within the card
  * 2. Provide a "small" version of the card interface to 
@@ -121,7 +127,7 @@ function getCardItems($) {
 	cards.each( function(idx){
         // Parse the description and remove the Card Image data	    
 	    var description = $(this).html(),picUrl;
-	    m = description.match(/[Cc]ard [Ii]mage: *([^\s<]*)/ );
+	    m = description.match(/[Cc]ard [Ii]mage *: *([^\s<]*)/ );
 	    if (m) {
     	    picUrl=m[1];
 	        description = description.replace( m[0], "");
@@ -143,16 +149,23 @@ function getCardItems($) {
 	    }
 	    
 	    // Parse the date for commencing
-	    var month,date,m = description.match(/[Cc]ard [Cc]ommencing: ([A-Za-z]*) ([0-9]*)/);
+	    var month,date,m = description.match(/[Cc]ard [Dd]ate *: *([A-Za-z]*) ([0-9]*)/);
 	    if (m) {
     	    month=m[1];
     	    date=m[2];
     	    description = description.replace(m[0],"");
 	    }
 	    
+	    // See if there's a different label for date
+	    m = description.match(/[Cc]ard [Dd]ate [Ll]abel *: (([^<]*)/);
+	    var dateLabel='Commencing';
+	    if (m) {
+	        dateLabel=m[1];
+	    }
+	    
 	    // See if the Course Label should be changed
 	    var label="Module";
-	    m = description.match(/[Cc]ard [Ll]abel: ([^<]*)/ );
+	    m = description.match(/[Cc]ard [Ll]abel *: *([^<]*)/ );
 	    if (m) {
 	        label=m[1];
 	    }
@@ -170,7 +183,7 @@ function getCardItems($) {
 	    }
 	    // save the item for later
 	    var item = {title:title, picUrl:picUrl, description:description,
-	        link:link,month:month,date:date,label:label};
+	        link:link,month:month,date:date,label:label,dateLabel:dateLabel};
 	    items.push(item);
 	});
 	
@@ -244,6 +257,7 @@ function getCardItems($) {
 	        cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate );
 	        cardHtml = cardHtml.replace(/{MONTH}/g, idx.month);
 	        cardHtml = cardHtml.replace(/{DATE}/g, idx.date);
+	        cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
 	    } else {
 	        cardHtml = cardHtml.replace('{DATE}', '');
 	    }
