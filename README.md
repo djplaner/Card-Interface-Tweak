@@ -1,28 +1,34 @@
 # Card Interface Tweak
 
-Interface kludge for Blackboard 9.1 
-
-1. Given a Blackboard content page with a list of items. 
-1. Find all the items using a defined format.
-1. Produce a card like interface based on [Tailwindcss responsive css](https://codepen.io/njs/pen/BVdwZB), with each item becoming a card
-1. Each of the Blackboard representations of the items is hidden
+Interface kludge for Blackboard 9.1 that transforms a standard Blackboard content page (a collection) of items into responsive, image rich card interface (based on [this approach](https://codepen.io/njs/pen/BVdwZB)). 
 
 ### Example
 
-Editing a Blackboard content page with the card tweak looks like the following. Note the "normal" Blackboard content items after the cards. They are visible when editing.
+For the learner, the card interface looks like the following
+
+![Viewing card interface](https://farm5.staticflickr.com/4844/46280738772_932c7bf9f9.jpg)
+
+For the teacher/content author, they will see both the card interface and the Blackboard content that is used to construct the card interface.
 
 ![Editing card interface](https://farm5.staticflickr.com/4822/46279789112_a65b67243c.jpg)
 
-When editing is turned off - the student view - the normal content items are hidden to give the following.
+The teacher/content author is able to edit the Blackboard content as they would normally and by doing this the content of the cards will change.
 
-![Viewing card interface](https://farm5.staticflickr.com/4844/46280738772_932c7bf9f9.jpg)
- 
 ### How it works
 
-1. Add an item to the Blackboard content page on which to use the Card interface.
-1. Copy and paste the contents of the **tweak.js** file into the description of this new item. 
-1. For every item you wish to have as a card, specify an image for the card using the data format below.
-1. Whenever the page is viewed the tweak will insert the card interface (currently into the first item) based on the elements in the page
+1. Add the card tweak Javascript to the page
+> 1. Create a new Blackboard content item on the page
+> 1. Using the HTML Code view to copy and paste the contents of the **tweak.js** file into the description of this new item 
+1. Add the Card Interface item
+> 1. Use an existing or add a new Blackboard content item on the page that is titled **Card Interface**
+> 1. Leave the content empty, the tweak will populate it
+1. Create and/or identify the other items on the page that should become cards
+> For each of these items
+> 1. Ensure they have a line containing **Card Image:** to indicate it should become a card.
+> 1. Specify an image to use on the card
+> 1. Specify a card date with a line containing **Card Date: Mar 8** (Replace __Mar 8__ with your date, but in the same format)
+> 1. Specify a label for the card (by default __Module__)
+
 
 ### Data format
  
