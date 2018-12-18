@@ -7,8 +7,9 @@
  * data format
  * - Card's indicating by "Card Image: URL" in the description, though the URL can be empty
  * - Card title - heading of Blackboard item
+ * - Card Label - Specify the label to apply to the card (default Module)
  * - Module number - just the order in which they appear in the list
- * - picture - heading includes Card Image:**url**
+ * - picture - heading includes Card Image:**url** OR inserted image with title attribute = 'Card Image'
  * - description - the rest of the description
  */
 
@@ -26,7 +27,7 @@ var cardHtmlTemplate = `
       <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
-        Module {MODULE_NUM}
+        {LABEL} {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
         <div class="mb-4 flex-1">
           {DESCRIPTION}
@@ -71,10 +72,10 @@ var dateHtmlTemplate = `
 
 /****
  * TO DO
- * 1. Specify the content item into which card interface should be inserted
- * 1. How to provide a "contextual" card at the start
+ * 1. Specify the content item into which card interface should be inserted **DONE**
+ * 1. How to provide a "contextual" card at the start  **DONE**
  *     - experiment with the content item approach
- * 2. Allow "Module" word to be changed
+ * 2. Allow "Module" word to be changed  **DONE**
  * 2. Allow the date word (commencing) to change (Assessment==due)
  * 2. Configure the number of cards and width of cards (e.g. 2 for assessment)
  * 2. Fix issues with formatting within the card
@@ -106,14 +107,9 @@ function cardsInterface($){
 	addCardInterface(items);
 }
 
-/****
- * TO do
- * 1. Get only items with Card: at the start **DONE**
- * 2. Get the descriptions as well as titles **DONE**
- * 3. Parse both and constract array of objects **DONE**
- * 4. Get the link of the title  **DONE**
- * 5. Throw an error or do something if there's no link?
- *    - remove the ENGAGE link?
+/***
+ * Extract an array of items from the page that have been specified as part 
+ * of the card interface
  */
 
 function getCardItems($) {
@@ -154,6 +150,13 @@ function getCardItems($) {
     	    description = description.replace(m[0],"");
 	    }
 	    
+	    // See if the Course Label should be changed
+	    var label="Module";
+	    m = description.match(/[Cc]ard [Ll]abel: ([^<]*)/ );
+	    if (m) {
+	        label=m[1];
+	    }
+	    
 	    // need to get back to the header which is up one div, a sibling, then span
 	    var header = $(this).parent().siblings(".item").find("span")[2];
 	    var title = $(header).html(),link;
@@ -167,7 +170,7 @@ function getCardItems($) {
 	    }
 	    // save the item for later
 	    var item = {title:title, picUrl:picUrl, description:description,
-	        link:link,month:month,date:date};
+	        link:link,month:month,date:date,label:label};
 	    items.push(item);
 	});
 	
@@ -212,9 +215,13 @@ function getCardItems($) {
     items.forEach( function(idx) {
 	    var cardHtml=cardHtmlTemplate;
 	    cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
+	    cardHtml = cardHtml.replace('{LABEL}',idx.label);
 	    cardHtml = cardHtml.replace('{PIC_URL}', idx.picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
-	    cardHtml = cardHtml.replace('{DESCRIPTION}', idx.description);
+	    description = idx.description.replace(/<p/, '<p class="pb-2"');
+	    description = description.replace(/<a/, '<a class="underline"');
+	    console.log("Description " + description);
+	    cardHtml = cardHtml.replace('{DESCRIPTION}', description);
 	    // Does the card link to another content item?
 	    if ( idx.link ) {
 	        // add the link
@@ -222,13 +229,13 @@ function getCardItems($) {
 	    } else {
 	        // remove the link
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', '');
-	        cardHtml = cardHtml.replace('<a href="{LINK}">','');
+	        cardHtml = cardHtml.replace(/<a href="{LINK}">/g,'');
 	        cardHtml = cardHtml.replace('</a>','');
 	        // remove the shadow/border effect
 	        cardHtml = cardHtml.replace('hover:outline-none','');
 	        cardHtml = cardHtml.replace('hover:shadow-outline', '');
 	        // don't count it as a module
-	        cardHtml = cardHtml.replace('Module ' + moduleNum, '');
+	        cardHtml = cardHtml.replace(idx.label + ' ' + moduleNum, '');
 	        moduleNum--;
 	    }
 	    cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
