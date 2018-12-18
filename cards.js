@@ -28,7 +28,7 @@ var cardHtmlTemplate = `
        <a href="{LINK}">
         Module {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="mb-4 p-4 flex-1">
+        <div class="mb-4 flex-1">
           {DESCRIPTION}
         </div>
         </a>
@@ -141,7 +141,6 @@ function getCardItems($) {
 	        // description to be placed into card
 	        var bb = $.parseHTML(description);
 	        // This will find the class
-	        console.log("Num classes = " + $(description).find('.contextMenuContainer').length);
 	        stringToRemove = $(description).find('.contextMenuContainer').parent().clone().html();
 	        
 	        description = description.replace( stringToRemove, '');
@@ -186,8 +185,26 @@ function getCardItems($) {
  
  function addCardInterface( items ) {
     // Initial kludge, just append to the first item
- 	var firstItem = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).children(".item").eq(0).siblings(".details")/*.children('.vtbegenerated')*/;
+ 	/*var firstItem = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).children(".item").eq(0).siblings(".details")/*.children('.vtbegenerated')*/
  	
+ 	// get the content item with h3 heading containing Card Interface
+ 	var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
+ 	
+ 	if ( cardInterface.length === 0){
+        console.log("Card: Can't find item with heading 'Card Interface' in which to insert card interface");
+        return false;
+    }
+    // make the h3 for the Card Interface item disappear
+    // (Can't hide the parent as then you can't edit via Bb)
+    cardInterface.hide();
+ 	// Get the content area in which to insert the HTML
+ 	var firstItem = cardInterface.parent().siblings(".details");
+    
+    console.log( "Num headers now is " + firstItem.length);
+    //console.log( "Num x now is " + x.length);
+    
+    
+   
  	// Use the card HTML template and the data in items to generate
  	// HTML for each card
     var cards = "" ;
