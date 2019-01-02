@@ -2,18 +2,30 @@
 
 A bit of digital renovation for Blackboard 9.1 in the form of some Javascript and CSS that can be used to transform a standard Blackboard content page (a collection) of items into responsive, image rich card interface. A transformation that can be accomplished with minimal technical knowledge.
 
-## Before - standard Blackboard 9.1 content page
+### Before - standard Blackboard 9.1 content page
+
+By default, Blackboard 9.1 provides a vertical list of content items.
 
 ![Normal Bb 9.1 content page](https://farm5.staticflickr.com/4822/46279789112_f6fde6f4f6.jpg)
 
 (See [larger image](https://www.flickr.com/photos/david_jones/46279789112/))
 
-## After - responsive, image rich card interface
+### After - responsive, image rich card interface
+
+With a few extra elements added (e.g. an image, a related date etc) the tweak transforms the default Blackboard appearance into a fully responsive and visual card interface.
 
 ![After the tweak](https://farm5.staticflickr.com/4844/46280738772_4f7a9ee623.jpg)
 
 
-### How it works
+## How to use the tweak
+
+Assumptions is that you are starting with a Blackboard 9.1 site and that you have a Blackboard content page (see the before above)
+
+#### 1. Add the Javascript
+
+#### 2. Create a space for the cards to appear
+
+#### 3. Modify each content item you want to appear as a card
 
 1. Add the card tweak Javascript to the page
 > 1. Create a new Blackboard content item on the page
