@@ -1,18 +1,17 @@
 # Card Interface Tweak
 
-Interface kludge for Blackboard 9.1 that transforms a standard Blackboard content page (a collection) of items into responsive, image rich card interface (based on [this approach](https://codepen.io/njs/pen/BVdwZB)). 
+A bit of digital renovation for Blackboard 9.1 in the form of some Javascript and CSS that can be used to transform a standard Blackboard content page (a collection) of items into responsive, image rich card interface. A transformation that can be accomplished with minimal technical knowledge.
 
-### Example
+## Before - standard Blackboard 9.1 content page
 
-For the learner, the card interface looks like the following
+![Normal Bb 9.1 content page](https://farm5.staticflickr.com/4822/46279789112_f6fde6f4f6_n.jpg)
 
-![Viewing card interface](https://farm5.staticflickr.com/4844/46280738772_932c7bf9f9.jpg)
+(See [larger image](https://www.flickr.com/photos/david_jones/46279789112/))
 
-For the teacher/content author, they will see both the card interface and the Blackboard content that is used to construct the card interface.
+## After - responsive, image rich card interface
 
-![Editing card interface](https://farm5.staticflickr.com/4822/46279789112_a65b67243c.jpg)
+![After the tweak](https://farm5.staticflickr.com/4844/46280738772_4f7a9ee623_n.jpg)
 
-The teacher/content author is able to edit the Blackboard content as they would normally and by doing this the content of the cards will change.
 
 ### How it works
 
