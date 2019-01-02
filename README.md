@@ -59,37 +59,56 @@ There are two methods that can be used:
 >  **Card Image: http://djon.es/images/GrandCanyon.jpg**
 1. [Insert the image](https://suffolk.screenstepslive.com/s/1050/m/bb9/l/11549-how-do-i-embed-a-picture-or-image-as-part-of-an-item) into the Blackboard content item and ensure that the _Image Description_ for the image is **Card Image**
 
+For example, a content item like this
+
 ![Content item with image specified](https://farm5.staticflickr.com/4885/32690681948_06d899958d_n.jpg)
+
+Will produce a card like this.
 
 ![Corresponding card interface](https://farm5.staticflickr.com/4853/32690681868_68d40300cf_n.jpg)
 
 #### 4. Add a date
 
+Each card can have a date associated with it.
 
-#### 5. Add a date name
+1. Add **Card Date:** as a single line to the content item followed by the relevant date using the MMM DD format
+> e.g. **Card Date: Mar 4**
 
-#### 6. Change the module name
+This will add a calendar graphic to the top right of the card, for example
 
-to specify the image that shold be displayed
-> 1. Ensure they have a line containing **Card Image:** to indicate it should become a card.
-> 1. Specify an image to use on the card
-> 1. Specify a card date with a line containing **Card Date: Mar 8** (Replace __Mar 8__ with your date, but in the same format)
-> 1. Specify a label for the card (by default __Module__)
+![Card with a date](https://farm5.staticflickr.com/4847/45650359185_305a721313_n.jpg)
 
+#### 5. Change the date name
 
-### Data format
- 
-An item to be turned into a card The description/body of the item should contain
-> Card Image: __Image URL__
+By default, a card date will be preceeded by **Commencing**. You can change this.
 
-### Card format
+1. Add **Card Date Label: _Due_**
+> Where you replace _Due_ with whatever word you wish to use.
 
-The Blackboard item becomes a card by
+For example, the following content item
 
-1. Title of the Blackboard item becomes title of card
-1. Card title is preceeded by **Module X**, where X is a number indicating the item's place in the sequence of cards
-1. The card image is the __Card Image:__ image
-1. Card description is the Blackboard item's description (minus the __Card Image:__ content)
-1. If the Blackboard item is a folder or learning module (i.e. it links to another sub-item) the card will link to that item
+![Content item with new date label](https://farm8.staticflickr.com/7810/46564373241_5387dd591c_n.jpg)
+
+will produce the following card
+
+![Card with new date label](https://farm5.staticflickr.com/4864/45650359455_4aa522a829_n.jpg)
+
+#### 6. Change the card label
+
+If the content item you are adding is either a _Content Folder_ or _Module Page_ (i.e. it links to another Blackboard content page) then card will be labelled (by default) as **Module _X_**. Where **_X_** is replaced a number representing the number of the card. 
+
+For example, the card above has the card label **Module 5**. Meaning it was the 5th card content item on this page. **Module** may not be the label you wish to use.
+
+1. Add a line with **Card Label: _new name_** to the content item
+> Replace **_new name_** with the label you wish to use.
+
+For example, the following content item specifies the use of _Learning path_ as the new card label.
+
+![Content item specifying new card label](https://farm5.staticflickr.com/4855/31623611047_3c8941a9a6_n.jpg)
+
+Producing this card.
+
+![Card with new label](https://farm5.staticflickr.com/4901/46564616831_81df4d7077_n.jpg)
+
 
 
