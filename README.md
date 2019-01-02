@@ -4,13 +4,13 @@ A bit of digital renovation for Blackboard 9.1 in the form of some Javascript an
 
 ## Before - standard Blackboard 9.1 content page
 
-![Normal Bb 9.1 content page](https://farm5.staticflickr.com/4822/46279789112_f6fde6f4f6_n.jpg)
+![Normal Bb 9.1 content page](https://farm5.staticflickr.com/4822/46279789112_f6fde6f4f6.jpg)
 
 (See [larger image](https://www.flickr.com/photos/david_jones/46279789112/))
 
 ## After - responsive, image rich card interface
 
-![After the tweak](https://farm5.staticflickr.com/4844/46280738772_4f7a9ee623_n.jpg)
+![After the tweak](https://farm5.staticflickr.com/4844/46280738772_4f7a9ee623.jpg)
 
 
 ### How it works
