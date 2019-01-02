@@ -45,11 +45,17 @@ The card interface produced by the Tweak needs to appear in an existing content 
 1. Add the phrase **Card Image:** (including the colon) to the content item
 > The simplest example content item and what it is transformed into is illustrated in the following images.
 
+The following is almost the simplest content item for a card.
+
 ![Basic content item](https://farm5.staticflickr.com/4804/32690548888_1e3ed76595_n.jpg)
+
+It will produce the following card.
 
 ![Transformed card interface](https://farm8.staticflickr.com/7836/45650083695_f8c6ce290f_n.jpg)
 
-Note: that the card above does not have an image, rather the top of the card is a blank yellow space.
+The title of the content item has become the title of the card, and the content of the content item becomes the card content. **Card Image:** and other "card commands" are removed from the content.
+
+Note: that the card above does not have an image, rather the top of the card is a blank yellow space. 
 
 #### 4. Specify the image you want to appear on the card
 
@@ -59,7 +65,7 @@ There are two methods that can be used:
 >  **Card Image: http://djon.es/images/GrandCanyon.jpg**
 1. [Insert the image](https://suffolk.screenstepslive.com/s/1050/m/bb9/l/11549-how-do-i-embed-a-picture-or-image-as-part-of-an-item) into the Blackboard content item and ensure that the _Image Description_ for the image is **Card Image**
 
-For example, a content item like this
+For example, a content item like the following.
 
 ![Content item with image specified](https://farm5.staticflickr.com/4885/32690681948_06d899958d_n.jpg)
 
@@ -72,9 +78,8 @@ Will produce a card like this.
 Each card can have a date associated with it.
 
 1. Add **Card Date:** as a single line to the content item followed by the relevant date using the MMM DD format
-> e.g. **Card Date: Mar 4**
 
-This will add a calendar graphic to the top right of the card, for example
+For example, if **Card Date: Mar 4** is added to the content item from the previous steps the card will have a calendar graphic added to the top right of the card.
 
 ![Card with a date](https://farm5.staticflickr.com/4847/45650359185_305a721313_n.jpg)
 
@@ -82,8 +87,7 @@ This will add a calendar graphic to the top right of the card, for example
 
 By default, a card date will be preceeded by **Commencing**. You can change this.
 
-1. Add **Card Date Label: _Due_**
-> Where you replace _Due_ with whatever word you wish to use.
+1. Add **Card Date Label: _Due_** Where you replace _Due_ with whatever word you wish to use.
 
 For example, the following content item
 
