@@ -40,12 +40,12 @@ The card interface produced by the Tweak needs to appear in an existing content 
 1. Create a new Blackboard content item that is titled **Card Interface**
 > Current advice is to leave this content item empty. The tweak will add content to it.
 
-#### 3. Specify the content item(s) you want to appear as a card
+#### 3. Specify the content item/folder you want to appear as a card
 
-1. Add the phrase **Card Image:** (including the colon) to the content item
-> The simplest example content item and what it is transformed into is illustrated in the following images.
+1. Add the phrase **Card Image:** (including the colon) to the content item/folder
+> It's assumed that only content items or content folders are turned into cards. Each works a little differently. A content item will become an "info card". i.e. providing only information. A content folder will also be clickable. Clicking on a content folder will take the user into the folder.
 
-The following is almost the simplest content item for a card.
+The following is almost the simplest content item/folder for a card.
 
 ![Basic content item](https://farm5.staticflickr.com/4804/32690548888_1e3ed76595_n.jpg)
 
