@@ -18,9 +18,11 @@
  *     Specify the label for the date - default Commencing
  */
 
+// <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" /></p>
+// <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
 // Interface design from https://codepen.io/njs/pen/BVdwZB
 var interfaceHtmlTemplate = `
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" /></p>
+<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
 <div class="flex flex-wrap -m-3">
  {CARDS}
 </div>
@@ -77,11 +79,6 @@ var dateHtmlTemplate = `
 
 /****
  * TO DO
- * 1. Specify the content item into which card interface should be inserted **DONE**
- * 1. How to provide a "contextual" card at the start  **DONE**
- *     - experiment with the content item approach
- * 2. Allow "Module" word to be changed  **DONE**
- * 2. Allow the date word (commencing) to change (Assessment==due) **DONE**
  * 2. Add a "right now" important way to highlight a card
  * 2. Configure the number of cards and width of cards (e.g. 2 for assessment)
  * 2. Fix issues with formatting within the card
@@ -103,10 +100,15 @@ function cardsInterface($){
 	      row_element: "li" };
 	      
 	 if (location.href.indexOf("listContent.jsp") > 0) {
-           $(".gutweak").parents("li").hide(); 
+         $(".gutweak").parents("li").hide(); 
 	 }
 
-	/* Get the titles and descriptions of the items on the page */
+    var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
+ 	
+ 	if ( cardInterface.length === 0){
+ 	    return false;
+ 	}
+    /* Get the titles and descriptions of the items on the page */
 	var items = getCardItems($);
 	
 	/* generate the cards interface for the tiems */
@@ -180,7 +182,7 @@ function getCardItems($) {
 	    // Hide the contentItem  TODO Only do this if display page
 	    var tweak_bb_active_url_pattern = "listContent.jsp";
 	    if (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ) { 
-	        var contentItem = $(this).parent().parent().hide();
+	        $(this).parent().parent().hide();
 	        //console.log( "content item " + contentItem.html());
 	    }
 	    // save the item for later
@@ -216,7 +218,7 @@ function getCardItems($) {
     // (Can't hide the parent as then you can't edit via Bb)
     cardInterface.hide();
  	// Get the content area in which to insert the HTML
- 	var firstItem = cardInterface.parent().siblings(".details");
+ 	var firstItem = cardInterface.parent().siblings(".details");//.children('.vtbegenerated');
     
  	// Use the card HTML template and the data in items to generate
  	// HTML for each card
@@ -224,10 +226,16 @@ function getCardItems($) {
     var moduleNum = 1;
     items.forEach( function(idx) {
 	    var cardHtml=cardHtmlTemplate;
-	    cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
+	    // Only show module number if there's a label
+	    if ( idx.label!=='') {
+	        cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
+	    } else {
+	        cardHtml = cardHtml.replace('{MODULE_NUM}','');
+	    }
 	    cardHtml = cardHtml.replace('{LABEL}',idx.label);
 	    cardHtml = cardHtml.replace('{PIC_URL}', idx.picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
+	    // Get rid of some crud Bb inserts into the HTML
 	    description = idx.description.replace(/<p/, '<p class="pb-2"');
 	    description = description.replace(/<a/, '<a class="underline"');
 	    cardHtml = cardHtml.replace('{DESCRIPTION}', description);
@@ -236,7 +244,7 @@ function getCardItems($) {
 	        // add the link
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', linkItemHtmlTemplate );
 	    } else {
-	        // remove the link
+	        // remove the link, as there isn't one
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', '');
 	        cardHtml = cardHtml.replace(/<a href="{LINK}">/g,'');
 	        cardHtml = cardHtml.replace('</a>','');
@@ -249,6 +257,7 @@ function getCardItems($) {
 	    }
 	    cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
 	    
+	    // if there's a date, insert it
 	    if ( idx.month ) {
 	        cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate );
 	        cardHtml = cardHtml.replace(/{MONTH}/g, idx.month);
@@ -265,5 +274,6 @@ function getCardItems($) {
 	var interfaceHtml = interfaceHtmlTemplate;
 	interfaceHtml = interfaceHtml.replace('{CARDS}',cards);
 	// Insert the HTML to the selected item(s)
+	//return false;
 	$(firstItem).append( interfaceHtml);
 }
