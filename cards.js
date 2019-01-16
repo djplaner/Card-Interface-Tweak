@@ -21,14 +21,33 @@
 // <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" /></p>
 // <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
 // Interface design from https://codepen.io/njs/pen/BVdwZB
-var interfaceHtmlTemplate = `
+
+const HORIZONTAL=0, VERTICAL=1;
+
+// TEMPLATES - by 2
+
+// Define the wrapper around the card interface
+
+var interfaceHtmlTemplate = Array(2);
+
+interfaceHtmlTemplate[HORIZONTAL] = `
 <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
 <div class="flex flex-wrap -m-3">
  {CARDS}
 </div>
 `;
 
-var cardHtmlTemplate = `
+interfaceHtmlTemplate[VERTICAL] = `
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" />
+ {CARDS}
+</div>
+`;
+
+// template for each individual card
+
+var cardHtmlTemplate = Array(2);
+
+cardHtmlTemplate[HORIZONTAL]=`
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>
@@ -47,7 +66,30 @@ var cardHtmlTemplate = `
   </div>
 `;
 
-var linkItemHtmlTemplate = `
+cardHtmlTemplate[VERTICAL]=`
+<a href="{LINK}">
+<div class="inline-flex rounded-lg shadow-lg hover:shadow-outline mb-4">
+  <div class="h-48 w-1/4 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('{PIC_URL}')">
+<p>&nbsp;</p>
+  </div>
+    <div class="m-4 flex-initial  w-1/6">
+        <h3>{TITLE}</h3>
+    </div>
+    <div class="m-4 flex-initial w-1/2 ">
+      <p class="text-grey-darker text-base">
+        {DESCRIPTION} 
+      </p>
+      {LINK_ITEM}
+    </div>
+</div>
+</a>
+`;
+
+// template to add the "ENGAGE" link to (more strongly) indicate that the card links somewhere
+
+var linkItemHtmlTemplate = Array(2);
+
+linkItemHtmlTemplate[HORIZONTAL] = `
         <p>&nbsp;<br /> &nbsp;</p>
         <div class="p-4 absolute pin-r pin-b">
            <a href="{LINK}"><button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
@@ -55,8 +97,15 @@ var linkItemHtmlTemplate = `
         </button></a>
         </div>
         `;
+
+// TODO: need to decide how and what this will look like
+linkItemHtmlTemplate[1] = '<p><strong>Engage</strong></p>';
         
-var dateHtmlTemplate = `
+// Template for the calendar/date tab
+
+var dateHtmlTemplate = Array(2);
+
+dateHtmlTemplate[HORIZONTAL] = `
 <div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24 absolute pin-t pin-r">
           <div class="bg-black text-white py-1 text-xs">
              {DATE_LABEL}
@@ -74,20 +123,14 @@ var dateHtmlTemplate = `
         </div>
 `;
 
-/** <a href="{LINK}" class="border-t border-grey-light pt-2 text-xs text-grey hover:text-red uppercase no-underline tracking-wide" style="text-align: right;">Engage</a>
- */
+dateHtmlTemplate[VERTICAL] = dateHtmlTemplate[HORIZONTAL];
 
 /****
- * TO DO
- * 2. Add a "right now" important way to highlight a card
- * 2. Configure the number of cards and width of cards (e.g. 2 for assessment)
- * 2. Fix issues with formatting within the card
- * 2. Provide a "small" version of the card interface to 
- * 2. Provide a date CSS addition to the card **DONE**
- * 2. Make the whole card a link (but retain link as well) Consider new template for card interface that is more active (e.g. roll over)  **DONE***
- * 2. Exclude content items from the Module naming  **DONE**
- * 2. Add some instructions into the tweak HTML to point to documentation and help with setting up.
- * 3. Explore the use of opacity to highlight the whole card?
+ * TODO
+ * - Add a "right now" important way to highlight a card
+ * - Configure the number of cards and width of cards (e.g. 2 for assessment)
+ * - Fix issues with formatting within the card
+ * - Explore the use of opacity to highlight the whole card?
  *     i.e. an overview that goes over the top? or perhaps just shade bottom same blue as the border with white text
  */
  
@@ -204,8 +247,9 @@ function getCardItems($) {
  */
  
  function addCardInterface( items ) {
-    // Initial kludge, just append to the first item
- 	/*var firstItem = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).children(".item").eq(0).siblings(".details")/*.children('.vtbegenerated')*/
+
+    // Define which template to use 
+    var template = HORIZONTAL;
  	
  	// get the content item with h3 heading containing Card Interface
  	var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
@@ -225,7 +269,7 @@ function getCardItems($) {
     var cards = "" ;
     var moduleNum = 1;
     items.forEach( function(idx) {
-	    var cardHtml=cardHtmlTemplate;
+	    var cardHtml=cardHtmlTemplate[template];
 	    // Only show module number if there's a label
 	    if ( idx.label!=='') {
 	        cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
@@ -242,7 +286,7 @@ function getCardItems($) {
 	    // Does the card link to another content item?
 	    if ( idx.link ) {
 	        // add the link
-	        cardHtml = cardHtml.replace('{LINK_ITEM}', linkItemHtmlTemplate );
+	        cardHtml = cardHtml.replace('{LINK_ITEM}', linkItemHtmlTemplate[template] );
 	    } else {
 	        // remove the link, as there isn't one
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', '');
@@ -259,7 +303,7 @@ function getCardItems($) {
 	    
 	    // if there's a date, insert it
 	    if ( idx.month ) {
-	        cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate );
+	        cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template] );
 	        cardHtml = cardHtml.replace(/{MONTH}/g, idx.month);
 	        cardHtml = cardHtml.replace(/{DATE}/g, idx.date);
 	        cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
@@ -271,9 +315,10 @@ function getCardItems($) {
 	});
 	
 	// STick the cards into the complete card HTML
-	var interfaceHtml = interfaceHtmlTemplate;
+	var interfaceHtml = interfaceHtmlTemplate[template];
 	interfaceHtml = interfaceHtml.replace('{CARDS}',cards);
 	// Insert the HTML to the selected item(s)
 	//return false;
 	$(firstItem).append( interfaceHtml);
 }
+
