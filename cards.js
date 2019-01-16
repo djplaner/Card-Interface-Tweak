@@ -257,6 +257,24 @@ function getCardItems($) {
  	if ( cardInterface.length === 0){
         console.log("Card: Can't find item with heading 'Card Interface' in which to insert card interface");
         return false;
+    } else {
+        // parse title to change template, if necessary
+        //var cardInterfaceTitle=$(cardInterface + "span:last");
+        var cardInterfaceTitle=cardInterface.html();
+        
+        var m = cardInterfaceTitle.match(/Card Interface *([^<]*) *<\/span>/ );
+	    if (m) {
+	        templateChoice=m[1];
+	        m = templateChoice.match(/[Vv]ertical/ );
+	        if (m) {
+	            template = VERTICAL;
+	        } else if ( templateChoice.match(/[Hh]orizontal/ ) ) {
+	            template = HORIZONTAL;
+	        }
+	    } // if no match, stay with default
+        
+        /*console.log( "Card interface html " + cardInterface.html());
+        console.log( "titla object " + cardInterfaceTitle + "title is " + cardInterfaceTitle.html()); */
     }
     // make the h3 for the Card Interface item disappear
     // (Can't hide the parent as then you can't edit via Bb)
