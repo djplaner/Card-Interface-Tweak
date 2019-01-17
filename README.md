@@ -12,7 +12,12 @@ By default, Blackboard 9.1 provides a vertical list of content items.
 
 ### After - responsive, image rich card interface
 
-With a few extra elements added (e.g. an image, a related date etc) the tweak transforms the default Blackboard appearance into a fully responsive and visual card interface.
+With a few extra elements added (e.g. an image, a related date etc) the tweak transforms the default Blackboard appearance into a fully responsive and visual card interface. 
+
+**New!!** Now with two different card interfaces:
+
+1. a horizontal interface (shown in image below), cards displayed in rows of up to 3 (depending on browser window size) cards horizontally, and
+1. a vertical interface where the cards are displayed vertically with one card to a row. 
 
 ![After the tweak](https://farm5.staticflickr.com/4844/46280738772_4f7a9ee623.jpg)
 
