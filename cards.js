@@ -38,7 +38,7 @@ interfaceHtmlTemplate[HORIZONTAL] = `
 `;
 
 interfaceHtmlTemplate[VERTICAL] = `
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" />
+<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
  {CARDS}
 </div>
 `;
@@ -68,14 +68,14 @@ cardHtmlTemplate[HORIZONTAL]=`
 
 cardHtmlTemplate[VERTICAL]=`
 <a href="{LINK}">
-<div class="inline-flex rounded-lg shadow-lg hover:shadow-outline mb-4">
-  <div class="h-48 w-1/4 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('{PIC_URL}')">
-<p>&nbsp;</p>
+<div class="lg:flex xl:flex md:flex mb-4 rounded-lg shadow-lg hover:shadow-outline">
+  <div class="lg:w-1/4 md:w-1/4 sm:w-full h-auto lg:flex-none bg-cover bg-center rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('{PIC_URL}')">
+        <img src="{PIC_URL}" style="opacity:0;width:50%" />
   </div>
-    <div class="m-4 flex-initial  w-1/6">
+    <div class="p-2 m-2 lg:flex md:w-1/5 lg:w-1/5 sm:w-full">
         <h3>{TITLE}</h3>
     </div>
-    <div class="m-4 flex-initial w-1/2 ">
+    <div class="m-2 p-2 lg:flex-initial md:w-1/2 lg:w-1/2 sm:w-full">
       <p class="text-grey-darker text-base">
         {DESCRIPTION} 
       </p>
@@ -99,7 +99,11 @@ linkItemHtmlTemplate[HORIZONTAL] = `
         `;
 
 // TODO: need to decide how and what this will look like
-linkItemHtmlTemplate[1] = '<p><strong>Engage</strong></p>';
+//linkItemHtmlTemplate[1] = '<p><strong>Engage</strong></p>';
+linkItemHtmlTemplate[VERTICAL] = '';
+/*`
+<div class="relative pin-r pin-b m-18"> <button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"> Engage </button> 
+        </div>`;*/
         
 // Template for the calendar/date tab
 
@@ -295,7 +299,7 @@ function getCardItems($) {
 	        cardHtml = cardHtml.replace('{MODULE_NUM}','');
 	    }
 	    cardHtml = cardHtml.replace('{LABEL}',idx.label);
-	    cardHtml = cardHtml.replace('{PIC_URL}', idx.picUrl);
+	    cardHtml = cardHtml.replace(/{PIC_URL}/g, idx.picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
 	    // Get rid of some crud Bb inserts into the HTML
 	    description = idx.description.replace(/<p/, '<p class="pb-2"');
