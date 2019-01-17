@@ -44,6 +44,7 @@ The card interface produced by the Tweak needs to appear in an existing content 
 
 1. Create a new Blackboard content item that is titled **Card Interface**
 > Current advice is to leave this content item empty. The tweak will add content to it.
+1. If you want a **vertical interface** for the cards then add vertical e.g. **Card Interface vertical**
 
 #### 3. Specify the content item/folder you want to appear as a card
 
