@@ -22,13 +22,22 @@
 // <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
 // Interface design from https://codepen.io/njs/pen/BVdwZB
 
-const HORIZONTAL=0, VERTICAL=1;
 
-// TEMPLATES - by 2
+
+// TEMPLATES - by 3
+
+// only one of these for now
+var editLinkTemplate = `
+	        <div class="text-xs grey-light">
+	           [<a href="#{ID}">View original</a>]
+	        </div>`;
+	        
+// define the template types
+const HORIZONTAL=0, VERTICAL=1, HORIZONTAL_NOENGAGE=2, BY=3;
 
 // Define the wrapper around the card interface
 
-var interfaceHtmlTemplate = Array(2);
+var interfaceHtmlTemplate = Array(4);
 
 interfaceHtmlTemplate[HORIZONTAL] = `
 <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
@@ -43,9 +52,18 @@ interfaceHtmlTemplate[VERTICAL] = `
 </div>
 `;
 
+interfaceHtmlTemplate[HORIZONTAL_NOENGAGE]=interfaceHtmlTemplate[HORIZONTAL];
+interfaceHtmlTemplate[BY]= interfaceHtmlTemplate[HORIZONTAL];
+/*`
+<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
+<div class="flex -m-1 flex-wrap">
+ {CARDS}
+</div>
+`;**/
+
 // template for each individual card
 
-var cardHtmlTemplate = Array(2);
+var cardHtmlTemplate = Array(4);
 
 cardHtmlTemplate[HORIZONTAL]=`
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
@@ -57,9 +75,11 @@ cardHtmlTemplate[HORIZONTAL]=`
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
         <div class="mb-4 flex-1">
           {DESCRIPTION}
+          
         </div>
         </a>
          {LINK_ITEM}
+         {EDIT_ITEM}
          {DATE} 
       </div>
     </div>
@@ -80,14 +100,55 @@ cardHtmlTemplate[VERTICAL]=`
         {DESCRIPTION} 
       </p>
       {LINK_ITEM}
+      {EDIT_ITEM}
     </div>
 </div>
 </a>
 `;
 
+
+cardHtmlTemplate[HORIZONTAL_NOENGAGE]=`
+  <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
+    <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
+      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>
+      <div class="p-4 flex-1 flex flex-col">
+       <a href="{LINK}">
+        {LABEL} {MODULE_NUM}
+        <h3 class="mb-4 text-2xl">{TITLE}</h3>
+        <div class="mb-4 flex-1">
+          {DESCRIPTION}
+        </div>
+        </a>
+         {DATE} 
+         {EDIT_ITEM}
+      </div>
+    </div>
+  </div>
+`;
+
+cardHtmlTemplate[BY]=`
+  <div class="flex flex-col p-2 sm:w-1/3 md:w-1/5">
+    <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>
+      <div class="p-4 flex-1 flex flex-col">
+       <a href="{LINK}">
+        {LABEL} {MODULE_NUM}
+        <h3 class="mb-4 text-2xl">{TITLE}</h3>
+        <div class="mb-4 flex-1">
+          {DESCRIPTION}
+        </div>
+        </a>
+         {DATE} 
+         {EDIT_ITEM}
+      </div>
+    </div>
+  </div>
+`;
+
+
 // template to add the "ENGAGE" link to (more strongly) indicate that the card links somewhere
 
-var linkItemHtmlTemplate = Array(2);
+var linkItemHtmlTemplate = Array(4);
 
 linkItemHtmlTemplate[HORIZONTAL] = `
         <p>&nbsp;<br /> &nbsp;</p>
@@ -97,6 +158,10 @@ linkItemHtmlTemplate[HORIZONTAL] = `
         </button></a>
         </div>
         `;
+
+linkItemHtmlTemplate[VERTICAL] ='';
+linkItemHtmlTemplate[HORIZONTAL_NOENGAGE] = '';
+linkItemHtmlTemplate[BY] = '';
 
 // TODO: need to decide how and what this will look like
 //linkItemHtmlTemplate[1] = '<p><strong>Engage</strong></p>';
@@ -128,6 +193,9 @@ dateHtmlTemplate[HORIZONTAL] = `
 `;
 
 dateHtmlTemplate[VERTICAL] = dateHtmlTemplate[HORIZONTAL];
+dateHtmlTemplate[HORIZONTAL_NOENGAGE] = dateHtmlTemplate[HORIZONTAL];
+dateHtmlTemplate[BY] = dateHtmlTemplate[HORIZONTAL];
+
 
 /****
  * TODO
@@ -160,6 +228,7 @@ function cardsInterface($){
 	
 	/* generate the cards interface for the tiems */
 	addCardInterface(items);
+	
 }
 
 /***
@@ -179,6 +248,7 @@ function getCardItems($) {
 	    m = description.match(/[Cc]ard [Ii]mage *: *([^\s<]*)/ );
 	    if (m) {
     	    picUrl=m[1];
+    	    description = description.replace( "<p>"+m[0]+"</p>","");
 	        description = description.replace( m[0], "");
 	    }
 	    
@@ -193,7 +263,6 @@ function getCardItems($) {
 	        var bb = $.parseHTML(description);
 	        // This will find the class
 	        stringToRemove = $(description).find('.contextMenuContainer').parent().clone().html();
-	        
 	        description = description.replace( stringToRemove, '');
 	    }
 	    
@@ -202,6 +271,7 @@ function getCardItems($) {
 	    if (m) {
     	    month=m[1];
     	    date=m[2];
+    	    description = description.replace( "<p>"+m[0]+"</p>","");
     	    description = description.replace(m[0],"");
 	    }
 	    
@@ -210,6 +280,7 @@ function getCardItems($) {
 	    var dateLabel='Commencing';
 	    if (m) {
 	        dateLabel=m[1];
+	        description = description.replace( "<p>"+m[0]+"</p>","");
 	        description = description.replace( m[0], "");
 	    }
 	    
@@ -218,14 +289,17 @@ function getCardItems($) {
 	    m = description.match(/[Cc]ard [Ll]abel *: *([^<]*)/ );
 	    if (m) {
 	        label=m[1];
+	        description = description.replace( "<p>"+m[0]+"</p>","");
 	        description = description.replace( m[0], "");
 	    }
 	    
 	    // need to get back to the header which is up one div, a sibling, then span
 	    var header = $(this).parent().siblings(".item").find("span")[2];
 	    var title = $(header).html(),link;
-	    link = $(header).parent('a').attr('href');
-	    
+	    link = $(header).parents('a').attr('href');
+	    // get the itemId to allow for "edit" link in card
+	    var itemId = $(this).parents('.liItem').attr('id');
+	    console.log("Item id " + itemId + " for link " + link );
 	    // Hide the contentItem  TODO Only do this if display page
 	    var tweak_bb_active_url_pattern = "listContent.jsp";
 	    if (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ) { 
@@ -234,7 +308,9 @@ function getCardItems($) {
 	    }
 	    // save the item for later
 	    var item = {title:title, picUrl:picUrl, description:description,
-	        link:link,month:month,date:date,label:label,dateLabel:dateLabel};
+	        link:link,month:month,date:date,label:label,dateLabel:dateLabel,
+	        id:itemId
+	    };
 	    items.push(item);
 	});
 	
@@ -251,9 +327,10 @@ function getCardItems($) {
  */
  
  function addCardInterface( items ) {
-
+   
     // Define which template to use 
-    var template = HORIZONTAL;
+    var template = BY; //HORIZONTAL;
+ 	
  	
  	// get the content item with h3 heading containing Card Interface
  	var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
@@ -266,6 +343,7 @@ function getCardItems($) {
         //var cardInterfaceTitle=$(cardInterface + "span:last");
         var cardInterfaceTitle=cardInterface.html();
         
+        // check for options for how to display TODO abstract this
         var m = cardInterfaceTitle.match(/Card Interface *([^<]*) *<\/span>/ );
 	    if (m) {
 	        templateChoice=m[1];
@@ -274,6 +352,10 @@ function getCardItems($) {
 	            template = VERTICAL;
 	        } else if ( templateChoice.match(/[Hh]orizontal/ ) ) {
 	            template = HORIZONTAL;
+	        }
+	        m = templateChoice.match(/noengage/ );
+	        if (m ) {
+	            template = HORIZONTAL_NOENGAGE;
 	        }
 	    } // if no match, stay with default
         
@@ -292,6 +374,7 @@ function getCardItems($) {
     var moduleNum = 1;
     items.forEach( function(idx) {
 	    var cardHtml=cardHtmlTemplate[template];
+	    console.log("template is " + template);
 	    // Only show module number if there's a label
 	    if ( idx.label!=='') {
 	        cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
@@ -309,7 +392,7 @@ function getCardItems($) {
 	    if ( idx.link ) {
 	        // add the link
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', linkItemHtmlTemplate[template] );
-	    } else {
+	    } else if (template!=HORIZONTAL_NOENGAGE) {
 	        // remove the link, as there isn't one
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', '');
 	        cardHtml = cardHtml.replace(/<a href="{LINK}">/g,'');
@@ -322,6 +405,15 @@ function getCardItems($) {
 	        moduleNum--;
 	    }
 	    cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
+	    
+	    // Should we add a link to edit/view the original content
+	    if (location.href.indexOf("listContentEditable.jsp") > 0) {
+	        editLink = editLinkTemplate.replace('{ID}', idx.id);
+	        
+	        cardHtml = cardHtml.replace(/{EDIT_ITEM}/, editLink );
+	    } else {
+	        cardHtml = cardHtml.replace(/{EDIT_ITEM}/,'');
+	    }
 	    
 	    // if there's a date, insert it
 	    if ( idx.month ) {
