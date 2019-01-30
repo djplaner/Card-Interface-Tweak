@@ -18,26 +18,18 @@
  *     Specify the label for the date - default Commencing
  */
 
-// <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" /></p>
-// <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
+
 // Interface design from https://codepen.io/njs/pen/BVdwZB
 
 
+// TEMPLATES - by 4
 
-// TEMPLATES - by 3
-
-// only one of these for now
-var editLinkTemplate = `
-	        <div class="text-xs grey-light">
-	           [<a href="#{ID}">View original</a>]
-	        </div>`;
-	        
 // define the template types
-const HORIZONTAL=0, VERTICAL=1, HORIZONTAL_NOENGAGE=2;
+const HORIZONTAL=0, VERTICAL=1, HORIZONTAL_NOENGAGE=2, BY5=3;
 
 // Define the wrapper around the card interface
 
-var interfaceHtmlTemplate = Array(2);
+var interfaceHtmlTemplate = Array(4);
 
 interfaceHtmlTemplate[HORIZONTAL] = `
 <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
@@ -53,10 +45,17 @@ interfaceHtmlTemplate[VERTICAL] = `
 `;
 
 interfaceHtmlTemplate[HORIZONTAL_NOENGAGE]=interfaceHtmlTemplate[HORIZONTAL];
+interfaceHtmlTemplate[BY5]= interfaceHtmlTemplate[HORIZONTAL];
+/*`
+<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
+<div class="flex -m-1 flex-wrap">
+ {CARDS}
+</div>
+`;**/
 
 // template for each individual card
 
-var cardHtmlTemplate = Array(2);
+var cardHtmlTemplate = Array(4);
 
 cardHtmlTemplate[HORIZONTAL]=`
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
@@ -68,6 +67,7 @@ cardHtmlTemplate[HORIZONTAL]=`
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
         <div class="mb-4 flex-1">
           {DESCRIPTION}
+          
         </div>
         </a>
          {LINK_ITEM}
@@ -117,9 +117,30 @@ cardHtmlTemplate[HORIZONTAL_NOENGAGE]=`
     </div>
   </div>
 `;
+
+cardHtmlTemplate[BY5]=`
+  <div class="flex flex-col p-2 sm:w-1/3 md:w-1/5">
+    <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>
+      <div class="p-4 flex-1 flex flex-col">
+       <a href="{LINK}">
+        {LABEL} {MODULE_NUM}
+        <h3 class="mb-4 text-2xl">{TITLE}</h3>
+        <div class="mb-4 flex-1">
+          {DESCRIPTION}
+        </div>
+        </a>
+         {DATE} 
+         {EDIT_ITEM}
+      </div>
+    </div>
+  </div>
+`;
+
+
 // template to add the "ENGAGE" link to (more strongly) indicate that the card links somewhere
 
-var linkItemHtmlTemplate = Array(2);
+var linkItemHtmlTemplate = Array(4);
 
 linkItemHtmlTemplate[HORIZONTAL] = `
         <p>&nbsp;<br /> &nbsp;</p>
@@ -132,6 +153,7 @@ linkItemHtmlTemplate[HORIZONTAL] = `
 
 linkItemHtmlTemplate[VERTICAL] ='';
 linkItemHtmlTemplate[HORIZONTAL_NOENGAGE] = '';
+linkItemHtmlTemplate[BY5] = '';
 
 // TODO: need to decide how and what this will look like
 //linkItemHtmlTemplate[1] = '<p><strong>Engage</strong></p>';
@@ -164,7 +186,14 @@ dateHtmlTemplate[HORIZONTAL] = `
 
 dateHtmlTemplate[VERTICAL] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[HORIZONTAL_NOENGAGE] = dateHtmlTemplate[HORIZONTAL];
+dateHtmlTemplate[BY5] = dateHtmlTemplate[HORIZONTAL];
 
+// Template to allow editors to view the original Bb content item
+// Same for all templates
+var editLinkTemplate = `
+	        <div class="text-xs grey-light">
+	           [<a href="#{ID}">View original</a>]
+	        </div>`;
 
 
 /****
@@ -198,6 +227,7 @@ function cardsInterface($){
 	
 	/* generate the cards interface for the tiems */
 	addCardInterface(items);
+	
 }
 
 /***
@@ -268,7 +298,7 @@ function getCardItems($) {
 	    link = $(header).parents('a').attr('href');
 	    // get the itemId to allow for "edit" link in card
 	    var itemId = $(this).parents('.liItem').attr('id');
-	    console.log("Item id " + itemId + " for link " + link );
+	    //console.log("Item id " + itemId + " for link " + link );
 	    // Hide the contentItem  TODO Only do this if display page
 	    var tweak_bb_active_url_pattern = "listContent.jsp";
 	    if (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ) { 
@@ -296,9 +326,10 @@ function getCardItems($) {
  */
  
  function addCardInterface( items ) {
-
+   
     // Define which template to use 
     var template = HORIZONTAL;
+ 	
  	
  	// get the content item with h3 heading containing Card Interface
  	var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
@@ -320,6 +351,8 @@ function getCardItems($) {
 	            template = VERTICAL;
 	        } else if ( templateChoice.match(/[Hh]orizontal/ ) ) {
 	            template = HORIZONTAL;
+	        } else if ( templateChoice.match(/[Bb][yY]5/)) {
+	            template = BY5;
 	        }
 	        m = templateChoice.match(/noengage/ );
 	        if (m ) {
@@ -327,14 +360,12 @@ function getCardItems($) {
 	        }
 	    } // if no match, stay with default
         
-        /*console.log( "Card interface html " + cardInterface.html());
-        console.log( "titla object " + cardInterfaceTitle + "title is " + cardInterfaceTitle.html()); */
     }
     // make the h3 for the Card Interface item disappear
     // (Can't hide the parent as then you can't edit via Bb)
     cardInterface.hide();
  	// Get the content area in which to insert the HTML
- 	var firstItem = cardInterface.parent().siblings(".details");//.children('.vtbegenerated');
+ 	var firstItem = cardInterface.parent().siblings(".details");
     
  	// Use the card HTML template and the data in items to generate
  	// HTML for each card
@@ -342,6 +373,7 @@ function getCardItems($) {
     var moduleNum = 1;
     items.forEach( function(idx) {
 	    var cardHtml=cardHtmlTemplate[template];
+	    //console.log("template is " + template);
 	    // Only show module number if there's a label
 	    if ( idx.label!=='') {
 	        cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
