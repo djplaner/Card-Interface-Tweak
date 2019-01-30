@@ -67,13 +67,13 @@ The title of the content item has become the title of the card, and the content 
 
 Note: that the card above does not have an image, rather the top of the card is a blank yellow space. 
 
-#### 4. Specify the image you want to appear on the card
+#### Step 4. Specify the image you want to appear on the card
 
 There are two methods that can be used:
 
 1. Paste/type the URL for an image after **Card Image:**
 >  **Card Image: http://djon.es/images/GrandCanyon.jpg**
-1. [Insert the image](https://suffolk.screenstepslive.com/s/1050/m/bb9/l/11549-how-do-i-embed-a-picture-or-image-as-part-of-an-item) into the Blackboard content item and ensure that the _Image Description_ for the image is **Card Image**
+2. [Insert the image](https://suffolk.screenstepslive.com/s/1050/m/bb9/l/11549-how-do-i-embed-a-picture-or-image-as-part-of-an-item) into the Blackboard content item and ensure that the _Image Description_ for the image is **Card Image**
 
 For example, a content item like the following.
 
@@ -83,7 +83,7 @@ Will produce a card like this.
 
 ![Corresponding card interface](https://farm5.staticflickr.com/4853/32690681868_68d40300cf_n.jpg)
 
-#### 4. Add a date
+#### Step 4. Add a date
 
 Each card can have a date associated with it.
 
@@ -93,9 +93,9 @@ For example, if **Card Date: Mar 4** is added to the content item from the previ
 
 ![Card with a date](https://farm5.staticflickr.com/4847/45650359185_305a721313_n.jpg)
 
-#### 5. Change the date name
+#### Step 5. Change the date label
 
-By default, a card date will be preceeded by **Commencing**. You can change this.
+By default, a card date will be preceeded by the label **Commencing**. You can change this.
 
 1. Add **Card Date Label: _Due_** Where you replace _Due_ with whatever word you wish to use.
 
@@ -107,7 +107,7 @@ will produce the following card
 
 ![Card with new date label](https://farm5.staticflickr.com/4864/45650359455_4aa522a829_n.jpg)
 
-#### 6. Change the card label
+#### Step 6. Change the card label
 
 If the content item you are adding is either a _Content Folder_ or _Module Page_ (i.e. it links to another Blackboard content page) then card will be labelled (by default) as **Module _X_**. Where **_X_** is replaced a number representing the number of the card. 
 
