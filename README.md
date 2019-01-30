@@ -34,9 +34,9 @@ Assumptions is that you are starting with a Blackboard 9.1 site and that you hav
 For the card transformation to happen on a Blackboard content page, some Javascript code needs to be inserted into the content page.
 
 1. Create a new Blackboard content item on your Blackboard content page.
-1. When editing this new content item, use [the HTML Code View Button](https://www.cpcc.edu/onlinelearning/resources/blackboard/BbAddEmbedCode.pdf) to open a pop-up window
-1. Copy and paste the content of the [tweak.js file](https://raw.githubusercontent.com/djplaner/Card-Interface-Tweak/master/tweak.js) into this pop-up window
-1. Save and submit your changes
+2. When editing this new content item, use [the HTML Code View Button](https://www.cpcc.edu/onlinelearning/resources/blackboard/BbAddEmbedCode.pdf) to open a pop-up window
+3. Copy and paste the content of the [tweak.js file](https://raw.githubusercontent.com/djplaner/Card-Interface-Tweak/master/tweak.js) into this pop-up window
+4. Save and submit your changes
 
 #### 2. Create a space for the cards to appear
 
@@ -44,7 +44,11 @@ The card interface produced by the Tweak needs to appear in an existing content 
 
 1. Create a new Blackboard content item that is titled **Card Interface**
 > Current advice is to leave this content item empty. The tweak will add content to it.
-1. If you want a **vertical interface** for the cards then add vertical e.g. **Card Interface vertical**
+1. Choose the type of card interface you wish by adding one of the following words after **Card Interface**
+
+  * **vertical** for one card per row with elements of a single card displayed horizontally
+  * **by5** to have 5 cards per row
+  * **noengage** if you'd prefer not to have the "Engage" button appear for content folders
 
 #### 3. Specify the content item/folder you want to appear as a card
 
