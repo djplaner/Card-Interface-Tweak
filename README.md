@@ -29,7 +29,7 @@ This Tweak is inspiried by and built somewhat upon [the Blackboard Tweaks buildi
 
 Assumptions is that you are starting with a Blackboard 9.1 site and that you have a Blackboard content page (see the before above)
 
-#### 1. Add the Tweak Javascript
+#### Step 1. Add the Tweak Javascript
 
 For the card transformation to happen on a Blackboard content page, some Javascript code needs to be inserted into the content page.
 
@@ -38,19 +38,19 @@ For the card transformation to happen on a Blackboard content page, some Javascr
 3. Copy and paste the content of the [tweak.js file](https://raw.githubusercontent.com/djplaner/Card-Interface-Tweak/master/tweak.js) into this pop-up window
 4. Save and submit your changes
 
-#### 2. Create a space for the cards to appear
+#### Step 2. Create a space for the cards to appear
 
 The card interface produced by the Tweak needs to appear in an existing content item on the same content page. 
 
 1. Create a new Blackboard content item that is titled **Card Interface**
 > Current advice is to leave this content item empty. The tweak will add content to it.
-1. Choose the type of card interface you wish by adding one of the following words after **Card Interface**
+2. Choose the type of card interface you wish by adding one of the following words after **Card Interface**
 
   * **vertical** for one card per row with elements of a single card displayed horizontally
   * **by5** to have 5 cards per row
   * **noengage** if you'd prefer not to have the "Engage" button appear for content folders
 
-#### 3. Specify the content item/folder you want to appear as a card
+#### Step 3. Specify the content item/folder you want to appear as a card
 
 1. Add the phrase **Card Image:** (including the colon) to the content item/folder
 > It's assumed that only content items or content folders are turned into cards. Each works a little differently. A content item will become an "info card". i.e. providing only information. A content folder will also be clickable. Clicking on a content folder will take the user into the folder.
