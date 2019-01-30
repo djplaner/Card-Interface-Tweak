@@ -48,6 +48,7 @@ The card interface produced by the Tweak needs to appear in an existing content 
 
   * **vertical** for one card per row with elements of a single card displayed horizontally
   * **by5** to have 5 cards per row
+  * **by5no** to have 5 cards per row without any image
   * **noengage** if you'd prefer not to have the "Engage" button appear for content folders
 
 #### Step 3. Specify the content item/folder you want to appear as a card
