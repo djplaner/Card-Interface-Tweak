@@ -22,14 +22,18 @@
 // Interface design from https://codepen.io/njs/pen/BVdwZB
 
 
-// TEMPLATES - by 4
+// TEMPLATES - by 5
 
 // define the template types
-const HORIZONTAL=0, VERTICAL=1, HORIZONTAL_NOENGAGE=2, BY5=3;
+const HORIZONTAL=0, // original 3 cards per row
+      VERTICAL=1, // 1 card per row 
+      HORIZONTAL_NOENGAGE=2, // original, but no engage
+      BY5=3, // horizontal but up to 5 cards per row
+      BY5_NOIMAGE = 4; // horizontal, 5 cards, no image
 
 // Define the wrapper around the card interface
 
-var interfaceHtmlTemplate = Array(4);
+var interfaceHtmlTemplate = Array(5);
 
 interfaceHtmlTemplate[HORIZONTAL] = `
 <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
@@ -46,6 +50,8 @@ interfaceHtmlTemplate[VERTICAL] = `
 
 interfaceHtmlTemplate[HORIZONTAL_NOENGAGE]=interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[BY5]= interfaceHtmlTemplate[HORIZONTAL];
+interfaceHtmlTemplate[BY5_NOIMAGE]= interfaceHtmlTemplate[HORIZONTAL];
+
 /*`
 <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
 <div class="flex -m-1 flex-wrap">
@@ -55,7 +61,7 @@ interfaceHtmlTemplate[BY5]= interfaceHtmlTemplate[HORIZONTAL];
 
 // template for each individual card
 
-var cardHtmlTemplate = Array(4);
+var cardHtmlTemplate = Array(5);
 
 cardHtmlTemplate[HORIZONTAL]=`
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
@@ -137,10 +143,30 @@ cardHtmlTemplate[BY5]=`
   </div>
 `;
 
+// TODO rounded cornes?
+cardHtmlTemplate[BY5_NOIMAGE]=`
+  <div class="flex flex-col p-2 sm:w-1/3 md:w-1/5">
+    <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
+      <!-- <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>-->
+      <div class="p-4 flex-1 flex flex-col">
+       <a href="{LINK}">
+        {LABEL} {MODULE_NUM}
+        <h3 class="mb-4 text-2xl">{TITLE}</h3>
+        <div class="mb-4 flex-1">
+          {DESCRIPTION}
+        </div>
+        </a>
+         {DATE} 
+         {EDIT_ITEM}
+      </div>
+    </div>
+  </div>
+`;
+
 
 // template to add the "ENGAGE" link to (more strongly) indicate that the card links somewhere
 
-var linkItemHtmlTemplate = Array(4);
+var linkItemHtmlTemplate = Array(5);
 
 linkItemHtmlTemplate[HORIZONTAL] = `
         <p>&nbsp;<br /> &nbsp;</p>
@@ -154,6 +180,7 @@ linkItemHtmlTemplate[HORIZONTAL] = `
 linkItemHtmlTemplate[VERTICAL] ='';
 linkItemHtmlTemplate[HORIZONTAL_NOENGAGE] = '';
 linkItemHtmlTemplate[BY5] = '';
+linkItemHtmlTemplate[BY5_NOIMAGE] = '';
 
 // TODO: need to decide how and what this will look like
 //linkItemHtmlTemplate[1] = '<p><strong>Engage</strong></p>';
@@ -164,7 +191,7 @@ linkItemHtmlTemplate[VERTICAL] = '';
         
 // Template for the calendar/date tab
 
-var dateHtmlTemplate = Array(2);
+var dateHtmlTemplate = Array(5);
 
 dateHtmlTemplate[HORIZONTAL] = `
 <div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24 absolute pin-t pin-r">
@@ -187,6 +214,7 @@ dateHtmlTemplate[HORIZONTAL] = `
 dateHtmlTemplate[VERTICAL] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[HORIZONTAL_NOENGAGE] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[BY5] = dateHtmlTemplate[HORIZONTAL];
+dateHtmlTemplate[BY5_NOIMAGE] = dateHtmlTemplate[HORIZONTAL];
 
 // Template to allow editors to view the original Bb content item
 // Same for all templates
@@ -351,7 +379,9 @@ function getCardItems($) {
 	            template = VERTICAL;
 	        } else if ( templateChoice.match(/[Hh]orizontal/ ) ) {
 	            template = HORIZONTAL;
-	        } else if ( templateChoice.match(/[Bb][yY]5/)) {
+	        } else if ( templateChoice.match(/[Bb][yY]5[nN][Oo]/)) {
+	            template = BY5_NOIMAGE;
+	        }else if ( templateChoice.match(/[Bb][yY]5/)) {
 	            template = BY5;
 	        }
 	        m = templateChoice.match(/noengage/ );
