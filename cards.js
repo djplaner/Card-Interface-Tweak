@@ -22,14 +22,15 @@
 // Interface design from https://codepen.io/njs/pen/BVdwZB
 
 
-// TEMPLATES - by 5
+// TEMPLATES - by 6
 
 // define the template types
 const HORIZONTAL=0, // original 3 cards per row
       VERTICAL=1, // 1 card per row 
       HORIZONTAL_NOENGAGE=2, // original, but no engage
       BY5=3, // horizontal but up to 5 cards per row
-      BY5_NOIMAGE = 4; // horizontal, 5 cards, no image
+      BY5_NOIMAGE = 4, // horizontal, 5 cards, no image
+      PEOPLE = 5; // horizontal but show off people (BCI) version
 
 // Define the wrapper around the card interface
 
@@ -37,7 +38,9 @@ var interfaceHtmlTemplate = Array(5);
 
 interfaceHtmlTemplate[HORIZONTAL] = `
 <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
-<div class="flex flex-wrap -m-3">
+
+
+<div id="guCardInterface" class="flex flex-wrap -m-3">
  {CARDS}
 </div>
 `;
@@ -51,6 +54,8 @@ interfaceHtmlTemplate[VERTICAL] = `
 interfaceHtmlTemplate[HORIZONTAL_NOENGAGE]=interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[BY5]= interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[BY5_NOIMAGE]= interfaceHtmlTemplate[HORIZONTAL];
+interfaceHtmlTemplate[PEOPLE]= interfaceHtmlTemplate[HORIZONTAL];
+
 
 /*`
 <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
@@ -66,7 +71,10 @@ var cardHtmlTemplate = Array(5);
 cardHtmlTemplate[HORIZONTAL]=`
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
-      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>
+      <a href="{LINK}">
+      <div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">
+      <!-- <div class="bg-contain bg-no-repeat bg-center bg-yellow-lightest h-64" style="background-image: url('{PIC_URL}');"> -->
+      </div></a>
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
         {LABEL} {MODULE_NUM}
@@ -126,13 +134,19 @@ cardHtmlTemplate[HORIZONTAL_NOENGAGE]=`
 
 cardHtmlTemplate[BY5]=`
   <div class="flex flex-col p-2 sm:w-1/3 md:w-1/5">
+  <style>
+ul { display: block}
+li { display: list-item} 
+ul { list-style-type: circle}
+#guDescription { display: block}
+</style>
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
       <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
         {LABEL} {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="mb-4 flex-1">
+        <div class="mb-4 flex-1" id="guDescription">
           {DESCRIPTION}
         </div>
         </a>
@@ -163,6 +177,35 @@ cardHtmlTemplate[BY5_NOIMAGE]=`
   </div>
 `;
 
+// TODO - this might not be a better fit as something not a template?
+
+cardHtmlTemplate[PEOPLE]=`
+<!-- <style>
+  .codegena{position:relative;width:100%;height:0;padding-bottom:56.27198%;
+  .codegena iframe{position:absolute;top:0;left:0;width:100%;height:100%;}
+</style>-->
+  
+  
+  <div class="w-full sm:w-1/2 md:w-1/2 flex flex-col p-3">
+    <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
+      <a href="{LINK}">
+      <div class="w-full"><iframe src='https://player.vimeo.com/video/226525600?&title=0&byline=0'></iframe></div></a>
+      <div class="p-4 flex-1 flex flex-col">
+       <a href="{LINK}">
+        {LABEL} {MODULE_NUM}
+        <h3 class="mb-4 text-2xl">{TITLE}</h3>
+        <div class="mb-4 flex-1">
+          {DESCRIPTION}
+          
+        </div>
+        </a>
+         {LINK_ITEM}
+         {EDIT_ITEM}
+         {DATE} 
+      </div>
+    </div>
+  </div>
+`;
 
 // template to add the "ENGAGE" link to (more strongly) indicate that the card links somewhere
 
@@ -181,6 +224,7 @@ linkItemHtmlTemplate[VERTICAL] ='';
 linkItemHtmlTemplate[HORIZONTAL_NOENGAGE] = '';
 linkItemHtmlTemplate[BY5] = '';
 linkItemHtmlTemplate[BY5_NOIMAGE] = '';
+linkItemHtmlTemplate[PEOPLE] = '';
 
 // TODO: need to decide how and what this will look like
 //linkItemHtmlTemplate[1] = '<p><strong>Engage</strong></p>';
@@ -215,6 +259,7 @@ dateHtmlTemplate[VERTICAL] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[HORIZONTAL_NOENGAGE] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[BY5] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[BY5_NOIMAGE] = dateHtmlTemplate[HORIZONTAL];
+dateHtmlTemplate[PEOPLE] = '';
 
 // Template to allow editors to view the original Bb content item
 // Same for all templates
@@ -383,6 +428,8 @@ function getCardItems($) {
 	            template = BY5_NOIMAGE;
 	        }else if ( templateChoice.match(/[Bb][yY]5/)) {
 	            template = BY5;
+	        }else if ( templateChoice.match(/people/i)) {
+	            template = PEOPLE;
 	        }
 	        m = templateChoice.match(/noengage/ );
 	        if (m ) {
@@ -419,8 +466,15 @@ function getCardItems($) {
 	    cardHtml = cardHtml.replace('{DESCRIPTION}', description);
 	    // Does the card link to another content item?
 	    if ( idx.link ) {
+	        
+	        
 	        // add the link
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', linkItemHtmlTemplate[template] );
+	        // if there is a label, then increment the module number
+	        if ( idx.label!=="") {
+	          moduleNum++;
+	        } 
+	        
 	    } else if (template!=HORIZONTAL_NOENGAGE) {
 	        // remove the link, as there isn't one
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', '');
@@ -431,7 +485,7 @@ function getCardItems($) {
 	        cardHtml = cardHtml.replace('hover:shadow-outline', '');
 	        // don't count it as a module
 	        cardHtml = cardHtml.replace(idx.label + ' ' + moduleNum, '');
-	        moduleNum--;
+	        //moduleNum--;
 	    }
 	    cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
 	    
@@ -454,7 +508,6 @@ function getCardItems($) {
 	        cardHtml = cardHtml.replace('{DATE}', '');
 	    }
 	    cards = cards.concat(cardHtml);
-	    moduleNum++;
 	});
 	
 	// STick the cards into the complete card HTML
