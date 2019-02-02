@@ -116,6 +116,7 @@ For example, the card above has the card label **Module 5**. Meaning it was the 
 
 1. Add a line with **Card Label: _new name_** to the content item
 > Replace **_new name_** with the label you wish to use.
+> Use an empty label if you don't want a label to appear.
 
 For example, the following content item specifies the use of _Learning path_ as the new card label.
 
