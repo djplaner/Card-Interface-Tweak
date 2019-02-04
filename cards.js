@@ -552,7 +552,7 @@ function getCardItems($) {
 	        if ( idx.week==="") {
 	            cardHtml = cardHtml.replace('{WEEK}','');
 	        } else
-	            weekHtml = weekHtmlTemplate.replace('{WEEK}', idx.week);
+	            var weekHtml = weekHtmlTemplate.replace('{WEEK}', idx.week);
 	            cardHtml = cardHtml.replace('{WEEK}',weekHtml);
 	    } else {
 	        
