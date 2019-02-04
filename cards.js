@@ -18,6 +18,25 @@
  *     Specify the label for the date - default Commencing
  */
 
+var TERM_DATES = {
+    "3191" : {
+         "1" : { "start" : "2019-02-25", "stop":"2019-03-03" } ,
+         "2" : { "start" : "2019-03-04", "stop":"2019-03-10" } ,
+         "3" : { "start" : "2019-03-11", "stop":"2019-03-17" } ,
+         "4" : { "start" : "2019-03-18", "stop":"2019-03-24" } ,
+         "5" : { "start" : "2019-03-25", "stop":"2019-03-31" } ,
+         "6" : { "start" : "2019-04-01", "stop":"2019-04-07" } ,
+         "7" : { "start" : "2019-04-08", "stop":"2019-04-14" } ,
+         "8" : { "start" : "2019-04-22", "stop":"2019-04-28" } ,
+         "9" : { "start" : "2019-04-29", "stop":"2019-05-05" } ,
+         "10" : { "start" : "2019-05-06", "stop":"2019-05-12" },
+         "11" : { "start" : "2019-05-13", "stop":"2019-05-19" } ,
+         "12" : { "start" : "2019-05-20", "stop":"2019-05-26" } 
+         }
+    };
+var TERM="3191";
+var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
 
 // Interface design from https://codepen.io/njs/pen/BVdwZB
 
@@ -242,6 +261,7 @@ dateHtmlTemplate[HORIZONTAL] = `
           <div class="bg-black text-white py-1 text-xs">
              {DATE_LABEL}
           </div>
+          {WEEK}
           <div class="bg-red text-white py-1">
       	     {MONTH}
           </div>
@@ -254,6 +274,12 @@ dateHtmlTemplate[HORIZONTAL] = `
           </div> -->
         </div>
 `;
+
+weekHtmlTemplate = `
+    <div class="bg-yellow-lighter text-black py-1">
+      Week {WEEK}
+    </div>
+    `;
 
 dateHtmlTemplate[VERTICAL] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[HORIZONTAL_NOENGAGE] = dateHtmlTemplate[HORIZONTAL];
@@ -339,12 +365,31 @@ function getCardItems($) {
 	    }
 	    
 	    // Parse the date for commencing
-	    var month,date,m = description.match(/[Cc]ard [Dd]ate *: *([A-Za-z]*) ([0-9]*)/);
+	    var month,date,week="";
+	    
+	    m = description.match(/[Cc]ard [Dd]ate *: *week ([0-9]*)/i);
 	    if (m) {
-    	    month=m[1];
-    	    date=m[2];
-    	    description = description.replace( "<p>"+m[0]+"</p>","");
-    	    description = description.replace(m[0],"");
+	        // Found Week, find matching date
+	        // TODO - what if there isn't a matching date
+	        week = m[1];
+	         //console.log( "Found Week " + week + " TERM " + TERM + "" )     ;
+	         var start = TERM_DATES[TERM][week].start;//[week].start;
+	         //console.log(" Starting date " + start);
+	         var d = new Date(start);
+	         month=MONTHS[d.getMonth()];
+	         date=d.getDate();
+	         //console.log( " Date " + month + " " + date);
+	         description = description.replace( "<p>"+m[0]+"</p>","");
+    	     description = description.replace(m[0],"");
+	         
+	    } else {
+	        m = description.match(/[Cc]ard [Dd]ate *: *([A-Za-z]*) ([0-9]*)/);
+	        if (m) {
+    	        month=m[1];
+    	        date=m[2];
+    	        description = description.replace( "<p>"+m[0]+"</p>","");
+    	        description = description.replace(m[0],"");
+	        }
 	    }
 	    
 	    // See if there's a different label for date
@@ -380,7 +425,7 @@ function getCardItems($) {
 	    }
 	    // save the item for later
 	    var item = {title:title, picUrl:picUrl, description:description,
-	        link:link,month:month,date:date,label:label,dateLabel:dateLabel,
+	        link:link,week:week,month:month,date:date,label:label,dateLabel:dateLabel,
 	        id:itemId
 	    };
 	    items.push(item);
@@ -504,7 +549,13 @@ function getCardItems($) {
 	        cardHtml = cardHtml.replace(/{MONTH}/g, idx.month);
 	        cardHtml = cardHtml.replace(/{DATE}/g, idx.date);
 	        cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
+	        if ( idx.week==="") {
+	            cardHtml = cardHtml.replace('{WEEK}','');
+	        } else
+	            weekHtml = weekHtmlTemplate.replace('{WEEK}', idx.week);
+	            cardHtml = cardHtml.replace('{WEEK}',weekHtml);
 	    } else {
+	        
 	        cardHtml = cardHtml.replace('{DATE}', '');
 	    }
 	    cards = cards.concat(cardHtml);
