@@ -298,6 +298,11 @@ var editLinkTemplate = `
 	           [<a href="#{ID}">View original</a>]
 	        </div>`;
 
+// Message to display on a card if EDIT mode on and the item is hidden
+HIDDEN_FROM_STUDENTS = `<div class="inline-block bg-yellow text-black text-xs rounded-t rounded-b">This item is <strong>hidden from students</strong></div>`;
+
+// LOCATION > 0 means view mode. < 0 means EDIT mode
+var LOCATION = 1;
 
 /****
  * TODO
@@ -319,6 +324,7 @@ function cardsInterface($){
 	 if (location.href.indexOf("listContent.jsp") > 0) {
          $(".gutweak").parents("li").hide(); 
 	 }
+	 LOCATION = location.href.indexOf("listContent.jsp");
 
     var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
  	
@@ -435,10 +441,16 @@ function getCardItems($) {
 	        link:link,week:week,month:month,date:date,label:label,dateLabel:dateLabel,
 	        id:itemId
 	    };
-	    // only add the card to display if it's not hidden from students
-	    if ( hidden.length===0) {
+	    // only add the card to display if
+	    // - VIEW MODE is on and it's not hidden
+	    // - EDIT MODE is on 
+	    if ( hidden.length===0 || LOCATION < 0) {
+	        // add message that item is hidden to students when EDIT mode on
+	        if ( hidden.length===1) {
+	            item.description = item.description.concat( HIDDEN_FROM_STUDENTS);
+	        }
 	        items.push(item);
-	    }
+	    } 
 	});
 	
 	return items;
