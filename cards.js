@@ -51,6 +51,10 @@ const HORIZONTAL=0, // original 3 cards per row
       BY5_NOIMAGE = 4, // horizontal, 5 cards, no image
       PEOPLE = 5; // horizontal but show off people (BCI) version
 
+// Whether or not xAPI logging is turned on
+// - turned on by adding "logging" to Card Interface
+var LOGGING=false;
+
 // Define the wrapper around the card interface
 
 var interfaceHtmlTemplate = Array(5);
@@ -350,6 +354,9 @@ function getCardItems($) {
 	        description = description.replace( m[0], "");
 	    }
 	    
+	    var hidden = $(this).prev().filter(":contains('Item is hidden from students.')");
+	    //.siblings('contextItemDetailsHeaders')
+	
 	    // Check to see if an image with title "Card Image" has been inserted
 	    var inlineImage = $(this).find('img').attr('title', 'Card Image');
 	    if (inlineImage.length) {
@@ -428,7 +435,10 @@ function getCardItems($) {
 	        link:link,week:week,month:month,date:date,label:label,dateLabel:dateLabel,
 	        id:itemId
 	    };
-	    items.push(item);
+	    // only add the card to display if it's not hidden from students
+	    if ( hidden.length===0) {
+	        items.push(item);
+	    }
 	});
 	
 	return items;
@@ -452,37 +462,44 @@ function getCardItems($) {
  	// get the content item with h3 heading containing Card Interface
  	var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
  	
+
  	if ( cardInterface.length === 0){
         console.log("Card: Can't find item with heading 'Card Interface' in which to insert card interface");
         return false;
     } else {
-        // parse title to change template, if necessary
-        //var cardInterfaceTitle=$(cardInterface + "span:last");
-        var cardInterfaceTitle=cardInterface.html();
+        // get the title - text only, stripped of whitespace before/after
+        var cardInterfaceTitle= jQuery.trim(cardInterface.text());
         
-        // check for options for how to display TODO abstract this
-        var m = cardInterfaceTitle.match(/Card Interface *([^<]*) *<\/span>/ );
+        //Extract parameters
+        var m = cardInterfaceTitle.match(/Card Interface *([^<]*)/ );
 	    if (m) {
-	        templateChoice=m[1];
-	        m = templateChoice.match(/[Vv]ertical/ );
-	        if (m) {
-	            template = VERTICAL;
-	        } else if ( templateChoice.match(/[Hh]orizontal/ ) ) {
-	            template = HORIZONTAL;
-	        } else if ( templateChoice.match(/[Bb][yY]5[nN][Oo]/)) {
-	            template = BY5_NOIMAGE;
-	        }else if ( templateChoice.match(/[Bb][yY]5/)) {
-	            template = BY5;
-	        }else if ( templateChoice.match(/people/i)) {
-	            template = PEOPLE;
-	        }
-	        m = templateChoice.match(/noengage/ );
-	        if (m ) {
-	            template = HORIZONTAL_NOENGAGE;
-	        }
+	        // get list of parameters
+	        params = m[1].match(/\S+/g);
+	        params.forEach( function(element) {
+	        //    console.log("element is " + element);
+	        
+	            m = element.match(/[Vv]ertical/ );
+	            if (m) {
+	                template = VERTICAL;
+	            } else if ( element.match(/[Hh]orizontal/ ) ) {
+	                template = HORIZONTAL;
+	            } else if ( element.match(/[Bb][yY]5[nN][Oo]/)) {
+	                template = BY5_NOIMAGE;
+	            } else if ( element.match(/[Bb][yY]5/)) {
+	                template = BY5;
+	            } else if ( element.match(/people/i)) {
+	                template = PEOPLE;
+	            } else if (element.match(/noengage/i )) {
+	                template = HORIZONTAL_NOENGAGE;
+	            } else if ( element.match(/logging/i)) {
+	                LOGGING = true;
+	            }
+	        });
 	    } // if no match, stay with default
         
     }
+    
+  //  console.log("LOGGING IS " + LOGGING);
     // make the h3 for the Card Interface item disappear
     // (Can't hide the parent as then you can't edit via Bb)
     cardInterface.hide();
@@ -510,6 +527,7 @@ function getCardItems($) {
 	    description = description.replace(/<a/, '<a class="underline"');
 	    cardHtml = cardHtml.replace('{DESCRIPTION}', description);
 	    // Does the card link to another content item?
+//	    console.log( " template is " + template + " and H_E " + HORIZONTAL_NOENGAGE);
 	    if ( idx.link ) {
 	        
 	        
@@ -520,7 +538,7 @@ function getCardItems($) {
 	          moduleNum++;
 	        } 
 	        
-	    } else if (template!=HORIZONTAL_NOENGAGE) {
+	    } else {// if (template!==HORIZONTAL_NOENGAGE) {
 	        // remove the link, as there isn't one
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', '');
 	        cardHtml = cardHtml.replace(/<a href="{LINK}">/g,'');
