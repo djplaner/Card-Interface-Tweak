@@ -487,6 +487,8 @@ function getCardItems($) {
 	    if (m) {
 	        // get list of parameters
 	        params = m[1].match(/\S+/g);
+	        
+	        if ( params ) {
 	        params.forEach( function(element) {
 	        //    console.log("element is " + element);
 	        
@@ -507,6 +509,7 @@ function getCardItems($) {
 	                LOGGING = true;
 	            }
 	        });
+	        }
 	    } // if no match, stay with default
         
     }
