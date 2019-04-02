@@ -359,9 +359,8 @@ function getCardItems($) {
     	    description = description.replace( "<p>"+m[0]+"</p>","");
 	        description = description.replace( m[0], "");
 	    }
-	    
-	    var hidden = $(this).prev().filter(":contains('Item is hidden from students.')");
-	    //.siblings('contextItemDetailsHeaders')
+	    // Find any ItemDetailsHeaders that indicate the item is hidden
+	    hidden = $(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Item is hidden from students.')");
 	
 	    // Check to see if an image with title "Card Image" has been inserted
 	    var inlineImage = $(this).find('img').attr('title', 'Card Image');
