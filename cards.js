@@ -32,7 +32,21 @@ var TERM_DATES = {
          "10" : { "start" : "2019-05-06", "stop":"2019-05-12" },
          "11" : { "start" : "2019-05-13", "stop":"2019-05-19" } ,
          "12" : { "start" : "2019-05-20", "stop":"2019-05-26" } 
-         }
+         },
+    "3195" : {
+         "1" : { "start" : "2019-07-08", "stop":"2019-07-14" } ,
+         "2" : { "start" : "2019-07-15", "stop":"2019-07-21" } ,
+         "3" : { "start" : "2019-07-22", "stop":"2019-07-28" } ,
+         "4" : { "start" : "2019-07-29", "stop":"2019-08-04" } ,
+         "5" : { "start" : "2019-08-05", "stop":"2019-08-11" } ,
+         "6" : { "start" : "2019-08-19", "stop":"2019-08-25" } ,
+         "7" : { "start" : "2019-08-26", "stop":"2019-09-01" } ,
+         "8" : { "start" : "2019-09-02", "stop":"2019-09-08" } ,
+         "9" : { "start" : "2019-09-09", "stop":"2019-09-15" } ,
+         "10" : { "start" : "2019-09-16", "stop":"2019-09-22" },
+         "11" : { "start" : "2019-09-23", "stop":"2019-09-29" } ,
+         "12" : { "start" : "2019-09-30", "stop":"2019-10-01" } 
+    }
     };
 var TERM="3191";
 var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -320,11 +334,20 @@ function cardsInterface($){
 	window.tweak_bb = { display_view: (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ), 
           page_id: "#content_listContainer",
 	      row_element: "li" };
-	      
+
+    /* Calculate actual term by using id="courseMenuLink"
+     * - which includes the courseId */
+     
+    courseTitle = $("#courseMenu_link").attr('title');
 	 if (location.href.indexOf("listContent.jsp") > 0) {
          $(".gutweak").parents("li").hide(); 
 	 }
-	 LOCATION = location.href.indexOf("listContent.jsp");
+	m = courseTitle.match(/.*\([0-9]*[A-Z]*_([0-9]*)[_A-Z]*\)/i);
+    if (m) {
+        TERM=m[1];
+    }
+	    
+	LOCATION = location.href.indexOf("listContent.jsp");
 
     var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
  	
@@ -361,6 +384,7 @@ function getCardItems($) {
 	    }
 	    // Find any ItemDetailsHeaders that indicate the item is hidden
 	    hidden = $(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Item is hidden from students.')");
+	    //.siblings('contextItemDetailsHeaders')
 	
 	    // Check to see if an image with title "Card Image" has been inserted
 	    var inlineImage = $(this).find('img').attr('title', 'Card Image');
