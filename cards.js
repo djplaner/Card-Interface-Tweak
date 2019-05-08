@@ -345,6 +345,9 @@ function cardsInterface($){
 	m = courseTitle.match(/.*\([0-9]*[A-Z]*_([0-9]*)[_A-Z]*\)/i);
     if (m) {
         TERM=m[1];
+        if (TERM==='') {
+            TERM='3191';
+        }
     }
 	    
 	LOCATION = location.href.indexOf("listContent.jsp");
@@ -408,7 +411,6 @@ function getCardItems($) {
 	        // Found Week, find matching date
 	        // TODO - what if there isn't a matching date
 	        week = m[1];
-	         //console.log( "Found Week " + week + " TERM " + TERM + "" )     ;
 	         var start = TERM_DATES[TERM][week].start;//[week].start;
 	         //console.log(" Starting date " + start);
 	         var d = new Date(start);
