@@ -74,7 +74,7 @@ var LOGGING=false;
 var interfaceHtmlTemplate = Array(5);
 
 interfaceHtmlTemplate[HORIZONTAL] = `
-<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
+<link rel="stylesheet" href="https://s3.amazonaws.com/filebucketdave/banner.js/cards.css" />
 
 
 <div id="guCardInterface" class="flex flex-wrap -m-3">
@@ -83,7 +83,7 @@ interfaceHtmlTemplate[HORIZONTAL] = `
 `;
 
 interfaceHtmlTemplate[VERTICAL] = `
-<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
+<link rel="stylesheet" href="https://s3.amazonaws.com/filebucketdave/banner.js/cards.css" />
  {CARDS}
 </div>
 `;
