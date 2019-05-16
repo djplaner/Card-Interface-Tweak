@@ -74,7 +74,7 @@ var LOGGING=false;
 var interfaceHtmlTemplate = Array(5);
 
 interfaceHtmlTemplate[HORIZONTAL] = `
-<link rel="stylesheet" href="https://s3.amazonaws.com/filebucketdave/banner.js/cards.css" />
+<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
 
 
 <div id="guCardInterface" class="flex flex-wrap -m-3">
@@ -83,7 +83,7 @@ interfaceHtmlTemplate[HORIZONTAL] = `
 `;
 
 interfaceHtmlTemplate[VERTICAL] = `
-<link rel="stylesheet" href="https://s3.amazonaws.com/filebucketdave/banner.js/cards.css" />
+<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
  {CARDS}
 </div>
 `;
@@ -379,7 +379,9 @@ function getCardItems($) {
 	cards.each( function(idx){
         // Parse the description and remove the Card Image data	    
 	    var description = $(this).html(),picUrl;
-	    m = description.match(/[Cc]ard [Ii]mage *: *([^\s<]*)/ );
+		// - get rid of any &nbsp; inserted by Bb
+	    description = description.replace(/&nbsp;/gi, ' ');
+	    m = description.match(/[Cc]ard [Ii]mage\s*: *([^\s<]*)/ );
 	    if (m) {
     	    picUrl=m[1];
     	    description = description.replace( "<p>"+m[0]+"</p>","");
