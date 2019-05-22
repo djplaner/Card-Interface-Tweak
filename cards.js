@@ -252,7 +252,7 @@ linkItemHtmlTemplate[HORIZONTAL] = `
         <p>&nbsp;<br /> &nbsp;</p>
         <div class="p-4 absolute pin-r pin-b">
            <a href="{LINK}"><button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
-            Engage
+            {ENGAGE}
         </button></a>
         </div>
         `;
@@ -273,6 +273,7 @@ linkItemHtmlTemplate[VERTICAL] = '';
 // Template for the calendar/date tab
 
 var dateHtmlTemplate = Array(5);
+var dualDateHtmlTemplate = Array(5);
 
 dateHtmlTemplate[HORIZONTAL] = `
 <div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24 absolute pin-t pin-r">
@@ -293,17 +294,48 @@ dateHtmlTemplate[HORIZONTAL] = `
         </div>
 `;
 
+dualDateHtmlTemplate[HORIZONTAL] = `
+<div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24 absolute pin-t pin-r">
+          <div class="bg-black text-white py-1 text-xs">
+             {DATE_LABEL}
+          </div>
+          {WEEK}
+          <div class="bg-red text-white flex items-stretch py-1">
+              <div class="w-1/2 flex-grow">{MONTH_START}</div>
+              <div class="flex items-stretch border-l border-black flex-grow  -mt-1 -mb-1"></div>
+              <div class="w-1/2">{MONTH_STOP}</div>
+          </div>
+          <div class="border-l border-r border-b text-center flex border-black items-stretch pt-1">
+      	     <div class="w-1/2 text-2xl flex-grow font-bold">{DATE_START}</div>
+      	     <div class="flex font-bolditems-stretch border-l border-black flex-grow -mt-1"></div>
+              <div class="w-1/2 text-2xl font-bold">{DATE_STOP}</div>
+          </div>
+         </div> 
+`;
+
 weekHtmlTemplate = `
     <div class="bg-yellow-lighter text-black py-1">
       Week {WEEK}
     </div>
     `;
+    
+dualWeekHtmlTemplate = `
+    <div class="bg-yellow-lighter text-black py-1">
+      Week {WEEK_START} to {WEEK_STOP}
+    </div>
+    `;    
 
 dateHtmlTemplate[VERTICAL] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[HORIZONTAL_NOENGAGE] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[BY5] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[BY5_NOIMAGE] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[PEOPLE] = '';
+
+dualDateHtmlTemplate[VERTICAL] = dualDateHtmlTemplate[HORIZONTAL];
+dualDateHtmlTemplate[HORIZONTAL_NOENGAGE] = dualDateHtmlTemplate[HORIZONTAL];
+dualDateHtmlTemplate[BY5] = dualDateHtmlTemplate[HORIZONTAL];
+dualDateHtmlTemplate[BY5_NOIMAGE] = dualDateHtmlTemplate[HORIZONTAL];
+dualDateHtmlTemplate[PEOPLE] = '';
 
 // Template to allow editors to view the original Bb content item
 // Same for all templates
@@ -406,31 +438,11 @@ function getCardItems($) {
 	    }
 	    
 	    // Parse the date for commencing
-	    var month,date,week="";
-	    
-	    m = description.match(/[Cc]ard [Dd]ate *: *week ([0-9]*)/i);
-	    if (m) {
-	        // Found Week, find matching date
-	        // TODO - what if there isn't a matching date
-	        week = m[1];
-	         var start = TERM_DATES[TERM][week].start;//[week].start;
-	         //console.log(" Starting date " + start);
-	         var d = new Date(start);
-	         month=MONTHS[d.getMonth()];
-	         date=d.getDate();
-	         //console.log( " Date " + month + " " + date);
-	         description = description.replace( "<p>"+m[0]+"</p>","");
-    	     description = description.replace(m[0],"");
-	         
-	    } else {
-	        m = description.match(/[Cc]ard [Dd]ate *: *([A-Za-z]*) ([0-9]*)/);
-	        if (m) {
-    	        month=m[1];
-    	        date=m[2];
-    	        description = description.replace( "<p>"+m[0]+"</p>","");
-    	        description = description.replace(m[0],"");
-	        }
-	    }
+	    // date will be in object with start and end members
+	    var date = handleDate( description );
+	    // kludge to modify the local description based on changes
+	    // done in handleDate
+	    description = date.descrip;
 	    
 	    // See if there's a different label for date
 	    m = description.match(/[Cc]ard [Dd]ate [Ll]abel *: ([^<]*)/);
@@ -450,6 +462,18 @@ function getCardItems($) {
 	        description = description.replace( m[0], "");
 	    }
 	    
+	    // Get course number
+	    var number='x';
+	    m = description.match(/[Cc]ard [Nn]umber *: *([^<]*)/ );
+	    if (m) {
+	        number=m[1];
+	        description = description.replace( "<p>"+m[0]+"</p>","");
+	        description = description.replace( m[0], "");
+	        if (number.match(/none/i)) {
+	            number='&nbsp;'
+	        }
+	    }
+	    
 	    // need to get back to the header which is up one div, a sibling, then span
 	    var header = $(this).parent().siblings(".item").find("span")[2];
 	    var title = $(header).html(),link;
@@ -465,9 +489,12 @@ function getCardItems($) {
 	    }
 	    // save the item for later
 	    var item = {title:title, picUrl:picUrl, description:description,
-	        link:link,week:week,month:month,date:date,label:label,dateLabel:dateLabel,
+	        link:link,date:date,label:label,dateLabel:dateLabel,
 	        id:itemId
 	    };
+	    if (number!=='x' ) {
+	        item.moduleNum=number;
+	    }
 	    // only add the card to display if
 	    // - VIEW MODE is on and it's not hidden
 	    // - EDIT MODE is on 
@@ -496,7 +523,7 @@ function getCardItems($) {
    
     // Define which template to use 
     var template = HORIZONTAL;
- 	
+ 	var engageVerb = 'Engage';
  	
  	// get the content item with h3 heading containing Card Interface
  	var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
@@ -534,6 +561,8 @@ function getCardItems($) {
 	                template = HORIZONTAL_NOENGAGE;
 	            } else if ( element.match(/logging/i)) {
 	                LOGGING = true;
+	            } else if ( m = element.match(/engage='([^']*)'/)) {
+	                engageVerb = m[1];	        
 	            }
 	        });
 	        }
@@ -554,16 +583,25 @@ function getCardItems($) {
     var moduleNum = 1;
     items.forEach( function(idx) {
 	    var cardHtml=cardHtmlTemplate[template];
+	    // replace the Engage verb
+	    
 	    //console.log("template is " + template);
 	    // Only show module number if there's a label
 	    if ( idx.label!=='') {
-	        cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
-	    } else {
-	        cardHtml = cardHtml.replace('{MODULE_NUM}','');
+	        if (idx.moduleNum) {
+	            // if there's a hard coded moduleNum use that
+	            cardHtml = cardHtml.replace('{MODULE_NUM}',idx.moduleNum);
+	        } else {
+	            // use the one we're calculating
+	            cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
+	        }
+	    } else { 
+	       cardHtml = cardHtml.replace('{MODULE_NUM}','');
 	    }
 	    cardHtml = cardHtml.replace('{LABEL}',idx.label);
 	    cardHtml = cardHtml.replace(/{PIC_URL}/g, idx.picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
+	    
 	    // Get rid of some crud Bb inserts into the HTML
 	    description = idx.description.replace(/<p/, '<p class="pb-2"');
 	    description = description.replace(/<a/, '<a class="underline"');
@@ -574,9 +612,12 @@ function getCardItems($) {
 	        
 	        
 	        // add the link
-	        cardHtml = cardHtml.replace('{LINK_ITEM}', linkItemHtmlTemplate[template] );
-	        // if there is a label, then increment the module number
-	        if ( idx.label!=="") {
+	        linkHtml = linkItemHtmlTemplate[template];
+	        linkHtml = linkHtml.replace( '{ENGAGE}',engageVerb);
+	        cardHtml = cardHtml.replace('{LINK_ITEM}',linkHtml);
+	        // if there is a label and no hard coded moduleNum, 
+	        //  then increment the module number
+	        if ( idx.label!=="" && ! idx.moduleNum) {
 	          moduleNum++;
 	        } 
 	        
@@ -603,19 +644,42 @@ function getCardItems($) {
 	        cardHtml = cardHtml.replace(/{EDIT_ITEM}/,'');
 	    }
 	    
-	    // if there's a date, insert it
-	    if ( idx.month ) {
-	        cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template] );
-	        cardHtml = cardHtml.replace(/{MONTH}/g, idx.month);
-	        cardHtml = cardHtml.replace(/{DATE}/g, idx.date);
-	        cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
-	        if ( idx.week==="") {
-	            cardHtml = cardHtml.replace('{WEEK}','');
-	        } else
-	            var weekHtml = weekHtmlTemplate.replace('{WEEK}', idx.week);
-	            cardHtml = cardHtml.replace('{WEEK}',weekHtml);
+	    // If need add the date visualisation
+	    if ( idx.date.start.month ) {
+	        if ( idx.date.stop.month ) {
+	            // start and stop dates
+	            cardHtml = cardHtml.replace('{DATE}', dualDateHtmlTemplate[template] );
+	            cardHtml = cardHtml.replace(/{MONTH_START}/g, 
+	                            idx.date.start.month);
+	            cardHtml = cardHtml.replace(/{DATE_START}/g, 
+	                            idx.date.start.date);
+	            cardHtml = cardHtml.replace(/{MONTH_STOP}/g, 
+	                            idx.date.stop.month);
+	            cardHtml = cardHtml.replace(/{DATE_STOP}/g, 
+	                            idx.date.stop.date);
+	            cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
+	            if ( idx.date.start.week==="") {
+	                cardHtml = cardHtml.replace('{WEEK}','');
+	            } else
+	                var weekHtml = dualWeekHtmlTemplate.replace('{WEEK_START}', 
+	                            idx.date.start.week);
+	                weekHtml = weekHtml.replace('{WEEK_STOP}',
+	                    idx.date.stop.week);
+	                cardHtml = cardHtml.replace('{WEEK}',weekHtml);
+	        } else {
+	            // just start date
+	            cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template] );
+	            cardHtml = cardHtml.replace(/{MONTH}/g, idx.date.start.month);
+	            cardHtml = cardHtml.replace(/{DATE}/g, idx.date.start.date);
+	            cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
+	            if ( idx.date.start.week==="") {
+	                cardHtml = cardHtml.replace('{WEEK}','');
+	            } else
+	                var weekHtml = weekHtmlTemplate.replace('{WEEK}', idx.date.start.week);
+	                cardHtml = cardHtml.replace('{WEEK}',weekHtml);
+	        }
 	    } else {
-	        
+	        // no dates at all
 	        cardHtml = cardHtml.replace('{DATE}', '');
 	    }
 	    cards = cards.concat(cardHtml);
@@ -628,3 +692,82 @@ function getCardItems($) {
 	//return false;
 	$(firstItem).append( interfaceHtml);
 }
+
+//*********************
+// getTermDate( week )
+// - given a week of Griffith semester return date for the 
+//   start of that week
+
+function getTermDate( week ) {
+    var date = { date: "", month: "", week: week };
+    if (( week<1) || (week>12)) {
+        return date;
+    }
+    var start = TERM_DATES[TERM][week].start;//[week].start;
+	//console.log(" Starting date " + start);
+	var d = new Date(start);
+	date.month=MONTHS[d.getMonth()];
+	date.date=d.getDate();
+	
+	return date;
+}
+	         
+//**************************************************
+// handleDate( description )
+// - given a description for an item find and parse Card Date
+// - return an object that has two members
+//   - start - start or only date {date:??,month:??}
+//   - stop  - end date
+// Options include
+// - specify specific date by text
+//          Card Date: Mar 5     
+// - specify date by week of Griffith term (monday)
+//          Card Date: Week 1
+// - specify a date range
+//          Card Date: Mar 5-Mar 10
+//          Card Date: Week 3-5
+
+function handleDate( description ) {
+    var month,endMonth,date,endDate,week="",endWeek="";
+    var empty1 = { date:"",week:""};
+    var empty2 = { date:"",week:""};
+	var date = { start: empty1, stop: empty2 } ; // object to return 
+	// date by griffith week    
+	
+    m = description.match(/[Cc]ard [Dd]ate *: *week ([0-9]*)/i);
+	if (m) {
+	    // check to see if a range was specified
+	    x = description.match(/[Cc]ard [Dd]ate *: *week ([0-9]*)-([0-9]*)/i);
+	    if (x) {
+	        //console.log('ZZZZZZZZZZZZZZZZZZZZZZ handling a range');
+	        week = x[1];
+	        endWeek = x[2];
+	        date.stop = getTermDate( endWeek);
+	        //console.log(date.stop);
+	            
+	        description = description.replace( "<p>"+x[0]+"</p>","");
+            description = description.replace(x[0],"");
+        } else {
+            week = m[1];
+	           
+            description = description.replace( "<p>"+m[0]+"</p>","");
+            description = description.replace(m[0],"");
+        }
+        
+        date.start = getTermDate( week )
+        //console.log( " Date " + month + " " + date);
+	        
+	         
+	} else {
+	    // TODO need to handle range here
+	    m = description.match(/[Cc]ard [Dd]ate *: *([A-Za-z]*) ([0-9]*)/);
+	    if (m) {
+            date.start.month=m[1];
+    	    date.start.date=m[2];
+    	    description = description.replace( "<p>"+m[0]+"</p>","");
+    	    description = description.replace(m[0],"");
+	    }
+	}
+	date.descrip = description;
+	return date;
+} 
