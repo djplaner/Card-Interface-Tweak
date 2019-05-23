@@ -562,7 +562,7 @@ function getCardItems($) {
 	            } else if ( element.match(/logging/i)) {
 	                LOGGING = true;
 	            } else if ( m = element.match(/engage='([^']*)'/)) {
-	                engageVerb = m[1];	        
+	                engageVerb = m[1];
 	            }
 	        });
 	        }
@@ -646,6 +646,7 @@ function getCardItems($) {
 	    
 	    // If need add the date visualisation
 	    if ( idx.date.start.month ) {
+	        // Do we have dual dates - both start and stop?
 	        if ( idx.date.stop.month ) {
 	            // start and stop dates
 	            cardHtml = cardHtml.replace('{DATE}', dualDateHtmlTemplate[template] );
@@ -658,21 +659,23 @@ function getCardItems($) {
 	            cardHtml = cardHtml.replace(/{DATE_STOP}/g, 
 	                            idx.date.stop.date);
 	            cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
-	            if ( idx.date.start.week==="") {
+	            console.log(idx.date);
+	            if ( ! idx.date.start.hasOwnProperty('week')) {
 	                cardHtml = cardHtml.replace('{WEEK}','');
-	            } else
+	            } else {
 	                var weekHtml = dualWeekHtmlTemplate.replace('{WEEK_START}', 
 	                            idx.date.start.week);
 	                weekHtml = weekHtml.replace('{WEEK_STOP}',
 	                    idx.date.stop.week);
 	                cardHtml = cardHtml.replace('{WEEK}',weekHtml);
+	            }
 	        } else {
 	            // just start date
 	            cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template] );
 	            cardHtml = cardHtml.replace(/{MONTH}/g, idx.date.start.month);
 	            cardHtml = cardHtml.replace(/{DATE}/g, idx.date.start.date);
 	            cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
-	            if ( idx.date.start.week==="") {
+	            if ( !idx.date.start.hasOwnProperty('week')) {
 	                cardHtml = cardHtml.replace('{WEEK}','');
 	            } else
 	                var weekHtml = weekHtmlTemplate.replace('{WEEK}', idx.date.start.week);
@@ -760,12 +763,24 @@ function handleDate( description ) {
 	         
 	} else {
 	    // TODO need to handle range here
-	    m = description.match(/[Cc]ard [Dd]ate *: *([A-Za-z]*) ([0-9]*)/);
+	    
+	    m = description.match(/card date *: *([a-z]+) ([0-9]+)/i);
 	    if (m) {
-            date.start.month=m[1];
-    	    date.start.date=m[2];
-    	    description = description.replace( "<p>"+m[0]+"</p>","");
-    	    description = description.replace(m[0],"");
+	        
+	        x = description.match(/card date *: *([a-z]+) ([0-9]+)-+([a-z]+) ([0-9]+)/i);
+	        if (x) {
+	            
+	            date.start = { month: x[1],date: x[2] }
+	            date.stop = { month: x[3], date: x[4] }
+
+	            description = description.replace( "<p>"+x[0]+"</p>","");
+                description = description.replace(x[0],"");
+            } else {
+            
+                date.start = { month:m[1],date:m[2]};
+    	        description = description.replace( "<p>"+m[0]+"</p>","");
+    	        description = description.replace(m[0],"");
+	        } 
 	    }
 	}
 	date.descrip = description;
