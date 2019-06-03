@@ -20,6 +20,7 @@
 
 var TERM_DATES = {
     "3191" : {
+         "0" : { "start" : "2019-02-18", "stop":"2019-02-24" },
          "1" : { "start" : "2019-02-25", "stop":"2019-03-03" } ,
          "2" : { "start" : "2019-03-04", "stop":"2019-03-10" } ,
          "3" : { "start" : "2019-03-11", "stop":"2019-03-17" } ,
@@ -37,6 +38,7 @@ var TERM_DATES = {
          "15" : { "start" : "2019-06-10", "stop":"2019-06-17" }
          },
     "3195" : {
+         "0" : { "start" : "2019-07-01", "stop":"2019-07-07" } ,
          "1" : { "start" : "2019-07-08", "stop":"2019-07-14" } ,
          "2" : { "start" : "2019-07-15", "stop":"2019-07-21" } ,
          "3" : { "start" : "2019-07-22", "stop":"2019-07-28" } ,
@@ -380,11 +382,12 @@ function cardsInterface($){
 	 if (location.href.indexOf("listContent.jsp") > 0) {
          $(".gutweak").parents("li").hide(); 
 	 }
-	regex = new RegExp('.*[0-9]+[a-z]+_([0-9]+)_[a-z]+',"i");
+	regex = new RegExp('.*\([0-9]+[a-z]+_([0-9]+)[_a-z]+\)',"i");
 	m = courseTitle.match( regex);
 	
     if (m) {
         TERM=m[1];
+        console.log("Course title " + courseTitle + " M1 " + m[1] + " TERM " + TERM);    
         if (TERM==='') {
             TERM='3191';
         }
@@ -732,7 +735,7 @@ function getCardItems($) {
 
 function getTermDate( week, startWeek=true ) {
     var date = { date: "", month: "", week: week };
-    if (( week<1) || (week>15)) {
+    if (( week<0) || (week>15)) {
         return date;
     }
     var start;
