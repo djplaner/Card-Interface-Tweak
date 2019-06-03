@@ -382,12 +382,12 @@ function cardsInterface($){
 	 if (location.href.indexOf("listContent.jsp") > 0) {
          $(".gutweak").parents("li").hide(); 
 	 }
-	regex = new RegExp('.*\([0-9]+[a-z]+_([0-9]+)[_a-z]+\)',"i");
+	regex = new RegExp('.*[0-9]+[a-z]+_([0-9]+)[_a-z]+',"i");
 	m = courseTitle.match( regex);
 	
     if (m) {
         TERM=m[1];
-        console.log("Course title " + courseTitle + " M1 " + m[1] + " TERM " + TERM);    
+        //console.log("Course title " + courseTitle + " M1 " + m[1] + " TERM " + TERM);    
         if (TERM==='') {
             TERM='3191';
         }
@@ -734,6 +734,7 @@ function getCardItems($) {
 //   start of that week
 
 function getTermDate( week, startWeek=true ) {
+    //console.log("getTerm Date week " + week + " TERM " + TERM);
     var date = { date: "", month: "", week: week };
     if (( week<0) || (week>15)) {
         return date;
