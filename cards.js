@@ -54,7 +54,7 @@ var TERM_DATES = {
          "15" : { "start" : "2019-10-21", "stop":"2019-10-27" }
     }
     };
-var TERM="3191";
+var TERM="3191",YEAR=2019, SET_DATE="";
 var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 
@@ -380,11 +380,22 @@ function cardsInterface($){
 	 if (location.href.indexOf("listContent.jsp") > 0) {
          $(".gutweak").parents("li").hide(); 
 	 }
-	m = courseTitle.match(/.*\([0-9]*[A-Z]*_([0-9]*)[_A-Z]*\)/i);
+	regex = new RegExp('.*\([0-9]+[a-z]+_([0-9]+)[_a-z]+\)',"i");
+	m = courseTitle.match( regex);
+	
     if (m) {
         TERM=m[1];
+        console.log("Course title " + courseTitle + " M1 " + m[1] + " TERM " + TERM);    
         if (TERM==='') {
             TERM='3191';
+        }
+        
+        // set the year
+        mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
+        if (mm) {
+            YEAR = 20 + mm[1];
+        } else {
+            YEAR = 2019;
         }
     }
 	    
@@ -451,7 +462,7 @@ function getCardItems($) {
 	    description = date.descrip;
 	    
 	    // See if there's a different label for date
-	    m = description.match(/[Cc]ard [Dd]ate [Ll]abel *: ([^<]*)/);
+	    m = description.match(/card date label *: ([^<]*)/i);
 	    var dateLabel='Commencing';
 	    if (m) {
 	        dateLabel=m[1];
@@ -461,16 +472,25 @@ function getCardItems($) {
 	    
 	    // See if the Course Label should be changed
 	    var label="Module";
-	    m = description.match(/[Cc]ard [Ll]abel *: *([^<]*)/ );
+	    
+	    m = description.match(/card label *: *([^<]*)/i );
 	    if (m) {
 	        label=m[1];
 	        description = description.replace( "<p>"+m[0]+"</p>","");
 	        description = description.replace( m[0], "");
 	    }
-	    
+	    // get active image
+	    var activePicUrl = '';
+	    var regex = new RegExp("card image active\s*:\s*([^<]*)", "i");
+	    m = description.match( regex );
+	    if (m) {
+	        activePicUrl=m[1];
+	        description = description.replace( "<p>"+m[0]+"</p>","");
+	        description = description.replace( m[0], "");
+	    }
 	    // Get course number
 	    var number='x';
-	    m = description.match(/[Cc]ard [Nn]umber *: *([^<]*)/ );
+	    m = description.match(/card number *: *([^<]*)/i );
 	    if (m) {
 	        number=m[1];
 	        description = description.replace( "<p>"+m[0]+"</p>","");
@@ -496,7 +516,7 @@ function getCardItems($) {
 	    // save the item for later
 	    var item = {title:title, picUrl:picUrl, description:description,
 	        link:link,date:date,label:label,dateLabel:dateLabel,
-	        id:itemId
+	        id:itemId,activePicUrl:activePicUrl
 	    };
 	    if (number!=='x' ) {
 	        item.moduleNum=number;
@@ -549,28 +569,32 @@ function getCardItems($) {
 	        params = m[1].match(/\S+/g);
 	        
 	        if ( params ) {
-	        params.forEach( function(element) {
-	        //    console.log("element is " + element);
+	            params.forEach( function(element) {
+	            //    console.log("element is " + element);
 	        
-	            m = element.match(/[Vv]ertical/ );
-	            if (m) {
-	                template = VERTICAL;
-	            } else if ( element.match(/[Hh]orizontal/ ) ) {
-	                template = HORIZONTAL;
-	            } else if ( element.match(/[Bb][yY]5[nN][Oo]/)) {
-	                template = BY5_NOIMAGE;
-	            } else if ( element.match(/[Bb][yY]5/)) {
-	                template = BY5;
-	            } else if ( element.match(/people/i)) {
-	                template = PEOPLE;
-	            } else if (element.match(/noengage/i )) {
-	                template = HORIZONTAL_NOENGAGE;
-	            } else if ( element.match(/logging/i)) {
-	                LOGGING = true;
-	            } else if ( m = element.match(/engage='([^']*)'/)) {
-	                engageVerb = m[1];
-	            }
-	        });
+	                m = element.match(/[Vv]ertical/ );
+	                if (m) {
+	                    template = VERTICAL;
+	                } else if ( element.match(/[Hh]orizontal/ ) ) {
+	                    template = HORIZONTAL;
+	                } else if ( element.match(/[Bb][yY]5[nN][Oo]/)) {
+	                    template = BY5_NOIMAGE;
+	                } else if ( element.match(/[Bb][yY]5/)) {
+	                    template = BY5;
+	                } else if ( element.match(/people/i)) {
+	                    template = PEOPLE;
+	                } else if (element.match(/noengage/i )) {
+	                    template = HORIZONTAL_NOENGAGE;
+	                } else if ( element.match(/logging/i)) {
+	                    LOGGING = true;
+	                } else if ( m = element.match(/engage='([^']*)'/)) {
+	                    engageVerb = m[1];
+	                } else if ( 
+	                    //m=element.match(/set[Dd]ate=([0-9]+-[0-9]+-[0-9]+)\s/ ))
+	                    m=element.match(/set[Dd]ate=([^\s]*)/ )){
+	                    SET_DATE = m[1];
+	                }
+	            });
 	        }
 	    } // if no match, stay with default
         
@@ -605,7 +629,10 @@ function getCardItems($) {
 	       cardHtml = cardHtml.replace('{MODULE_NUM}','');
 	    }
 	    cardHtml = cardHtml.replace('{LABEL}',idx.label);
-	    cardHtml = cardHtml.replace(/{PIC_URL}/g, idx.picUrl);
+	    
+	    var picUrl = setImage( idx);
+	    
+	    cardHtml = cardHtml.replace(/{PIC_URL}/g, picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
 	    
 	    // Get rid of some crud Bb inserts into the HTML
@@ -615,8 +642,6 @@ function getCardItems($) {
 	    // Does the card link to another content item?
 //	    console.log( " template is " + template + " and H_E " + HORIZONTAL_NOENGAGE);
 	    if ( idx.link ) {
-	        
-	        
 	        // add the link
 	        linkHtml = linkItemHtmlTemplate[template];
 	        linkHtml = linkHtml.replace( '{ENGAGE}',engageVerb);
@@ -626,7 +651,6 @@ function getCardItems($) {
 	        if ( idx.label!=="" && ! idx.moduleNum) {
 	          moduleNum++;
 	        } 
-	        
 	    } else {// if (template!==HORIZONTAL_NOENGAGE) {
 	        // remove the link, as there isn't one
 	        cardHtml = cardHtml.replace('{LINK_ITEM}', '');
@@ -665,7 +689,7 @@ function getCardItems($) {
 	            cardHtml = cardHtml.replace(/{DATE_STOP}/g, 
 	                            idx.date.stop.date);
 	            cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
-	            console.log(idx.date);
+	 //           console.log(idx.date);
 	            if ( ! idx.date.start.hasOwnProperty('week')) {
 	                cardHtml = cardHtml.replace('{WEEK}','');
 	            } else {
@@ -707,12 +731,17 @@ function getCardItems($) {
 // - given a week of Griffith semester return date for the 
 //   start of that week
 
-function getTermDate( week ) {
+function getTermDate( week, startWeek=true ) {
     var date = { date: "", month: "", week: week };
     if (( week<1) || (week>15)) {
         return date;
     }
-    var start = TERM_DATES[TERM][week].start;//[week].start;
+    var start;
+    if ( startWeek ) {
+        start = TERM_DATES[TERM][week].start;//[week].start;
+    } else {
+        start = TERM_DATES[TERM][week].stop;
+    }
 	//console.log(" Starting date " + start);
 	var d = new Date(start);
 	date.month=MONTHS[d.getMonth()];
@@ -751,7 +780,7 @@ function handleDate( description ) {
 	        //console.log('ZZZZZZZZZZZZZZZZZZZZZZ handling a range');
 	        week = x[1];
 	        endWeek = x[2];
-	        date.stop = getTermDate( endWeek);
+	        date.stop = getTermDate( endWeek, false);
 	        //console.log(date.stop);
 	            
 	        description = description.replace( "<p>"+x[0]+"</p>","");
@@ -792,3 +821,54 @@ function handleDate( description ) {
 	date.descrip = description;
 	return date;
 } 
+
+//*************************************************************
+// picUrl = setImage( card )
+// - given card object containing information about a card
+// - return picUrl if no active card image
+// - return picUrl if there is an active card image, but it's
+//   not the date
+// - return activePicUrl if there is one and it's not the date
+function setImage( card) {
+    // only use activePicURL if it is set and there are dates on
+    // the card
+    if ( card.activePicUrl!=='' &&
+             card.date.start.date!=="" ){
+        // there is an activePicUrl, check if it should be active
+        
+        // active means that the current date falls within the start/stop
+        // dates for the card
+        var start,stop, now;
+        if ( SET_DATE==="") {
+            now = new Date();
+        } else {
+            now = new Date( SET_DATE);
+        }
+        
+        //console.log(card.date);
+        if ( card.date.start.hasOwnProperty( 'month') &&
+               card.date.start.month!==""){
+        
+            start = new Date( parseInt(YEAR), MONTHS.indexOf(card.date.start.month), parseInt(card.date.start.date));
+        } 
+        if ( card.date.stop.hasOwnProperty('month') &&
+                  card.date.stop.month!=='') {
+            stop = new Date( YEAR, MONTHS.indexOf(card.date.stop.month), card.date.stop.date);
+            stop.setHours(23,59,0);
+        } else if ( card.date.start.hasOwnProperty('week')){
+            // there's no end date, but there is a start week
+            // so set stop to end of that week
+            stop = new Date( TERM_DATES[TERM][card.date.start.week].stop);  
+            stop.setHours(23,59,0);
+        } else { // no week for stop, meaning it's just on the day
+            stop = new Date(start.getTime());
+            stop.setHours(23,59,0);
+        }
+        
+        if ( now>=start && now<=stop) {
+            return card.activePicUrl;
+        }
+    }
+    return card.picUrl;
+}    
+
