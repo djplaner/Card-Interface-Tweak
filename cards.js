@@ -117,7 +117,7 @@ cardHtmlTemplate[HORIZONTAL]=`
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}">
-      <div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">
+      <div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}
       <!-- <div class="bg-contain bg-no-repeat bg-center bg-yellow-lightest h-64" style="background-image: url('{PIC_URL}');"> -->
       </div></a>
       <div class="p-4 flex-1 flex flex-col">
@@ -142,6 +142,7 @@ cardHtmlTemplate[VERTICAL]=`
 <div class="lg:flex xl:flex md:flex mb-4 rounded-lg shadow-lg hover:shadow-outline">
   <div class="lg:w-1/4 md:w-1/4 sm:w-full h-auto lg:flex-none bg-cover bg-center rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('{PIC_URL}')">
         <img src="{PIC_URL}" style="opacity:0;width:50%" />
+        {IFRAME}
   </div>
     <div class="p-2 m-2 lg:flex md:w-1/5 lg:w-1/5 sm:w-full">
         <h3>{TITLE}</h3>
@@ -161,7 +162,7 @@ cardHtmlTemplate[VERTICAL]=`
 cardHtmlTemplate[HORIZONTAL_NOENGAGE]=`
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
-      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>
+      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}</div></a>
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
         {LABEL} {MODULE_NUM}
@@ -186,7 +187,7 @@ ul { list-style-type: circle}
 #guDescription { display: block}
 </style>
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
-      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>
+      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}</div></a>
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
         {LABEL} {MODULE_NUM}
@@ -422,14 +423,32 @@ function cardsInterface($){
  */
 
 function getCardItems($) {
-	// Find all the items that containg Card Image: ??
-	var cards = jQuery(tweak_bb.page_id + " > " +tweak_bb.row_element).children(".details").children('.vtbegenerated').filter(":contains('Card Image:')");
-	var items=[];
+	// Find all the items that containg Card Image: OR Card Image Iframe:
 	
-	// Loop through each card and construct the items array with card data
-	cards.each( function(idx){
+	var bbItems = jQuery(tweak_bb.page_id + " > " +tweak_bb.row_element).children(".details").children('.vtbegenerated').filter(
+	       function( index ) {
+	            if ( $(this).filter(":contains('Card Image:')").length==1 ) {
+	                return true;
+	            }    
+	            if ( $(this).filter(":contains('Card Image Iframe:')").length==1 ) {
+	                return true;
+	            }    
+	           return false;
+	       } );
+	       
+	var cards = extractCardsFromContent( bbItems);
+	
+	return cards;
+}
+
+function extractCardsFromContent( myCards) {
+    
+    var items = [];
+    
+    // Loop through each card and construct the items array with card data
+	myCards.each( function(idx){
         // Parse the description and remove the Card Image data	    
-	    var description = $(this).html(),picUrl;
+	    var description = jQuery(this).html(),picUrl;
 		// - get rid of any &nbsp; inserted by Bb
 	    description = description.replace(/&nbsp;/gi, ' ');
 	    m = description.match(/[Cc]ard [Ii]mage\s*: *([^\s<]*)/ );
@@ -439,20 +458,20 @@ function getCardItems($) {
 	        description = description.replace( m[0], "");
 	    }
 	    // Find any ItemDetailsHeaders that indicate the item is hidden
-	    hidden = $(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Item is hidden from students.')");
+	    hidden = jQuery(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Item is hidden from students.')");
 	    //.siblings('contextItemDetailsHeaders')
 	
 	    // Check to see if an image with title "Card Image" has been inserted
-	    var inlineImage = $(this).find('img').attr('title', 'Card Image');
+	    var inlineImage = jQuery(this).find('img').attr('title', 'Card Image');
 	    if (inlineImage.length) {
 	        picUrl=inlineImage[0].src;
 	        //console.log("item html" + inlineImage[0].outerHTML);
 	        description = description.replace(inlineImage[0].outerHTML,"");
 	        // Bb also adds stuff when images inserted, remove it from 
 	        // description to be placed into card
-	        var bb = $.parseHTML(description);
+	        var bb = jQuery.parseHTML(description);
 	        // This will find the class
-	        stringToRemove = $(description).find('.contextMenuContainer').parent().clone().html();
+	        stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html();
 	        description = description.replace( stringToRemove, '');
 	    }
 	    
@@ -501,18 +520,36 @@ function getCardItems($) {
 	            number='&nbsp;'
 	        }
 	    }
+	    // Get Image IFrame
+	    var iframe='';
+	    m = description.match(/card image iframe *: *(<iframe.*<\/iframe>)/i );
+	    if (m) {
+	        iframe=m[1];
+	        // replace the width and height
+	        x = iframe.match(/width="[^"]+"/i);
+	        if (x) {
+	            console.log(" MATCHED " + x[0]);
+	            iframe = iframe.replace(x[0], 'width="100%"');
+	        }
+	        x = iframe.match(/height="[^"]+"/i);
+	        if (x){
+	            iframe=iframe.replace(x[0], 'height="auto"');
+	        }
+	        description = description.replace( "<p>"+m[0]+"</p>","");
+	        description = description.replace( m[0], "");
+	    }
 	    
 	    // need to get back to the header which is up one div, a sibling, then span
-	    var header = $(this).parent().siblings(".item").find("span")[2];
-	    var title = $(header).html(),link;
-	    link = $(header).parents('a').attr('href');
+	    var header = jQuery(this).parent().siblings(".item").find("span")[2];
+	    var title = jQuery(header).html(),link;
+	    link = jQuery(header).parents('a').attr('href');
 	    // get the itemId to allow for "edit" link in card
-	    var itemId = $(this).parents('.liItem').attr('id');
+	    var itemId = jQuery(this).parents('.liItem').attr('id');
 	    //console.log("Item id " + itemId + " for link " + link );
 	    // Hide the contentItem  TODO Only do this if display page
 	    var tweak_bb_active_url_pattern = "listContent.jsp";
 	    if (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ) { 
-	        $(this).parent().parent().hide();
+	        jQuery(this).parent().parent().hide();
 	        //console.log( "content item " + contentItem.html());
 	    }
 	    // save the item for later
@@ -522,6 +559,9 @@ function getCardItems($) {
 	    };
 	    if (number!=='x' ) {
 	        item.moduleNum=number;
+	    }
+	    if (iframe!=='') {
+	        item.iframe=iframe;
 	    }
 	    // only add the card to display if
 	    // - VIEW MODE is on and it's not hidden
@@ -634,8 +674,19 @@ function getCardItems($) {
 	    
 	    var picUrl = setImage( idx);
 	    
+	    // replace the {IMAGE_URL} variable if none set
+	    if ( ! idx.hasOwnProperty('iframe')) {
+	        cardHtml = cardHtml.replace(/{IFRAME}/g, '');
+	    } else {
+	        cardHtml = cardHtml.replace(/{IFRAME}/g, idx.iframe);
+	        // set pic URl to empty so non is provided
+	        picUrl = ''
+	    }
 	    cardHtml = cardHtml.replace(/{PIC_URL}/g, picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
+	    
+	    
+	    
 	    
 	    // Get rid of some crud Bb inserts into the HTML
 	    description = idx.description.replace(/<p/, '<p class="pb-2"');
