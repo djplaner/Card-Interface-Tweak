@@ -66,12 +66,13 @@ var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 // TEMPLATES - by 6
 
 // define the template types
-const HORIZONTAL=0, // original 3 cards per row
+const NUM_TEMPLATES=6, HORIZONTAL=0, // original 3 cards per row
       VERTICAL=1, // 1 card per row 
       HORIZONTAL_NOENGAGE=2, // original, but no engage
       BY5=3, // horizontal but up to 5 cards per row
       BY5_NOIMAGE = 4, // horizontal, 5 cards, no image
-      PEOPLE = 5; // horizontal but show off people (BCI) version
+      PEOPLE = 5,
+      ASSESSMENT = 6; // horizontal but show off people (BCI) version
 
 // Whether or not xAPI logging is turned on
 // - turned on by adding "logging" to Card Interface
@@ -79,7 +80,7 @@ var LOGGING=false;
 
 // Define the wrapper around the card interface
 
-var interfaceHtmlTemplate = Array(5);
+var interfaceHtmlTemplate = Array(NUM_TEMPLATES);
 
 interfaceHtmlTemplate[HORIZONTAL] = `
 <link rel="stylesheet" href="https://djon.es/gu/cards.css" />
@@ -100,6 +101,7 @@ interfaceHtmlTemplate[HORIZONTAL_NOENGAGE]=interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[BY5]= interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[BY5_NOIMAGE]= interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[PEOPLE]= interfaceHtmlTemplate[HORIZONTAL];
+interfaceHtmlTemplate[ASSESSMENT]= interfaceHtmlTemplate[HORIZONTAL];
 
 
 /*`
@@ -111,7 +113,7 @@ interfaceHtmlTemplate[PEOPLE]= interfaceHtmlTemplate[HORIZONTAL];
 
 // template for each individual card
 
-var cardHtmlTemplate = Array(5);
+var cardHtmlTemplate = Array(NUM_TEMPLATES);
 
 cardHtmlTemplate[HORIZONTAL]=`
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
@@ -253,9 +255,44 @@ cardHtmlTemplate[PEOPLE]=`
   </div>
 `;
 
+// Implement the assessment template
+
+cardHtmlTemplate[ASSESSMENT]=`
+<a href="{LINK}">
+
+<div class="lg:max-w-full w-full lg:flex xl:flex md:flex mb-4 rounded-lg shadow-lg hover:shadow-outline"> 
+
+    <!-- <div class="lg:w-1/3 md:w-1/3 h-auto overflow-hidden"> -->
+    <!--<div class="h-48 lg-h-auto lg:w-32 m-2">
+          <h1>{MODULE_NUM}</h1>
+    </div>-->
+    <div class="h-48 lg-h-auto lg:w-48 m-2">
+        <div class="flex m-1 mt-2">
+          <h2>{MODULE_NUM}</h2>
+          <div class="m-1">
+          <h3>{TITLE}</h3>
+          <p class="text-sm">{ASSESSMENT TYPE}</p>
+          
+          </div>
+        </div>
+        {DATE}    
+    </div>
+    <div class="p-2 m-2">
+      <p class="text-grey-darker text-base">
+        {DESCRIPTION} 
+      </p>
+      {LINK_ITEM}
+      {EDIT_ITEM}   
+    </div>
+  <!--</div>-->
+</div>
+</a>
+<p>&nbsp;</p>
+`;
+
 // template to add the "ENGAGE" link to (more strongly) indicate that the card links somewhere
 
-var linkItemHtmlTemplate = Array(5);
+var linkItemHtmlTemplate = Array(NUM_TEMPLATES);
 
 linkItemHtmlTemplate[HORIZONTAL] = `
         <p>&nbsp;<br /> &nbsp;</p>
@@ -271,6 +308,7 @@ linkItemHtmlTemplate[HORIZONTAL_NOENGAGE] = '';
 linkItemHtmlTemplate[BY5] = '';
 linkItemHtmlTemplate[BY5_NOIMAGE] = '';
 linkItemHtmlTemplate[PEOPLE] = '';
+linkItemHtmlTemplate[ASSESSMENT] = '';
 
 // TODO: need to decide how and what this will look like
 //linkItemHtmlTemplate[1] = '<p><strong>Engage</strong></p>';
@@ -281,11 +319,30 @@ linkItemHtmlTemplate[VERTICAL] = '';
         
 // Template for the calendar/date tab
 
-var dateHtmlTemplate = Array(5);
-var dualDateHtmlTemplate = Array(5);
+var dateHtmlTemplate = Array(NUM_TEMPLATES);
+var dualDateHtmlTemplate = Array(NUM_TEMPLATES);
 
 dateHtmlTemplate[HORIZONTAL] = `
 <div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24 absolute pin-t pin-r">
+          <div class="bg-black text-white py-1 text-xs">
+             {DATE_LABEL}
+          </div>
+          {WEEK}
+          <div class="bg-red text-white py-1">
+      	     {MONTH}
+          </div>
+          <div class="pt-1 border-l border-r border-b">
+      	     <span class="text-2xl font-bold">{DATE}</span>
+          </div>
+          <!-- <div class="pb-2 px-2 border-l border-r border-b rounded-b flex justify-between">
+      	    <span class="text-xs font-bold">Fri</span>
+      	    <span class="text-xs font-bold">2018</span>
+          </div> -->
+        </div>
+`;
+
+dateHtmlTemplate[ASSESSMENT] = `
+<div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24  pin-b pin-l"> 
           <div class="bg-black text-white py-1 text-xs">
              {DATE_LABEL}
           </div>
@@ -322,6 +379,25 @@ dualDateHtmlTemplate[HORIZONTAL] = `
          </div> 
 `;
 
+dualDateHtmlTemplate[ASSESSMENT] = `
+<div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24  pin-b pin-l">
+          <div class="bg-black text-white py-1 text-xs">
+             {DATE_LABEL}
+          </div>
+          {WEEK}
+          <div class="bg-red text-white flex items-stretch py-1">
+              <div class="w-1/2 flex-grow">{MONTH_START}</div>
+              <div class="flex items-stretch border-l border-black flex-grow  -mt-1 -mb-1"></div>
+              <div class="w-1/2">{MONTH_STOP}</div>
+          </div>
+          <div class="border-l border-r border-b text-center flex border-black items-stretch pt-1">
+      	     <div class="w-1/2 text-2xl flex-grow font-bold">{DATE_START}</div>
+      	     <div class="flex font-bolditems-stretch border-l border-black flex-grow -mt-1"></div>
+              <div class="w-1/2 text-2xl font-bold">{DATE_STOP}</div>
+          </div>
+         </div> 
+`;
+
 weekHtmlTemplate = `
     <div class="bg-yellow-lighter text-black py-1">
       Week {WEEK}
@@ -339,12 +415,14 @@ dateHtmlTemplate[HORIZONTAL_NOENGAGE] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[BY5] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[BY5_NOIMAGE] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[PEOPLE] = '';
+//dateHtmlTemplate[ASSESSMENT] = dateHtmlTemplate[HORIZONTAL];
 
 dualDateHtmlTemplate[VERTICAL] = dualDateHtmlTemplate[HORIZONTAL];
 dualDateHtmlTemplate[HORIZONTAL_NOENGAGE] = dualDateHtmlTemplate[HORIZONTAL];
 dualDateHtmlTemplate[BY5] = dualDateHtmlTemplate[HORIZONTAL];
 dualDateHtmlTemplate[BY5_NOIMAGE] = dualDateHtmlTemplate[HORIZONTAL];
 dualDateHtmlTemplate[PEOPLE] = '';
+//dualDateHtmlTemplate[ASSESSMENT] = dualDateHtmlTemplate[HORIZONTAL];
 
 // Template to allow editors to view the original Bb content item
 // Same for all templates
@@ -539,10 +617,62 @@ function extractCardsFromContent( myCards) {
 	        description = description.replace( m[0], "");
 	    }
 	    
+	    // Get assessment related information
+	    var assessmentType="",assessmentWeighting="",assessmentOutcomes="";
+	    
+	    m = description.match(/assessment type *: *([^<]*)/i );
+	    if (m) {
+	        assessmentType=m[1];
+	        description = description.replace( "<p>"+m[0]+"</p>","");
+	        description = description.replace( m[0], "");
+	    }
+	    m = description.match(/assessment weighting *: *([^<]*)/i );
+	    if (m) {
+	        assessmentWeighting=m[1];
+	        description = description.replace( "<p>"+m[0]+"</p>","");
+	        description = description.replace( m[0], "");
+	    }
+	    m = description.match(/assessment outcomes *: *([^<]*)/i );
+	    if (m) {
+	        assessmentOutcomes=m[1];
+	        description = description.replace( "<p>"+m[0]+"</p>","");
+	        description = description.replace( m[0], "");
+	    }
+	    
+	    
 	    // need to get back to the header which is up one div, a sibling, then span
 	    var header = jQuery(this).parent().siblings(".item").find("span")[2];
 	    var title = jQuery(header).html(),link;
+	    
+	    //--------------------------------
+	    // Three options for link
+	    // 1. A link on the header (e.g. content folder)
+	    // 2. No link (e.g. a content item)
+	    // 3. A link in the attached filed (content item with attached file)
+	    //    This one is kludgy. e.g. doesn't handle multiple files. 
+	    //    Currently sets the link to the last file
+	    //    TODO figure out what do with multiple files
 	    link = jQuery(header).parents('a').attr('href');
+	    
+	    // if link is empty, must be content item
+	    if ( link === undefined ) {
+	        // check to see if there are attached fileds
+	        filesThere = jQuery(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Attached Files:')");
+	        
+	        if ( filesThere !== undefined) {
+	            // get a list of all attached files
+	            lis = jQuery(this).parent().find('.contextItemDetailsHeaders').children('.detailsValue').children("ul").children("li"); 
+	            
+	            // loop through the files and get the link
+	            lis.each( function(idx, li){
+	                // get the link
+	                link = jQuery(li).children("a").attr("href");
+	            });
+	        }
+	        //.siblings('contextItemDetailsHeaders')
+	    }
+	    
+	    
 	    // get the itemId to allow for "edit" link in card
 	    var itemId = jQuery(this).parents('.liItem').attr('id');
 	    //console.log("Item id " + itemId + " for link " + link );
@@ -555,7 +685,10 @@ function extractCardsFromContent( myCards) {
 	    // save the item for later
 	    var item = {title:title, picUrl:picUrl, description:description,
 	        link:link,date:date,label:label,dateLabel:dateLabel,
-	        id:itemId,activePicUrl:activePicUrl
+	        id:itemId,activePicUrl:activePicUrl,
+	        assessmentWeighting:assessmentWeighting,
+	        assessmentOutcomes:assessmentOutcomes,
+	        assessmentType:assessmentType
 	    };
 	    if (number!=='x' ) {
 	        item.moduleNum=number;
@@ -614,10 +747,10 @@ function extractCardsFromContent( myCards) {
 	            params.forEach( function(element) {
 	            //    console.log("element is " + element);
 	        
-	                m = element.match(/[Vv]ertical/ );
+	                m = element.match(/template=["']vertical['"]/i );
 	                if (m) {
 	                    template = VERTICAL;
-	                } else if ( element.match(/[Hh]orizontal/ ) ) {
+	                } else if (element.match(/template=['"]horizontal['"]/i )) {
 	                    template = HORIZONTAL;
 	                } else if ( element.match(/[Bb][yY]5[nN][Oo]/)) {
 	                    template = BY5_NOIMAGE;
@@ -631,9 +764,9 @@ function extractCardsFromContent( myCards) {
 	                    LOGGING = true;
 	                } else if ( m = element.match(/engage='([^']*)'/)) {
 	                    engageVerb = m[1];
-	                } else if ( 
-	                    //m=element.match(/set[Dd]ate=([0-9]+-[0-9]+-[0-9]+)\s/ ))
-	                    m=element.match(/set[Dd]ate=([^\s]*)/ )){
+	                } else if (m=element.match(/template=["']*assessment["']*/i)){
+	                    template = ASSESSMENT;
+	                } else if ( m=element.match(/set[Dd]ate=([^\s]*)/ )){
 	                    SET_DATE = m[1];
 	                }
 	            });
@@ -665,8 +798,9 @@ function extractCardsFromContent( myCards) {
 	            cardHtml = cardHtml.replace('{MODULE_NUM}',idx.moduleNum);
 	        } else {
 	            // use the one we're calculating
-	            cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
-	        }
+	            //cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
+	            cardHtml = cardHtml.replace(/\{MODULE_NUM\}/g,moduleNum);
+	 	    }
 	    } else { 
 	       cardHtml = cardHtml.replace('{MODULE_NUM}','');
 	    }
@@ -684,9 +818,8 @@ function extractCardsFromContent( myCards) {
 	    }
 	    cardHtml = cardHtml.replace(/{PIC_URL}/g, picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
-	    
-	    
-	    
+	    console.log("assessent type is" + idx.assessmentType);
+	    cardHtml = cardHtml.replace( /\{ASSESSMENT[_ ]TYPE\}/g, idx.assessmentType);
 	    
 	    // Get rid of some crud Bb inserts into the HTML
 	    description = idx.description.replace(/<p/, '<p class="pb-2"');
