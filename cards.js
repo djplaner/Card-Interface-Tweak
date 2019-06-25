@@ -1023,12 +1023,14 @@ function handleDate( description ) {
 	        // Fall back to check for exam period
 	        m = description.match(/card date *: *exam *(period)*/i );
 	        if (m) {
-	            console.log("match exam period");
+	            //console.log("match exam period");
 	            date.start = getTermDate( 'exam');
 	            date.stop = getTermDate('exam', false);
-	            console.log('Exam date is ' );
-	            console.log(date.start);
-	            console.log(date.stop);
+	            description = description.replace( "<p>"+m[0]+"</p>","");
+    	        description = description.replace(m[0],"");
+	            //console.log('Exam date is ' );
+	            //console.log(date.start);
+	            //console.log(date.stop);
 	        }
 	    }
 	}
