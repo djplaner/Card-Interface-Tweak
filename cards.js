@@ -84,20 +84,29 @@ var LOGGING=false;
 
 var interfaceHtmlTemplate = Array(NUM_TEMPLATES);
 
+// Kludge - hard code CSS path to enable shifting from
+//          dev to live
+var CARDS_CSS="https://djon.es/gu/cards.css";
+//var CARDS_CSS="https://s3.amazonaws.com/filebucketdave/banner.js/cards.css";
+
+
+
 interfaceHtmlTemplate[HORIZONTAL] = `
-<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
+<link rel="stylesheet" href="{CARDS_CSS}" />
 
 
 <div id="guCardInterface" class="flex flex-wrap -m-3">
  {CARDS}
 </div>
 `;
+interfaceHtmlTemplate[HORIZONTAL] = interfaceHtmlTemplate[HORIZONTAL].replace('{CARDS_CSS}',CARDS_CSS);
 
 interfaceHtmlTemplate[VERTICAL] = `
-<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
+<link rel="stylesheet" href="{CARDS_CSS}" />
  {CARDS}
 </div>
 `;
+interfaceHtmlTemplate[VERTICAL] = interfaceHtmlTemplate[VERTICAL].replace('{CARDS_CSS}',CARDS_CSS);
 
 interfaceHtmlTemplate[HORIZONTAL_NOENGAGE]=interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[BY5]= interfaceHtmlTemplate[HORIZONTAL];
@@ -105,34 +114,23 @@ interfaceHtmlTemplate[BY5_NOIMAGE]= interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[PEOPLE]= interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[ASSESSMENT]= interfaceHtmlTemplate[HORIZONTAL];
 
-
-/*`
-<link rel="stylesheet" href="https://djon.es/gu/cards.css" />
-<div class="flex -m-1 flex-wrap">
- {CARDS}
-</div>
-`;**/
-
 // template for each individual card
 
 var cardHtmlTemplate = Array(NUM_TEMPLATES);
 
 cardHtmlTemplate[HORIZONTAL]=`
-  <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
+  <div class="clickablecard w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
-      <a href="{LINK}">
+      <a href="{LINK}" class="cardmainlink"></a>
       <div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}
-      <!-- <div class="bg-contain bg-no-repeat bg-center bg-yellow-lightest h-64" style="background-image: url('{PIC_URL}');"> -->
-      </div></a>
+      </div>
       <div class="p-4 flex-1 flex flex-col">
-       <a href="{LINK}">
         {LABEL} {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
         <div class="mb-4 flex-1">
           {DESCRIPTION}
           
         </div>
-        </a>
          {LINK_ITEM}
          {EDIT_ITEM}
          {DATE} 
@@ -236,9 +234,9 @@ cardHtmlTemplate[PEOPLE]=`
 </style>-->
   
   
-  <div class="w-full sm:w-1/2 md:w-1/2 flex flex-col p-3">
+  <div class="clickablecard w-full sm:w-1/2 md:w-1/2 flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
-      <a href="{LINK}">
+      <a href="{LINK}" class="cardmainlink"></a>
       <div class="w-full"><iframe src='https://player.vimeo.com/video/226525600?&title=0&byline=0'></iframe></div></a>
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
@@ -260,12 +258,11 @@ cardHtmlTemplate[PEOPLE]=`
 // Implement the assessment template
 
 cardHtmlTemplate[ASSESSMENT]=`
-<a href="{LINK}">
-
-<div class="lg:max-w-full w-full lg:flex xl:flex md:flex mb-6 rounded-lg shadow-lg hover:shadow-outline"> 
+<div class="clickablecard lg:max-w-full w-full lg:flex xl:flex md:flex mb-6 rounded-lg shadow-lg hover:shadow-outline"> 
     <!-- padding kludge -->
     <!-- <div>&nbsp;</div> -->
     <div class="h-auto">
+          <a href="{LINK}" class="cardmainlink"></a>
           <h1 class="mt-2 ml-2 font-extrabold rounded-full h-16 w-16 flex items-center justify-center border-2 border-black bg-red text-white ">{MODULE_NUM}</h1>
           <p class="text-xs p-2 pr-6">Weight: <span class="font-bold">{WEIGHTING}</p>
         
@@ -288,8 +285,6 @@ cardHtmlTemplate[ASSESSMENT]=`
 		  
 	</div>
 </div>
-</a>
-
 `;
 	
 // template to add the "ENGAGE" link to (more strongly) indicate that the card links somewhere
@@ -493,6 +488,14 @@ function cardsInterface($){
 	/* generate the cards interface for the tiems */
 	addCardInterface(items);
 	
+	/* Make them all clickable */
+	var cards = document.querySelectorAll(".clickablecard");
+    for (var i=0; i<cards.length; i++) {
+    cards[i].addEventListener('click', function(e) {
+            var link = this.querySelector(".cardmainlink");
+            link.click();
+        }, false);
+    }
 }
 
 /***

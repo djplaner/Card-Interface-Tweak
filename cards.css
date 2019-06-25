@@ -1,7 +1,37 @@
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
+
+/* ------------- clickable card implementation -----*/
+
+
+.clickablecard:hover {
+  cursor: pointer;
+}
+
+.clickablecard:hover p {
+  color: #00d;
+}
+
+.clickablecard:hover p a {
+  color: #000;
+}
+
+.clickablecard:hover .cardmainlink {
+  text-decoration: underline;
+  /*text-decoration-skip: ink;
+  text-decoration-skip-ink: auto;*/
+  color: #00d;
+}
+
+.clickablecard:hover img {
+  transform: scale(1.2);
+}
+
 /* Document
    ========================================================================== */
+
+
+
 
 /**
  * 1. Correct the line height in all browsers.
