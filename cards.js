@@ -266,7 +266,7 @@ cardHtmlTemplate[ASSESSMENT]=`
     <!-- padding kludge -->
     <!-- <div>&nbsp;</div> -->
     <div class="h-auto">
-          <h1 class="mt-2 ml-2 font-extrabold rounded-full h-16 w-16 flex items-center justify-center border-2 border-black bg-yellow ">{MODULE_NUM}</h1>
+          <h1 class="mt-2 ml-2 font-extrabold rounded-full h-16 w-16 flex items-center justify-center border-2 border-black bg-red text-white ">{MODULE_NUM}</h1>
           <p class="text-xs p-2 pr-6">Weight: <span class="font-bold">{WEIGHTING}</p>
         
         <!-- date -->
@@ -474,7 +474,7 @@ function cardsInterface($){
 	
     if (m) {
         TERM=m[1];
-        console.log("Course title " + courseTitle + " M1 " + m[1] + " TERM " + TERM);    
+        //console.log("Course title " + courseTitle + " M1 " + m[1] + " TERM " + TERM);    
         if (TERM==='') {
             TERM='3191';
         }
@@ -863,7 +863,6 @@ function extractCardsFromContent( myCards) {
 	    // Should we add a link to edit/view the original content
 	    if (location.href.indexOf("listContentEditable.jsp") > 0) {
 	        editLink = editLinkTemplate.replace('{ID}', idx.id);
-	        console.log("Edit link is " + editLink);
 	        cardHtml = cardHtml.replace(/{EDIT_ITEM}/, editLink );
 	    } else {
 	        //cardHtml = cardHtml.replace(/{EDIT_ITEM}/,'');
@@ -936,7 +935,7 @@ function extractCardsFromContent( myCards) {
 //   start of that week
 
 function getTermDate( week, startWeek=true ) {
-    console.log("getTerm Date week " + week + " TERM " + TERM);
+    //console.log("getTerm Date week " + week + " TERM " + TERM);
     var date = { date: "", month: "", week: week };
     if (( week<0) || (week>15) || (week!=='exam')) {
         return date;
