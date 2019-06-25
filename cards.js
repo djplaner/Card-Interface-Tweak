@@ -326,20 +326,16 @@ var dualDateHtmlTemplate = Array(NUM_TEMPLATES);
 
 dateHtmlTemplate[HORIZONTAL] = `
 <div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24 absolute pin-t pin-r">
-          <div class="bg-black text-white py-1 text-xs">
+          <div class="bg-black text-white py-1 text-xs border-l border-r border-t border-black">
              {DATE_LABEL}
           </div>
           {WEEK}
-          <div class="bg-red text-white py-1">
+          <div class="bg-red text-white py-1 border-l border-r border-black">
       	     {MONTH}
           </div>
-          <div class="pt-1 border-l border-r border-b">
+          <div class="pt-1 border-l border-r border-b border-black rounded-b">
       	     <span class="text-2xl font-bold">{DATE}</span>
           </div>
-          <!-- <div class="pb-2 px-2 border-l border-r border-b rounded-b flex justify-between">
-      	    <span class="text-xs font-bold">Fri</span>
-      	    <span class="text-xs font-bold">2018</span>
-          </div> -->
         </div>
 `;
 
@@ -355,20 +351,16 @@ dateHtmlTemplate[ASSESSMENT] = `
           <div class="pt-1 border-l border-r border-b rounded-b">
       	     <span class="text-2xl font-bold">{DATE}</span>
           </div>
-          <!-- <div class="pb-2 px-2 border-l border-r border-b rounded-b flex justify-between">
-      	    <span class="text-xs font-bold">Fri</span>
-      	    <span class="text-xs font-bold">2018</span>
-          </div> -->
         </div>
 `;
 
 dualDateHtmlTemplate[HORIZONTAL] = `
 <div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24 absolute pin-t pin-r">
-          <div class="bg-black text-white py-1 text-xs">
+          <div class="bg-black text-white py-1 text-xs border-l border-r border-black">
              {DATE_LABEL}
           </div>
           {WEEK}
-          <div class="bg-red text-white flex items-stretch py-1">
+          <div class="bg-red text-white flex items-stretch py-1 border-l border-r border-black">
               <div class="w-1/2 flex-grow">{MONTH_START}</div>
               <div class="flex items-stretch border-l border-black flex-grow  -mt-1 -mb-1"></div>
               <div class="w-1/2">{MONTH_STOP}</div>
@@ -383,11 +375,11 @@ dualDateHtmlTemplate[HORIZONTAL] = `
 
 dualDateHtmlTemplate[ASSESSMENT] = `
 <div class="block rounded-t rounded-b overflow-hidden bg-white text-center w-24  pin-b pin-l">
-          <div class="bg-black text-white py-1 text-xs">
+          <div class="bg-black text-white py-1 text-xs border-l border-r border-t border-black">
              {DATE_LABEL}
           </div>
           {WEEK}
-          <div class="bg-red text-white flex items-stretch py-1">
+          <div class="bg-red text-white flex items-stretch py-1 border-l border-r border-black">
               <div class="w-1/2 flex-grow">{MONTH_START}</div>
               <div class="flex items-stretch border-l border-black flex-grow  -mt-1 -mb-1"></div>
               <div class="w-1/2">{MONTH_STOP}</div>
@@ -407,13 +399,13 @@ weekHtmlTemplate = `
     `;
     
 dualWeekHtmlTemplate = `
-    <div class="bg-yellow-lighter text-black py-1">
+    <div class="bg-yellow-lighter text-black py-1 border-l border-r border-black">
       Week {WEEK_START} to {WEEK_STOP}
     </div>
     `;    
     
 examPeriodTemplate =`
-<div class="bg-yellow-lighter text-black py-1">
+<div class="bg-yellow-lighter text-black py-1 border-l border-r border-black">
       Exam Period
     </div>
 `;
