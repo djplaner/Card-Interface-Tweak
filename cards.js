@@ -35,7 +35,8 @@ var TERM_DATES = {
          "12" : { "start" : "2019-05-20", "stop":"2019-05-26" },
          "13" : { "start" : "2019-05-27", "stop":"2019-06-02" },
          "14" : { "start" : "2019-06-03", "stop":"2019-06-09" },
-         "15" : { "start" : "2019-06-10", "stop":"2019-06-17" }
+         "15" : { "start" : "2019-06-10", "stop":"2019-06-17" },
+         "exam": { "start" : "2019-05-30", "stop": "2019-06-08" }
          },
     "3195" : {
          "0" : { "start" : "2019-07-01", "stop":"2019-07-07" } ,
@@ -53,7 +54,8 @@ var TERM_DATES = {
          "12" : { "start" : "2019-09-30", "stop":"2019-10-06" },
          "13" : { "start" : "2019-10-07", "stop":"2019-10-13" },
          "14" : { "start" : "2019-10-14", "stop":"2019-10-20" },
-         "15" : { "start" : "2019-10-21", "stop":"2019-10-27" }
+         "15" : { "start" : "2019-10-21", "stop":"2019-10-27" },
+         "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
     }
     };
 var TERM="3191",YEAR=2019, SET_DATE="";
@@ -260,36 +262,36 @@ cardHtmlTemplate[PEOPLE]=`
 cardHtmlTemplate[ASSESSMENT]=`
 <a href="{LINK}">
 
-<div class="lg:max-w-full w-full lg:flex xl:flex md:flex mb-4 rounded-lg shadow-lg hover:shadow-outline"> 
-
-    <!-- <div class="lg:w-1/3 md:w-1/3 h-auto overflow-hidden"> -->
-    <!--<div class="h-48 lg-h-auto lg:w-32 m-2">
-          <h1>{MODULE_NUM}</h1>
-    </div>-->
-    <div class="h-48 lg-h-auto lg:w-48 m-2">
-        <div class="flex m-1 mt-2">
-          <h2>{MODULE_NUM}</h2>
-          <div class="m-1">
-          <h3>{TITLE}</h3>
-          <p class="text-sm">{ASSESSMENT TYPE}</p>
-          
-          </div>
-        </div>
-        {DATE}    
+<div class="lg:max-w-full w-full lg:flex xl:flex md:flex mb-6 rounded-lg shadow-lg hover:shadow-outline"> 
+    <!-- padding kludge -->
+    <!-- <div>&nbsp;</div> -->
+    <div class="h-auto">
+          <h1 class="mt-2 ml-2 font-extrabold rounded-full h-16 w-16 flex items-center justify-center border-2 border-black bg-yellow ">{MODULE_NUM}</h1>
+          <p class="text-xs p-2 pr-6">Weight: <span class="font-bold">{WEIGHTING}</p>
+        
+        <!-- date -->
+        {DATE}
+        
     </div>
-    <div class="p-2 m-2">
-      <p class="text-grey-darker text-base">
-        {DESCRIPTION} 
-      </p>
-      {LINK_ITEM}
-      {EDIT_ITEM}   
-    </div>
-  <!--</div>-->
+	<div class="m-2">&nbsp;</div>
+	<div class="m-2">
+          <div class="mb-4">
+			<h3 class="font-bold">{TITLE}</h3>
+			<p class="text-sm">{ASSESSMENT_TYPE}</p>
+			<p class="text-sm">Learning outcomes: {LEARNING_OUTCOMES}</p>
+		  </div>
+		  
+		  {DESCRIPTION}
+		  
+		  {LINK_ITEM}
+		  {EDIT_ITEM}
+		  
+	</div>
 </div>
 </a>
-<p>&nbsp;</p>
-`;
 
+`;
+	
 // template to add the "ENGAGE" link to (more strongly) indicate that the card links somewhere
 
 var linkItemHtmlTemplate = Array(NUM_TEMPLATES);
@@ -350,7 +352,7 @@ dateHtmlTemplate[ASSESSMENT] = `
           <div class="bg-red text-white py-1">
       	     {MONTH}
           </div>
-          <div class="pt-1 border-l border-r border-b">
+          <div class="pt-1 border-l border-r border-b rounded-b">
       	     <span class="text-2xl font-bold">{DATE}</span>
           </div>
           <!-- <div class="pb-2 px-2 border-l border-r border-b rounded-b flex justify-between">
@@ -390,7 +392,7 @@ dualDateHtmlTemplate[ASSESSMENT] = `
               <div class="flex items-stretch border-l border-black flex-grow  -mt-1 -mb-1"></div>
               <div class="w-1/2">{MONTH_STOP}</div>
           </div>
-          <div class="border-l border-r border-b text-center flex border-black items-stretch pt-1">
+          <div class="border-l border-r border-b text-center flex border-black items-stretch pt-1 rounded-b">
       	     <div class="w-1/2 text-2xl flex-grow font-bold">{DATE_START}</div>
       	     <div class="flex font-bolditems-stretch border-l border-black flex-grow -mt-1"></div>
               <div class="w-1/2 text-2xl font-bold">{DATE_STOP}</div>
@@ -409,6 +411,12 @@ dualWeekHtmlTemplate = `
       Week {WEEK_START} to {WEEK_STOP}
     </div>
     `;    
+    
+examPeriodTemplate =`
+<div class="bg-yellow-lighter text-black py-1">
+      Exam Period
+    </div>
+`;
 
 dateHtmlTemplate[VERTICAL] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[HORIZONTAL_NOENGAGE] = dateHtmlTemplate[HORIZONTAL];
@@ -818,8 +826,9 @@ function extractCardsFromContent( myCards) {
 	    }
 	    cardHtml = cardHtml.replace(/{PIC_URL}/g, picUrl);
 	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
-	    console.log("assessent type is" + idx.assessmentType);
 	    cardHtml = cardHtml.replace( /\{ASSESSMENT[_ ]TYPE\}/g, idx.assessmentType);
+	    cardHtml = cardHtml.replace( /\{WEIGHTING\}/g, idx.assessmentWeighting);
+	    cardHtml = cardHtml.replace( /\{LEARNING_OUTCOMES\}/g, idx.assessmentOutcomes);
 	    
 	    // Get rid of some crud Bb inserts into the HTML
 	    description = idx.description.replace(/<p/, '<p class="pb-2"');
@@ -854,10 +863,14 @@ function extractCardsFromContent( myCards) {
 	    // Should we add a link to edit/view the original content
 	    if (location.href.indexOf("listContentEditable.jsp") > 0) {
 	        editLink = editLinkTemplate.replace('{ID}', idx.id);
-	        
+	        console.log("Edit link is " + editLink);
 	        cardHtml = cardHtml.replace(/{EDIT_ITEM}/, editLink );
 	    } else {
-	        cardHtml = cardHtml.replace(/{EDIT_ITEM}/,'');
+	        //cardHtml = cardHtml.replace(/{EDIT_ITEM}/,'');
+	        
+	        //editLink = editLinkTemplate.replace('{ID}', idx.id);
+	        editLink = '<div><a href="#hello">&nbsp;</a></div>';
+	        cardHtml = cardHtml.replace(/{EDIT_ITEM}/, editLink );
 	    }
 	    
 	    // If need add the date visualisation
@@ -879,10 +892,15 @@ function extractCardsFromContent( myCards) {
 	            if ( ! idx.date.start.hasOwnProperty('week')) {
 	                cardHtml = cardHtml.replace('{WEEK}','');
 	            } else {
-	                var weekHtml = dualWeekHtmlTemplate.replace('{WEEK_START}', 
+	                // if exam, use that template
+	                // other wise construct dual week
+	                var weekHtml = examPeriodTemplate;
+	                if (idx.date.start.week!=='exam') {
+	                    weekHtml = dualWeekHtmlTemplate.replace('{WEEK_START}', 
 	                            idx.date.start.week);
-	                weekHtml = weekHtml.replace('{WEEK_STOP}',
-	                    idx.date.stop.week);
+	                    weekHtml = weekHtml.replace('{WEEK_STOP}',
+	                        idx.date.stop.week);
+	                }
 	                cardHtml = cardHtml.replace('{WEEK}',weekHtml);
 	            }
 	        } else {
@@ -918,9 +936,9 @@ function extractCardsFromContent( myCards) {
 //   start of that week
 
 function getTermDate( week, startWeek=true ) {
-    //console.log("getTerm Date week " + week + " TERM " + TERM);
+    console.log("getTerm Date week " + week + " TERM " + TERM);
     var date = { date: "", month: "", week: week };
-    if (( week<0) || (week>15)) {
+    if (( week<0) || (week>15) || (week!=='exam')) {
         return date;
     }
     var start;
@@ -959,10 +977,10 @@ function handleDate( description ) {
 	var date = { start: empty1, stop: empty2 } ; // object to return 
 	// date by griffith week    
 	
-    m = description.match(/[Cc]ard [Dd]ate *: *week ([0-9]*)/i);
+    m = description.match(/card date *: *week ([0-9]*)/i);
 	if (m) {
 	    // check to see if a range was specified
-	    x = description.match(/[Cc]ard [Dd]ate *: *week ([0-9]*)-([0-9]*)/i);
+	    x = description.match(/card date *: *week ([0-9]*)-([0-9]*)/i);
 	    if (x) {
 	        //console.log('ZZZZZZZZZZZZZZZZZZZZZZ handling a range');
 	        week = x[1];
@@ -985,7 +1003,6 @@ function handleDate( description ) {
 	         
 	} else {
 	    // TODO need to handle range here
-	    
 	    m = description.match(/card date *: *([a-z]+) ([0-9]+)/i);
 	    if (m) {
 	        
@@ -1003,6 +1020,17 @@ function handleDate( description ) {
     	        description = description.replace( "<p>"+m[0]+"</p>","");
     	        description = description.replace(m[0],"");
 	        } 
+	    } else {
+	        // Fall back to check for exam period
+	        m = description.match(/card date *: *exam *(period)*/i );
+	        if (m) {
+	            console.log("match exam period");
+	            date.start = getTermDate( 'exam');
+	            date.stop = getTermDate('exam', false);
+	            console.log('Exam date is ' );
+	            console.log(date.start);
+	            console.log(date.stop);
+	        }
 	    }
 	}
 	date.descrip = description;
