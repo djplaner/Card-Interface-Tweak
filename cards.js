@@ -86,8 +86,8 @@ var interfaceHtmlTemplate = Array(NUM_TEMPLATES);
 
 // Kludge - hard code CSS path to enable shifting from
 //          dev to live
-var CARDS_CSS="https://djon.es/gu/cards.css";
-//var CARDS_CSS="https://s3.amazonaws.com/filebucketdave/banner.js/cards.css";
+//var CARDS_CSS="https://djon.es/gu/cards.css";
+var CARDS_CSS="https://s3.amazonaws.com/filebucketdave/banner.js/cards.css";
 
 
 
@@ -124,7 +124,7 @@ cardHtmlTemplate[HORIZONTAL]=`
       <a href="{LINK}" class="cardmainlink"></a>
       <div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}
       </div>
-      <div class="p-4 flex-1 flex flex-col">
+      <div class="carddescription p-4 flex-1 flex flex-col">
         {LABEL} {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
         <div class="mb-4 flex-1">
@@ -149,7 +149,7 @@ cardHtmlTemplate[VERTICAL]=`
     <div class="p-2 m-2 lg:flex md:w-1/5 lg:w-1/5 sm:w-full">
         <h3>{TITLE}</h3>
     </div>
-    <div class="m-2 p-2 lg:flex-initial md:w-1/2 lg:w-1/2 sm:w-full">
+    <div class="carddescription m-2 p-2 lg:flex-initial md:w-1/2 lg:w-1/2 sm:w-full">
       <p class="text-grey-darker text-base">
         {DESCRIPTION} 
       </p>
@@ -169,7 +169,7 @@ cardHtmlTemplate[HORIZONTAL_NOENGAGE]=`
        <a href="{LINK}">
         {LABEL} {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="mb-4 flex-1">
+        <div class="carddescription mb-4 flex-1">
           {DESCRIPTION}
         </div>
         </a>
@@ -194,7 +194,7 @@ ul { list-style-type: circle}
        <a href="{LINK}">
         {LABEL} {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="mb-4 flex-1" id="guDescription">
+        <div class="carddescription mb-4 flex-1" id="guDescription">
           {DESCRIPTION}
         </div>
         </a>
@@ -214,7 +214,7 @@ cardHtmlTemplate[BY5_NOIMAGE]=`
        <a href="{LINK}">
         {LABEL} {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="mb-4 flex-1">
+        <div class="carddescription mb-4 flex-1">
           {DESCRIPTION}
         </div>
         </a>
@@ -242,7 +242,7 @@ cardHtmlTemplate[PEOPLE]=`
        <a href="{LINK}">
         {LABEL} {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="mb-4 flex-1">
+        <div class="carddescription mb-4 flex-1">
           {DESCRIPTION}
           
         </div>
@@ -271,7 +271,7 @@ cardHtmlTemplate[ASSESSMENT]=`
         
     </div>
 	<div class="m-2">&nbsp;</div>
-	<div class="m-2">
+	<div class="carddescription m-2">
           <div class="mb-4">
 			<h3 class="font-bold">{TITLE}</h3>
 			<p class="text-sm">{ASSESSMENT_TYPE}</p>
@@ -488,14 +488,26 @@ function cardsInterface($){
 	/* generate the cards interface for the tiems */
 	addCardInterface(items);
 	
-	/* Make them all clickable */
+	/** ------ cards should be created by now -- */
+	/* But make all the links in carddescription stop propagation */
+    var cardContent = jQuery(".carddescription [href]");
+    for (var i=0; i<cardContent.length; i++) {
+        cardContent[i].addEventListener('click', function(e) {
+            //var link = this.querySelector(".cardmainlink");
+            //link.click();
+            e.stopPropagation();
+        }, false);
+    }
+    
+	/* Make all of the cards clickable by adding an event handler  */
 	var cards = document.querySelectorAll(".clickablecard");
-    for (var i=0; i<cards.length; i++) {
+    for (i=0; i<cards.length; i++) {
     cards[i].addEventListener('click', function(e) {
             var link = this.querySelector(".cardmainlink");
             link.click();
         }, false);
     }
+    
 }
 
 /***

@@ -9,18 +9,19 @@
 }
 
 .clickablecard:hover p {
-  color: #00d;
+  /*color: #f00;*/
+  text-decoration: none;
 }
 
-.clickablecard:hover p a {
+/*.clickablecard:hover p a {
   color: #000;
-}
+}*/
 
 .clickablecard:hover .cardmainlink {
-  text-decoration: underline;
+  text-decoration: none;
   /*text-decoration-skip: ink;
   text-decoration-skip-ink: auto;*/
-  color: #00d;
+  /*color: #00d;*/
 }
 
 .clickablecard:hover img {
