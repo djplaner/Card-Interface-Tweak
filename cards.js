@@ -723,6 +723,7 @@ function extractCardsFromContent( myCards) {
 	    } 
 	});
 	
+	//console.log(items);
 	return items;
 }
 
@@ -942,13 +943,15 @@ function extractCardsFromContent( myCards) {
 //   start of that week
 
 function getTermDate( week, startWeek=true ) {
-    //console.log("getTerm Date week " + week + " TERM " + TERM);
     var date = { date: "", month: "", week: week };
-    if (( week<0) || (week>15) || (week!=='exam')) {
-        return date;
+    if (( week<0) || (week>15) ) {
+        if (week!=='exam') {
+            return date;
+        }
     }
     var start;
-    if ( startWeek ) {
+    if ( startWeek===true ) {
+        // setting start week
         start = TERM_DATES[TERM][week].start;//[week].start;
     } else {
         start = TERM_DATES[TERM][week].stop;
@@ -988,7 +991,7 @@ function handleDate( description ) {
 	    // check to see if a range was specified
 	    x = description.match(/card date *: *week ([0-9]*)-([0-9]*)/i);
 	    if (x) {
-	        //console.log('ZZZZZZZZZZZZZZZZZZZZZZ handling a range');
+	//        console.log('ZZZZZZZZZZZZZZZZZZZZZZ handling a range');
 	        week = x[1];
 	        endWeek = x[2];
 	        date.stop = getTermDate( endWeek, false);
@@ -997,6 +1000,7 @@ function handleDate( description ) {
 	        description = description.replace( "<p>"+x[0]+"</p>","");
             description = description.replace(x[0],"");
         } else {
+      //      console.log('ZZZZ week date, but not a range');
             week = m[1];
 	           
             description = description.replace( "<p>"+m[0]+"</p>","");
@@ -1004,7 +1008,7 @@ function handleDate( description ) {
         }
         
         date.start = getTermDate( week )
-        //console.log( " Date " + month + " " + date);
+        //console.log( date);
 	        
 	         
 	} else {
