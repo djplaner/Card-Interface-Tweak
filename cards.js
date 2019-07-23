@@ -122,7 +122,7 @@ cardHtmlTemplate[HORIZONTAL]=`
   <div class="clickablecard w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}" class="cardmainlink"></a>
-      <div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}
+      <div class="bg-cover h-48" style="background-image: url('{PIC_URL}'); background-color: rgb(255,255,204)">{IFRAME}
       </div>
       <div class="carddescription p-4 flex-1 flex flex-col">
         {LABEL} {MODULE_NUM}
@@ -537,6 +537,7 @@ function getCardItems($) {
 function extractCardsFromContent( myCards) {
     
     var items = [];
+    var picUrl,cardBGcolour;
     
     // Loop through each card and construct the items array with card data
 	myCards.each( function(idx){
@@ -544,9 +545,22 @@ function extractCardsFromContent( myCards) {
 	    var description = jQuery(this).html(),picUrl;
 		// - get rid of any &nbsp; inserted by Bb
 	    description = description.replace(/&nbsp;/gi, ' ');
-	    m = description.match(/[Cc]ard [Ii]mage\s*: *([^\s<]*)/ );
+	    
+	    var re = new RegExp("card image\s*:\s*([^<]*)", "i");
+	    //m = description.match(/[Cc]ard [Ii]mage\s*: *([^\s<]*)/ );
+	    m = description.match( re );
 	    if (m) {
-    	    picUrl=m[1];
+	        // TODO need to parse the m[1] to see if it's a URL
+	        // OR a colour to be set
+	        
+	        // Return a three element list of rgb colours
+	        // if the Card Image: value is a valid colour
+	        // Otherwise undefined
+	        
+	        cardBGcolour = identifyCardBackgroundColour( m[1]);
+	        picUrl = identifyPicUrl( m[1]);
+	        
+    	    //picUrl=m[1];
     	    description = description.replace( "<p>"+m[0]+"</p>","");
 	        description = description.replace( m[0], "");
 	    }
@@ -621,7 +635,6 @@ function extractCardsFromContent( myCards) {
 	        // replace the width and height
 	        x = iframe.match(/width="[^"]+"/i);
 	        if (x) {
-	            console.log(" MATCHED " + x[0]);
 	            iframe = iframe.replace(x[0], 'width="100%"');
 	        }
 	        x = iframe.match(/height="[^"]+"/i);
@@ -698,9 +711,9 @@ function extractCardsFromContent( myCards) {
 	        //console.log( "content item " + contentItem.html());
 	    }
 	    // save the item for later
-	    var item = {title:title, picUrl:picUrl, description:description,
-	        link:link,date:date,label:label,dateLabel:dateLabel,
-	        id:itemId,activePicUrl:activePicUrl,
+	    var item = {title:title, picUrl:picUrl, cardBGcolour:cardBGcolour,
+	        description:description, link:link, date:date, label:label,
+	        dateLabel:dateLabel,id:itemId,activePicUrl:activePicUrl,
 	        assessmentWeighting:assessmentWeighting,
 	        assessmentOutcomes:assessmentOutcomes,
 	        assessmentType:assessmentType
@@ -804,6 +817,14 @@ function extractCardsFromContent( myCards) {
     var moduleNum = 1;
     items.forEach( function(idx) {
 	    var cardHtml=cardHtmlTemplate[template];
+	  
+	    // replace the default background colour if a different one
+	    // is specific
+	    if ( idx.cardBGcolour ) {
+	        cardHtml = cardHtml.replace(/background-color:\s*rgb\(255,255,204\)/i, 'background-color: '+idx.cardBGcolour );
+	    }
+	    
+	    //<div class="bg-cover h-48" style="background-image: url('{PIC_URL}'); //background-color: rgb(255,255,204)">{IFRAME}
 	    // replace the Engage verb
 	    
 	    //console.log("template is " + template);
@@ -1099,3 +1120,39 @@ function setImage( card) {
     return card.picUrl;
 }    
 
+//**************************************************************
+// cardBGcolour = identifyCardBackgroundColour( value );
+// return undefined if value is not a valid CSS colour
+// Otherwise return rgb(X,Y,Z)
+
+function identifyCardBackgroundColour( input ) {
+    
+    // don't both if it's an empty string or a URL
+    url = input.match(/^\s*http/i);
+    if ( input === "" || url ) {
+        return undefined;
+    }
+    var div = document.createElement('div'), m;
+    div.style.color = input;
+    // add to DOMTree to work
+    document.body.appendChild( div );
+    
+    // extract the rgb numbers
+    m = getComputedStyle(div).color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
+    if( m) {
+        return "rgb("+m[1]+","+m[2]+","+m[3]+")";
+    } 
+    return undefined;
+}
+    
+
+
+//**************************************************************
+// picUrl = identifyPicUrl( value )
+// TODO - return "" if value is not a valid URI
+//   Otherwise return the value
+	        
+function identifyPicUrl( value ) {
+    
+    return value;
+}
