@@ -506,7 +506,8 @@ function cardsInterface($){
             }
         } else {
             // check for a normal GU course
-            breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
+     //       breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
+            breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])$');
 	        m = id.match(breakIdRe) ;
 
             // found an actual course site (rather than org site)	    
@@ -522,6 +523,7 @@ function cardsInterface($){
             }
         }
 	}
+	
 	LOCATION = location.href.indexOf("listContent.jsp");
 
     var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
