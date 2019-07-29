@@ -478,25 +478,50 @@ function cardsInterface($){
 	 if (location.href.indexOf("listContent.jsp") > 0) {
          $(".gutweak").parents("li").hide(); 
 	 }
-	regex = new RegExp('.*[0-9]+[a-z]+_([0-9]+)[_a-z]*',"i");
-	m = courseTitle.match( regex);
 	
-    if (m) {
-        TERM=m[1];
-        //console.log("Course title " + courseTitle + " M1 " + m[1] + " TERM " + TERM);    
-        if (TERM==='') {
-            TERM='3191';
-        }
-        
-        // set the year
-        mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
-        if (mm) {
-            YEAR = 20 + mm[1];
+	// Calculate the actual TERM for this course based on the 
+	// courseId. If it doesn't parse, just leave it as the default
+	// initialised term
+	
+	// get the course id which will be in brackets
+	//idRe = new RegExp('\((.*)\)');
+	m = courseTitle.match( /^.*\((.+)\)/ );
+	// we found a course Id, get the STRM value
+	if (m){
+	    id = m[1];
+	    // break the course Id up into its components
+	    // This is the RE for COMM10 - OUA course?
+	    breakIdRe = new RegExp('^([A-Z]+[0-9]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
+	    m = id.match(breakIdRe) ;
+
+        // found an actual course site (rather than org site)	    
+	    if (m) { 
+	        TERM=m[2];
+            // set the year
+            mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
+            if (mm) {
+                YEAR = 20 + mm[1];
+            } else {
+                YEAR = 2019;
+            }
         } else {
-            YEAR = 2019;
+            // check for a normal GU course
+            breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
+	        m = id.match(breakIdRe) ;
+
+            // found an actual course site (rather than org site)	    
+	        if (m) { 
+	            TERM=m[2];
+                // set the year
+                mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
+                if (mm) {
+                    YEAR = 20 + mm[1];
+                } else {
+                    YEAR = 2019;
+                }
+            }
         }
-    }
-	    
+	}
 	LOCATION = location.href.indexOf("listContent.jsp");
 
     var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
