@@ -506,8 +506,9 @@ function cardsInterface($){
             }
         } else {
             // check for a normal GU course
-     //       breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
-            breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])$');
+            breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
+            // Following is broken
+            //breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])$');
 	        m = id.match(breakIdRe) ;
 
             // found an actual course site (rather than org site)	    
