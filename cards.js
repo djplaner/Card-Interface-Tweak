@@ -505,10 +505,10 @@ function cardsInterface($){
                 YEAR = 2019;
             }
         } else {
-            // check for a normal GU course
+            // check for campus specific (1030LAW_3195_GC)
             breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
             // Following is broken
-            //breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])$');
+            
 	        m = id.match(breakIdRe) ;
 
             // found an actual course site (rather than org site)	    
@@ -521,6 +521,23 @@ function cardsInterface($){
                 } else {
                     YEAR = 2019;
                 }
+            } else {
+                // Test the joined course version - (1030LAW_3195)
+                breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])$');
+                
+                m = id.match(breakIdRe) ;
+
+                // found an actual course site (rather than org site)	    
+	            if (m) { 
+	                TERM=m[2];
+                    // set the year
+                    mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
+                    if (mm) {
+                        YEAR = 20 + mm[1];
+                    } else {
+                        YEAR = 2019;
+                    }
+	            }
             }
         }
 	}
