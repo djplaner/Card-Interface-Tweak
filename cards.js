@@ -968,7 +968,7 @@ function extractCardsFromContent( myCards) {
 	    
 	    // Get rid of some crud Bb inserts into the HTML
 	    description = idx.description.replace(/<p/, '<p class="pb-2"');
-	    description = description.replace(/<a/, '<a class="underline"');
+	    description = description.replace(/<a/g, '<a class="underline"');
 	    cardHtml = cardHtml.replace('{DESCRIPTION}', description);
 	    // Does the card link to another content item?
 //	    console.log( " template is " + template + " and H_E " + HORIZONTAL_NOENGAGE);
