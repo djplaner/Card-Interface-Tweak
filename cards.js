@@ -194,7 +194,9 @@ cardHtmlTemplate[HORIZONTAL]=`
           {DESCRIPTION}
           
         </div>
+         
          {LINK_ITEM}
+         {REVIEW_ITEM}
          {EDIT_ITEM}
          {DATE} 
       </div>
@@ -376,6 +378,39 @@ linkItemHtmlTemplate[VERTICAL] = '';
 /*`
 <div class="relative pin-r pin-b m-18"> <button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"> Engage </button> 
         </div>`;*/
+        
+//*****************************************************************
+// Templates for the "Mark Review" and "Reviewed" features
+
+var markReviewLinkHtmlTemplate = Array(NUM_TEMPLATES);
+var markUnReviewedLinkHtmlTemplate = Array(NUM_TEMPLATES);
+
+markReviewLinkHtmlTemplate[HORIZONTAL] = `
+<div class="p-4 absolute pin-l pin-b">
+     <a href="{LINK}"><button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+     <span class="font-bold rounded-full px-2 py-1 bg-yellow text-black">?</span>&nbsp; {MARK_REVIEWED}</button></a>
+</div>
+        `;
+        
+markUnReviewedLinkHtmlTemplate[HORIZONTAL] = `
+<div class="p-4 absolute pin-l pin-b">
+    <a href="{LINK}"><button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+                    <span class="font-bold rounded-full px-2 py-1 bg-green text-white">&#10003;</span>&nbsp;{REVIEWED}</button></a>
+</div>
+`;
+
+markReviewLinkHtmlTemplate[VERTICAL] ='';
+markUnReviewedLinkHtmlTemplate[VERTICAL] ='';
+markReviewLinkHtmlTemplate[HORIZONTAL_NOENGAGE] = '';
+markUnReviewedLinkHtmlTemplate[HORIZONTAL_NOENGAGE] ='';
+markReviewLinkHtmlTemplate[BY5] = '';
+markUnReviewedLinkHtmlTemplate[BY5] ='';
+markReviewLinkHtmlTemplate[BY5_NOIMAGE] = '';
+markUnReviewedLinkHtmlTemplate[BY5_NOIMAGE] ='';
+markReviewLinkHtmlTemplate[PEOPLE] = '';
+markUnReviewedLinkHtmlTemplate[PEOPLE] ='';
+markReviewLinkHtmlTemplate[ASSESSMENT] = '';
+markUnReviewedLinkHtmlTemplate[ASSESSMENT] ='';
         
 // Template for the calendar/date tab
 
@@ -607,11 +642,16 @@ function cardsInterface($){
     }
     
 	/* Make all of the cards clickable by adding an event handler  */
+	jQuery( ".cardmainlink[href='undefined'" ).contents().unwrap();
+	//return true;
 	var cards = document.querySelectorAll(".clickablecard");
+	//var cards = document.querySelectorAll(".cardmainlink");
     for (i=0; i<cards.length; i++) {
     cards[i].addEventListener('click', function(e) {
             var link = this.querySelector(".cardmainlink");
-            link.click();
+            if ( link!==null ) {
+                link.click();
+            }
         }, false);
     }
     
@@ -641,6 +681,8 @@ function getCardItems($) {
 	return cards;
 }
 
+
+
 function extractCardsFromContent( myCards) {
     
     var items = [];
@@ -648,8 +690,14 @@ function extractCardsFromContent( myCards) {
     
     // Loop through each card and construct the items array with card data
 	myCards.each( function(idx){
+	    // jQuery(this) - is the vtbgenerated div for a BbItem
+	    
+	    //------- check for any review status element
+	    review = getReviewStatus( this );
+	    
         // Parse the description and remove the Card Image data	    
 	    var description = jQuery(this).html(),picUrl;
+	    
 		// - get rid of any &nbsp; inserted by Bb
 	    description = description.replace(/&nbsp;/gi, ' ');
 	    
@@ -814,12 +862,14 @@ function extractCardsFromContent( myCards) {
 	    // Hide the contentItem  TODO Only do this if display page
 	    var tweak_bb_active_url_pattern = "listContent.jsp";
 	    if (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ) { 
+	        // TODO un comment this Reviewed
 	        jQuery(this).parent().parent().hide();
 	        //console.log( "content item " + contentItem.html());
 	    }
 	    // save the item for later
 	    var item = {title:title, picUrl:picUrl, cardBGcolour:cardBGcolour,
 	        description:description, link:link, date:date, label:label,
+	        review:review,
 	        dateLabel:dateLabel,id:itemId,activePicUrl:activePicUrl,
 	        assessmentWeighting:assessmentWeighting,
 	        assessmentOutcomes:assessmentOutcomes,
@@ -831,6 +881,7 @@ function extractCardsFromContent( myCards) {
 	    if (iframe!=='') {
 	        item.iframe=iframe;
 	    }
+	    
 	    // only add the card to display if
 	    // - VIEW MODE is on and it's not hidden
 	    // - EDIT MODE is on 
@@ -862,6 +913,10 @@ function extractCardsFromContent( myCards) {
     var template = HORIZONTAL;
  	var engageVerb = 'Engage';
  	
+ 	// Define the text for Review Status
+ 	var MARK_REVIEWED = "Mark Reviewed"
+ 	var REVIEWED = "Reviewed";
+ 	
  	// get the content item with h3 heading containing Card Interface
  	var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
  	
@@ -871,17 +926,17 @@ function extractCardsFromContent( myCards) {
         return false;
     } else {
         // get the title - text only, stripped of whitespace before/after
+        
         var cardInterfaceTitle= jQuery.trim(cardInterface.text());
         
+        
         //Extract parameters
-        var m = cardInterfaceTitle.match(/Card Interface *([^<]*)/ );
+        var m = cardInterfaceTitle.match(/Card Interface *([^<]*)/i );
 	    if (m) {
-	        // get list of parameters
-	        params = m[1].match(/\S+/g);
+	        newParams = parse_parameters( m[1]);
 	        
-	        if ( params ) {
-	            params.forEach( function(element) {
-	            //    console.log("element is " + element);
+	        if ( newParams ) {
+	            newParams.forEach( function(element) {
 	        
 	                m = element.match(/template=["']vertical['"]/i );
 	                if (m) {
@@ -898,12 +953,16 @@ function extractCardsFromContent( myCards) {
 	                    template = HORIZONTAL_NOENGAGE;
 	                } else if ( element.match(/logging/i)) {
 	                    LOGGING = true;
-	                } else if ( m = element.match(/engage='([^']*)'/)) {
+	                } else if ( m = element.match(/engage=([^']*)/)) {
 	                    engageVerb = m[1];
-	                } else if (m=element.match(/template=["']*assessment["']*/i)){
+	                } else if (m=element.match(/template=assessment/i)){
 	                    template = ASSESSMENT;
 	                } else if ( m=element.match(/set[Dd]ate=([^\s]*)/ )){
 	                    SET_DATE = m[1];
+	                } else if ( m=element.match(/^reviewed=([^']*)/ui)) {
+	                    REVIEWED = m[1];
+	                } else if ( m=element.match(/^markReviewed=(.+)/i)) {
+	                    MARK_REVIEWED = m[1];
 	                }
 	            });
 	        }
@@ -934,9 +993,31 @@ function extractCardsFromContent( myCards) {
 	    //<div class="bg-cover h-48" style="background-image: url('{PIC_URL}'); //background-color: rgb(255,255,204)">{IFRAME}
 	    // replace the Engage verb
 	    
+	    //---------------------------------------------
+	    // Add in the mark review/reviewed options
+	    var reviewTemplate = '';
+	    if ( idx.review !== undefined) {
+	        // only do it if there is a review option found
+	        // check whether its a mark review or review
+	        // - if link contains markUnreviewed then it has been
+	        //   reviewed
+	        if ( idx.review.match(/markUnreviewed/)) {
+	            reviewTemplate = markUnReviewedLinkHtmlTemplate[template];
+	            reviewTemplate = reviewTemplate.replace('{REVIEWED}', REVIEWED)
+	        } else {
+	            // it's the other one which indicates it has not been reviewed
+	            reviewTemplate = markReviewLinkHtmlTemplate[template];
+	            
+	            reviewTemplate = reviewTemplate.replace('{MARK_REVIEWED}', MARK_REVIEWED)
+	        }
+	        // set the right link
+	        reviewTemplate = reviewTemplate.replace('{LINK}',idx.review);
+	    }
+	    cardHtml = cardHtml.replace('{REVIEW_ITEM}',reviewTemplate);
 	    //console.log("template is " + template);
 	    // Only show module number if there's a label
 	    if ( idx.label!=='') {
+	        var checkForNum = idx.moduleNum;
 	        if (idx.moduleNum) {
 	            // if there's a hard coded moduleNum use that
 	            cardHtml = cardHtml.replace('{MODULE_NUM}',idx.moduleNum);
@@ -944,7 +1025,19 @@ function extractCardsFromContent( myCards) {
 	            // use the one we're calculating
 	            //cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
 	            cardHtml = cardHtml.replace(/\{MODULE_NUM\}/g,moduleNum);
+	            checkForNum = moduleNum;
 	 	    }
+	 	    
+	 	    // Update the title, check to see if it starts with label and 
+	        // moduleNum.  If it does, remove them from the title
+	        // So that the card doesn't duplicate it, but the information is 
+	        // still there in Blackboard
+	        var regex = new RegExp( '^' + idx.label + '\\s*' + checkForNum +
+	                             '\\s*[-:]*\\s*(.*)')
+	        var m = idx.title.match(regex );
+	        if (m) {
+	            idx.title = m[1];
+	        }
 	    } else { 
 	       cardHtml = cardHtml.replace('{MODULE_NUM}','');
 	    }
@@ -1071,7 +1164,7 @@ function extractCardsFromContent( myCards) {
 //   start of that week
 
 function getTermDate( week, startWeek=true ) {
-    console.log("TERM is " + TERM + " week is " + week);
+    //console.log("TERM is " + TERM + " week is " + week);
     var date = { date: "", month: "", week: week };
     if (( week<0) || (week>15) ) {
         if (week!=='exam') {
@@ -1263,4 +1356,61 @@ function identifyCardBackgroundColour( input ) {
 function identifyPicUrl( value ) {
     
     return value;
+}
+
+//-----------------------------------------------------------------
+// checkReviewStatus
+// - given a vtbgenerated item from Bb Item, check to see if the
+//   parent div contains a review status element (anchor with class
+//   button-5)
+// - if not return NULL
+// - if there is one return the link (which indicates with it's
+//   mark reviewed, or reviewed)
+
+function getReviewStatus( vtbgen ) {
+    // get parent    
+    var parent = jQuery(vtbgen).parent();
+    
+    // check to see if it has the anchor with class button-5
+    review = jQuery(parent).find("a.button-5");
+    
+    if ( review.length === 0) {
+        return undefined
+    } else {
+        return jQuery(review).attr("href");
+    }
+}
+
+//---------------------------------------------------------------------
+// Given a string of parameters use some Stack Overflow provided
+// regular expression magic to split it up into its component parts
+
+function parse_parameters(cmdline) {
+//    var re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
+    var re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
+    var next_arg = ['', '', cmdline];
+    var args = [];
+    while (next_arg = re_next_arg.exec(next_arg[2])) {
+        var quoted_arg = next_arg[1];
+        var unquoted_arg = "";
+        while (quoted_arg.length > 0) {
+            if (/^"/.test(quoted_arg)) {
+                var quoted_part = /^"((?:\\.|[^"])*)"(.*)$/.exec(quoted_arg);
+                unquoted_arg += quoted_part[1].replace(/\\(.)/g, "$1");
+                quoted_arg = quoted_part[2];
+            } else if (/^'/.test(quoted_arg)) {
+                var quoted_part = /^'([^']*)'(.*)$/.exec(quoted_arg);
+                unquoted_arg += quoted_part[1];
+                quoted_arg = quoted_part[2];
+            } else if (/^\\/.test(quoted_arg)) {
+                unquoted_arg += quoted_arg[1];
+                quoted_arg = quoted_arg.substring(2);
+            } else {
+                unquoted_arg += quoted_arg[0];
+                quoted_arg = quoted_arg.substring(1);
+            }
+        }
+        args[args.length] = unquoted_arg;
+    }
+    return args;
 }
