@@ -388,7 +388,7 @@ var markUnReviewedLinkHtmlTemplate = Array(NUM_TEMPLATES);
 markReviewLinkHtmlTemplate[HORIZONTAL] = `
 <div class="p-4 absolute pin-l pin-b">
      <a href="{LINK}"><button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
-     <span class="font-bold rounded-full px-2 py-1 bg-yellow text-black">?</span>&nbsp; {MARK_REVIEWED}</button></a>
+     <span class="font-bold rounded-full px-2 py-1 bg-yellow text-black">&#x26a0;</span>&nbsp; {MARK_REVIEWED}</button></a>
 </div>
         `;
         
