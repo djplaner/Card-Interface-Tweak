@@ -152,8 +152,6 @@ var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 const NUM_TEMPLATES=6, HORIZONTAL=0, // original 3 cards per row
       VERTICAL=1, // 1 card per row 
       HORIZONTAL_NOENGAGE=2, // original, but no engage
-      BY5=3, // horizontal but up to 5 cards per row
-      BY5_NOIMAGE = 4, // horizontal, 5 cards, no image
       PEOPLE = 5,
       ASSESSMENT = 6; // horizontal but show off people (BCI) version
 
@@ -190,8 +188,6 @@ interfaceHtmlTemplate[VERTICAL] = `
 interfaceHtmlTemplate[VERTICAL] = interfaceHtmlTemplate[VERTICAL].replace('{CARDS_CSS}',CARDS_CSS);
 
 interfaceHtmlTemplate[HORIZONTAL_NOENGAGE]=interfaceHtmlTemplate[HORIZONTAL];
-interfaceHtmlTemplate[BY5]= interfaceHtmlTemplate[HORIZONTAL];
-interfaceHtmlTemplate[BY5_NOIMAGE]= interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[PEOPLE]= interfaceHtmlTemplate[HORIZONTAL];
 interfaceHtmlTemplate[ASSESSMENT]= interfaceHtmlTemplate[HORIZONTAL];
 
@@ -200,7 +196,7 @@ interfaceHtmlTemplate[ASSESSMENT]= interfaceHtmlTemplate[HORIZONTAL];
 var cardHtmlTemplate = Array(NUM_TEMPLATES);
 
 cardHtmlTemplate[HORIZONTAL]=`
-  <div class="clickablecard w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
+  <div class="clickablecard w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}" class="cardmainlink"></a>
       <div class="bg-cover h-48" style="background-image: url('{PIC_URL}'); background-color: rgb(255,255,204)">{IFRAME}
@@ -248,51 +244,6 @@ cardHtmlTemplate[HORIZONTAL_NOENGAGE]=`
   <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}</div></a>
-      <div class="p-4 flex-1 flex flex-col">
-       <a href="{LINK}">
-        {LABEL} {MODULE_NUM}
-        <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="carddescription mb-4 flex-1">
-          {DESCRIPTION}
-        </div>
-        </a>
-         {DATE} 
-         {EDIT_ITEM}
-      </div>
-    </div>
-  </div>
-`;
-
-cardHtmlTemplate[BY5]=`
-  <div class="flex flex-col p-2 sm:w-1/3 md:w-1/5">
-  <style>
-ul { display: block}
-li { display: list-item} 
-ul { list-style-type: circle}
-#guDescription { display: block}
-</style>
-    <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
-      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}</div></a>
-      <div class="p-4 flex-1 flex flex-col">
-       <a href="{LINK}">
-        {LABEL} {MODULE_NUM}
-        <h3 class="mb-4 text-2xl">{TITLE}</h3>
-        <div class="carddescription mb-4 flex-1" id="guDescription">
-          {DESCRIPTION}
-        </div>
-        </a>
-         {DATE} 
-         {EDIT_ITEM}
-      </div>
-    </div>
-  </div>
-`;
-
-// TODO rounded cornes?
-cardHtmlTemplate[BY5_NOIMAGE]=`
-  <div class="flex flex-col p-2 sm:w-1/3 md:w-1/5">
-    <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col">
-      <!-- <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');"></div></a>-->
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
         {LABEL} {MODULE_NUM}
@@ -385,8 +336,6 @@ linkItemHtmlTemplate[HORIZONTAL] = `
 
 linkItemHtmlTemplate[VERTICAL] ='';
 linkItemHtmlTemplate[HORIZONTAL_NOENGAGE] = '';
-linkItemHtmlTemplate[BY5] = '';
-linkItemHtmlTemplate[BY5_NOIMAGE] = '';
 linkItemHtmlTemplate[PEOPLE] = '';
 linkItemHtmlTemplate[ASSESSMENT] = '';
 
@@ -421,10 +370,6 @@ markReviewLinkHtmlTemplate[VERTICAL] ='';
 markUnReviewedLinkHtmlTemplate[VERTICAL] ='';
 markReviewLinkHtmlTemplate[HORIZONTAL_NOENGAGE] = '';
 markUnReviewedLinkHtmlTemplate[HORIZONTAL_NOENGAGE] ='';
-markReviewLinkHtmlTemplate[BY5] = '';
-markUnReviewedLinkHtmlTemplate[BY5] ='';
-markReviewLinkHtmlTemplate[BY5_NOIMAGE] = '';
-markUnReviewedLinkHtmlTemplate[BY5_NOIMAGE] ='';
 markReviewLinkHtmlTemplate[PEOPLE] = '';
 markUnReviewedLinkHtmlTemplate[PEOPLE] ='';
 markReviewLinkHtmlTemplate[ASSESSMENT] = '';
@@ -523,15 +468,11 @@ examPeriodTemplate =`
 
 dateHtmlTemplate[VERTICAL] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[HORIZONTAL_NOENGAGE] = dateHtmlTemplate[HORIZONTAL];
-dateHtmlTemplate[BY5] = dateHtmlTemplate[HORIZONTAL];
-dateHtmlTemplate[BY5_NOIMAGE] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[PEOPLE] = '';
 //dateHtmlTemplate[ASSESSMENT] = dateHtmlTemplate[HORIZONTAL];
 
 dualDateHtmlTemplate[VERTICAL] = dualDateHtmlTemplate[HORIZONTAL];
 dualDateHtmlTemplate[HORIZONTAL_NOENGAGE] = dualDateHtmlTemplate[HORIZONTAL];
-dualDateHtmlTemplate[BY5] = dualDateHtmlTemplate[HORIZONTAL];
-dualDateHtmlTemplate[BY5_NOIMAGE] = dualDateHtmlTemplate[HORIZONTAL];
 dualDateHtmlTemplate[PEOPLE] = '';
 //dualDateHtmlTemplate[ASSESSMENT] = dualDateHtmlTemplate[HORIZONTAL];
 
@@ -581,7 +522,7 @@ function cardsInterface($){
 	//idRe = new RegExp('\((.*)\)');
 	m = courseTitle.match( /^.*\((.+)\)/ );
 	// we found a course Id, get the STRM value
-	console.log("got title " + courseTitle );
+	//console.log("got title " + courseTitle );
 	if (m){
 	    id = m[1];
 	    // break the course Id up into its components
@@ -677,6 +618,10 @@ function cardsInterface($){
         }, false);
     }
     
+    // if we want the images to be hidden, hide them at the end
+    if ( HIDE_IMAGES ) {
+        jQuery( ".bg-cover").hide();
+    }
 }
 
 /***
@@ -954,6 +899,8 @@ function extractCardsFromContent( myCards) {
         
         //Extract parameters
         var m = cardInterfaceTitle.match(/Card Interface *([^<]*)/i );
+        WIDTH='md:w-1/3';
+        HIDE_IMAGES=false;
 	    if (m) {
 	        newParams = parse_parameters( m[1]);
 	        
@@ -965,10 +912,10 @@ function extractCardsFromContent( myCards) {
 	                    template = VERTICAL;
 	                } else if (element.match(/template=['"]horizontal['"]/i )) {
 	                    template = HORIZONTAL;
-	                } else if ( element.match(/[Bb][yY]5[nN][Oo]/)) {
-	                    template = BY5_NOIMAGE;
-	                } else if ( element.match(/[Bb][yY]5/)) {
-	                    template = BY5;
+	                } else if ( element.match(/noimages/)) {
+	                    HIDE_IMAGES = true;
+	                } else if ( x = element.match(/[Bb][yY]([2-6])/ )) {
+	                    WIDTH = "md:w-1/" + x[1];
 	                } else if ( element.match(/people/i)) {
 	                    template = PEOPLE;
 	                } else if (element.match(/noengage/i )) {
@@ -1005,7 +952,7 @@ function extractCardsFromContent( myCards) {
     var moduleNum = 1;
     items.forEach( function(idx) {
 	    var cardHtml=cardHtmlTemplate[template];
-	  
+	    cardHtml = cardHtml.replace( '{WIDTH}', WIDTH);
 	    // replace the default background colour if a different one
 	    // is specific
 	    if ( idx.cardBGcolour ) {
