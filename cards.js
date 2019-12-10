@@ -944,10 +944,10 @@ function extractCardsFromContent( myCards) {
 	    } // if no match, stay with default
     }
     
-  //  console.log("LOGGING IS " + LOGGING);
     // make the h3 for the Card Interface item disappear
     // (Can't hide the parent as then you can't edit via Bb)
-    cardInterface.hide();
+    // Need to have the span in order to be able to reorder
+    cardInterface.html('<span class="reorder editmode"></span>');
  	// Get the content area in which to insert the HTML
  	var firstItem = cardInterface.parent().siblings(".details");
     
@@ -970,7 +970,6 @@ function extractCardsFromContent( myCards) {
 	    //---------------------------------------------
 	    // Add in the mark review/reviewed options
 	    var reviewTemplate = '';
-	    console.log('--------------------- check review template');
 	    if ( idx.review !== undefined) {
 	        // only do it if there is a review option found
 	        // check whether its a mark review or review
