@@ -241,7 +241,7 @@ cardHtmlTemplate[VERTICAL]=`
 
 
 cardHtmlTemplate[HORIZONTAL_NOENGAGE]=`
-  <div class="w-full sm:w-1/2 md:w-1/3 flex flex-col p-3">
+  <div class="w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}</div></a>
       <div class="p-4 flex-1 flex flex-col">
@@ -253,6 +253,8 @@ cardHtmlTemplate[HORIZONTAL_NOENGAGE]=`
         </div>
         </a>
          {DATE} 
+         {LINK_ITEM}
+         {REVIEW_ITEM}
          {EDIT_ITEM}
       </div>
     </div>
@@ -368,8 +370,8 @@ markUnReviewedLinkHtmlTemplate[HORIZONTAL] = `
 
 markReviewLinkHtmlTemplate[VERTICAL] ='';
 markUnReviewedLinkHtmlTemplate[VERTICAL] ='';
-markReviewLinkHtmlTemplate[HORIZONTAL_NOENGAGE] = '';
-markUnReviewedLinkHtmlTemplate[HORIZONTAL_NOENGAGE] ='';
+markReviewLinkHtmlTemplate[HORIZONTAL_NOENGAGE] = markReviewLinkHtmlTemplate[HORIZONTAL];
+markUnReviewedLinkHtmlTemplate[HORIZONTAL_NOENGAGE] =markUnReviewedLinkHtmlTemplate[HORIZONTAL];
 markReviewLinkHtmlTemplate[PEOPLE] = '';
 markUnReviewedLinkHtmlTemplate[PEOPLE] ='';
 markReviewLinkHtmlTemplate[ASSESSMENT] = '';
@@ -906,16 +908,20 @@ function extractCardsFromContent( myCards) {
 	        
 	        if ( newParams ) {
 	            newParams.forEach( function(element) {
-	        
 	                m = element.match(/template=["']vertical['"]/i );
-	                if (m) {
+	                m1 = element.match(/template=vertical/i );
+	                if (m || m1) {
 	                    template = VERTICAL;
 	                } else if (element.match(/template=['"]horizontal['"]/i )) {
 	                    template = HORIZONTAL;
 	                } else if ( element.match(/noimages/)) {
 	                    HIDE_IMAGES = true;
-	                } else if ( x = element.match(/[Bb][yY]([2-6])/ )) {
+	                } else if ( x = element.match(/template=by([2-6])/i ) ) {
 	                    WIDTH = "md:w-1/" + x[1];
+	                } else if (x = element.match(/by([2-6])/i ) ) {
+	                    WIDTH = "md:w-1/" + x[1];
+	                } else if ( x = element.match(/[Bb][yY]1/ )) {     
+	                    WIDTH = "md:w-full";
 	                } else if ( element.match(/people/i)) {
 	                    template = PEOPLE;
 	                } else if (element.match(/noengage/i )) {
@@ -936,7 +942,6 @@ function extractCardsFromContent( myCards) {
 	            });
 	        }
 	    } // if no match, stay with default
-        
     }
     
   //  console.log("LOGGING IS " + LOGGING);
@@ -965,6 +970,7 @@ function extractCardsFromContent( myCards) {
 	    //---------------------------------------------
 	    // Add in the mark review/reviewed options
 	    var reviewTemplate = '';
+	    console.log('--------------------- check review template');
 	    if ( idx.review !== undefined) {
 	        // only do it if there is a review option found
 	        // check whether its a mark review or review
