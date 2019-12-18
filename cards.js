@@ -19,6 +19,26 @@
  */
 
 var TERM_DATES = {
+    // OUA 2020 Study Period 1
+    "2201" :  {
+         "0" : { "start" : "2020-02-24", "stop":"2020-03-01" } ,
+         "1" : { "start" : "2020-03-02", "stop":"2020-03-08" } ,
+         "2" : { "start" : "2020-03-09", "stop":"2020-03-15" } ,
+         "3" : { "start" : "2020-03-16", "stop":"2020-03-22" } ,
+         "4" : { "start" : "2020-03-23", "stop":"2020-03-29" } ,
+         "5" : { "start" : "2020-03-30", "stop":"2020-04-05" } ,
+         "6" : { "start" : "2020-04-06", "stop":"2020-04-12" } ,
+         "7" : { "start" : "2020-04-13", "stop":"2020-04-19" } ,
+         "8" : { "start" : "2020-04-20", "stop":"2020-04-26" } ,
+         "9" : { "start" : "2020-04-27", "stop":"2020-05-03" } ,
+         "10" : { "start" : "2020-05-04", "stop":"2020-05-10" } ,
+         "11" : { "start" : "2020-05-11", "stop":"2020-05-17" } ,
+         "12" : { "start" : "2020-05-18", "stop":"2020-05-24" } ,
+         "13" : { "start" : "2020-05-25", "stop":"2020-05-31" },
+         /* End of study period 4 */
+         "exam" : { "start" : "2020-06-01", "stop":"2020-06-05" },
+         // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
+    },
     // Griffith 2020 Trimester 1
     "3201" : {
          "0" : { "start" : "2020-02-17", "stop":"2020-02-23" } ,
@@ -944,6 +964,7 @@ function extractCardsFromContent( myCards) {
 	    } // if no match, stay with default
     }
     
+  //  console.log("LOGGING IS " + LOGGING);
     // make the h3 for the Card Interface item disappear
     // (Can't hide the parent as then you can't edit via Bb)
     // Need to have the span in order to be able to reorder
