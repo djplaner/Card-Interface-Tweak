@@ -620,8 +620,9 @@ function cardsInterface($){
     var cardContent = jQuery(".carddescription [href]");
     for (var i=0; i<cardContent.length; i++) {
         cardContent[i].addEventListener('click', function(e) {
-            //var link = this.querySelector(".cardmainlink");
-            //link.click();
+            // this helps make the button link work
+            var link = this.querySelector(".cardmainlink");
+            link.click();
             e.stopPropagation();
         }, false);
     }
