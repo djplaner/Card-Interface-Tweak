@@ -1088,7 +1088,7 @@ function extractCardsFromContent( myCards) {
 	    }
 	    
 	    // If there is a linkTarget in Blackboard
-	    if ( typeof idx.linkTarget!==undefined) {
+	    if ( typeof idx.linkTarget!=='undefined' ) {
 	        // replace "{LINK}" with "{LINK}" target="linkTarget"
 	        cardHtml = cardHtml.replace( /"{LINK}"/g, '"{LINK}" target="' +
 	                    idx.linkTarget + '"');
