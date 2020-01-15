@@ -815,7 +815,7 @@ function extractCardsFromContent( myCards) {
 	    
 	    // need to get back to the header which is up one div, a sibling, then span
 	    var header = jQuery(this).parent().siblings(".item").find("span")[2];
-	    var title = jQuery(header).html(),link;
+	    var title = jQuery(header).html(),link,linkTarget='';
 	    
 	    //--------------------------------
 	    // Three options for link
@@ -826,6 +826,7 @@ function extractCardsFromContent( myCards) {
 	    //    Currently sets the link to the last file
 	    //    TODO figure out what do with multiple files
 	    link = jQuery(header).parents('a').attr('href');
+	    linkTarget = jQuery(header).parents("a").attr("target");
 	    
 	    // if link is empty, must be content item
 	    if ( link === undefined ) {
@@ -858,7 +859,8 @@ function extractCardsFromContent( myCards) {
 	    }
 	    // save the item for later
 	    var item = {title:title, picUrl:picUrl, cardBGcolour:cardBGcolour,
-	        description:description, link:link, date:date, label:label,
+	        description:description, date:date, label:label,
+	        link:link, linkTarget:linkTarget,
 	        review:review,
 	        dateLabel:dateLabel,id:itemId,activePicUrl:activePicUrl,
 	        assessmentWeighting:assessmentWeighting,
@@ -1063,6 +1065,7 @@ function extractCardsFromContent( myCards) {
 //	    console.log( " template is " + template + " and H_E " + HORIZONTAL_NOENGAGE);
 	    if ( idx.link ) {
 	        // add the link
+	        
 	        linkHtml = linkItemHtmlTemplate[template];
 	        linkHtml = linkHtml.replace( '{ENGAGE}',engageVerb);
 	        cardHtml = cardHtml.replace('{LINK_ITEM}',linkHtml);
@@ -1082,6 +1085,13 @@ function extractCardsFromContent( myCards) {
 	        // don't count it as a module
 	        cardHtml = cardHtml.replace(idx.label + ' ' + moduleNum, '');
 	        //moduleNum--;
+	    }
+	    
+	    // If there is a linkTarget in Blackboard
+	    if ( typeof idx.linkTarget!==undefined) {
+	        // replace "{LINK}" with "{LINK}" target="linkTarget"
+	        cardHtml = cardHtml.replace( /"{LINK}"/g, '"{LINK}" target="' +
+	                    idx.linkTarget + '"');
 	    }
 	    cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
 	    
@@ -1355,7 +1365,7 @@ function identifyPicUrl( value ) {
 }
 
 //-----------------------------------------------------------------
-// checkReviewStatus
+// getReviewStatus
 // - given a vtbgenerated item from Bb Item, check to see if the
 //   parent div contains a review status element (anchor with class
 //   button-5)
