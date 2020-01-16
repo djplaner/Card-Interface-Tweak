@@ -350,9 +350,9 @@ var linkItemHtmlTemplate = Array(NUM_TEMPLATES);
 linkItemHtmlTemplate[HORIZONTAL] = `
         <p>&nbsp;<br /> &nbsp;</p>
         <div class="p-4 absolute pin-r pin-b">
-           <a href="{LINK}"><button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+           <a href="{LINK}" class="gu-engage"><div class="hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
             {ENGAGE}
-        </button></a>
+        </div></a>
         </div>
         `;
 
@@ -615,31 +615,43 @@ function cardsInterface($){
 	/* generate the cards interface for the tiems */
 	addCardInterface(items);
 	
+	// remove click event handler from engage buttons
+	
+	// Add event handler for the engage links
+    /*jQuery(".gu-engage").click( function(e) {
+            
+            e.stopPropagation();
+    });*/
+	
 	/** ------ cards should be created by now -- */
 	/* But make all the links in carddescription stop propagation */
-    var cardContent = jQuery(".carddescription [href]");
+    var cardContent = jQuery(".carddescription [href]").not(".gu-engage");
+
     for (var i=0; i<cardContent.length; i++) {
         cardContent[i].addEventListener('click', function(e) {
-            // this helps make the button link work
-            var link = this.querySelector(".cardmainlink");
-            link.click();
+            // aim here is to allow internal links to override the 
+            // cardmainlink
             e.stopPropagation();
         }, false);
     }
     
 	/* Make all of the cards clickable by adding an event handler  */
-	jQuery( ".cardmainlink[href='undefined'" ).contents().unwrap();
+	// Does this unwrap actually do anything???
+	//jQuery( ".cardmainlink[href='undefined'" ).contents().unwrap();
 	//return true;
 	var cards = document.querySelectorAll(".clickablecard");
 	//var cards = document.querySelectorAll(".cardmainlink");
     for (i=0; i<cards.length; i++) {
-    cards[i].addEventListener('click', function(e) {
+    cards[i].addEventListener('click', function() {
             var link = this.querySelector(".cardmainlink");
+            
             if ( link!==null ) {
                 link.click();
             }
         }, false);
     }
+    
+    
     
     // if we want the images to be hidden, hide them at the end
     if ( HIDE_IMAGES ) {
