@@ -12,3 +12,4 @@ jQuery( document ).ready(function( $ ) {
   cardsInterface($);
 });
 ]]></script>
+<div id="gu_card_docs"></div>
