@@ -511,6 +511,126 @@ HIDDEN_FROM_STUDENTS = `<div class="inline-block bg-yellow text-black text-xs ro
 // LOCATION > 0 means view mode. < 0 means EDIT mode
 var LOCATION = 1;
 
+INTRO_HTML=`
+<p><strong>Important:</strong> </p>
+<ol>
+  <li> <strong>No changes</strong> - do not edit or remove content from this item. It implements the Card interface. Changes may break that interface.</li>
+  <li> <strong>Don't hide it from students</strong> - the tweak will hide itself, students won't see it. If you use Blackboard to hide this tweak from students, it will NOT work.</li>
+  </ol>
+`;
+
+
+DOCUMENTATION_HTML = `
+<h3>How do I...</h3>
+
+<p>Table below provides links to help with various tasks. Helps is provided in two formats:</p>
+<ol>
+  <li> Word document; and,
+       <p>Accessible to any Griffith staff member, but not providing the full interactive, web interface. </p> </li>
+  <li> in Learning@Griffith (L@G).
+       <p>Accessible once you "enrol" in an Blackboard site and provides the full interactive, web interface. </p> </li>
+</ol>
+
+<table style="width:100%;padding:2px">
+  <tr>
+    <td class="bg-grey"> Get started </td>
+    <td class="bg-grey-light"> Change a card </td>
+    <td class="bg-grey-lighter"> Change the appearance of all cards </td>
+  </tr>
+  <tr>
+    <td class="bg-grey">
+<ul style="padding-left:1.2em">
+  <li> Card Interface - What and why? [ 
+       <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/EbEoe9wj0YZJlqReCZ1zIgYBqec-roMdEc6O8g0HO3WYJA?e=euNDVZ">Word</a> | 
+       <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110115_1&course_id=_82534_1&mode=quick">L@G</a> ] </li>
+  <li> How to create a Card Interface [
+           <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/EQjDbsce2UlPjNKpRkcrx4ABnpv5XexhJUtqPW4wucmFnQ?e=j3aZJB">Word</a> |
+           <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110120_1&course_id=_82534_1&content_id=_5110129_1">L@G</a> ]
+</ul>
+    </td>
+    <td class="bg-grey-light">
+      <p>By customising a single card [
+        <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/ETbYt2lHdNVApcQsbJsXp4YBHgCLTKE-clIRw38qpiKfiw?e=8kEDCC">Word</a> |
+        <a href="">L@G</a> ] by</p>
+          <ul>
+            <li> Setting a card image. </li>
+            <li> Setting the date. </li>
+            <li> Changing a label. </li>
+         </ul>
+    </td>
+    <td class="bg-grey-lighter">
+        <p>using attributes & templates [ 
+        <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/EWwyyTG6BBNBirb1G9rnnP8BEuniqGyVmwBcTpzG9pLB9Q?e=5kdY0c">Word</a> |
+        <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1">L&G</a>], by</p>
+    <ul style="padding-left:1.2em">
+        <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1#2">understanding templates and attributes</a> </li>
+        <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1#3">arranging cards vertically</a> </li>
+        <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1#4">changing the number of cards per row</a> </li>
+        <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1#5">using an assessment template</a> </li>
+        <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1#6">Changing or removing the engage button</a> </li>
+    </ul>
+    </td>
+    </table>
+  
+
+`;
+
+NEW_DOCUMENTATION_HTML = `
+<h3>How do I...</h3>
+
+<table style="width:100%;padding:2px">
+  <tr>
+    <td class="bg-grey"> Get started </td>
+    <td class="bg-grey-light"> Change a card </td>
+    <td class="bg-grey-lighter"> Change the appearance of all cards </td>
+  </tr>
+  <tr>
+    <td class="bg-grey">
+<ul style="padding-left:1.2em">
+  <li> <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/ETGyerxSf5pMuHFxsn1nA14BHDJlNgGezO_gW2p5uQm_IQ?e=VjWJ60" target="_blank">learn the basics about the Card Interface</a> </li>
+  <li> <a href="">Add a card</a> </li>
+  <li> <a href="">set up a new Card Interface (elsewhere)</a> </li>
+</ul>
+    </td>
+    <td class="bg-grey-light">
+        <ul style="padding-left:1.2em">
+        <li> <a href="">adding/changing an image</a> </li>
+        <li> <a href="">adding a card colour</a> </li>
+        <li> <a href="">adding a card video</a> (or a Padlet or other embeddable content) </li>
+        <li> <a href="">change the date or date label</a> </li>        
+        <li> <a href="">change the card label (e.g. Module) or number</a> </li>        
+    </ul>
+    </td>
+    <td class="bg-grey-lighter">
+  
+    <ul style="padding-left:1.2em">
+        <li> <a href="">changing the number of cards per row</a> </li>
+        <li> <a href="">using different card templates</a> </li>
+    </ul>
+    </td>
+    </table>
+  
+
+`;
+
+// Big kludge for HDR
+
+function hideJourney($) {
+    console.log("---------- RUNNING THE tmp script");
+  
+  var tweak_bb_active_url_pattern = "listContent.jsp";
+	window.tweak_bb = { display_view: (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ), 
+          page_id: "#content_listContainer",
+	      row_element: "li" };
+
+  var journeyTitle = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Your HDR Journey")').eq(0);		  
+  //console.log(journeyTitle);
+  var journey = jQuery(journeyTitle).parent().next('div.details').children('.vtbegenerated');
+  //console.log(journey);
+  var child = jQuery(journey).children(".yourJourney");
+  //console.log(child);
+  jQuery(child).unwrap();
+}
 /****
  * TODO
  * - Add a "right now" important way to highlight a card
@@ -535,11 +655,15 @@ function cardsInterface($){
 	 if (location.href.indexOf("listContent.jsp") > 0) {
          $(".gutweak").parents("li").hide(); 
 	 }
-	
+
+    // 
+    jQuery('#gu_card_docs').html(DOCUMENTATION_HTML);
+	jQuery('#gu_card_intro').html(INTRO_HTML);
+		
 	// Calculate the actual TERM for this course based on the 
 	// courseId. If it doesn't parse, just leave it as the default
 	// initialised term
-	
+
 	// get the course id which will be in brackets
 	//idRe = new RegExp('\((.*)\)');
 	m = courseTitle.match( /^.*\((.+)\)/ );
