@@ -502,7 +502,7 @@ dualDateHtmlTemplate[PEOPLE] = '';
 // Same for all templates
 var editLinkTemplate = `
 	        <div class="text-xs grey-light">
-	           [<a href="#{ID}">View original</a>]
+	           [<a href="#{ID}">View origin</a>]
 	        </div>`;
 
 // Message to display on a card if EDIT mode on and the item is hidden
