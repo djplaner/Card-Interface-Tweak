@@ -770,7 +770,12 @@ function cardsInterface($){
             var link = this.querySelector(".cardmainlink");
             
             if ( link!==null ) {
-                link.click();
+                // prevent clicking on a undefined blackboard link
+                if ( link.match(/blackboard\/content\/undefined$/)) {
+                    console.log("Undefined");
+                } else {
+                    link.click();
+                }
             }
         }, false);
     }
@@ -947,7 +952,6 @@ function extractCardsFromContent( myCards) {
 	        description = description.replace( "<p>"+m[0]+"</p>","");
 	        description = description.replace( m[0], "");
 	    }
-	    
 	    
 	    // need to get back to the header which is up one div, a sibling, then span
 	    var header = jQuery(this).parent().siblings(".item").find("span")[2];
@@ -1194,7 +1198,7 @@ function extractCardsFromContent( myCards) {
 	    cardHtml = cardHtml.replace( /\{LEARNING_OUTCOMES\}/g, idx.assessmentOutcomes);
 	    
 	    // Get rid of some crud Bb inserts into the HTML
-	    description = idx.description.replace(/<p/, '<p class="pb-2"');
+	    description = idx.description.replace(/<p/g, '<p class="pb-2"');
 	    description = description.replace(/<a/g, '<a class="underline"');
 	    cardHtml = cardHtml.replace('{DESCRIPTION}', description);
 	    // Does the card link to another content item?
@@ -1229,7 +1233,13 @@ function extractCardsFromContent( myCards) {
 	        cardHtml = cardHtml.replace( /"{LINK}"/g, '"{LINK}" target="' +
 	                    idx.linkTarget + '"');
 	    }
-	    cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
+	    
+	    if ( typeof idx.link!=='undefined') {
+	        cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
+	    } else {
+	        cardHtml = cardHtml.replace(/<a href="{LINK}" class="cardmainlink">/g, '');
+	        cardHtml = cardHtml.replace(/class="clickablecard /, 'class="');
+	    }
 	    
 	    // Should we add a link to edit/view the original content
 	    if (location.href.indexOf("listContentEditable.jsp") > 0) {
