@@ -40,6 +40,27 @@ var TERM_DATES = {
          "exam" : { "start" : "2020-06-01", "stop":"2020-06-05" },
          // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
     },
+    // OUA 2020 Study Period 2
+    "2203" :  {
+         "0" : { "start" : "2020-05-25", "stop":"2020-05-31" } ,
+         "1" : { "start" : "2020-06-01", "stop":"2020-06-07" } ,
+         "2" : { "start" : "2020-06-08", "stop":"2020-06-14" } ,
+         "3" : { "start" : "2020-06-15", "stop":"2020-06-21" } ,
+         "4" : { "start" : "2020-06-22", "stop":"2020-06-28" } ,
+         "5" : { "start" : "2020-06-29", "stop":"2020-07-05" } ,
+         "6" : { "start" : "2020-07-06", "stop":"2020-07-12" } ,
+         "7" : { "start" : "2020-07-13", "stop":"2020-07-19" } ,
+         "8" : { "start" : "2020-07-20", "stop":"2020-07-26" } ,
+         "9" : { "start" : "2020-07-27", "stop":"2020-08-02" } ,
+         "10" : { "start" : "2020-08-03", "stop":"2020-08-09" } ,
+         "11" : { "start" : "2020-08-10", "stop":"2020-05-17" } ,
+         "12" : { "start" : "2020-08-17", "stop":"2020-05-24" } ,
+         "13" : { "start" : "2020-08-24", "stop":"2020-05-31" },
+         "14" : { "start" : "2020-08-31", "stop":"2020-09-06" },
+         /* End of study period 4 */
+         "exam" : { "start" : "2020-08-31", "stop":"2020-09-04" },
+         // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
+    },
     // Griffith 2020 Trimester 1
     "3201" : {
          "0" : { "start" : "2020-02-17", "stop":"2020-02-23" } ,
@@ -642,6 +663,8 @@ function hideJourney($) {
  */
  
 function cardsInterface($){
+    
+    console.log("Number 2.5");
 	/* define variables based on Bb page type */
 	/* used to identify important components in html */
 	var tweak_bb_active_url_pattern = "listContent.jsp";
