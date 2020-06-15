@@ -725,7 +725,6 @@ function hideJourney($) {
  
 function cardsInterface($){
     
-    console.log("Number 2.5");
 	/* define variables based on Bb page type */
 	/* used to identify important components in html */
 	var tweak_bb_active_url_pattern = "listContent.jsp";
@@ -880,18 +879,17 @@ function cardsInterface($){
 
 function getCardItems($) {
 	// Find all the items that containg Card Image: OR Card Image Iframe:
+	// Case insensitive
+	// This will include any Content Item that includes this string
+	// even if it isn't meant to be a card
+	var cardRE = new RegExp( '(card image) ?(iframe)?:', 'i');
 	
 	var bbItems = jQuery(tweak_bb.page_id + " > " +tweak_bb.row_element).children(".details").children('.vtbegenerated').filter(
-	       function( index ) {
-	            if ( $(this).filter(":contains('Card Image:')").length==1 ) {
-	                return true;
-	            }    
-	            if ( $(this).filter(":contains('Card Image Iframe:')").length==1 ) {
-	                return true;
-	            }    
-	           return false;
-	       } );
-	       
+	       function( ) {
+	           return match = this.innerHTML.match(cardRE);
+	         } 
+	       );
+	
 	var cards = extractCardsFromContent( bbItems);
 	
 	return cards;
