@@ -302,7 +302,8 @@ cardHtmlTemplate[HORIZONTAL]=`
   <div class="clickablecard w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}" class="cardmainlink"></a>
-      <div class="bg-cover h-48" style="background-image: url('{PIC_URL}'); background-color: rgb(255,255,204)">{IFRAME}
+      <!-- <div class="bg-contain bg-no-repeat h-48" style="background-image: url -->
+      <div class="{BG_SIZE} h-48" style="background-image: url('{PIC_URL}'); background-color: rgb(255,255,255)">{IFRAME}
       </div>
       <div class="carddescription p-4 flex-1 flex flex-col">
         {LABEL} {MODULE_NUM}
@@ -636,9 +637,12 @@ DOCUMENTATION_HTML = `
         <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/ETbYt2lHdNVApcQsbJsXp4YBHgCLTKE-clIRw38qpiKfiw?e=8kEDCC">Word</a> |
         <a href="">L@G</a> ] by</p>
           <ul>
-            <li> Setting a card image. </li>
-            <li> Setting the date. </li>
-            <li> Changing a label. </li>
+            <li> Adding a card image <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#2">using a URL</a> or <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#3">by uploading</a>. </li>
+            <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#4">Making an image fit neatly</a> in a card. </li>
+            <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#5">Using a background colour</a>, rather than an image. </li>
+            <li> Adding or <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#6">changing the date</a>. </li>
+            <li> Using <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#7">different card types and labels</a>. </li>
+            <li> Hiding <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#8">a card</a>. </li>
          </ul>
     </td>
     <td class="bg-grey-lighter">
@@ -951,6 +955,16 @@ function extractCardsFromContent( myCards) {
 	        description = description.replace( stringToRemove, '');
 	    }
 	    
+	    //---------------- card Image Size
+	    // Looking for contain
+	    m = description.match(/card image size *: contain/i);
+	    var bgSize = "";
+	    if (m) {
+	        bgSize = "contain";
+	        description = description.replace( "<p>"+m[0]+"</p>","");
+	        description = description.replace( m[0], "");
+	    }
+	    
 	    // Parse the date for commencing
 	    // date will be in object with start and end members
 	    var date = handleDate( description );
@@ -1081,7 +1095,8 @@ function extractCardsFromContent( myCards) {
 	        //console.log( "content item " + contentItem.html());
 	    }
 	    // save the item for later
-	    var item = {title:title, picUrl:picUrl, cardBGcolour:cardBGcolour,
+	    var item = {title:title, picUrl:picUrl, bgSize: bgSize,
+	        cardBGcolour:cardBGcolour,
 	        description:description, date:date, label:label,
 	        link:link, linkTarget:linkTarget,
 	        review:review,
@@ -1262,6 +1277,21 @@ function extractCardsFromContent( myCards) {
 	       cardHtml = cardHtml.replace('{MODULE_NUM}','');
 	    }
 	    cardHtml = cardHtml.replace('{LABEL}',idx.label);
+	    
+	    //------------------ set the card image
+	    
+	    // Two options for BG_SIZE
+	    // 1. cover (bg-cover)
+	    //    Default option. Image covers the entire backgroun
+	    // 2. contain (bg-contain bg-no-repeat) 
+	    //    Entire image must fit within the card
+	    
+	    if ( idx.bgSize === 'contain' ) {
+	        cardHtml = cardHtml.replace(/{BG_SIZE}/, 
+	              'bg-contain bg-no-repeat bg-center');
+	    } else { 
+	        cardHtml = cardHtml.replace(/{BG_SIZE}/, 'bg-cover');
+	    }
 	    
 	    var picUrl = setImage( idx);
 	    
