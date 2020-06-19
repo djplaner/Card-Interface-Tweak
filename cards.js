@@ -596,70 +596,140 @@ HIDDEN_FROM_STUDENTS = `<div class="inline-block bg-yellow text-black text-xs ro
 var LOCATION = 1;
 
 INTRO_HTML=`
-<p><strong>Important:</strong> </p>
-<ol>
-  <li> <strong>No changes</strong> - do not edit or remove content from this item. It implements the Card interface. Changes may break that interface.</li>
-  <li> <strong>Don't hide it from students</strong> - the tweak will hide itself, students won't see it. If you use Blackboard to hide this tweak from students, it will NOT work.</li>
-  </ol>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <h3>Note</h3>
+
+  <div class="mx-auto border-none box-content px-4 py-2">
+    <div class="flex flex-wrap -mx-1 lg:-mx-4 p-0">
+
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+            <article class="overlow-hidden rounded-lg shadow-lg h-full">
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
+                    <h1 class="text-lg">
+                            <i class="fa fa-exclamation-triangle text-red"></i>
+                            Change with care
+                    </h1>
+                </header>
+                <div class="p-2 md:p-4">
+                    <p>Changes may stop the Card Interface from working.</p>
+                </div>
+            </article>
+        </div>
+
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+            <article class="overlow-hidden rounded-lg shadow-lg h-full">
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
+                    <h1 class="text-lg">
+                            <i class="fa fa-exclamation-triangle text-red"></i>
+                            Do not hide the tweak code
+                    </h1>
+                </header>
+                <div class="p-2 md:p-4">
+                    <p>If hidden the Card Interface will not work.</p>
+                </div>
+            </article>
+        </div>
+
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+            <article class="overlow-hidden rounded-lg shadow-lg h-full">
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
+                    <h1 class="text-lg">
+                            <i class="fa fa-info-circle text-orange"></i>
+                            Cards are always last
+                    </h1>
+                </header>
+                <div class="p-2 md:p-4">
+                    <p>
+                        You can add content to the Card Interface using the <a href="https://help.blackboard.com/Learn/Administrator/Hosting/Tools_Management/Content_Editor"> 
+                            Blackboard content editor</a>. But the cards will always appear after your content.
+                    </p>
+                </div>
+            </article>
+        </div>
+
+    </div>
+  </div>
 `;
 
 
 DOCUMENTATION_HTML = `
-<h3>How do I...</h3>
 
-<p>Table below provides links to help with various tasks. Helps is provided in two formats:</p>
-<ol>
-  <li> Word document; and,
-       <p>Accessible to any Griffith staff member, but not providing the full interactive, web interface. </p> </li>
-  <li> in Learning@Griffith (L@G).
-       <p>Accessible once you "enrol" in an Blackboard site and provides the full interactive, web interface. </p> </li>
-</ol>
+<h3>More information</h3>
 
-<table style="width:100%;padding:2px">
-  <tr>
-    <td class="bg-grey"> Get started </td>
-    <td class="bg-grey-light"> Change a card </td>
-    <td class="bg-grey-lighter"> Change the appearance of all cards </td>
-  </tr>
-  <tr>
-    <td class="bg-grey">
-<ul style="padding-left:1.2em">
-  <li> Card Interface - What and why? [ 
-       <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/EbEoe9wj0YZJlqReCZ1zIgYBqec-roMdEc6O8g0HO3WYJA?e=euNDVZ">Word</a> | 
-       <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110115_1&course_id=_82534_1&mode=quick">L@G</a> ] </li>
-  <li> How to create a Card Interface [
-           <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/EQjDbsce2UlPjNKpRkcrx4ABnpv5XexhJUtqPW4wucmFnQ?e=j3aZJB">Word</a> |
-           <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110120_1&course_id=_82534_1&content_id=_5110129_1">L@G</a> ]
-</ul>
-    </td>
-    <td class="bg-grey-light">
-      <p>By customising a single card [
-        <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/ETbYt2lHdNVApcQsbJsXp4YBHgCLTKE-clIRw38qpiKfiw?e=8kEDCC">Word</a> |
-        <a href="">L@G</a> ] by</p>
-          <ul>
-            <li> Adding a card image <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#2">using a URL</a> or <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#3">by uploading</a>. </li>
-            <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#4">Making an image fit neatly</a> in a card. </li>
-            <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#5">Using a background colour</a>, rather than an image. </li>
-            <li> Adding or <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#6">changing the date</a>. </li>
-            <li> Using <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#7">different card types and labels</a>. </li>
-            <li> Hiding <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#8">a card</a>. </li>
-         </ul>
-    </td>
-    <td class="bg-grey-lighter">
-        <p>using attributes & templates [ 
-        <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/EWwyyTG6BBNBirb1G9rnnP8BEuniqGyVmwBcTpzG9pLB9Q?e=5kdY0c">Word</a> |
-        <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1">L&G</a>], by</p>
-    <ul style="padding-left:1.2em">
-        <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1#2">understanding templates and attributes</a> </li>
-        <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1#3">arranging cards vertically</a> </li>
-        <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1#4">changing the number of cards per row</a> </li>
-        <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1#5">using an assessment template</a> </li>
-        <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&course_id=_82534_1&content_id=_5110408_1#6">Changing or removing the engage button</a> </li>
-    </ul>
-    </td>
-    </table>
-  
+  <div class="box-content mx-auto border-none h-auto py-0 px-4 m-0">
+    <div class="flex flex-wrap -mx-1 lg:-mx-4">
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+            <article class="overlow-hidden rounded-lg shadow-lg h-full">
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
+                    <h1 class="text-lg">
+                            Getting started
+                    </h1>
+                </header>
+                <div class="p-2 md:p-4">
+                    Learn about
+                    <ul class="p-0 m-0">
+                     <li class="p-0"> the <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110115_1&amp;course_id=_82534_1&amp;mode=quick">
+                       what and why</a> of the Card Interface.</li>
+                      <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110120_1&amp;course_id=_82534_1&amp;content_id=_5110129_1">
+                   adding the Card Interface</a> to a new Blackboard page. </li>
+                  </ul>
 
+                </div>
+            </article>
+        </div>
+
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+            <article class="overlow-hidden rounded-lg shadow-lg h-full">
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
+                    <h1 class="text-lg">
+                            Changing a card
+                    </h1>
+                </header>
+                <div class="p-2 md:p-4">
+        How do you...
+        <ul>
+           <li> Add an image to a card <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#2">using a URL</a> or <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#3">by uploading</a>. 
+          </li>
+           <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#4">Make an image fit neatly</a> in a card. </li>
+           <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#5">Use a background colour</a>, rather than an image. </li>
+           <li> Add or <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#6">change the date</a>. </li>
+           <li> Use <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#7">different card types and labels</a>. </li>
+           <li> Hide <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#8">a card</a>. </li>
+        </ul>
+
+                </div>
+            </article>
+        </div>
+
+        <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
+            <article class="overlow-hidden rounded-lg shadow-lg h-full">
+                <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
+                    <h1 class="text-lg">
+                           Change appearance of all cards 
+                    </h1>
+                </header>
+                <div class="p-2 md:p-4">
+        How do you...   
+         <ul>
+           <li> Change the <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&amp;course_id=_82534_1&amp;content_id=_5110408_1#4">
+              number of cards per row</a> </li>
+            <li> Change or remove <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&amp;course_id=_82534_1&amp;content_id=_5110408_1#6">
+              the engage button</a> </li>
+             <li> Arrange <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&amp;course_id=_82534_1&amp;content_id=_5110408_1#3">
+               cards vertically</a> </li>
+             <li> Learn the basics of <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&amp;course_id=_82534_1&amp;content_id=_5110408_1#2">
+                  templates and attributes</a> </li>
+             <li> Use the <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&amp;course_id=_82534_1&amp;content_id=_5110408_1#5">
+                assessment template</a> </li>
+          </ul>
+
+                </div>
+            </article>
+        </div>
+
+    </div>
+</div>
 `;
 
 NEW_DOCUMENTATION_HTML = `
