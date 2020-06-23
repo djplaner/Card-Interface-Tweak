@@ -119,7 +119,8 @@ var TERM_DATES = {
          "11" : { "start" : "2020-09-28", "stop":"2020-10-04" } ,
          "12" : { "start" : "2020-10-05", "stop":"2020-10-11" } ,
          "13" : { "start" : "2020-10-12", "stop":"2020-10-18" } ,
-         "14" : { "start" : "2020-10-19", "stop":"2020-10-25" } ,
+         "14" : { "start" : "2020-10-19", "stop":"2020-10-25" },
+         "15" : { "start" : "2020-10-27", "stop":"2020-11-01" },
          "exam" : { "start": "2020-10-12", "stop": "2020-10-18" }
     },
     // Griffith 2020 Trimester 1
@@ -1508,7 +1509,9 @@ function getTermDate( week, startWeek=true ) {
     var start;
     if ( startWeek===true ) {
         // setting start week
-        start = TERM_DATES[TERM][week].start;//[week].start;
+        if ( typeof TERM_DATES[TERM][week] !== 'undefined') {
+            start = TERM_DATES[TERM][week].start;//[week].start;
+        }
     } else {
         start = TERM_DATES[TERM][week].stop;
     }
