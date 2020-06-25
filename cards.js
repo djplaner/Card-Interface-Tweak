@@ -1003,7 +1003,7 @@ function extractCardsFromContent( myCards) {
 	        
 	        cardBGcolour = identifyCardBackgroundColour( m[1]);
 	        picUrl = identifyPicUrl( m[1]);
-	        
+
     	    //picUrl=m[1];
     	    description = description.replace( "<p>"+m[0]+"</p>","");
 	        description = description.replace( m[0], "");
@@ -1293,7 +1293,7 @@ function extractCardsFromContent( myCards) {
 	    // replace the default background colour if a different one
 	    // is specific
 	    if ( idx.cardBGcolour ) {
-	        cardHtml = cardHtml.replace(/background-color:\s*rgb\(255,255,204\)/i, 'background-color: '+idx.cardBGcolour );
+	        cardHtml = cardHtml.replace(/background-color:\s*rgb\(255,255,255\)/i, 'background-color: '+idx.cardBGcolour );
 	    }
 	    
 	    //<div class="bg-cover h-48" style="background-image: url('{PIC_URL}'); //background-color: rgb(255,255,204)">{IFRAME}
