@@ -5,7 +5,6 @@ A bit of digital renovation for Blackboard 9.1 in the form of some Javascript an
 The [following conference paper](https://djon.es/blog/2019/08/08/exploring-knowledge-reuse-in-design-for-digital-learning-tweaks-h5p-constructive-templates-and-casa/) and [associated presetation](https://djon.es/blog/2019/11/28/how-to-share-design-knowledge-in-design-for-digital-learning/) contain more background and theory about this approach
 > Jones, D. (2019). Exploring knowledge reuse in design for digital learning: Tweaks, H5P, CASA and constructive templates. In Y. W. Chew, K. M. Chan, & A. Alphonso (Eds.), Personalised Learning. Diverse Goals. One Heart. ASCILITE 2019 (pp. 139–148).
 
-
 ### Before - standard Blackboard 9.1 content page
 
 By default, Blackboard 9.1 provides a vertical list of content items.
@@ -31,7 +30,11 @@ This Tweak is inspiried by and built somewhat upon [the Blackboard Tweaks buildi
 
 ## How to use the tweak
 
-Assumptions is that you are starting with a Blackboard 9.1 site and that you have a Blackboard content page (see the before above)
+Requirements are
+
+1. You have a [Blackboard Learn](https://www.blackboard.com/teaching-learning/learning-management/blackboard-learn) site that you have both the permission and knowledge to edit.
+1. You can copy [this tweak.js Javascript file](tweak.js) into that page.
+1. You can implement the following instructions.
 
 #### Step 1. Add the Tweak Javascript
 
