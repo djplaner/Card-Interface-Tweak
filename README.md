@@ -31,7 +31,7 @@ Assumptions is that you are starting with a Blackboard 9.1 site and that you hav
 
 #### Step 1. Add the Tweak Javascript
 
-For the card transformation to happen on a Blackboard content page, some Javascript code needs to be inserted into the content page.
+For the card transformation to happen on a Blackboard content page, [some Javascript](tweak.js) code needs to be inserted into the content page.
 
 1. Create a new Blackboard content item on your Blackboard content page.
 2. When editing this new content item, use [the HTML Code View Button](https://www.cpcc.edu/onlinelearning/resources/blackboard/BbAddEmbedCode.pdf) to open a pop-up window
