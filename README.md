@@ -2,6 +2,10 @@
 
 A bit of digital renovation for Blackboard 9.1 in the form of some Javascript and CSS that can be used to transform a standard Blackboard content page (a collection) of items into responsive, image rich card interface. A transformation that can be accomplished with minimal technical knowledge.
 
+The [following conference paper](https://djon.es/blog/2019/08/08/exploring-knowledge-reuse-in-design-for-digital-learning-tweaks-h5p-constructive-templates-and-casa/) and [associated presetation](https://djon.es/blog/2019/11/28/how-to-share-design-knowledge-in-design-for-digital-learning/) contain more background and theory about this approach
+> Jones, D. (2019). Exploring knowledge reuse in design for digital learning: Tweaks, H5P, CASA and constructive templates. In Y. W. Chew, K. M. Chan, & A. Alphonso (Eds.), Personalised Learning. Diverse Goals. One Heart. ASCILITE 2019 (pp. 139–148).
+
+
 ### Before - standard Blackboard 9.1 content page
 
 By default, Blackboard 9.1 provides a vertical list of content items.
@@ -35,23 +39,24 @@ For the card transformation to happen on a Blackboard content page, [some Javasc
 
 1. Create a new Blackboard content item on your Blackboard content page.
 2. When editing this new content item, use [the HTML Code View Button](https://www.cpcc.edu/onlinelearning/resources/blackboard/BbAddEmbedCode.pdf) to open a pop-up window
-3. Copy and paste the content of the [tweak.js file](https://raw.githubusercontent.com/djplaner/Card-Interface-Tweak/master/tweak.js) into this pop-up window
+3. Copy and paste the content of the [tweak.js file](tweak.js) into this pop-up window
 4. Save and submit your changes
 
 #### Step 2. Create a space for the cards to appear
 
-The card interface produced by the Tweak needs to appear in an existing content item on the same content page. 
+The card interface produced by the Tweak needs to appear in a content item on the same content page as the Javascript. 
 
-1. Create a new Blackboard content item that is titled **Card Interface**
-> Current advice is to leave this content item empty. The tweak will add content to it.
-2. Choose the type of card interface you wish by adding one of the following words after **Card Interface**
+1. Create a new Blackboard content item titled **Card Interface** 
+   Current advice is to leave this content item empty. The tweak will add content to it.
+2. Choose the type of card interface you wish by ignoring this step (accept the default) or adding one of the following words after **Card Interface**
+    * **vertical** for one card per row with elements of a single card displayed horizontally
+    * **by5** to have 5 cards per row
+    * **by5no** to have 5 cards per row without any image
+    * **noengage** if you'd prefer not to have the "Engage" button appear for content folders
 
-  * **vertical** for one card per row with elements of a single card displayed horizontally
-  * **by5** to have 5 cards per row
-  * **by5no** to have 5 cards per row without any image
-  * **noengage** if you'd prefer not to have the "Engage" button appear for content folders
+#### Step 3. Specify the content item(s)/folder(s) you want to appear as a card
 
-#### Step 3. Specify the content item/folder you want to appear as a card
+Each Card displayed matches one Blackboard content item (see the images above). You need to tell the tweak code which items you want turned into cards. The tweak code will hide the original content item and produce a card.
 
 1. Add the phrase **Card Image:** (including the colon) to the content item/folder
 > It's assumed that only content items or content folders are turned into cards. Each works a little differently. A content item will become an "info card". i.e. providing only information. A content folder will also be clickable. Clicking on a content folder will take the user into the folder.
