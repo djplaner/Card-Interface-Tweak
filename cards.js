@@ -20,230 +20,230 @@
 
 var TERM_DATES = {
     // OUA 2020 Study Period 1
-    "2201" :  {
-         "0" : { "start" : "2020-02-24", "stop":"2020-03-01" } ,
-         "1" : { "start" : "2020-03-02", "stop":"2020-03-08" } ,
-         "2" : { "start" : "2020-03-09", "stop":"2020-03-15" } ,
-         "3" : { "start" : "2020-03-16", "stCop":"2020-03-22" } ,
-         "4" : { "start" : "2020-03-23", "stop":"2020-03-29" } ,
-         "5" : { "start" : "2020-03-30", "stop":"2020-04-05" } ,
-         "6" : { "start" : "2020-04-06", "stop":"2020-04-12" } ,
-         "7" : { "start" : "2020-04-13", "stop":"2020-04-19" } ,
-         "8" : { "start" : "2020-04-20", "stop":"2020-04-26" } ,
-         "9" : { "start" : "2020-04-27", "stop":"2020-05-03" } ,
-         "10" : { "start" : "2020-05-04", "stop":"2020-05-10" } ,
-         "11" : { "start" : "2020-05-11", "stop":"2020-05-17" } ,
-         "12" : { "start" : "2020-05-18", "stop":"2020-05-24" } ,
-         "13" : { "start" : "2020-05-25", "stop":"2020-05-31" },
-         "14" : { "start" : "2020-06-01", "stop":"2020-06-05" },
-         /* End of study period 4 */
-         "exam" : { "start" : "2020-06-01", "stop":"2020-06-05" },
-         // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
+    "2201": {
+        "0": { "start": "2020-02-24", "stop": "2020-03-01" },
+        "1": { "start": "2020-03-02", "stop": "2020-03-08" },
+        "2": { "start": "2020-03-09", "stop": "2020-03-15" },
+        "3": { "start": "2020-03-16", "stCop": "2020-03-22" },
+        "4": { "start": "2020-03-23", "stop": "2020-03-29" },
+        "5": { "start": "2020-03-30", "stop": "2020-04-05" },
+        "6": { "start": "2020-04-06", "stop": "2020-04-12" },
+        "7": { "start": "2020-04-13", "stop": "2020-04-19" },
+        "8": { "start": "2020-04-20", "stop": "2020-04-26" },
+        "9": { "start": "2020-04-27", "stop": "2020-05-03" },
+        "10": { "start": "2020-05-04", "stop": "2020-05-10" },
+        "11": { "start": "2020-05-11", "stop": "2020-05-17" },
+        "12": { "start": "2020-05-18", "stop": "2020-05-24" },
+        "13": { "start": "2020-05-25", "stop": "2020-05-31" },
+        "14": { "start": "2020-06-01", "stop": "2020-06-05" },
+        /* End of study period 4 */
+        "exam": { "start": "2020-06-01", "stop": "2020-06-05" },
+        // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
     },
     // OUA 2020 Study Period 2
-    "2203" :  {
-         "0" : { "start" : "2020-05-25", "stop":"2020-05-31" } ,
-         "1" : { "start" : "2020-06-01", "stop":"2020-06-07" } ,
-         "2" : { "start" : "2020-06-08", "stop":"2020-06-14" } ,
-         "3" : { "start" : "2020-06-15", "stop":"2020-06-21" } ,
-         "4" : { "start" : "2020-06-22", "stop":"2020-06-28" } ,
-         "5" : { "start" : "2020-06-29", "stop":"2020-07-05" } ,
-         "6" : { "start" : "2020-07-06", "stop":"2020-07-12" } ,
-         "7" : { "start" : "2020-07-13", "stop":"2020-07-19" } ,
-         "8" : { "start" : "2020-07-20", "stop":"2020-07-26" } ,
-         "9" : { "start" : "2020-07-27", "stop":"2020-08-02" } ,
-         "10" : { "start" : "2020-08-03", "stop":"2020-08-09" } ,
-         "11" : { "start" : "2020-08-10", "stop":"2020-05-17" } ,
-         "12" : { "start" : "2020-08-17", "stop":"2020-05-24" } ,
-         "13" : { "start" : "2020-08-24", "stop":"2020-05-31" },
-         "14" : { "start" : "2020-08-31", "stop":"2020-09-06" },
-         /* End of study period 4 */
-         "exam" : { "start" : "2020-08-31", "stop":"2020-09-04" },
-         // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
+    "2203": {
+        "0": { "start": "2020-05-25", "stop": "2020-05-31" },
+        "1": { "start": "2020-06-01", "stop": "2020-06-07" },
+        "2": { "start": "2020-06-08", "stop": "2020-06-14" },
+        "3": { "start": "2020-06-15", "stop": "2020-06-21" },
+        "4": { "start": "2020-06-22", "stop": "2020-06-28" },
+        "5": { "start": "2020-06-29", "stop": "2020-07-05" },
+        "6": { "start": "2020-07-06", "stop": "2020-07-12" },
+        "7": { "start": "2020-07-13", "stop": "2020-07-19" },
+        "8": { "start": "2020-07-20", "stop": "2020-07-26" },
+        "9": { "start": "2020-07-27", "stop": "2020-08-02" },
+        "10": { "start": "2020-08-03", "stop": "2020-08-09" },
+        "11": { "start": "2020-08-10", "stop": "2020-05-17" },
+        "12": { "start": "2020-08-17", "stop": "2020-05-24" },
+        "13": { "start": "2020-08-24", "stop": "2020-05-31" },
+        "14": { "start": "2020-08-31", "stop": "2020-09-06" },
+        /* End of study period 4 */
+        "exam": { "start": "2020-08-31", "stop": "2020-09-04" },
+        // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
     },
     // OUA 2020 Study Period 3
-    "2205" :  {
-         "0" : { "start" : "2020-08-31", "stop":"2020-09-06" } ,
-         "1" : { "start" : "2020-09-07", "stop":"2020-09-13" } ,
-         "2" : { "start" : "2020-09-14", "stop":"2020-09-20" } ,
-         "3" : { "start" : "2020-09-21", "stop":"2020-09-27" } ,
-         "4" : { "start" : "2020-09-28", "stop":"2020-10-04" } ,
-         "5" : { "start" : "2020-10-05", "stop":"2020-10-11" } ,
-         "6" : { "start" : "2020-10-12", "stop":"2020-10-19" } ,
-         "7" : { "start" : "2020-10-19", "stop":"2020-10-25" } ,
-         "8" : { "start" : "2020-10-26", "stop":"2020-11-01" } ,
-         "9" : { "start" : "2020-11-02", "stop":"2020-11-08" } ,
-         "10" : { "start" : "2020-11-09", "stop":"2020-11-15" } ,
-         "11" : { "start" : "2020-11-16", "stop":"2020-11-22" } ,
-         "12" : { "start" : "2020-11-23", "stop":"2020-11-29" } ,
-         "13" : { "start" : "2020-11-30", "stop":"2020-12-06" },
-         "14" : { "start" : "2020-12-07", "stop":"2020-12-13" },
-         /* End of study period 4 */
-         "exam" : { "start" : "2020-12-07", "stop":"2020-12-13" },
-         // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
+    "2205": {
+        "0": { "start": "2020-08-31", "stop": "2020-09-06" },
+        "1": { "start": "2020-09-07", "stop": "2020-09-13" },
+        "2": { "start": "2020-09-14", "stop": "2020-09-20" },
+        "3": { "start": "2020-09-21", "stop": "2020-09-27" },
+        "4": { "start": "2020-09-28", "stop": "2020-10-04" },
+        "5": { "start": "2020-10-05", "stop": "2020-10-11" },
+        "6": { "start": "2020-10-12", "stop": "2020-10-19" },
+        "7": { "start": "2020-10-19", "stop": "2020-10-25" },
+        "8": { "start": "2020-10-26", "stop": "2020-11-01" },
+        "9": { "start": "2020-11-02", "stop": "2020-11-08" },
+        "10": { "start": "2020-11-09", "stop": "2020-11-15" },
+        "11": { "start": "2020-11-16", "stop": "2020-11-22" },
+        "12": { "start": "2020-11-23", "stop": "2020-11-29" },
+        "13": { "start": "2020-11-30", "stop": "2020-12-06" },
+        "14": { "start": "2020-12-07", "stop": "2020-12-13" },
+        /* End of study period 4 */
+        "exam": { "start": "2020-12-07", "stop": "2020-12-13" },
+        // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
     },
     // OUA 2020 Study Period 4
-    "2207" :  {
-         "0" : { "start" : "2020-11-30", "stop":"2020-12-06" } ,
-         "1" : { "start" : "2020-12-07", "stop":"2020-12-13" } ,
-         "2" : { "start" : "2020-12-14", "stop":"2020-12-20" } ,
-         "3" : { "start" : "2020-12-21", "stop":"2020-12-27" } ,
-         "4" : { "start" : "2020-12-28", "stop":"2021-01-03" } ,
-         "5" : { "start" : "2021-01-04", "stop":"2021-01-10" } ,
-         "6" : { "start" : "2021-01-11", "stop":"2021-01-17" } ,
-         "7" : { "start" : "2021-01-18", "stop":"2021-01-24" } ,
-         "8" : { "start" : "2021-01-25", "stop":"2021-01-31" } ,
-         "9" : { "start" : "2021-02-01", "stop":"2021-02-07" } ,
-         "10" : { "start" : "2021-02-08", "stop":"2021-02-14" } ,
-         "11" : { "start" : "2021-02-15", "stop":"2021-02-21" } ,
-         "12" : { "start" : "2021-02-22", "stop":"2021-02-28" } ,
-         "13" : { "start" : "2021-03-01", "stop":"2021-03-07" },
-         "14" : { "start" : "2021-03-08", "stop":"2021-03-14" },
-         /* End of study period 4 */
-         "exam" : { "start" : "2021-03-08", "stop":"2021-03-14" },
-         // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
+    "2207": {
+        "0": { "start": "2020-11-30", "stop": "2020-12-06" },
+        "1": { "start": "2020-12-07", "stop": "2020-12-13" },
+        "2": { "start": "2020-12-14", "stop": "2020-12-20" },
+        "3": { "start": "2020-12-21", "stop": "2020-12-27" },
+        "4": { "start": "2020-12-28", "stop": "2021-01-03" },
+        "5": { "start": "2021-01-04", "stop": "2021-01-10" },
+        "6": { "start": "2021-01-11", "stop": "2021-01-17" },
+        "7": { "start": "2021-01-18", "stop": "2021-01-24" },
+        "8": { "start": "2021-01-25", "stop": "2021-01-31" },
+        "9": { "start": "2021-02-01", "stop": "2021-02-07" },
+        "10": { "start": "2021-02-08", "stop": "2021-02-14" },
+        "11": { "start": "2021-02-15", "stop": "2021-02-21" },
+        "12": { "start": "2021-02-22", "stop": "2021-02-28" },
+        "13": { "start": "2021-03-01", "stop": "2021-03-07" },
+        "14": { "start": "2021-03-08", "stop": "2021-03-14" },
+        /* End of study period 4 */
+        "exam": { "start": "2021-03-08", "stop": "2021-03-14" },
+        // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
     },
     // Griffith 2020 Trimester 2
-    "3205" : {
-         "0" : { "start" : "2020-07-06", "stop":"2020-07-12" } ,
-         "1" : { "start" : "2020-07-13", "stop":"2020-07-19" } ,
-         "2" : { "start" : "2020-07-20", "stop":"2020-08-26" } ,
-         "3" : { "start" : "2020-07-27", "stop":"2020-08-02" } ,
-         "4" : { "start" : "2020-08-03", "stop":"2020-08-16" } ,
-         "5" : { "start" : "2020-08-17", "stop":"2020-08-23" } ,
-         "6" : { "start" : "2020-08-24", "stop":"2020-08-30" } ,
-         "7" : { "start" : "2020-08-31", "stop":"2020-09-06" } ,
-         "8" : { "start" : "2020-09-07", "stop":"2020-09-13" } ,
-         "9" : { "start" : "2020-09-14", "stop":"2020-09-20" } ,
-         "10" : { "start" : "2020-09-21", "stop":"2020-09-27" } ,
-         "11" : { "start" : "2020-09-28", "stop":"2020-10-04" } ,
-         "12" : { "start" : "2020-10-05", "stop":"2020-10-11" } ,
-         "13" : { "start" : "2020-10-12", "stop":"2020-10-18" } ,
-         "14" : { "start" : "2020-10-19", "stop":"2020-10-25" },
-         "15" : { "start" : "2020-10-27", "stop":"2020-11-01" },
-         "exam" : { "start": "2020-10-12", "stop": "2020-10-18" }
+    "3205": {
+        "0": { "start": "2020-07-06", "stop": "2020-07-12" },
+        "1": { "start": "2020-07-13", "stop": "2020-07-19" },
+        "2": { "start": "2020-07-20", "stop": "2020-08-26" },
+        "3": { "start": "2020-07-27", "stop": "2020-08-02" },
+        "4": { "start": "2020-08-03", "stop": "2020-08-16" },
+        "5": { "start": "2020-08-17", "stop": "2020-08-23" },
+        "6": { "start": "2020-08-24", "stop": "2020-08-30" },
+        "7": { "start": "2020-08-31", "stop": "2020-09-06" },
+        "8": { "start": "2020-09-07", "stop": "2020-09-13" },
+        "9": { "start": "2020-09-14", "stop": "2020-09-20" },
+        "10": { "start": "2020-09-21", "stop": "2020-09-27" },
+        "11": { "start": "2020-09-28", "stop": "2020-10-04" },
+        "12": { "start": "2020-10-05", "stop": "2020-10-11" },
+        "13": { "start": "2020-10-12", "stop": "2020-10-18" },
+        "14": { "start": "2020-10-19", "stop": "2020-10-25" },
+        "15": { "start": "2020-10-27", "stop": "2020-11-01" },
+        "exam": { "start": "2020-10-12", "stop": "2020-10-18" }
     },
     // Griffith 2020 Trimester 1
-    "3201" : {
-         "0" : { "start" : "2020-02-17", "stop":"2020-02-23" } ,
-         "1" : { "start" : "2020-02-24", "stop":"2020-03-01" } ,
-         "2" : { "start" : "2020-03-02", "stop":"2020-03-08" } ,
-         "3" : { "start" : "2020-03-09", "stop":"2020-03-15" } ,
-         "4" : { "start" : "2020-03-16", "stop":"2020-03-22" } ,
-         "5" : { "start" : "2020-03-23", "stop":"2020-03-29" } ,
-         "6" : { "start" : "2020-03-30", "stop":"2020-04-05" } ,
-         "7" : { "start" : "2020-04-13", "stop":"2020-04-19" } ,
-         "8" : { "start" : "2020-04-20", "stop":"2020-04-26" } ,
-         "9" : { "start" : "2020-04-27", "stop":"2020-05-03" } ,
-         "10" : { "start" : "2020-05-04", "stop":"2020-05-10" } ,
-         "11" : { "start" : "2020-05-11", "stop":"2020-05-17" } ,
-         "12" : { "start" : "2020-05-18", "stop":"2020-05-24" } ,
-         "13" : { "start" : "2020-05-25", "stop":"2020-05-31" } ,
-         "exam" : { "start": "2020-06-01", "stop": "2020-06-07" }
+    "3201": {
+        "0": { "start": "2020-02-17", "stop": "2020-02-23" },
+        "1": { "start": "2020-02-24", "stop": "2020-03-01" },
+        "2": { "start": "2020-03-02", "stop": "2020-03-08" },
+        "3": { "start": "2020-03-09", "stop": "2020-03-15" },
+        "4": { "start": "2020-03-16", "stop": "2020-03-22" },
+        "5": { "start": "2020-03-23", "stop": "2020-03-29" },
+        "6": { "start": "2020-03-30", "stop": "2020-04-05" },
+        "7": { "start": "2020-04-13", "stop": "2020-04-19" },
+        "8": { "start": "2020-04-20", "stop": "2020-04-26" },
+        "9": { "start": "2020-04-27", "stop": "2020-05-03" },
+        "10": { "start": "2020-05-04", "stop": "2020-05-10" },
+        "11": { "start": "2020-05-11", "stop": "2020-05-17" },
+        "12": { "start": "2020-05-18", "stop": "2020-05-24" },
+        "13": { "start": "2020-05-25", "stop": "2020-05-31" },
+        "exam": { "start": "2020-06-01", "stop": "2020-06-07" }
     },
     // Griffith 2019 Trimester 3
-    "3198" : {
-         "0" : { "start" : "2019-10-21", "stop":"2019-10-27" } ,
-         "1" : { "start" : "2019-10-28", "stop":"2019-11-03" } ,
-         "2" : { "start" : "2019-11-04", "stop":"2019-11-10" } ,
-         "3" : { "start" : "2019-11-11", "stop":"2019-11-17" } ,
-         "4" : { "start" : "2019-11-18", "stop":"2019-11-24" } ,
-         "5" : { "start" : "2019-11-25", "stop":"2019-12-1" } ,
-         "6" : { "start" : "2019-12-02", "stop":"2019-12-08" } ,
-         "7" : { "start" : "2019-12-09", "stop":"2019-12-15" } ,
-         "8" : { "start" : "2019-12-16", "stop":"2019-12-22" } ,
-         "9" : { "start" : "2020-01-06", "stop":"2020-01-12" } ,
-         "10" : { "start" : "2020-01-13", "stop":"2020-01-19" } ,
-         "11" : { "start" : "2020-01-20", "stop":"2020-01-26" } ,
-         "12" : { "start" : "2020-01-27", "stop":"2020-02-02" },
-         "13" : { "start" : "2020-02-03", "stop":"2020-02-09" } ,
-         "exam" : { "start": "2020-02-06", "stop": "2020-02-15" }
-         // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
+    "3198": {
+        "0": { "start": "2019-10-21", "stop": "2019-10-27" },
+        "1": { "start": "2019-10-28", "stop": "2019-11-03" },
+        "2": { "start": "2019-11-04", "stop": "2019-11-10" },
+        "3": { "start": "2019-11-11", "stop": "2019-11-17" },
+        "4": { "start": "2019-11-18", "stop": "2019-11-24" },
+        "5": { "start": "2019-11-25", "stop": "2019-12-1" },
+        "6": { "start": "2019-12-02", "stop": "2019-12-08" },
+        "7": { "start": "2019-12-09", "stop": "2019-12-15" },
+        "8": { "start": "2019-12-16", "stop": "2019-12-22" },
+        "9": { "start": "2020-01-06", "stop": "2020-01-12" },
+        "10": { "start": "2020-01-13", "stop": "2020-01-19" },
+        "11": { "start": "2020-01-20", "stop": "2020-01-26" },
+        "12": { "start": "2020-01-27", "stop": "2020-02-02" },
+        "13": { "start": "2020-02-03", "stop": "2020-02-09" },
+        "exam": { "start": "2020-02-06", "stop": "2020-02-15" }
+        // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
     },
     // OUA Study Period 4 2019
-    "2197" : {
-         "0" : { "start" : "2019-11-18", "stop":"2019-11-24" } ,
-         "1" : { "start" : "2019-11-25", "stop":"2019-12-01" } ,
-         "2" : { "start" : "2019-12-02", "stop":"2019-12-08" } ,
-         "3" : { "start" : "2019-12-09", "stop":"2019-12-15" } ,
-         "4" : { "start" : "2019-12-16", "stop":"2019-12-22" } ,
-         "5" : { "start" : "2019-12-23", "stop":"2019-09-29" } ,
-         "6" : { "start" : "2019-12-30", "stop":"2020-01-05" } ,
-         "7" : { "start" : "2020-01-06", "stop":"2020-01-12" } ,
-         "8" : { "start" : "2020-01-13", "stop":"2020-01-19" } ,
-         "9" : { "start" : "2020-01-20", "stop":"2020-01-26" } ,
-         "10" : { "start" : "2020-01-27", "stop":"2020-02-02" } ,
-         "11" : { "start" : "2020-02-03", "stop":"2020-02-09" } ,
-         "12" : { "start" : "2020-02-10", "stop":"2020-02-16" },
-         "13" : { "start" : "2019-02-17", "stop":"2020-02-23" } ,
-         /* End of study period 4 */
-         "14" : { "start" : "2020-02-24", "stop":"2020-03-01" },
-         "15" : { "start" : "2020-03-02", "stop":"2020-03-08" },
-         // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
+    "2197": {
+        "0": { "start": "2019-11-18", "stop": "2019-11-24" },
+        "1": { "start": "2019-11-25", "stop": "2019-12-01" },
+        "2": { "start": "2019-12-02", "stop": "2019-12-08" },
+        "3": { "start": "2019-12-09", "stop": "2019-12-15" },
+        "4": { "start": "2019-12-16", "stop": "2019-12-22" },
+        "5": { "start": "2019-12-23", "stop": "2019-09-29" },
+        "6": { "start": "2019-12-30", "stop": "2020-01-05" },
+        "7": { "start": "2020-01-06", "stop": "2020-01-12" },
+        "8": { "start": "2020-01-13", "stop": "2020-01-19" },
+        "9": { "start": "2020-01-20", "stop": "2020-01-26" },
+        "10": { "start": "2020-01-27", "stop": "2020-02-02" },
+        "11": { "start": "2020-02-03", "stop": "2020-02-09" },
+        "12": { "start": "2020-02-10", "stop": "2020-02-16" },
+        "13": { "start": "2019-02-17", "stop": "2020-02-23" },
+        /* End of study period 4 */
+        "14": { "start": "2020-02-24", "stop": "2020-03-01" },
+        "15": { "start": "2020-03-02", "stop": "2020-03-08" },
+        // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
     },
     // OUA Study Period 3 2019
-    "2195" : {
-         "0" : { "start" : "2019-08-19", "stop":"2019-09-25" } ,
-         "1" : { "start" : "2019-08-26", "stop":"2019-09-01" } ,
-         "2" : { "start" : "2019-09-02", "stop":"2019-09-18" } ,
-         "3" : { "start" : "2019-09-09", "stop":"2019-09-15" } ,
-         "4" : { "start" : "2019-09-16", "stop":"2019-09-22" } ,
-         "5" : { "start" : "2019-09-23", "stop":"2019-09-29" } ,
-         "6" : { "start" : "2019-09-30", "stop":"2019-10-06" } ,
-         "7" : { "start" : "2019-10-07", "stop":"2019-10-13" } ,
-         "8" : { "start" : "2019-10-14", "stop":"2019-08-20" } ,
-         "9" : { "start" : "2019-10-21", "stop":"2019-10-27" } ,
-         "10" : { "start" : "2019-10-28", "stop":"2019-11-03" } ,
-         "11" : { "start" : "2019-11-04", "stop":"2019-11-10" } ,
-         "12" : { "start" : "2019-11-11", "stop":"2019-11-17" },
-         "13" : { "start" : "2019-11-18", "stop":"2019-11-24" } ,
-         /* End of study period 3 */
-         "14" : { "start" : "2019-11-25", "stop":"2019-12-01" },
-         "15" : { "start" : "2019-10-07", "stop":"2019-10-13" },
-         // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
+    "2195": {
+        "0": { "start": "2019-08-19", "stop": "2019-09-25" },
+        "1": { "start": "2019-08-26", "stop": "2019-09-01" },
+        "2": { "start": "2019-09-02", "stop": "2019-09-18" },
+        "3": { "start": "2019-09-09", "stop": "2019-09-15" },
+        "4": { "start": "2019-09-16", "stop": "2019-09-22" },
+        "5": { "start": "2019-09-23", "stop": "2019-09-29" },
+        "6": { "start": "2019-09-30", "stop": "2019-10-06" },
+        "7": { "start": "2019-10-07", "stop": "2019-10-13" },
+        "8": { "start": "2019-10-14", "stop": "2019-08-20" },
+        "9": { "start": "2019-10-21", "stop": "2019-10-27" },
+        "10": { "start": "2019-10-28", "stop": "2019-11-03" },
+        "11": { "start": "2019-11-04", "stop": "2019-11-10" },
+        "12": { "start": "2019-11-11", "stop": "2019-11-17" },
+        "13": { "start": "2019-11-18", "stop": "2019-11-24" },
+        /* End of study period 3 */
+        "14": { "start": "2019-11-25", "stop": "2019-12-01" },
+        "15": { "start": "2019-10-07", "stop": "2019-10-13" },
+        // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
     },
     // Griffith 2019 Trimester 2
-    "3195" : {
-         "0" : { "start" : "2019-07-01", "stop":"2019-07-07" } ,
-         "1" : { "start" : "2019-07-08", "stop":"2019-07-14" } ,
-         "2" : { "start" : "2019-07-15", "stop":"2019-07-21" } ,
-         "3" : { "start" : "2019-07-22", "stop":"2019-07-28" } ,
-         "4" : { "start" : "2019-07-29", "stop":"2019-08-04" } ,
-         "5" : { "start" : "2019-08-05", "stop":"2019-08-11" } ,
-         "6" : { "start" : "2019-08-19", "stop":"2019-08-25" } ,
-         "7" : { "start" : "2019-08-26", "stop":"2019-09-01" } ,
-         "8" : { "start" : "2019-09-02", "stop":"2019-09-08" } ,
-         "9" : { "start" : "2019-09-09", "stop":"2019-09-15" } ,
-         "10" : { "start" : "2019-09-16", "stop":"2019-09-22" },
-         "11" : { "start" : "2019-09-23", "stop":"2019-09-29" } ,
-         "12" : { "start" : "2019-09-30", "stop":"2019-10-06" },
-         "13" : { "start" : "2019-10-07", "stop":"2019-10-13" },
-         "14" : { "start" : "2019-10-14", "stop":"2019-10-20" },
-         "15" : { "start" : "2019-10-21", "stop":"2019-10-27" },
-         "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
+    "3195": {
+        "0": { "start": "2019-07-01", "stop": "2019-07-07" },
+        "1": { "start": "2019-07-08", "stop": "2019-07-14" },
+        "2": { "start": "2019-07-15", "stop": "2019-07-21" },
+        "3": { "start": "2019-07-22", "stop": "2019-07-28" },
+        "4": { "start": "2019-07-29", "stop": "2019-08-04" },
+        "5": { "start": "2019-08-05", "stop": "2019-08-11" },
+        "6": { "start": "2019-08-19", "stop": "2019-08-25" },
+        "7": { "start": "2019-08-26", "stop": "2019-09-01" },
+        "8": { "start": "2019-09-02", "stop": "2019-09-08" },
+        "9": { "start": "2019-09-09", "stop": "2019-09-15" },
+        "10": { "start": "2019-09-16", "stop": "2019-09-22" },
+        "11": { "start": "2019-09-23", "stop": "2019-09-29" },
+        "12": { "start": "2019-09-30", "stop": "2019-10-06" },
+        "13": { "start": "2019-10-07", "stop": "2019-10-13" },
+        "14": { "start": "2019-10-14", "stop": "2019-10-20" },
+        "15": { "start": "2019-10-21", "stop": "2019-10-27" },
+        "exam": { "start": "2019-10-10", "stop": "2019-10-19" }
     },
-    "3191" : {
-         "0" : { "start" : "2019-02-18", "stop":"2019-02-24" },
-         "1" : { "start" : "2019-02-25", "stop":"2019-03-03" } ,
-         "2" : { "start" : "2019-03-04", "stop":"2019-03-10" } ,
-         "3" : { "start" : "2019-03-11", "stop":"2019-03-17" } ,
-         "4" : { "start" : "2019-03-18", "stop":"2019-03-24" } ,
-         "5" : { "start" : "2019-03-25", "stop":"2019-03-31" } ,
-         "6" : { "start" : "2019-04-01", "stop":"2019-04-07" } ,
-         "7" : { "start" : "2019-04-08", "stop":"2019-04-14" } ,
-         "8" : { "start" : "2019-04-22", "stop":"2019-04-28" } ,
-         "9" : { "start" : "2019-04-29", "stop":"2019-05-05" } ,
-         "10" : { "start" : "2019-05-06", "stop":"2019-05-12" },
-         "11" : { "start" : "2019-05-13", "stop":"2019-05-19" } ,
-         "12" : { "start" : "2019-05-20", "stop":"2019-05-26" },
-         "13" : { "start" : "2019-05-27", "stop":"2019-06-02" },
-         "14" : { "start" : "2019-06-03", "stop":"2019-06-09" },
-         "15" : { "start" : "2019-06-10", "stop":"2019-06-17" },
-         "exam": { "start" : "2019-05-30", "stop": "2019-06-08" }
-         }
-    
-    };
-var TERM="3191",YEAR=2019, SET_DATE="";
+    "3191": {
+        "0": { "start": "2019-02-18", "stop": "2019-02-24" },
+        "1": { "start": "2019-02-25", "stop": "2019-03-03" },
+        "2": { "start": "2019-03-04", "stop": "2019-03-10" },
+        "3": { "start": "2019-03-11", "stop": "2019-03-17" },
+        "4": { "start": "2019-03-18", "stop": "2019-03-24" },
+        "5": { "start": "2019-03-25", "stop": "2019-03-31" },
+        "6": { "start": "2019-04-01", "stop": "2019-04-07" },
+        "7": { "start": "2019-04-08", "stop": "2019-04-14" },
+        "8": { "start": "2019-04-22", "stop": "2019-04-28" },
+        "9": { "start": "2019-04-29", "stop": "2019-05-05" },
+        "10": { "start": "2019-05-06", "stop": "2019-05-12" },
+        "11": { "start": "2019-05-13", "stop": "2019-05-19" },
+        "12": { "start": "2019-05-20", "stop": "2019-05-26" },
+        "13": { "start": "2019-05-27", "stop": "2019-06-02" },
+        "14": { "start": "2019-06-03", "stop": "2019-06-09" },
+        "15": { "start": "2019-06-10", "stop": "2019-06-17" },
+        "exam": { "start": "2019-05-30", "stop": "2019-06-08" }
+    }
+
+};
+var TERM = "3191", YEAR = 2019, SET_DATE = "";
 var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 
@@ -253,15 +253,15 @@ var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oc
 // TEMPLATES - by 6
 
 // define the template types
-const NUM_TEMPLATES=6, HORIZONTAL=0, // original 3 cards per row
-      VERTICAL=1, // 1 card per row 
-      HORIZONTAL_NOENGAGE=2, // original, but no engage
-      PEOPLE = 5,
-      ASSESSMENT = 6; // horizontal but show off people (BCI) version
+const NUM_TEMPLATES = 6, HORIZONTAL = 0, // original 3 cards per row
+    VERTICAL = 1, // 1 card per row 
+    HORIZONTAL_NOENGAGE = 2, // original, but no engage
+    PEOPLE = 5,
+    ASSESSMENT = 6; // horizontal but show off people (BCI) version
 
 // Whether or not xAPI logging is turned on
 // - turned on by adding "logging" to Card Interface
-var LOGGING=false;
+var LOGGING = false;
 
 // Define the wrapper around the card interface
 
@@ -270,7 +270,7 @@ var interfaceHtmlTemplate = Array(NUM_TEMPLATES);
 // Kludge - hard code CSS path to enable shifting from
 //          dev to live
 //var CARDS_CSS="https://djon.es/gu/cards.css";
-var CARDS_CSS="https://s3.amazonaws.com/filebucketdave/banner.js/cards.css";
+var CARDS_CSS = "https://s3.amazonaws.com/filebucketdave/banner.js/cards.css";
 
 
 
@@ -282,24 +282,24 @@ interfaceHtmlTemplate[HORIZONTAL] = `
  {CARDS}
 </div>
 `;
-interfaceHtmlTemplate[HORIZONTAL] = interfaceHtmlTemplate[HORIZONTAL].replace('{CARDS_CSS}',CARDS_CSS);
+interfaceHtmlTemplate[HORIZONTAL] = interfaceHtmlTemplate[HORIZONTAL].replace('{CARDS_CSS}', CARDS_CSS);
 
 interfaceHtmlTemplate[VERTICAL] = `
 <link rel="stylesheet" href="{CARDS_CSS}" />
  {CARDS}
 </div>
 `;
-interfaceHtmlTemplate[VERTICAL] = interfaceHtmlTemplate[VERTICAL].replace('{CARDS_CSS}',CARDS_CSS);
+interfaceHtmlTemplate[VERTICAL] = interfaceHtmlTemplate[VERTICAL].replace('{CARDS_CSS}', CARDS_CSS);
 
-interfaceHtmlTemplate[HORIZONTAL_NOENGAGE]=interfaceHtmlTemplate[HORIZONTAL];
-interfaceHtmlTemplate[PEOPLE]= interfaceHtmlTemplate[HORIZONTAL];
-interfaceHtmlTemplate[ASSESSMENT]= interfaceHtmlTemplate[HORIZONTAL];
+interfaceHtmlTemplate[HORIZONTAL_NOENGAGE] = interfaceHtmlTemplate[HORIZONTAL];
+interfaceHtmlTemplate[PEOPLE] = interfaceHtmlTemplate[HORIZONTAL];
+interfaceHtmlTemplate[ASSESSMENT] = interfaceHtmlTemplate[HORIZONTAL];
 
 // template for each individual card
 
 var cardHtmlTemplate = Array(NUM_TEMPLATES);
 
-cardHtmlTemplate[HORIZONTAL]=`
+cardHtmlTemplate[HORIZONTAL] = `
   <div class="clickablecard w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}" class="cardmainlink"></a>
@@ -323,7 +323,7 @@ cardHtmlTemplate[HORIZONTAL]=`
   </div>
 `;
 
-cardHtmlTemplate[VERTICAL]=`
+cardHtmlTemplate[VERTICAL] = `
 <a href="{LINK}">
 <div class="lg:flex xl:flex md:flex mb-4 rounded-lg shadow-lg hover:shadow-outline">
   <div class="lg:w-1/4 md:w-1/4 sm:w-full h-auto lg:flex-none bg-cover bg-center rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('{PIC_URL}')">
@@ -345,7 +345,7 @@ cardHtmlTemplate[VERTICAL]=`
 `;
 
 
-cardHtmlTemplate[HORIZONTAL_NOENGAGE]=`
+cardHtmlTemplate[HORIZONTAL_NOENGAGE] = `
   <div class="w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}</div></a>
@@ -368,7 +368,7 @@ cardHtmlTemplate[HORIZONTAL_NOENGAGE]=`
 
 // TODO - this might not be a better fit as something not a template?
 
-cardHtmlTemplate[PEOPLE]=`
+cardHtmlTemplate[PEOPLE] = `
 <!-- <style>
   .codegena{position:relative;width:100%;height:0;padding-bottom:56.27198%;
   .codegena iframe{position:absolute;top:0;left:0;width:100%;height:100%;}
@@ -398,7 +398,7 @@ cardHtmlTemplate[PEOPLE]=`
 
 // Implement the assessment template
 
-cardHtmlTemplate[ASSESSMENT]=`
+cardHtmlTemplate[ASSESSMENT] = `
 <div class="clickablecard lg:max-w-full w-full lg:flex xl:flex md:flex mb-6 rounded-lg shadow-lg hover:shadow-outline"> 
     <!-- padding kludge -->
     <!-- <div>&nbsp;</div> -->
@@ -427,7 +427,7 @@ cardHtmlTemplate[ASSESSMENT]=`
 	</div>
 </div>
 `;
-	
+
 // template to add the "ENGAGE" link to (more strongly) indicate that the card links somewhere
 
 var linkItemHtmlTemplate = Array(NUM_TEMPLATES);
@@ -441,7 +441,7 @@ linkItemHtmlTemplate[HORIZONTAL] = `
         </div>
         `;
 
-linkItemHtmlTemplate[VERTICAL] ='';
+linkItemHtmlTemplate[VERTICAL] = '';
 linkItemHtmlTemplate[HORIZONTAL_NOENGAGE] = '';
 linkItemHtmlTemplate[PEOPLE] = '';
 linkItemHtmlTemplate[ASSESSMENT] = '';
@@ -452,7 +452,7 @@ linkItemHtmlTemplate[VERTICAL] = '';
 /*`
 <div class="relative pin-r pin-b m-18"> <button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"> Engage </button> 
         </div>`;*/
-        
+
 //*****************************************************************
 // Templates for the "Mark Review" and "Reviewed" features
 
@@ -465,7 +465,7 @@ markReviewLinkHtmlTemplate[HORIZONTAL] = `
      <span class="font-bold rounded-full px-2 py-1 bg-yellow text-black">&#x26a0;</span>&nbsp; {MARK_REVIEWED}</button></a>
 </div>
         `;
-        
+
 markUnReviewedLinkHtmlTemplate[HORIZONTAL] = `
 <div class="p-4 absolute pin-l pin-b">
     <a href="{LINK}"><button class="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
@@ -473,15 +473,15 @@ markUnReviewedLinkHtmlTemplate[HORIZONTAL] = `
 </div>
 `;
 
-markReviewLinkHtmlTemplate[VERTICAL] ='';
-markUnReviewedLinkHtmlTemplate[VERTICAL] ='';
+markReviewLinkHtmlTemplate[VERTICAL] = '';
+markUnReviewedLinkHtmlTemplate[VERTICAL] = '';
 markReviewLinkHtmlTemplate[HORIZONTAL_NOENGAGE] = markReviewLinkHtmlTemplate[HORIZONTAL];
-markUnReviewedLinkHtmlTemplate[HORIZONTAL_NOENGAGE] =markUnReviewedLinkHtmlTemplate[HORIZONTAL];
+markUnReviewedLinkHtmlTemplate[HORIZONTAL_NOENGAGE] = markUnReviewedLinkHtmlTemplate[HORIZONTAL];
 markReviewLinkHtmlTemplate[PEOPLE] = '';
-markUnReviewedLinkHtmlTemplate[PEOPLE] ='';
+markUnReviewedLinkHtmlTemplate[PEOPLE] = '';
 markReviewLinkHtmlTemplate[ASSESSMENT] = '';
-markUnReviewedLinkHtmlTemplate[ASSESSMENT] ='';
-        
+markUnReviewedLinkHtmlTemplate[ASSESSMENT] = '';
+
 // Template for the calendar/date tab
 
 var dateHtmlTemplate = Array(NUM_TEMPLATES);
@@ -557,17 +557,17 @@ dualDateHtmlTemplate[ASSESSMENT] = `
 
 weekHtmlTemplate = `
     <div class="bg-yellow-lighter text-black py-1">
-      Week {WEEK}
+      {WEEK}
     </div>
     `;
-    
+
 dualWeekHtmlTemplate = `
     <div class="bg-yellow-lighter text-black py-1 border-l border-r border-black">
       Week {WEEK_START} to {WEEK_STOP}
     </div>
-    `;    
-    
-examPeriodTemplate =`
+    `;
+
+examPeriodTemplate = `
 <div class="bg-yellow-lighter text-black py-1 border-l border-r border-black">
       Exam Period
     </div>
@@ -596,7 +596,7 @@ HIDDEN_FROM_STUDENTS = `<div class="inline-block bg-yellow text-black text-xs ro
 // LOCATION > 0 means view mode. < 0 means EDIT mode
 var LOCATION = 1;
 
-INTRO_HTML=`
+INTRO_HTML = `
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <h3>Note</h3>
@@ -775,19 +775,21 @@ NEW_DOCUMENTATION_HTML = `
 
 function hideJourney($) {
     console.log("---------- RUNNING THE tmp script");
-  
-  var tweak_bb_active_url_pattern = "listContent.jsp";
-	window.tweak_bb = { display_view: (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ), 
-          page_id: "#content_listContainer",
-	      row_element: "li" };
 
-  var journeyTitle = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Your HDR Journey")').eq(0);		  
-  //console.log(journeyTitle);
-  var journey = jQuery(journeyTitle).parent().next('div.details').children('.vtbegenerated');
-  //console.log(journey);
-  var child = jQuery(journey).children(".yourJourney");
-  //console.log(child);
-  jQuery(child).unwrap();
+    var tweak_bb_active_url_pattern = "listContent.jsp";
+    window.tweak_bb = {
+        display_view: (location.href.indexOf(tweak_bb_active_url_pattern) > 0),
+        page_id: "#content_listContainer",
+        row_element: "li"
+    };
+
+    var journeyTitle = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter(':contains("Your HDR Journey")').eq(0);
+    //console.log(journeyTitle);
+    var journey = jQuery(journeyTitle).parent().next('div.details').children('.vtbegenerated');
+    //console.log(journey);
+    var child = jQuery(journey).children(".yourJourney");
+    //console.log(child);
+    jQuery(child).unwrap();
 }
 /****
  * TODO
@@ -797,49 +799,51 @@ function hideJourney($) {
  * - Explore the use of opacity to highlight the whole card?
  *     i.e. an overview that goes over the top? or perhaps just shade bottom same blue as the border with white text
  */
- 
-function cardsInterface($){
-    
-	/* define variables based on Bb page type */
-	/* used to identify important components in html */
-	var tweak_bb_active_url_pattern = "listContent.jsp";
-	window.tweak_bb = { display_view: (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ), 
-          page_id: "#content_listContainer",
-	      row_element: "li" };
+
+function cardsInterface($) {
+
+    /* define variables based on Bb page type */
+    /* used to identify important components in html */
+    var tweak_bb_active_url_pattern = "listContent.jsp";
+    window.tweak_bb = {
+        display_view: (location.href.indexOf(tweak_bb_active_url_pattern) > 0),
+        page_id: "#content_listContainer",
+        row_element: "li"
+    };
 
     /* Calculate actual term by using id="courseMenuLink"
      * - which includes the courseId */
-     
+
     courseTitle = $("#courseMenu_link").attr('title');
-	 if (location.href.indexOf("listContent.jsp") > 0) {
-         $(".gutweak").parents("li").hide(); 
-	 }
+    if (location.href.indexOf("listContent.jsp") > 0) {
+        $(".gutweak").parents("li").hide();
+    }
 
     // 
     jQuery('#gu_card_docs').html(DOCUMENTATION_HTML);
-	jQuery('#gu_card_intro').html(INTRO_HTML);
-		
-	// Calculate the actual TERM for this course based on the 
-	// courseId. If it doesn't parse, just leave it as the default
-	// initialised term
+    jQuery('#gu_card_intro').html(INTRO_HTML);
 
-	// get the course id which will be in brackets
-	//idRe = new RegExp('\((.*)\)');
-	m = courseTitle.match( /^.*\((.+)\)/ );
-	// we found a course Id, get the STRM value
-	//console.log("got title " + courseTitle );
-	if (m){
-	    id = m[1];
-	    // break the course Id up into its components
-	    // This is the RE for COMM10 - OUA course?
-	    breakIdRe = new RegExp('^([A-Z]+[0-9]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
-	    m = id.match(breakIdRe) ;
+    // Calculate the actual TERM for this course based on the 
+    // courseId. If it doesn't parse, just leave it as the default
+    // initialised term
 
-        
+    // get the course id which will be in brackets
+    //idRe = new RegExp('\((.*)\)');
+    m = courseTitle.match(/^.*\((.+)\)/);
+    // we found a course Id, get the STRM value
+    //console.log("got title " + courseTitle );
+    if (m) {
+        id = m[1];
+        // break the course Id up into its components
+        // This is the RE for COMM10 - OUA course?
+        breakIdRe = new RegExp('^([A-Z]+[0-9]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
+        m = id.match(breakIdRe);
+
+
         // found an actual course site (rather than org site)	    
-	    if (m) { 
-	        TERM=m[2];
-	    
+        if (m) {
+            TERM = m[2];
+
             // set the year
             mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
             if (mm) {
@@ -851,13 +855,13 @@ function cardsInterface($){
             // check for a normal GU course
             breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
             // Following is broken
-            
-	        m = id.match(breakIdRe) ;
+
+            m = id.match(breakIdRe);
 
             // found an actual course site (rather than org site)	    
-	        if (m) { 
-	            TERM=m[2];
-	            
+            if (m) {
+                TERM = m[2];
+
                 // set the year
                 mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
                 if (mm) {
@@ -867,12 +871,12 @@ function cardsInterface($){
                 }
             } else {
                 breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])$');
-                
-                m = id.match(breakIdRe) ;
+
+                m = id.match(breakIdRe);
 
                 // found an actual course site (rather than org site)	    
-	            if (m) { 
-	                TERM=m[2];
+                if (m) {
+                    TERM = m[2];
                     // set the year
                     mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
                     if (mm) {
@@ -880,57 +884,57 @@ function cardsInterface($){
                     } else {
                         YEAR = 2019;
                     }
-	            }
+                }
             }
         }
-	}
-	
-	LOCATION = location.href.indexOf("listContent.jsp");
+    }
 
-    var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
- 	
- 	if ( cardInterface.length === 0){
- 	    return false;
- 	}
+    LOCATION = location.href.indexOf("listContent.jsp");
+
+    var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
+
+    if (cardInterface.length === 0) {
+        return false;
+    }
     /* Get the titles and descriptions of the items on the page */
-	var items = getCardItems($);
-	
-	/* generate the cards interface for the tiems */
-	addCardInterface(items);
-	
-	// remove click event handler from engage buttons
-	
-	// Add event handler for the engage links
+    var items = getCardItems($);
+
+    /* generate the cards interface for the tiems */
+    addCardInterface(items);
+
+    // remove click event handler from engage buttons
+
+    // Add event handler for the engage links
     /*jQuery(".gu-engage").click( function(e) {
             
             e.stopPropagation();
     });*/
-	
-	/** ------ cards should be created by now -- */
-	/* But make all the links in carddescription stop propagation */
+
+    /** ------ cards should be created by now -- */
+    /* But make all the links in carddescription stop propagation */
     var cardContent = jQuery(".carddescription [href]").not(".gu-engage");
 
-    for (var i=0; i<cardContent.length; i++) {
-        cardContent[i].addEventListener('click', function(e) {
+    for (var i = 0; i < cardContent.length; i++) {
+        cardContent[i].addEventListener('click', function (e) {
             // aim here is to allow internal links to override the 
             // cardmainlink
             e.stopPropagation();
         }, false);
     }
-    
-	/* Make all of the cards clickable by adding an event handler  */
-	// Does this unwrap actually do anything???
-	//jQuery( ".cardmainlink[href='undefined'" ).contents().unwrap();
-	//return true;
-	var cards = document.querySelectorAll(".clickablecard");
-	//var cards = document.querySelectorAll(".cardmainlink");
-    for (i=0; i<cards.length; i++) {
-    cards[i].addEventListener('click', function() {
+
+    /* Make all of the cards clickable by adding an event handler  */
+    // Does this unwrap actually do anything???
+    //jQuery( ".cardmainlink[href='undefined'" ).contents().unwrap();
+    //return true;
+    var cards = document.querySelectorAll(".clickablecard");
+    //var cards = document.querySelectorAll(".cardmainlink");
+    for (i = 0; i < cards.length; i++) {
+        cards[i].addEventListener('click', function () {
             var link = this.querySelector(".cardmainlink");
-            
-            if ( link!==null ) {
+
+            if (link !== null) {
                 // prevent clicking on a undefined blackboard link
-                if ( link.match(/blackboard\/content\/undefined$/)) {
+                if (link.match(/blackboard\/content\/undefined$/)) {
                     console.log("Undefined");
                 } else {
                     link.click();
@@ -938,12 +942,12 @@ function cardsInterface($){
             }
         }, false);
     }
-    
-    
-    
+
+
+
     // if we want the images to be hidden, hide them at the end
-    if ( HIDE_IMAGES ) {
-        jQuery( ".bg-cover").hide();
+    if (HIDE_IMAGES) {
+        jQuery(".bg-cover").hide();
     }
 }
 
@@ -953,250 +957,251 @@ function cardsInterface($){
  */
 
 function getCardItems($) {
-	// Find all the items that containg Card Image: OR Card Image Iframe:
-	// Case insensitive
-	// This will include any Content Item that includes this string
-	// even if it isn't meant to be a card
-	var cardRE = new RegExp( '(card image) ?(iframe)?:', 'i');
-	
-	var bbItems = jQuery(tweak_bb.page_id + " > " +tweak_bb.row_element).children(".details").children('.vtbegenerated').filter(
-	       function( ) {
-	           return match = this.innerHTML.match(cardRE);
-	         } 
-	       );
-	
-	var cards = extractCardsFromContent( bbItems);
-	
-	return cards;
+    // Find all the items that containg Card Image: OR Card Image Iframe:
+    // Case insensitive
+    // This will include any Content Item that includes this string
+    // even if it isn't meant to be a card
+    var cardRE = new RegExp('(card image) ?(iframe)?:', 'i');
+
+    var bbItems = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).children(".details").children('.vtbegenerated').filter(
+        function () {
+            return match = this.innerHTML.match(cardRE);
+        }
+    );
+
+    var cards = extractCardsFromContent(bbItems);
+
+    return cards;
 }
 
 
 
-function extractCardsFromContent( myCards) {
-    
-    var items = [];
-    var picUrl,cardBGcolour;
-    
-    // Loop through each card and construct the items array with card data
-	myCards.each( function(idx){
-	    // jQuery(this) - is the vtbgenerated div for a BbItem
-	    
-	    //------- check for any review status element
-	    review = getReviewStatus( this );
-	    
-        // Parse the description and remove the Card Image data	    
-	    var description = jQuery(this).html(),picUrl;
-	    
-		// - get rid of any &nbsp; inserted by Bb
-	    description = description.replace(/&nbsp;/gi, ' ');
-	    
-	    var re = new RegExp("card image\s*:\s*([^<]*)", "i");
-	    //m = description.match(/[Cc]ard [Ii]mage\s*: *([^\s<]*)/ );
-	    m = description.match( re );
-	    if (m) {
-	        // TODO need to parse the m[1] to see if it's a URL
-	        // OR a colour to be set
-	        
-	        // Return a three element list of rgb colours
-	        // if the Card Image: value is a valid colour
-	        // Otherwise undefined
-	        
-	        cardBGcolour = identifyCardBackgroundColour( m[1]);
-	        picUrl = identifyPicUrl( m[1]);
+function extractCardsFromContent(myCards) {
 
-    	    //picUrl=m[1];
-    	    description = description.replace( "<p>"+m[0]+"</p>","");
-	        description = description.replace( m[0], "");
-	    }
-	    // Find any ItemDetailsHeaders that indicate the item is hidden
-	    hidden = jQuery(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Item is hidden from students.')");
-	    //.siblings('contextItemDetailsHeaders')
-	
-	    // Check to see if an image with title "Card Image" has been inserted
-	    var inlineImage = jQuery(this).find('img').attr('title', 'Card Image');
-	    if (inlineImage.length) {
-	        picUrl=inlineImage[0].src;
-	        //console.log("item html" + inlineImage[0].outerHTML);
-	        description = description.replace(inlineImage[0].outerHTML,"");
-	        // Bb also adds stuff when images inserted, remove it from 
-	        // description to be placed into card
-	        var bb = jQuery.parseHTML(description);
-	        // This will find the class
-	        stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html();
-	        description = description.replace( stringToRemove, '');
-	    }
-	    
-	    //---------------- card Image Size
-	    // Looking for contain
-	    m = description.match(/card image size *: contain/i);
-	    var bgSize = "";
-	    if (m) {
-	        bgSize = "contain";
-	        description = description.replace( "<p>"+m[0]+"</p>","");
-	        description = description.replace( m[0], "");
-	    }
-	    
-	    // Parse the date for commencing
-	    // date will be in object with start and end members
-	    var date = handleDate( description );
-	    // kludge to modify the local description based on changes
-	    // done in handleDate
-	    description = date.descrip;
-	    
-	    // See if there's a different label for date
-	    m = description.match(/card date label *: ([^<]*)/i);
-	    var dateLabel='Commencing';
-	    if (m) {
-	        dateLabel=m[1];
-	        description = description.replace( "<p>"+m[0]+"</p>","");
-	        description = description.replace( m[0], "");
-	    }
-	    
-	    // See if the Course Label should be changed
-	    var label="Module";
-	    
-	    m = description.match(/card label *: *([^<]*)/i );
-	    if (m) {
-	        label=m[1];
-	        description = description.replace( "<p>"+m[0]+"</p>","");
-	        description = description.replace( m[0], "");
-	    }
-	    // get active image
-	    var activePicUrl = '';
-	    var regex = new RegExp("card image active\s*:\s*([^<]*)", "i");
-	    m = description.match( regex );
-	    if (m) {
-	        activePicUrl=m[1];
-	        description = description.replace( "<p>"+m[0]+"</p>","");
-	        description = description.replace( m[0], "");
-	    }
-	    // Get course number
-	    var number='x';
-	    m = description.match(/card number *: *([^<]*)/i );
-	    if (m) {
-	        number=m[1];
-	        description = description.replace( "<p>"+m[0]+"</p>","");
-	        description = description.replace( m[0], "");
-	        if (number.match(/none/i)) {
-	            number='&nbsp;'
-	        }
-	    }
-	    // Get Image IFrame
-	    var iframe='';
-	    m = description.match(/card image iframe *: *(<iframe.*<\/iframe>)/i );
-	    if (m) {
-	        iframe=m[1];
-	        // replace the width and height
-	        x = iframe.match(/width="[^"]+"/i);
-	        if (x) {
-	            iframe = iframe.replace(x[0], 'width="100%"');
-	        }
-	        x = iframe.match(/height="[^"]+"/i);
-	        if (x){
-	            iframe=iframe.replace(x[0], 'height="auto"');
-	        }
-	        description = description.replace( "<p>"+m[0]+"</p>","");
-	        description = description.replace( m[0], "");
-	    }
-	    
-	    // Get assessment related information
-	    var assessmentType="",assessmentWeighting="",assessmentOutcomes="";
-	    
-	    m = description.match(/assessment type *: *([^<]*)/i );
-	    if (m) {
-	        assessmentType=m[1];
-	        description = description.replace( "<p>"+m[0]+"</p>","");
-	        description = description.replace( m[0], "");
-	    }
-	    m = description.match(/assessment weighting *: *([^<]*)/i );
-	    if (m) {
-	        assessmentWeighting=m[1];
-	        description = description.replace( "<p>"+m[0]+"</p>","");
-	        description = description.replace( m[0], "");
-	    }
-	    m = description.match(/assessment outcomes *: *([^<]*)/i );
-	    if (m) {
-	        assessmentOutcomes=m[1];
-	        description = description.replace( "<p>"+m[0]+"</p>","");
-	        description = description.replace( m[0], "");
-	    }
-	    
-	    // need to get back to the header which is up one div, a sibling, then span
-	    var header = jQuery(this).parent().siblings(".item").find("span")[2];
-	    var title = jQuery(header).html(),link,linkTarget='';
-	    
-	    //--------------------------------
-	    // Three options for link
-	    // 1. A link on the header (e.g. content folder)
-	    // 2. No link (e.g. a content item)
-	    // 3. A link in the attached filed (content item with attached file)
-	    //    This one is kludgy. e.g. doesn't handle multiple files. 
-	    //    Currently sets the link to the last file
-	    //    TODO figure out what do with multiple files
-	    link = jQuery(header).parents('a').attr('href');
-	    linkTarget = jQuery(header).parents("a").attr("target");
-	    
-	    // if link is empty, must be content item
-	    if ( link === undefined ) {
-	        // check to see if there are attached fileds
-	        filesThere = jQuery(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Attached Files:')");
-	        
-	        if ( filesThere !== undefined) {
-	            // get a list of all attached files
-	            lis = jQuery(this).parent().find('.contextItemDetailsHeaders').children('.detailsValue').children("ul").children("li"); 
-	            
-	            // loop through the files and get the link
-	            lis.each( function(idx, li){
-	                // get the link
-	                link = jQuery(li).children("a").attr("href");
-	            });
-	        }
-	        //.siblings('contextItemDetailsHeaders')
-	    }
-	    
-	    
-	    // get the itemId to allow for "edit" link in card
-	    var itemId = jQuery(this).parents('.liItem').attr('id');
-	    //console.log("Item id " + itemId + " for link " + link );
-	    // Hide the contentItem  TODO Only do this if display page
-	    var tweak_bb_active_url_pattern = "listContent.jsp";
-	    if (location.href.indexOf(tweak_bb_active_url_pattern) > 0 ) { 
-	        // TODO un comment this Reviewed
-	        jQuery(this).parent().parent().hide();
-	        //console.log( "content item " + contentItem.html());
-	    }
-	    // save the item for later
-	    var item = {title:title, picUrl:picUrl, bgSize: bgSize,
-	        cardBGcolour:cardBGcolour,
-	        description:description, date:date, label:label,
-	        link:link, linkTarget:linkTarget,
-	        review:review,
-	        dateLabel:dateLabel,id:itemId,activePicUrl:activePicUrl,
-	        assessmentWeighting:assessmentWeighting,
-	        assessmentOutcomes:assessmentOutcomes,
-	        assessmentType:assessmentType
-	    };
-	    if (number!=='x' ) {
-	        item.moduleNum=number;
-	    }
-	    if (iframe!=='') {
-	        item.iframe=iframe;
-	    }
-	    
-	    // only add the card to display if
-	    // - VIEW MODE is on and it's not hidden
-	    // - EDIT MODE is on 
-	    if ( hidden.length===0 || LOCATION < 0) {
-	        // add message that item is hidden to students when EDIT mode on
-	        if ( hidden.length===1) {
-	            item.description = item.description.concat( HIDDEN_FROM_STUDENTS);
-	        }
-	        items.push(item);
-	    } 
-	});
-	
-	//console.log(items);
-	return items;
+    var items = [];
+    var picUrl, cardBGcolour;
+
+    // Loop through each card and construct the items array with card data
+    myCards.each(function (idx) {
+        // jQuery(this) - is the vtbgenerated div for a BbItem
+
+        //------- check for any review status element
+        review = getReviewStatus(this);
+
+        // Parse the description and remove the Card Image data	    
+        var description = jQuery(this).html(), picUrl;
+
+        // - get rid of any &nbsp; inserted by Bb
+        description = description.replace(/&nbsp;/gi, ' ');
+
+        var re = new RegExp("card image\s*:\s*([^<]*)", "i");
+        //m = description.match(/[Cc]ard [Ii]mage\s*: *([^\s<]*)/ );
+        m = description.match(re);
+        if (m) {
+            // TODO need to parse the m[1] to see if it's a URL
+            // OR a colour to be set
+
+            // Return a three element list of rgb colours
+            // if the Card Image: value is a valid colour
+            // Otherwise undefined
+
+            cardBGcolour = identifyCardBackgroundColour(m[1]);
+            picUrl = identifyPicUrl(m[1]);
+
+            //picUrl=m[1];
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+        }
+        // Find any ItemDetailsHeaders that indicate the item is hidden
+        hidden = jQuery(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Item is hidden from students.')");
+        //.siblings('contextItemDetailsHeaders')
+
+        // Check to see if an image with title "Card Image" has been inserted
+        var inlineImage = jQuery(this).find('img').attr('title', 'Card Image');
+        if (inlineImage.length) {
+            picUrl = inlineImage[0].src;
+            //console.log("item html" + inlineImage[0].outerHTML);
+            description = description.replace(inlineImage[0].outerHTML, "");
+            // Bb also adds stuff when images inserted, remove it from 
+            // description to be placed into card
+            var bb = jQuery.parseHTML(description);
+            // This will find the class
+            stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html();
+            description = description.replace(stringToRemove, '');
+        }
+
+        //---------------- card Image Size
+        // Looking for contain
+        m = description.match(/card image size *: contain/i);
+        var bgSize = "";
+        if (m) {
+            bgSize = "contain";
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+        }
+
+        // Parse the date for commencing
+        // date will be in object with start and end members
+        var date = handleDate(description);
+        // kludge to modify the local description based on changes
+        // done in handleDate
+        description = date.descrip;
+
+        // See if there's a different label for date
+        m = description.match(/card date label *: ([^<]*)/i);
+        var dateLabel = 'Commencing';
+        if (m) {
+            dateLabel = m[1];
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+        }
+
+        // See if the Course Label should be changed
+        var label = "Module";
+
+        m = description.match(/card label *: *([^<]*)/i);
+        if (m) {
+            label = m[1];
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+        }
+        // get active image
+        var activePicUrl = '';
+        var regex = new RegExp("card image active\s*:\s*([^<]*)", "i");
+        m = description.match(regex);
+        if (m) {
+            activePicUrl = m[1];
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+        }
+        // Get course number
+        var number = 'x';
+        m = description.match(/card number *: *([^<]*)/i);
+        if (m) {
+            number = m[1];
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+            if (number.match(/none/i)) {
+                number = '&nbsp;'
+            }
+        }
+        // Get Image IFrame
+        var iframe = '';
+        m = description.match(/card image iframe *: *(<iframe.*<\/iframe>)/i);
+        if (m) {
+            iframe = m[1];
+            // replace the width and height
+            x = iframe.match(/width="[^"]+"/i);
+            if (x) {
+                iframe = iframe.replace(x[0], 'width="100%"');
+            }
+            x = iframe.match(/height="[^"]+"/i);
+            if (x) {
+                iframe = iframe.replace(x[0], 'height="auto"');
+            }
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+        }
+
+        // Get assessment related information
+        var assessmentType = "", assessmentWeighting = "", assessmentOutcomes = "";
+
+        m = description.match(/assessment type *: *([^<]*)/i);
+        if (m) {
+            assessmentType = m[1];
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+        }
+        m = description.match(/assessment weighting *: *([^<]*)/i);
+        if (m) {
+            assessmentWeighting = m[1];
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+        }
+        m = description.match(/assessment outcomes *: *([^<]*)/i);
+        if (m) {
+            assessmentOutcomes = m[1];
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+        }
+
+        // need to get back to the header which is up one div, a sibling, then span
+        var header = jQuery(this).parent().siblings(".item").find("span")[2];
+        var title = jQuery(header).html(), link, linkTarget = '';
+
+        //--------------------------------
+        // Three options for link
+        // 1. A link on the header (e.g. content folder)
+        // 2. No link (e.g. a content item)
+        // 3. A link in the attached filed (content item with attached file)
+        //    This one is kludgy. e.g. doesn't handle multiple files. 
+        //    Currently sets the link to the last file
+        //    TODO figure out what do with multiple files
+        link = jQuery(header).parents('a').attr('href');
+        linkTarget = jQuery(header).parents("a").attr("target");
+
+        // if link is empty, must be content item
+        if (link === undefined) {
+            // check to see if there are attached fileds
+            filesThere = jQuery(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Attached Files:')");
+
+            if (filesThere !== undefined) {
+                // get a list of all attached files
+                lis = jQuery(this).parent().find('.contextItemDetailsHeaders').children('.detailsValue').children("ul").children("li");
+
+                // loop through the files and get the link
+                lis.each(function (idx, li) {
+                    // get the link
+                    link = jQuery(li).children("a").attr("href");
+                });
+            }
+            //.siblings('contextItemDetailsHeaders')
+        }
+
+
+        // get the itemId to allow for "edit" link in card
+        var itemId = jQuery(this).parents('.liItem').attr('id');
+        //console.log("Item id " + itemId + " for link " + link );
+        // Hide the contentItem  TODO Only do this if display page
+        var tweak_bb_active_url_pattern = "listContent.jsp";
+        if (location.href.indexOf(tweak_bb_active_url_pattern) > 0) {
+            // TODO un comment this Reviewed
+            jQuery(this).parent().parent().hide();
+            //console.log( "content item " + contentItem.html());
+        }
+        // save the item for later
+        var item = {
+            title: title, picUrl: picUrl, bgSize: bgSize,
+            cardBGcolour: cardBGcolour,
+            description: description, date: date, label: label,
+            link: link, linkTarget: linkTarget,
+            review: review,
+            dateLabel: dateLabel, id: itemId, activePicUrl: activePicUrl,
+            assessmentWeighting: assessmentWeighting,
+            assessmentOutcomes: assessmentOutcomes,
+            assessmentType: assessmentType
+        };
+        if (number !== 'x') {
+            item.moduleNum = number;
+        }
+        if (iframe !== '') {
+            item.iframe = iframe;
+        }
+
+        // only add the card to display if
+        // - VIEW MODE is on and it's not hidden
+        // - EDIT MODE is on 
+        if (hidden.length === 0 || LOCATION < 0) {
+            // add message that item is hidden to students when EDIT mode on
+            if (hidden.length === 1) {
+                item.description = item.description.concat(HIDDEN_FROM_STUDENTS);
+            }
+            items.push(item);
+        }
+    });
+
+    //console.log(items);
+    return items;
 }
 
 /****
@@ -1207,322 +1212,339 @@ function extractCardsFromContent( myCards) {
  *     "Card Interface:" with an optional title
  * 
  */
- 
- function addCardInterface( items ) {
-   
+
+function addCardInterface(items) {
+
     // Define which template to use 
     var template = HORIZONTAL;
- 	var engageVerb = 'Engage';
- 	
- 	// Define the text for Review Status
- 	var MARK_REVIEWED = "Mark Reviewed"
- 	var REVIEWED = "Reviewed";
- 	
- 	// get the content item with h3 heading containing Card Interface
- 	var cardInterface = jQuery(tweak_bb.page_id +" > "+tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
- 	
+    var engageVerb = 'Engage';
 
- 	if ( cardInterface.length === 0){
+    // Define the text for Review Status
+    var MARK_REVIEWED = "Mark Reviewed"
+    var REVIEWED = "Reviewed";
+
+    // get the content item with h3 heading containing Card Interface
+    var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
+
+
+    if (cardInterface.length === 0) {
         console.log("Card: Can't find item with heading 'Card Interface' in which to insert card interface");
         return false;
     } else {
         // get the title - text only, stripped of whitespace before/after
-        var cardInterfaceTitle= jQuery.trim(cardInterface.text());
-        
-        
+        var cardInterfaceTitle = jQuery.trim(cardInterface.text());
+
+
         //Extract parameters
-        var m = cardInterfaceTitle.match(/Card Interface *([^<]*)/i );
-        WIDTH='md:w-1/3';
-        HIDE_IMAGES=false;
-	    if (m) {
-	        newParams = parse_parameters( m[1]);
-	        
-	        if ( newParams ) {
-	            newParams.forEach( function(element) {
-	                m = element.match(/template=["']vertical['"]/i );
-	                m1 = element.match(/template=vertical/i );
-	                if (m || m1) {
-	                    template = VERTICAL;
-	                } else if (element.match(/template=['"]horizontal['"]/i )) {
-	                    template = HORIZONTAL;
-	                } else if ( element.match(/noimages/)) {
-	                    HIDE_IMAGES = true;
-	                } else if ( x = element.match(/template=by([2-6])/i ) ) {
-	                    WIDTH = "md:w-1/" + x[1];
-	                } else if (x = element.match(/by([2-6])/i ) ) {
-	                    WIDTH = "md:w-1/" + x[1];
-	                } else if ( x = element.match(/[Bb][yY]1/ )) {     
-	                    WIDTH = "md:w-full";
-	                } else if ( element.match(/people/i)) {
-	                    template = PEOPLE;
-	                } else if (element.match(/noengage/i )) {
-	                    template = HORIZONTAL_NOENGAGE;
-	                } else if ( element.match(/logging/i)) {
-	                    LOGGING = true;
-	                } else if ( m = element.match(/engage=([^']*)/)) {
-	                    engageVerb = m[1];
-	                } else if (m=element.match(/template=assessment/i)){
-	                    template = ASSESSMENT;
-	                } else if ( m=element.match(/set[Dd]ate=([^\s]*)/ )){
-	                    SET_DATE = m[1];
-	                } else if ( m=element.match(/^reviewed=([^']*)/ui)) {
-	                    REVIEWED = m[1];
-	                } else if ( m=element.match(/^markReviewed=(.+)/i)) {
-	                    MARK_REVIEWED = m[1];
-	                }
-	            });
-	        }
-	    } // if no match, stay with default
+        var m = cardInterfaceTitle.match(/Card Interface *([^<]*)/i);
+        WIDTH = 'md:w-1/3';
+        HIDE_IMAGES = false;
+        if (m) {
+            newParams = parse_parameters(m[1]);
+
+            if (newParams) {
+                newParams.forEach(function (element) {
+                    m = element.match(/template=["']vertical['"]/i);
+                    m1 = element.match(/template=vertical/i);
+                    if (m || m1) {
+                        template = VERTICAL;
+                    } else if (element.match(/template=['"]horizontal['"]/i)) {
+                        template = HORIZONTAL;
+                    } else if (element.match(/noimages/)) {
+                        HIDE_IMAGES = true;
+                    } else if (x = element.match(/template=by([2-6])/i)) {
+                        WIDTH = "md:w-1/" + x[1];
+                    } else if (x = element.match(/by([2-6])/i)) {
+                        WIDTH = "md:w-1/" + x[1];
+                    } else if (x = element.match(/[Bb][yY]1/)) {
+                        WIDTH = "md:w-full";
+                    } else if (element.match(/people/i)) {
+                        template = PEOPLE;
+                    } else if (element.match(/noengage/i)) {
+                        template = HORIZONTAL_NOENGAGE;
+                    } else if (element.match(/logging/i)) {
+                        LOGGING = true;
+                    } else if (m = element.match(/engage=([^']*)/)) {
+                        engageVerb = m[1];
+                    } else if (m = element.match(/template=assessment/i)) {
+                        template = ASSESSMENT;
+                    } else if (m = element.match(/set[Dd]ate=([^\s]*)/)) {
+                        SET_DATE = m[1];
+                    } else if (m = element.match(/^reviewed=([^']*)/ui)) {
+                        REVIEWED = m[1];
+                    } else if (m = element.match(/^markReviewed=(.+)/i)) {
+                        MARK_REVIEWED = m[1];
+                    }
+                });
+            }
+        } // if no match, stay with default
     }
-    
-  //  console.log("LOGGING IS " + LOGGING);
+
+    //  console.log("LOGGING IS " + LOGGING);
     // make the h3 for the Card Interface item disappear
     // (Can't hide the parent as then you can't edit via Bb)
     // Need to have the span in order to be able to reorder
     cardInterface.html('<span class="reorder editmode"></span>');
- 	// Get the content area in which to insert the HTML
- 	var firstItem = cardInterface.parent().siblings(".details");
-    
- 	// Use the card HTML template and the data in items to generate
- 	// HTML for each card
-    var cards = "" ;
+    // Get the content area in which to insert the HTML
+    var firstItem = cardInterface.parent().siblings(".details");
+
+    // Use the card HTML template and the data in items to generate
+    // HTML for each card
+    var cards = "";
     var moduleNum = 1;
-    items.forEach( function(idx) {
-	    var cardHtml=cardHtmlTemplate[template];
-	    cardHtml = cardHtml.replace( '{WIDTH}', WIDTH);
-	    // replace the default background colour if a different one
-	    // is specific
-	    if ( idx.cardBGcolour ) {
-	        cardHtml = cardHtml.replace(/background-color:\s*rgb\(255,255,255\)/i, 'background-color: '+idx.cardBGcolour );
-	    }
-	    
-	    //<div class="bg-cover h-48" style="background-image: url('{PIC_URL}'); //background-color: rgb(255,255,204)">{IFRAME}
-	    // replace the Engage verb
-	    
-	    //---------------------------------------------
-	    // Add in the mark review/reviewed options
-	    var reviewTemplate = '';
-	    if ( idx.review !== undefined) {
-	        // only do it if there is a review option found
-	        // check whether its a mark review or review
-	        // - if link contains markUnreviewed then it has been
-	        //   reviewed
-	        if ( idx.review.match(/markUnreviewed/)) {
-	            reviewTemplate = markUnReviewedLinkHtmlTemplate[template];
-	            reviewTemplate = reviewTemplate.replace('{REVIEWED}', REVIEWED)
-	        } else {
-	            // it's the other one which indicates it has not been reviewed
-	            reviewTemplate = markReviewLinkHtmlTemplate[template];
-	            
-	            reviewTemplate = reviewTemplate.replace('{MARK_REVIEWED}', MARK_REVIEWED)
-	        }
-	        // set the right link
-	        reviewTemplate = reviewTemplate.replace('{LINK}',idx.review);
-	    }
-	    cardHtml = cardHtml.replace('{REVIEW_ITEM}',reviewTemplate);
-	    //console.log("template is " + template);
-	    // Only show module number if there's a label
-	    if ( idx.label!=='') {
-	        var checkForNum = idx.moduleNum;
-	        if (idx.moduleNum) {
-	            // if there's a hard coded moduleNum use that
-	            cardHtml = cardHtml.replace('{MODULE_NUM}',idx.moduleNum);
-	        } else {
-	            // use the one we're calculating
-	            //cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
-	            cardHtml = cardHtml.replace(/\{MODULE_NUM\}/g,moduleNum);
-	            checkForNum = moduleNum;
-	 	    }
-	 	    
-	 	    // Update the title, check to see if it starts with label and 
-	        // moduleNum.  If it does, remove them from the title
-	        // So that the card doesn't duplicate it, but the information is 
-	        // still there in Blackboard
-	        var regex = new RegExp( '^' + idx.label + '\\s*' + checkForNum +
-	                             '\\s*[-:]*\\s*(.*)')
-	        var m = idx.title.match(regex );
-	        if (m) {
-	            idx.title = m[1];
-	        }
-	    } else { 
-	       cardHtml = cardHtml.replace('{MODULE_NUM}','');
-	    }
-	    cardHtml = cardHtml.replace('{LABEL}',idx.label);
-	    
-	    //------------------ set the card image
-	    
-	    // Two options for BG_SIZE
-	    // 1. cover (bg-cover)
-	    //    Default option. Image covers the entire backgroun
-	    // 2. contain (bg-contain bg-no-repeat) 
-	    //    Entire image must fit within the card
-	    
-	    if ( idx.bgSize === 'contain' ) {
-	        cardHtml = cardHtml.replace(/{BG_SIZE}/, 
-	              'bg-contain bg-no-repeat bg-center');
-	    } else { 
-	        cardHtml = cardHtml.replace(/{BG_SIZE}/, 'bg-cover');
-	    }
-	    
-	    var picUrl = setImage( idx);
-	    
-	    // replace the {IMAGE_URL} variable if none set
-	    if ( ! idx.hasOwnProperty('iframe')) {
-	        cardHtml = cardHtml.replace(/{IFRAME}/g, '');
-	    } else {
-	        cardHtml = cardHtml.replace(/{IFRAME}/g, idx.iframe);
-	        // set pic URl to empty so non is provided
-	        picUrl = ''
-	    }
-	    cardHtml = cardHtml.replace(/{PIC_URL}/g, picUrl);
-	    cardHtml = cardHtml.replace('{TITLE}', idx.title);
-	    cardHtml = cardHtml.replace( /\{ASSESSMENT[_ ]TYPE\}/g, idx.assessmentType);
-	    cardHtml = cardHtml.replace( /\{WEIGHTING\}/g, idx.assessmentWeighting);
-	    cardHtml = cardHtml.replace( /\{LEARNING_OUTCOMES\}/g, idx.assessmentOutcomes);
-	    
-	    // Get rid of some crud Bb inserts into the HTML
-	    description = idx.description.replace(/<p/g, '<p class="pb-2"');
-	    description = description.replace(/<a/g, '<a class="underline"');
-	    cardHtml = cardHtml.replace('{DESCRIPTION}', description);
-	    // Does the card link to another content item?
-//	    console.log( " template is " + template + " and H_E " + HORIZONTAL_NOENGAGE);
-	    if ( idx.link ) {
-	        // add the link
-	        
-	        linkHtml = linkItemHtmlTemplate[template];
-	        linkHtml = linkHtml.replace( '{ENGAGE}',engageVerb);
-	        cardHtml = cardHtml.replace('{LINK_ITEM}',linkHtml);
-	        // if there is a label and no hard coded moduleNum, 
-	        //  then increment the module number
-	        if ( idx.label!=="" && ! idx.moduleNum) {
-	          moduleNum++;
-	        } 
-	    } else {// if (template!==HORIZONTAL_NOENGAGE) {
-	        // remove the link, as there isn't one
-	        cardHtml = cardHtml.replace('{LINK_ITEM}', '');
-	        cardHtml = cardHtml.replace(/<a href="{LINK}">/g,'');
-	        cardHtml = cardHtml.replace('</a>','');
-	        // remove the shadow/border effect
-	        cardHtml = cardHtml.replace('hover:outline-none','');
-	        cardHtml = cardHtml.replace('hover:shadow-outline', '');
-	        // don't count it as a module
-	        cardHtml = cardHtml.replace(idx.label + ' ' + moduleNum, '');
-	        //moduleNum--;
-	    }
-	    
-	    // If there is a linkTarget in Blackboard
-	    if ( typeof idx.linkTarget!=='undefined' ) {
-	        // replace "{LINK}" with "{LINK}" target="linkTarget"
-	        cardHtml = cardHtml.replace( /"{LINK}"/g, '"{LINK}" target="' +
-	                    idx.linkTarget + '"');
-	    }
-	    
-	    if ( typeof idx.link!=='undefined') {
-	        cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
-	    } else {
-	        cardHtml = cardHtml.replace(/<a href="{LINK}" class="cardmainlink">/g, '');
-	        cardHtml = cardHtml.replace(/class="clickablecard /, 'class="');
-	    }
-	    
-	    // Should we add a link to edit/view the original content
-	    if (location.href.indexOf("listContentEditable.jsp") > 0) {
-	        editLink = editLinkTemplate.replace('{ID}', idx.id);
-	        cardHtml = cardHtml.replace(/{EDIT_ITEM}/, editLink );
-	    } else {
-	        //cardHtml = cardHtml.replace(/{EDIT_ITEM}/,'');
-	        
-	        //editLink = editLinkTemplate.replace('{ID}', idx.id);
-	        editLink = '<div><a href="#hello">&nbsp;</a></div>';
-	        cardHtml = cardHtml.replace(/{EDIT_ITEM}/, editLink );
-	    }
-	    
-	    // If need add the date visualisation
-	    if ( idx.date.start.month ) {
-	        // Do we have dual dates - both start and stop?
-	        if ( idx.date.stop.month ) {
-	            // start and stop dates
-	            cardHtml = cardHtml.replace('{DATE}', dualDateHtmlTemplate[template] );
-	            cardHtml = cardHtml.replace(/{MONTH_START}/g, 
-	                            idx.date.start.month);
-	            cardHtml = cardHtml.replace(/{DATE_START}/g, 
-	                            idx.date.start.date);
-	            cardHtml = cardHtml.replace(/{MONTH_STOP}/g, 
-	                            idx.date.stop.month);
-	            cardHtml = cardHtml.replace(/{DATE_STOP}/g, 
-	                            idx.date.stop.date);
-	            cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
-	 //           console.log(idx.date);
-	            if ( ! idx.date.start.hasOwnProperty('week')) {
-	                cardHtml = cardHtml.replace('{WEEK}','');
-	            } else {
-	                // if exam, use that template
-	                // other wise construct dual week
-	                var weekHtml = examPeriodTemplate;
-	                if (idx.date.start.week!=='exam') {
-	                    weekHtml = dualWeekHtmlTemplate.replace('{WEEK_START}', 
-	                            idx.date.start.week);
-	                    weekHtml = weekHtml.replace('{WEEK_STOP}',
-	                        idx.date.stop.week);
-	                }
-	                cardHtml = cardHtml.replace('{WEEK}',weekHtml);
-	            }
-	        } else {
-	            // just start date
-	            cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template] );
-	            cardHtml = cardHtml.replace(/{MONTH}/g, idx.date.start.month);
-	            cardHtml = cardHtml.replace(/{DATE}/g, idx.date.start.date);
-	            cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
-	            if ( !idx.date.start.hasOwnProperty('week')) {
-	                cardHtml = cardHtml.replace('{WEEK}','');
-	            } else
-	                var weekHtml = weekHtmlTemplate.replace('{WEEK}', idx.date.start.week);
-	                cardHtml = cardHtml.replace('{WEEK}',weekHtml);
-	        }
-	    } else {
-	        // no dates at all
-	        cardHtml = cardHtml.replace('{DATE}', '');
-	    }
-	    cards = cards.concat(cardHtml);
-	});
-	
-	// STick the cards into the complete card HTML
-	var interfaceHtml = interfaceHtmlTemplate[template];
-	interfaceHtml = interfaceHtml.replace('{CARDS}',cards);
-	// Insert the HTML to the selected item(s)
-	//return false;
-	$(firstItem).append( interfaceHtml);
+    items.forEach(function (idx) {
+        var cardHtml = cardHtmlTemplate[template];
+        cardHtml = cardHtml.replace('{WIDTH}', WIDTH);
+        // replace the default background colour if a different one
+        // is specific
+        if (idx.cardBGcolour) {
+            cardHtml = cardHtml.replace(/background-color:\s*rgb\(255,255,255\)/i, 'background-color: ' + idx.cardBGcolour);
+        }
+
+        //<div class="bg-cover h-48" style="background-image: url('{PIC_URL}'); //background-color: rgb(255,255,204)">{IFRAME}
+        // replace the Engage verb
+
+        //---------------------------------------------
+        // Add in the mark review/reviewed options
+        var reviewTemplate = '';
+        if (idx.review !== undefined) {
+            // only do it if there is a review option found
+            // check whether its a mark review or review
+            // - if link contains markUnreviewed then it has been
+            //   reviewed
+            if (idx.review.match(/markUnreviewed/)) {
+                reviewTemplate = markUnReviewedLinkHtmlTemplate[template];
+                reviewTemplate = reviewTemplate.replace('{REVIEWED}', REVIEWED)
+            } else {
+                // it's the other one which indicates it has not been reviewed
+                reviewTemplate = markReviewLinkHtmlTemplate[template];
+
+                reviewTemplate = reviewTemplate.replace('{MARK_REVIEWED}', MARK_REVIEWED)
+            }
+            // set the right link
+            reviewTemplate = reviewTemplate.replace('{LINK}', idx.review);
+        }
+        cardHtml = cardHtml.replace('{REVIEW_ITEM}', reviewTemplate);
+        //console.log("template is " + template);
+        // Only show module number if there's a label
+        if (idx.label !== '') {
+            var checkForNum = idx.moduleNum;
+            if (idx.moduleNum) {
+                // if there's a hard coded moduleNum use that
+                cardHtml = cardHtml.replace('{MODULE_NUM}', idx.moduleNum);
+            } else {
+                // use the one we're calculating
+                //cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
+                cardHtml = cardHtml.replace(/\{MODULE_NUM\}/g, moduleNum);
+                checkForNum = moduleNum;
+            }
+
+            // Update the title, check to see if it starts with label and 
+            // moduleNum.  If it does, remove them from the title
+            // So that the card doesn't duplicate it, but the information is 
+            // still there in Blackboard
+            var regex = new RegExp('^' + idx.label + '\\s*' + checkForNum +
+                '\\s*[-:]*\\s*(.*)')
+            var m = idx.title.match(regex);
+            if (m) {
+                idx.title = m[1];
+            }
+        } else {
+            cardHtml = cardHtml.replace('{MODULE_NUM}', '');
+        }
+        cardHtml = cardHtml.replace('{LABEL}', idx.label);
+
+        //------------------ set the card image
+
+        // Two options for BG_SIZE
+        // 1. cover (bg-cover)
+        //    Default option. Image covers the entire backgroun
+        // 2. contain (bg-contain bg-no-repeat) 
+        //    Entire image must fit within the card
+
+        if (idx.bgSize === 'contain') {
+            cardHtml = cardHtml.replace(/{BG_SIZE}/,
+                'bg-contain bg-no-repeat bg-center');
+        } else {
+            cardHtml = cardHtml.replace(/{BG_SIZE}/, 'bg-cover');
+        }
+
+        var picUrl = setImage(idx);
+
+        // replace the {IMAGE_URL} variable if none set
+        if (!idx.hasOwnProperty('iframe')) {
+            cardHtml = cardHtml.replace(/{IFRAME}/g, '');
+        } else {
+            cardHtml = cardHtml.replace(/{IFRAME}/g, idx.iframe);
+            // set pic URl to empty so non is provided
+            picUrl = ''
+        }
+        cardHtml = cardHtml.replace(/{PIC_URL}/g, picUrl);
+        cardHtml = cardHtml.replace('{TITLE}', idx.title);
+        cardHtml = cardHtml.replace(/\{ASSESSMENT[_ ]TYPE\}/g, idx.assessmentType);
+        cardHtml = cardHtml.replace(/\{WEIGHTING\}/g, idx.assessmentWeighting);
+        cardHtml = cardHtml.replace(/\{LEARNING_OUTCOMES\}/g, idx.assessmentOutcomes);
+
+        // Get rid of some crud Bb inserts into the HTML
+        description = idx.description.replace(/<p/g, '<p class="pb-2"');
+        description = description.replace(/<a/g, '<a class="underline"');
+        cardHtml = cardHtml.replace('{DESCRIPTION}', description);
+        // Does the card link to another content item?
+        //	    console.log( " template is " + template + " and H_E " + HORIZONTAL_NOENGAGE);
+        if (idx.link) {
+            // add the link
+
+            linkHtml = linkItemHtmlTemplate[template];
+            linkHtml = linkHtml.replace('{ENGAGE}', engageVerb);
+            cardHtml = cardHtml.replace('{LINK_ITEM}', linkHtml);
+            // if there is a label and no hard coded moduleNum, 
+            //  then increment the module number
+            if (idx.label !== "" && !idx.moduleNum) {
+                moduleNum++;
+            }
+        } else {// if (template!==HORIZONTAL_NOENGAGE) {
+            // remove the link, as there isn't one
+            cardHtml = cardHtml.replace('{LINK_ITEM}', '');
+            cardHtml = cardHtml.replace(/<a href="{LINK}">/g, '');
+            cardHtml = cardHtml.replace('</a>', '');
+            // remove the shadow/border effect
+            cardHtml = cardHtml.replace('hover:outline-none', '');
+            cardHtml = cardHtml.replace('hover:shadow-outline', '');
+            // don't count it as a module
+            cardHtml = cardHtml.replace(idx.label + ' ' + moduleNum, '');
+            //moduleNum--;
+        }
+
+        // If there is a linkTarget in Blackboard
+        if (typeof idx.linkTarget !== 'undefined') {
+            // replace "{LINK}" with "{LINK}" target="linkTarget"
+            cardHtml = cardHtml.replace(/"{LINK}"/g, '"{LINK}" target="' +
+                idx.linkTarget + '"');
+        }
+
+        if (typeof idx.link !== 'undefined') {
+            cardHtml = cardHtml.replace(/{LINK}/g, idx.link);
+        } else {
+            cardHtml = cardHtml.replace(/<a href="{LINK}" class="cardmainlink">/g, '');
+            cardHtml = cardHtml.replace(/class="clickablecard /, 'class="');
+        }
+
+        // Should we add a link to edit/view the original content
+        if (location.href.indexOf("listContentEditable.jsp") > 0) {
+            editLink = editLinkTemplate.replace('{ID}', idx.id);
+            cardHtml = cardHtml.replace(/{EDIT_ITEM}/, editLink);
+        } else {
+            //cardHtml = cardHtml.replace(/{EDIT_ITEM}/,'');
+
+            //editLink = editLinkTemplate.replace('{ID}', idx.id);
+            editLink = '<div><a href="#hello">&nbsp;</a></div>';
+            cardHtml = cardHtml.replace(/{EDIT_ITEM}/, editLink);
+        }
+
+        // If need add the date visualisation
+        if (idx.date.start.month) {
+            // Do we have dual dates - both start and stop?
+            if (idx.date.stop.month) {
+                // start and stop dates
+                cardHtml = cardHtml.replace('{DATE}', dualDateHtmlTemplate[template]);
+                cardHtml = cardHtml.replace(/{MONTH_START}/g,
+                    idx.date.start.month);
+                cardHtml = cardHtml.replace(/{DATE_START}/g,
+                    idx.date.start.date);
+                cardHtml = cardHtml.replace(/{MONTH_STOP}/g,
+                    idx.date.stop.month);
+                cardHtml = cardHtml.replace(/{DATE_STOP}/g,
+                    idx.date.stop.date);
+                cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
+                //           console.log(idx.date);
+                if (!idx.date.start.hasOwnProperty('week')) {
+                    cardHtml = cardHtml.replace('{WEEK}', '');
+                } else {
+                    // if exam, use that template
+                    // other wise construct dual week
+                    var weekHtml = examPeriodTemplate;
+                    if (idx.date.start.week !== 'exam') {
+                        weekHtml = dualWeekHtmlTemplate.replace('{WEEK_START}',
+                            idx.date.start.week);
+                        weekHtml = weekHtml.replace('{WEEK_STOP}',
+                            idx.date.stop.week);
+                    }
+                    cardHtml = cardHtml.replace('{WEEK}', weekHtml);
+                }
+            } else {
+                // just start date
+                cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template]);
+                cardHtml = cardHtml.replace(/{MONTH}/g, idx.date.start.month);
+                cardHtml = cardHtml.replace(/{DATE}/g, idx.date.start.date);
+                cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
+                if (!idx.date.start.hasOwnProperty('week')) {
+                    cardHtml = cardHtml.replace('{WEEK}', '');
+                } else 
+                    var weekReplace = "Week " + idx.date.start.week;
+                    if ( idx.date.start.hasOwnProperty('day')) {
+                        weekReplace = idx.date.start.day + " " + weekReplace;
+                    }
+                    var weekHtml = weekHtmlTemplate.replace('{WEEK}', weekReplace);
+                cardHtml = cardHtml.replace('{WEEK}', weekHtml);
+            }
+        } else {
+            // no dates at all
+            cardHtml = cardHtml.replace('{DATE}', '');
+        }
+        cards = cards.concat(cardHtml);
+    });
+
+    // STick the cards into the complete card HTML
+    var interfaceHtml = interfaceHtmlTemplate[template];
+    interfaceHtml = interfaceHtml.replace('{CARDS}', cards);
+    // Insert the HTML to the selected item(s)
+    //return false;
+    jQuery(firstItem).append(interfaceHtml);
 }
 
 //*********************
-// getTermDate( week )
+// getTermDate( week, day )
 // - given a week of Griffith semester return date for the 
 //   start of that week
+// - optional pass day of the week, add more days Monday=0
 
-function getTermDate( week, startWeek=true ) {
+function getTermDate(week, startWeek = true, dayOfWeek = 'Monday') {
+
+    dayOfWeek = dayOfWeek.toLowerCase()
     //console.log("TERM is " + TERM + " week is " + week);
     var date = { date: "", month: "", week: week };
-    if (( week<0) || (week>15) ) {
-        if (week!=='exam') {
+    if ((week < 0) || (week > 15)) {
+        if (week !== 'exam') {
             return date;
         }
     }
     var start;
-    if ( startWeek===true ) {
+    if (startWeek === true) {
         // setting start week
-        if ( typeof TERM_DATES[TERM][week] !== 'undefined') {
+        if (typeof TERM_DATES[TERM][week] !== 'undefined') {
             start = TERM_DATES[TERM][week].start;//[week].start;
         }
     } else {
         start = TERM_DATES[TERM][week].stop;
     }
-	//console.log(" Starting date " + start);
-	var d = new Date(start);
-	date.month=MONTHS[d.getMonth()];
-	date.date=d.getDate();
-	
-	return date;
+    var d = new Date(start);
+
+    // if dayOfWeek is not Monday, add some days
+    if ( dayOfWeek !== 'monday') {
+        var dayToNum = { 'tuesday' : 1, 'wednesday': 2, 'thursday':3, 'friday':4, 'saturday': 5, 'sunday': 6 };
+        // add in the day abbreviation so it can appear
+        date.day = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.substr(1,2);
+        if ( dayOfWeek in dayToNum ) { 
+            d.setDate( d.getDate() + dayToNum[dayOfWeek.toLowerCase()]);
+        }
+    }
+
+    date.month = MONTHS[d.getMonth()];
+    date.date = d.getDate();
+
+    return date;
 }
-	         
+
 //**************************************************
 // handleDate( description )
 // - given a description for an item find and parse Card Date
@@ -1537,76 +1559,79 @@ function getTermDate( week, startWeek=true ) {
 // - specify a date range
 //          Card Date: Mar 5-Mar 10
 //          Card Date: Week 3-5
+// - specify a day of the week
+//          Card Date: Monday Week 5
+//          Card Date: Mon Week 5
 
-function handleDate( description ) {
-    var month,endMonth,date,endDate,week="",endWeek="";
-    var empty1 = { date:"",week:""};
-    var empty2 = { date:"",week:""};
-	var date = { start: empty1, stop: empty2 } ; // object to return 
-	// date by griffith week    
-	
+function handleDate(description) {
+    var month, endMonth, date, endDate, week = "", endWeek = "";
+    var empty1 = { date: "", week: "" };
+    var empty2 = { date: "", week: "" };
+    var date = { start: empty1, stop: empty2 }; // object to return 
+    // date by griffith week    
+
     m = description.match(/card date *: *week ([0-9]*)/i);
-	if (m) {
-	    // check to see if a range was specified
-	    x = description.match(/card date *: *week ([0-9]*)-([0-9]*)/i);
-	    if (x) {
-	//        console.log('ZZZZZZZZZZZZZZZZZZZZZZ handling a range');
-	        week = x[1];
-	        endWeek = x[2];
-	        date.stop = getTermDate( endWeek, false);
-	        //console.log(date.stop);
-	            
-	        description = description.replace( "<p>"+x[0]+"</p>","");
-            description = description.replace(x[0],"");
-        } else {
-      //      console.log('ZZZZ week date, but not a range');
-            week = m[1];
-	           
-            description = description.replace( "<p>"+m[0]+"</p>","");
-            description = description.replace(m[0],"");
-        }
-        
-        date.start = getTermDate( week )
-        //console.log( date);
-	        
-	         
-	} else {
-	    // TODO need to handle range here
-	    m = description.match(/card date *: *([a-z]+) ([0-9]+)/i);
-	    if (m) {
-	        
-	        x = description.match(/card date *: *([a-z]+) ([0-9]+)-+([a-z]+) ([0-9]+)/i);
-	        if (x) {
-	            
-	            date.start = { month: x[1],date: x[2] }
-	            date.stop = { month: x[3], date: x[4] }
+    if (m) {
+        // check to see if a range was specified
+        x = description.match(/card date *: *week ([0-9]*)-([0-9]*)/i);
+        if (x) {
+            week = x[1];
+            endWeek = x[2];
+            date.stop = getTermDate(endWeek, false);
 
-	            description = description.replace( "<p>"+x[0]+"</p>","");
-                description = description.replace(x[0],"");
+            description = description.replace("<p>" + x[0] + "</p>", "");
+            description = description.replace(x[0], "");
+        } else {
+            week = m[1];
+
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+        }
+        date.start = getTermDate(week)
+    } else {
+        // Handle the day of a semester week 
+        // start date becomes start of week + number of days in
+        m = description.match(
+            /card date: *\b(((mon|tues|wed(nes)?|thur(s)?|fri|sat(ur)?|sun)(day)?))\b *week *([0-9]*)/i);
+        if (m) {
+            day = m[1];
+            week = m[m.length - 1];
+            description = description.replace("<p>" + m[0] + "</p>", "");
+            description = description.replace(m[0], "");
+            date.start = getTermDate(week, true, day)
+        } else {
+            // TODO need to handle range here 
+            m = description.match(/card date *: *([a-z]+) ([0-9]+)/i);
+            if (m) {
+                x = description.match(/card date *: *([a-z]+) ([0-9]+)-+([a-z]+) ([0-9]+)/i);
+                if (x) {
+
+                    date.start = { month: x[1], date: x[2] }
+                    date.stop = { month: x[3], date: x[4] }
+
+                    description = description.replace("<p>" + x[0] + "</p>", "");
+                    description = description.replace(x[0], "");
+                } else {
+
+                    date.start = { month: m[1], date: m[2] };
+                    description = description.replace("<p>" + m[0] + "</p>", "");
+                    description = description.replace(m[0], "");
+                }
             } else {
-            
-                date.start = { month:m[1],date:m[2]};
-    	        description = description.replace( "<p>"+m[0]+"</p>","");
-    	        description = description.replace(m[0],"");
-	        } 
-	    } else {
-	        // Fall back to check for exam period
-	        m = description.match(/card date *: *exam *(period)*/i );
-	        if (m) {
-	            //console.log("match exam period");
-	            date.start = getTermDate( 'exam');
-	            date.stop = getTermDate('exam', false);
-	            description = description.replace( "<p>"+m[0]+"</p>","");
-    	        description = description.replace(m[0],"");
-	            //console.log('Exam date is ' );
-	            //console.log(date.start);
-	            //console.log(date.stop);
-	        }
-	    }
-	}
-	date.descrip = description;
-	return date;
-} 
+                // Fall back to check for exam period
+                m = description.match(/card date *: *exam *(period)*/i);
+                if (m) {
+                    date.start = getTermDate('exam');
+                    date.stop = getTermDate('exam', false);
+                    description = description.replace("<p>" + m[0] + "</p>", "");
+                    description = description.replace(m[0], "");
+                }
+            }
+        }
+    }
+    date.descrip = description;
+    return date;
+}
 
 //*************************************************************
 // picUrl = setImage( card )
@@ -1615,83 +1640,82 @@ function handleDate( description ) {
 // - return picUrl if there is an active card image, but it's
 //   not the date
 // - return activePicUrl if there is one and it's not the date
-function setImage( card) {
+function setImage(card) {
     // only use activePicURL if it is set and there are dates on
     // the card
-    if ( card.activePicUrl!=='' &&
-             card.date.start.date!=="" ){
+    if (card.activePicUrl !== '' &&
+        card.date.start.date !== "") {
         // there is an activePicUrl, check if it should be active
-        
+
         // active means that the current date falls within the start/stop
         // dates for the card
-        var start,stop, now;
-        if ( SET_DATE==="") {
+        var start, stop, now;
+        if (SET_DATE === "") {
             now = new Date();
         } else {
-            now = new Date( SET_DATE);
+            now = new Date(SET_DATE);
         }
-        
-        //console.log(card.date);
-        if ( card.date.start.hasOwnProperty( 'month') &&
-               card.date.start.month!==""){
-        
-            start = new Date( parseInt(YEAR), MONTHS.indexOf(card.date.start.month), parseInt(card.date.start.date));
-        } 
-        if ( card.date.stop.hasOwnProperty('month') &&
-                  card.date.stop.month!=='') {
-            stop = new Date( YEAR, MONTHS.indexOf(card.date.stop.month), card.date.stop.date);
-            stop.setHours(23,59,0);
-        } else if ( card.date.start.hasOwnProperty('week')){
+
+        if (card.date.start.hasOwnProperty('month') &&
+            card.date.start.month !== "") {
+
+            start = new Date(parseInt(YEAR), MONTHS.indexOf(card.date.start.month), parseInt(card.date.start.date));
+        }
+        if (card.date.stop.hasOwnProperty('month') &&
+            card.date.stop.month !== '') {
+            stop = new Date(YEAR, MONTHS.indexOf(card.date.stop.month), card.date.stop.date);
+            stop.setHours(23, 59, 0);
+        } else if (card.date.start.hasOwnProperty('week')) {
             // there's no end date, but there is a start week
             // so set stop to end of that week
-            stop = new Date( TERM_DATES[TERM][card.date.start.week].stop);  
-            stop.setHours(23,59,0);
+            stop = new Date(TERM_DATES[TERM][card.date.start.week].stop);
+            stop.setHours(23, 59, 0);
         } else { // no week for stop, meaning it's just on the day
             stop = new Date(start.getTime());
-            stop.setHours(23,59,0);
+            stop.setHours(23, 59, 0);
         }
-        
-        if ( now>=start && now<=stop) {
+
+        if (now >= start && now <= stop) {
             return card.activePicUrl;
         }
     }
     return card.picUrl;
-}    
+}
 
 //**************************************************************
 // cardBGcolour = identifyCardBackgroundColour( value );
 // return undefined if value is not a valid CSS colour
 // Otherwise return rgb(X,Y,Z)
 
-function identifyCardBackgroundColour( input ) {
-    
+function identifyCardBackgroundColour(input) {
+
     // don't both if it's an empty string or a URL
     url = input.match(/^\s*http/i);
-    if ( input === "" || url ) {
+    if (input === "" || url) {
         return undefined;
     }
     var div = document.createElement('div'), m;
     div.style.color = input;
     // add to DOMTree to work
-    document.body.appendChild( div );
-    
+    document.body.appendChild(div);
+
     // extract the rgb numbers
     m = getComputedStyle(div).color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
-    if( m) {
-        return "rgb("+m[1]+","+m[2]+","+m[3]+")";
-    } 
+    if (m) {
+        return "rgb(" + m[1] + "," + m[2] + "," + m[3] + ")";
+    }
     return undefined;
 }
-    
+
 
 
 //**************************************************************
 // picUrl = identifyPicUrl( value )
 // TODO - return "" if value is not a valid URI
 //   Otherwise return the value
-	        
-function identifyPicUrl( value ) {
-    
+
+function identifyPicUrl(value) {
+
     return value;
 }
 
@@ -1704,14 +1728,14 @@ function identifyPicUrl( value ) {
 // - if there is one return the link (which indicates with it's
 //   mark reviewed, or reviewed)
 
-function getReviewStatus( vtbgen ) {
+function getReviewStatus(vtbgen) {
     // get parent    
     var parent = jQuery(vtbgen).parent();
-    
+
     // check to see if it has the anchor with class button-5
     review = jQuery(parent).find("a.button-5");
-    
-    if ( review.length === 0) {
+
+    if (review.length === 0) {
         return undefined
     } else {
         return jQuery(review).attr("href");
@@ -1723,7 +1747,7 @@ function getReviewStatus( vtbgen ) {
 // regular expression magic to split it up into its component parts
 
 function parse_parameters(cmdline) {
-//    var re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
+    //    var re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
     var re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
     var next_arg = ['', '', cmdline];
     var args = [];
