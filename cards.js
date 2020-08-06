@@ -303,7 +303,6 @@ cardHtmlTemplate[HORIZONTAL] = `
   <div class="clickablecard w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}" class="cardmainlink"></a>
-      <!-- <div class="bg-contain bg-no-repeat h-48" style="background-image: url -->
       <div class="{BG_SIZE} h-48" style="background-image: url('{PIC_URL}'); background-color: rgb(255,255,255)">{IFRAME}
       </div>
       <div class="carddescription p-4 flex-1 flex flex-col">
@@ -348,7 +347,10 @@ cardHtmlTemplate[VERTICAL] = `
 cardHtmlTemplate[HORIZONTAL_NOENGAGE] = `
   <div class="w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
-      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}</div></a>
+      <a href="{LINK}">
+      <div class="{BG_SIZE} h-48" style="background-image: url('{PIC_URL}');">
+          {IFRAME}
+      </div></a>
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
         {LABEL} {MODULE_NUM}
