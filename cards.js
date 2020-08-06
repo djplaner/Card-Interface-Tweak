@@ -343,22 +343,20 @@ cardHtmlTemplate[VERTICAL] = `
 </a>
 `;
 
-
 cardHtmlTemplate[HORIZONTAL_NOENGAGE] = `
-  <div class="w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
+  <div class="clickablecard w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
-      <a href="{LINK}">
+    <a href="{LINK}" class="cardmainlink"></a>
       <div class="{BG_SIZE} h-48" style="background-image: url('{PIC_URL}');">
           {IFRAME}
-      </div></a>
+      </div>
       <div class="p-4 flex-1 flex flex-col">
-       <a href="{LINK}">
+       
         {LABEL} {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
         <div class="carddescription mb-4 flex-1">
           {DESCRIPTION}
         </div>
-        </a>
          {DATE} 
          {LINK_ITEM}
          {REVIEW_ITEM}
@@ -776,7 +774,7 @@ NEW_DOCUMENTATION_HTML = `
 // Big kludge for HDR
 
 function hideJourney($) {
-    console.log("---------- RUNNING THE tmp script");
+    //console.log("---------- RUNNING THE tmp script");
 
     var tweak_bb_active_url_pattern = "listContent.jsp";
     window.tweak_bb = {
@@ -931,9 +929,9 @@ function cardsInterface($) {
     var cards = document.querySelectorAll(".clickablecard");
     //var cards = document.querySelectorAll(".cardmainlink");
     for (i = 0; i < cards.length; i++) {
-        cards[i].addEventListener('click', function () {
+        cards[i].addEventListener('click', function (event) {
             var link = this.querySelector(".cardmainlink");
-
+            
             if (link !== null) {
                 // prevent clicking on a undefined blackboard link
                 if (link.match(/blackboard\/content\/undefined$/)) {
