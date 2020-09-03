@@ -54,9 +54,10 @@ The card interface produced by the Tweak needs to appear in a content item on th
    Current advice is to leave this content item empty. The tweak will add content to it.
 2. Choose the type of card interface you wish by ignoring this step (accept the default) or adding one of the following words after **Card Interface**
     * **vertical** for one card per row with elements of a single card displayed horizontally
-    * **by5** to have 5 cards per row
+    * **by*X*** where *X* is some number specifying how many cards per row (e.g. by2 by4 by5 etc.)
     * **by5no** to have 5 cards per row without any image
     * **noengage** if you'd prefer not to have the "Engage" button appear for content folders
+    * **engage="*someLabel*"** if you'd prefer to change "Engage" to "*someLabel*" (you choose what *someLable* is)
 
 #### Step 3. Specify the content item(s)/folder(s) you want to appear as a card
 
