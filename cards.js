@@ -63,21 +63,22 @@ var TERM_DATES = {
     },
     // OUA 2020 Study Period 3
     "2205": {
-        "0": { "start": "2020-08-31", "stop": "2020-09-06" },
-        "1": { "start": "2020-09-07", "stop": "2020-09-13" },
-        "2": { "start": "2020-09-14", "stop": "2020-09-20" },
-        "3": { "start": "2020-09-21", "stop": "2020-09-27" },
-        "4": { "start": "2020-09-28", "stop": "2020-10-04" },
-        "5": { "start": "2020-10-05", "stop": "2020-10-11" },
-        "6": { "start": "2020-10-12", "stop": "2020-10-19" },
-        "7": { "start": "2020-10-19", "stop": "2020-10-25" },
-        "8": { "start": "2020-10-26", "stop": "2020-11-01" },
-        "9": { "start": "2020-11-02", "stop": "2020-11-08" },
-        "10": { "start": "2020-11-09", "stop": "2020-11-15" },
-        "11": { "start": "2020-11-16", "stop": "2020-11-22" },
-        "12": { "start": "2020-11-23", "stop": "2020-11-29" },
-        "13": { "start": "2020-11-30", "stop": "2020-12-06" },
-        "14": { "start": "2020-12-07", "stop": "2020-12-13" },
+        "0": { "start": "2020-08-24", "stop": "2020-09-30" },
+        "1": { "start": "2020-08-31", "stop": "2020-09-06" },
+        "2": { "start": "2020-09-07", "stop": "2020-09-13" },
+        "3": { "start": "2020-09-14", "stop": "2020-09-20" },
+        "4": { "start": "2020-09-21", "stop": "2020-09-27" },
+        "5": { "start": "2020-09-28", "stop": "2020-10-04" },
+        "6": { "start": "2020-10-05", "stop": "2020-10-11" },
+        "7": { "start": "2020-10-12", "stop": "2020-10-19" },
+        "8": { "start": "2020-10-19", "stop": "2020-10-25" },
+        "9": { "start": "2020-10-26", "stop": "2020-11-01" },
+        "10": { "start": "2020-11-02", "stop": "2020-11-08" },
+        "11": { "start": "2020-11-09", "stop": "2020-11-15" },
+        "12": { "start": "2020-11-16", "stop": "2020-11-22" },
+        "13": { "start": "2020-11-23", "stop": "2020-11-29" },
+        "14": { "start": "2020-11-30", "stop": "2020-12-06" },
+        "15": { "start": "2020-12-07", "stop": "2020-12-13" },
         /* End of study period 4 */
         "exam": { "start": "2020-12-07", "stop": "2020-12-13" },
         // No exam ?? "exam" : { "start": "2019-10-10", "stop" : "2019-10-19" }
@@ -303,7 +304,6 @@ cardHtmlTemplate[HORIZONTAL] = `
   <div class="clickablecard w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="{LINK}" class="cardmainlink"></a>
-      <!-- <div class="bg-contain bg-no-repeat h-48" style="background-image: url -->
       <div class="{BG_SIZE} h-48" style="background-image: url('{PIC_URL}'); background-color: rgb(255,255,255)">{IFRAME}
       </div>
       <div class="carddescription p-4 flex-1 flex flex-col">
@@ -344,19 +344,20 @@ cardHtmlTemplate[VERTICAL] = `
 </a>
 `;
 
-
 cardHtmlTemplate[HORIZONTAL_NOENGAGE] = `
-  <div class="w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
+  <div class="clickablecard w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
-      <a href="{LINK}"><div class="bg-cover bg-yellow-lightest h-48" style="background-image: url('{PIC_URL}');">{IFRAME}</div></a>
+    <a href="{LINK}" class="cardmainlink"></a>
+      <div class="{BG_SIZE} h-48" style="background-image: url('{PIC_URL}');">
+          {IFRAME}
+      </div>
       <div class="p-4 flex-1 flex flex-col">
-       <a href="{LINK}">
+       
         {LABEL} {MODULE_NUM}
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
         <div class="carddescription mb-4 flex-1">
           {DESCRIPTION}
         </div>
-        </a>
          {DATE} 
          {LINK_ITEM}
          {REVIEW_ITEM}
@@ -774,7 +775,7 @@ NEW_DOCUMENTATION_HTML = `
 // Big kludge for HDR
 
 function hideJourney($) {
-    console.log("---------- RUNNING THE tmp script");
+    //console.log("---------- RUNNING THE tmp script");
 
     var tweak_bb_active_url_pattern = "listContent.jsp";
     window.tweak_bb = {
@@ -929,9 +930,9 @@ function cardsInterface($) {
     var cards = document.querySelectorAll(".clickablecard");
     //var cards = document.querySelectorAll(".cardmainlink");
     for (i = 0; i < cards.length; i++) {
-        cards[i].addEventListener('click', function () {
+        cards[i].addEventListener('click', function (event) {
             var link = this.querySelector(".cardmainlink");
-
+            
             if (link !== null) {
                 // prevent clicking on a undefined blackboard link
                 if (link.match(/blackboard\/content\/undefined$/)) {

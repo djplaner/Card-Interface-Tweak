@@ -2,6 +2,12 @@
 
 A bit of digital renovation for Blackboard 9.1 in the form of some Javascript and CSS that can be used to transform a standard Blackboard content page (a collection) of items into responsive, image rich [card interface](https://www.smashingmagazine.com/2016/10/designing-card-based-user-interfaces/). A transformation that can be accomplished with minimal technical knowledge.
 
+## Documentation
+
+Is a work in progress. Rough early "how-to" instructions below. More [refined documentation available as a Word doc](\\staff.ad.griffith.edu.au\ud\fr\s2986288\Documents\GitHub\Card-Interface-Tweak). Better coming here - real soon now. 
+
+## Origins and rationale
+
 The [following conference paper](https://djon.es/blog/2019/08/08/exploring-knowledge-reuse-in-design-for-digital-learning-tweaks-h5p-constructive-templates-and-casa/) and [associated presetation](https://djon.es/blog/2019/11/28/how-to-share-design-knowledge-in-design-for-digital-learning/) contain more background and theory about this approach
 > Jones, D. (2019). Exploring knowledge reuse in design for digital learning: Tweaks, H5P, CASA and constructive templates. In Y. W. Chew, K. M. Chan, & A. Alphonso (Eds.), Personalised Learning. Diverse Goals. One Heart. ASCILITE 2019 (pp. 139–148).
 
@@ -48,9 +54,10 @@ The card interface produced by the Tweak needs to appear in a content item on th
    Current advice is to leave this content item empty. The tweak will add content to it.
 2. Choose the type of card interface you wish by ignoring this step (accept the default) or adding one of the following words after **Card Interface**
     * **vertical** for one card per row with elements of a single card displayed horizontally
-    * **by5** to have 5 cards per row
+    * **by*X*** where *X* is some number specifying how many cards per row (e.g. by2 by4 by5 etc.)
     * **by5no** to have 5 cards per row without any image
     * **noengage** if you'd prefer not to have the "Engage" button appear for content folders
+    * **engage="*someLabel*"** if you'd prefer to change "Engage" to "*someLabel*" (you choose what *someLable* is)
 
 #### Step 3. Specify the content item(s)/folder(s) you want to appear as a card
 
