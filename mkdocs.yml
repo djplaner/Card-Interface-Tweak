@@ -1,1 +1,9 @@
-site_name: My Docs
+site_name: Card Interface
+theme:
+  name: material
+nav:
+  - Home: 'index.md'
+  - Why & What: 'whatWhy.md'
+  - Create Cards: 'createCards.md' 
+  - Customise Single Cards: 'customiseIndividualCards.md'
+  - Customise Card Interface: 'customiseCardInterface.md'
