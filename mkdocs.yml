@@ -7,3 +7,6 @@ nav:
   - Create Cards: 'createCards.md' 
   - Customise a card: 'customiseACard.md'
   - Customise all cards: 'customiseAllCards.md'
+markdown_extensions:
+  - toc:
+      permalink: true
