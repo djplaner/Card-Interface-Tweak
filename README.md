@@ -1,6 +1,7 @@
 # Card Interface Tweak
 
-A bit of digital renovation for Blackboard 9.1 in the form of some Javascript and CSS that can be used to transform a standard Blackboard content page (a collection) of items into responsive, image rich [card interface](https://www.smashingmagazine.com/2016/10/designing-card-based-user-interfaces/). A transformation that can be accomplished with minimal technical knowledge.
+Insert a bit of Javascript into a [Blackboard Learn](https://en.wikipedia.org/wiki/Blackboard_Learn) content area and transform it into a responsive, image rich [card interface](https://www.smashingmagazine.com/2016/10/designing-card-based-user-interfaces/). 
+
 
 ## Documentation
 

@@ -5,5 +5,5 @@ nav:
   - Home: 'index.md'
   - Why & What: 'whatWhy.md'
   - Create Cards: 'createCards.md' 
-  - Customise Single Cards: 'customiseIndividualCards.md'
-  - Customise Card Interface: 'customiseCardInterface.md'
+  - Customise a card: 'customiseACard.md'
+  - Customise all cards: 'customiseAllCards.md'
