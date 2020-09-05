@@ -8,7 +8,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Convert a Blackboard Learn content area into a contemporary card interface.">
       
+      
+        <link rel="canonical" href="https://djplaner.github.io/Card-Interface-Tweak/createCards/">
+      
+      
+        <meta name="author" content="David Jones">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
@@ -60,7 +66,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="Card Interface" class="md-header-nav__button md-logo" aria-label="Card Interface">
+    <a href="https://djplaner.github.io/Card-Interface-Tweak/" title="Card Interface" class="md-header-nav__button md-logo" aria-label="Card Interface">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -134,7 +140,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Card Interface" class="md-nav__button md-logo" aria-label="Card Interface">
+    <a href="https://djplaner.github.io/Card-Interface-Tweak/" title="Card Interface" class="md-nav__button md-logo" aria-label="Card Interface">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -246,8 +252,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../customiseIndividualCards/" title="Customise Single Cards" class="md-nav__link">
-      Customise Single Cards
+    <a href="../customiseACard/" title="Customise a card" class="md-nav__link">
+      Customise a card
     </a>
   </li>
 
@@ -258,8 +264,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../customiseCardInterface/" title="Customise Card Interface" class="md-nav__link">
-      Customise Card Interface
+    <a href="../customiseAllCards/" title="Customise all cards" class="md-nav__link">
+      Customise all cards
     </a>
   </li>
 
@@ -332,11 +338,11 @@
                 
                 
                 <p>How to create cards</p>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
 <p>There is a simple three step process to create cards and the card interface. The following sections work through each of these. Steps 1 and 2 only need to be done once for each Blackboard page on which you want to use the Card Interface. Step 3 is repeated for as many times as you want cards.</p>
-<h3 id="pre-requisites">Pre-requisites</h3>
+<h3 id="pre-requisites">Pre-requisites<a class="headerlink" href="#pre-requisites" title="Permanent link">&para;</a></h3>
 <p>The following assumes that you have a Blackboard site for which you have permission to create content. It also assumes that within that course you have a <a href="https://help.blackboard.com/Learn/Instructor/Course_Content/Create_Content/Create_Containers_for_Content">content area or content folder</a> on which you want to use the card interface.</p>
-<h2 id="step-1-add-the-tweak-javascript">Step 1. Add the tweak javascript</h2>
+<h2 id="step-1-add-the-tweak-javascript">Step 1. Add the tweak javascript<a class="headerlink" href="#step-1-add-the-tweak-javascript" title="Permanent link">&para;</a></h2>
 <p>The Card Interface is implement with some Javascript that transforms the original Blackboard content into the Card Interface. For this to work, the Javascript must be added to the page using the following steps.</p>
 <ol>
 <li>Copy all of the tweak code on <a href="https://raw.githubusercontent.com/djplaner/Card-Interface-Tweak/master/tweak.js">this page</a> into your clipboard.</li>
@@ -346,7 +352,7 @@ It doesn’t matter what name you call this content item. It will not be visible
 <li>Save and submit your changes.</li>
 </ol>
 <p>This step only needs to be done once.</p>
-<h2 id="step-2-create-a-content-item-for-the-cards-to-appear">Step 2. Create a content item for the cards to appear</h2>
+<h2 id="step-2-create-a-content-item-for-the-cards-to-appear">Step 2. Create a content item for the cards to appear<a class="headerlink" href="#step-2-create-a-content-item-for-the-cards-to-appear" title="Permanent link">&para;</a></h2>
 <p>The Javascript you added in the last step will generate the card interface, but it needs somewhere to put that interface. That’s the aim of this step.</p>
 <ol>
 <li>Create a new Blackboard content item on your page.</li>
@@ -355,7 +361,7 @@ It doesn’t matter what name you call this content item. It will not be visible
 <li>Save your changes</li>
 </ol>
 <p>This step only needs to be done once.</p>
-<h2 id="step-3-specify-or-add-the-item-to-appear-as-a-card">Step 3. Specify (or add) the item to appear as a card</h2>
+<h2 id="step-3-specify-or-add-the-item-to-appear-as-a-card">Step 3. Specify (or add) the item to appear as a card<a class="headerlink" href="#step-3-specify-or-add-the-item-to-appear-as-a-card" title="Permanent link">&para;</a></h2>
 <p>The last step is to create the cards. Each card is based on a single Blackboard content item.</p>
 <ol>
 <li>Create a ne Blackboard content item on your page.</li>
@@ -403,13 +409,13 @@ It doesn’t have to be in bold, but it should include the colon.</li>
           </a>
         
         
-          <a href="../customiseIndividualCards/" title="Customise Single Cards" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../customiseACard/" title="Customise a card" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Customise Single Cards
+                Customise a card
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
