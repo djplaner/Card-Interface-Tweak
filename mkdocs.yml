@@ -1,6 +1,17 @@
 site_name: Card Interface
+site_url: https://djplaner.github.io/Card-Interface-Tweak/
+site_author: David Jones
+site_description: >-
+  Convert a Blackboard Learn content area into a contemporary card interface.
+
+# Configuration
 theme:
   name: material
+
+  language: en
+#  features:
+#    - tabs
+
 nav:
   - Home: 'index.md'
   - Why & What: 'whatWhy.md'
@@ -8,5 +19,5 @@ nav:
   - Customise a card: 'customiseACard.md'
   - Customise all cards: 'customiseAllCards.md'
 markdown_extensions:
-  - toc:
+  - markdown.extensions.toc:
       permalink: true

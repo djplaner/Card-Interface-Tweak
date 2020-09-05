@@ -1,6 +1,6 @@
-Card Interface Demonstration and Instructions
+# What and why?
 
-# What? 
+## What? 
 
 This module \(available as a [Word document](https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/EZzxe0eYGtxLvTfqRdyKskIB340arO4r80gZxIQ7pxqIKg?e=1SR5l3) and [on Learning@Griffith](https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_4411328_1&course_id=_73051_1)\) offers an explanation of why and how to use [the Card Interface tweak](https://github.com/djplaner/Card-Interface-Tweak) in Learning@Griffith\. The Card Interface tweak provides a simple way to transform a list of Blackboard items \(Figure 1\) into a visual, responsive and contemporary [card interface](https://www.smashingmagazine.com/2016/10/designing-card-based-user-interfaces/) \(Figure 2\)\. Perfect for representing collections of modules or assessments\.
 

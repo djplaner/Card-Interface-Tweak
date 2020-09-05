@@ -62,7 +62,7 @@ The Card Interface Tweak is a bit of Javascript/CSS that will transform a standa
       </div>
       </a>
       <div class="carddescription p-2 flex-1 flex flex-col pt-0">
-        <h3 class="mb-1 text-2xl"><a href="custommiseACard/" class="text-black no-underline hover:underline">Customise a Card</a></h3>
+        <h3 class="mb-1 text-2xl"><a href="customiseACard/" class="text-black no-underline hover:underline">Customise a Card</a></h3>
         <div class="mb-1 flex-1">
            <p class="pb-1">How do you:</p>
            <ul>
@@ -86,11 +86,11 @@ The Card Interface Tweak is a bit of Javascript/CSS that will transform a standa
     <!--<div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> Relative could go -->
     <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
       <a href="customiseAllCards/">
-      <div class="bg-cover h-48 hover:outline-none hover:shadow-outline bg-white rounded-t-lg shadow-lg overflow-hidden flex-1 flex flex-col relative" style="background-image: url('https://live.staticflickr.com/5533/9720306280_5710d5c4cd_c_d.jpg'); background-color: rgb(255,255,255)">
+      <div class="bg-cover h-48 hover:outline-none hover:shadow-outline bg-white rounded-t-lg shadow-lg overflow-hidden flex-1 flex flex-col relative" style="background-image: url('https://live.staticflickr.com/65535/49629884077_b519916d0d_c_d.jpg'); background-color: rgb(255,255,255)">
       </div>
       </a>
       <div class="carddescription p-2 flex-1 flex flex-col pt-0">
-        <h3 class="mb-1 text-2xl"><a href="custommiseAllCards/" class="text-black no-underline hover:underline">Customise all cards</a></h3>
+        <h3 class="mb-1 text-2xl"><a href="customiseAllCards/" class="text-black no-underline hover:underline">Customise all cards</a></h3>
         <div class="mb-1 flex-1">
            <p class="pb-1">How do you:</p>
            <ul>
@@ -120,3 +120,5 @@ The Card Interface Tweak is a bit of Javascript/CSS that will transform a standa
 ["Creation"](https://www.flickr.com/photos/92559558@N04/15323880649/) by [Ha Jeong Jeong](https://www.flickr.com/photos/92559558@N04/) is licensed under [CC BY-SA 2.0](http://creativecommons.org/licenses/by-sa/2.
 
 ["Custom"](https://www.flickr.com/photos/86755183@N04/9720306280/) by [Fred More](https://www.flickr.com/photos/86755183@N04/) is licensed under [CC BY-NC 2.0](http://creativecommons.org/licenses/by-nc/2.
+
+["Nakuru, The Lake of 1,000,000 Flamingos"](https://www.flickr.com/photos/rayinmanila/49629884077/) by [Ray in Manilla](ihttps://www.flickr.com/photos/rayinmanila/) is licensed under [CC BY 2.0](http://creativecommons.org/licenses/by/2.
