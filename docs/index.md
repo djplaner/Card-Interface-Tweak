@@ -1,11 +1,14 @@
 # Card Interface Tweak documentation
 
+## Introduction
+
 The Card Interface Tweak is a bit of Javascript/CSS that will transform a standard [Blackboard Learn](https://en.wikipedia.org/wiki/Blackboard_Learn) content area into a responsive, image rich [card interface](https://www.smashingmagazine.com/2016/10/designing-card-based-user-interfaces/).
 
 | **Before** | **After**| 
 | --- | ---- |
 | ![Normal Bb Learn content area](images/before.png) | ![Transformed into Card Interface](images/after.png) |
 
+## Documentation
 
 <link rel="stylesheet" href="https://s3.amazonaws.com/filebucketdave/banner.js/cards.css">
 <div id="guCardInterface" class="flex flex-wrap">
@@ -112,8 +115,15 @@ The Card Interface Tweak is a bit of Javascript/CSS that will transform a standa
 
 </div>
 
+## Inspiration
 
-### Image Attribution
+Initial inspiration from [the Blackboard Tweaks building block](http://tweaks.github.io/Tweaks/).
+
+## References
+
+Jones, D. (2019). [Exploring knowledge reuse in design for digital learning: Tweaks, H5P, CASA and constructive templates](https://djon.es/blog/2019/08/08/exploring-knowledge-reuse-in-design-for-digital-learning-tweaks-h5p-constructive-templates-and-casa/). In Y. W. Chew, K. M. Chan, & A. Alphonso (Eds.), Personalised Learning. Diverse Goals. One Heart. ASCILITE 2019 (pp. 139–148).
+
+## Attribution
 
 ["Question mark, Ipswich, 21 January 2010"](https://www.flickr.com/photos/omcoc/6751047205) by [ed_needs_a_bicycle](https://www.flickr.com/photos/omcoc/6751047205) is licensed under [CC BY-NC-SA 2.0](http://creativecommons.org/licenses/by-nc-sa/2.
 
