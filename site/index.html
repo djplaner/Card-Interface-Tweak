@@ -8,7 +8,13 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="Convert a Blackboard Learn content area into a contemporary card interface.">
       
+      
+        <link rel="canonical" href="https://djplaner.github.io/Card-Interface-Tweak/">
+      
+      
+        <meta name="author" content="David Jones">
       
       <link rel="shortcut icon" href="assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-5.5.12">
@@ -60,7 +66,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="." title="Card Interface" class="md-header-nav__button md-logo" aria-label="Card Interface">
+    <a href="https://djplaner.github.io/Card-Interface-Tweak/" title="Card Interface" class="md-header-nav__button md-logo" aria-label="Card Interface">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -134,7 +140,7 @@
                   <div class="md-sidebar__inner">
                     <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="Card Interface" class="md-nav__button md-logo" aria-label="Card Interface">
+    <a href="https://djplaner.github.io/Card-Interface-Tweak/" title="Card Interface" class="md-nav__button md-logo" aria-label="Card Interface">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -182,22 +188,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting started
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#changing-a-card" class="md-nav__link">
-    Changing a card
+  <a href="#documentation" class="md-nav__link">
+    Documentation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#changing-the-appearance" class="md-nav__link">
-    Changing the appearance
+  <a href="#inspiration" class="md-nav__link">
+    Inspiration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attribution" class="md-nav__link">
+    Attribution
   </a>
   
 </li>
@@ -239,8 +259,8 @@
 
 
   <li class="md-nav__item">
-    <a href="customiseIndividualCards/" title="Customise Single Cards" class="md-nav__link">
-      Customise Single Cards
+    <a href="customiseACard/" title="Customise a card" class="md-nav__link">
+      Customise a card
     </a>
   </li>
 
@@ -251,8 +271,8 @@
 
 
   <li class="md-nav__item">
-    <a href="customiseCardInterface/" title="Customise Card Interface" class="md-nav__link">
-      Customise Card Interface
+    <a href="customiseAllCards/" title="Customise all cards" class="md-nav__link">
+      Customise all cards
     </a>
   </li>
 
@@ -281,22 +301,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting started
+  <a href="#introduction" class="md-nav__link">
+    Introduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#changing-a-card" class="md-nav__link">
-    Changing a card
+  <a href="#documentation" class="md-nav__link">
+    Documentation
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#changing-the-appearance" class="md-nav__link">
-    Changing the appearance
+  <a href="#inspiration" class="md-nav__link">
+    Inspiration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    References
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attribution" class="md-nav__link">
+    Attribution
   </a>
   
 </li>
@@ -317,13 +351,14 @@
                   
                 
                 
-                <h1 id="card-interface-tweak-documentation">Card Interface Tweak documentation</h1>
+                <h1 id="card-interface-tweak-documentation">Card Interface Tweak documentation<a class="headerlink" href="#card-interface-tweak-documentation" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>The Card Interface Tweak is a bit of Javascript/CSS that will transform a standard <a href="https://en.wikipedia.org/wiki/Blackboard_Learn">Blackboard Learn</a> content area into a responsive, image rich <a href="https://www.smashingmagazine.com/2016/10/designing-card-based-user-interfaces/">card interface</a>.</p>
 <table>
 <thead>
 <tr>
-<th>Before</th>
-<th>After</th>
+<th><strong>Before</strong></th>
+<th><strong>After</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -333,25 +368,116 @@
 </tr>
 </tbody>
 </table>
-<h2 id="getting-started">Getting started</h2>
-<p>Learn about</p>
-<ul>
-<li>the <a href="whatWhy/">what and why</a> of the Card Interface</li>
-<li>adding the Card Interface to a Content Area</li>
-</ul>
-<h2 id="changing-a-card">Changing a card</h2>
-<p>How do you</p>
-<ul>
-<li>Add an image to a card</li>
-<li>using a URL, or</li>
-<li>uploading to Blackboard</li>
-<li>Make an image fit neatly in a card</li>
-<li>Use a background colour instead of an image</li>
-<li>Add or change the date</li>
-<li>Use different card types and labels</li>
-<li>Hide a card</li>
-</ul>
-<h2 id="changing-the-appearance">Changing the appearance</h2>
+<h2 id="documentation">Documentation<a class="headerlink" href="#documentation" title="Permanent link">&para;</a></h2>
+<p><link rel="stylesheet" href="https://s3.amazonaws.com/filebucketdave/banner.js/cards.css">
+<div id="guCardInterface" class="flex flex-wrap"></p>
+<p><div class="clickablecard w-full sm:w-1/2 md:w-1/2 flex flex-col p-1">
+    <!--<div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> Relative could go -->
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
+      <a href="whatWhy/">
+      <div class="bg-cover h-48 hover:outline-none hover:shadow-outline bg-white rounded-t-lg shadow-lg overflow-hidden flex-1 flex flex-col relative" style="background-image: url(' https://live.staticflickr.com/7158/6751047205_2df88f2ddc_c_d.jpg'); background-color: rgb(255,255,255)">
+      </div>
+      </a>
+      <div class="carddescription p-2 flex-1 flex flex-col pt-0">
+        <h3 class="mb-1 text-2xl"><a href="whatWhy/" class="text-black no-underline hover:underline">What and why?</a></h3>
+        <div class="mb-1 flex-1">
+           <p class="pb-1">What does it do? Why is this an educationally good idea?</p> 
+        </div>
+        <p>&nbsp;<br> </p>
+        <div class="p-2 absolute pin-r pin-b">
+           <a href="whatWhy/" class="gu-engage"><div class="hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+            Engage
+        </div>
+        </div>
+      </div>
+    </div>
+  </div></p>
+<p><div class="clickablecard w-full sm:w-1/2 md:w-1/2 flex flex-col p-1">
+    <!--<div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> Relative could go -->
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
+      <a href="createCards/">
+      <div class="bg-cover h-48 hover:outline-none hover:shadow-outline bg-white rounded-t-lg shadow-lg overflow-hidden flex-1 flex flex-col relative" style="background-image: url('https://live.staticflickr.com/5604/15323880649_b9332d888c_c_d.jpg'); background-color: rgb(255,255,255)">
+      </div>
+      </a>
+      <div class="carddescription p-2 flex-1 flex flex-col pt-0">
+        <h3 class="mb-1 text-2xl"><a href="createCards/" class="text-black no-underline hover:underline">Create Cards</a></h3>
+        <div class="mb-1 flex-1">
+           <p class="pb-1">How do you add cards to your Blackboard Learn content area?</p> 
+        </div>
+        <p>&nbsp;<br> </p>
+        <div class="p-2 absolute pin-r pin-b">
+           <a href="createCards/" class="gu-engage"><div class="hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+            Engage
+        </div>
+        </div>
+      </div>
+    </div>
+  </div></p>
+<p><div class="clickablecard w-full sm:w-1/2 md:w-1/2 flex flex-col p-1">
+    <!--<div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> Relative could go -->
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
+      <a href="customiseACard/">
+      <div class="bg-cover h-48 hover:outline-none hover:shadow-outline bg-white rounded-t-lg shadow-lg overflow-hidden flex-1 flex flex-col relative" style="background-image: url('https://live.staticflickr.com/5533/9720306280_5710d5c4cd_c_d.jpg'); background-color: rgb(255,255,255)">
+      </div>
+      </a>
+      <div class="carddescription p-2 flex-1 flex flex-col pt-0">
+        <h3 class="mb-1 text-2xl"><a href="customiseACard/" class="text-black no-underline hover:underline">Customise a Card</a></h3>
+        <div class="mb-1 flex-1">
+           <p class="pb-1">How do you:</p>
+           <ul>
+             <li> Add an image? </li>
+             <li> Use a background colour?</li>
+             <li> Add a date or date range?</li>
+             <li> Change/remove the label? </li>
+           </ul>
+        </div>
+        <p>&nbsp;<br> </p>
+        <div class="p-2 absolute pin-r pin-b">
+           <a href="customiseACard/" class="gu-engage"><div class="hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+            Engage
+        </div>
+        </div>
+      </div>
+    </div>
+  </div></p>
+<p><div class="clickablecard w-full sm:w-1/2 md:w-1/2 flex flex-col p-1">
+    <!--<div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> Relative could go -->
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
+      <a href="customiseAllCards/">
+      <div class="bg-cover h-48 hover:outline-none hover:shadow-outline bg-white rounded-t-lg shadow-lg overflow-hidden flex-1 flex flex-col relative" style="background-image: url('https://live.staticflickr.com/65535/49629884077_b519916d0d_c_d.jpg'); background-color: rgb(255,255,255)">
+      </div>
+      </a>
+      <div class="carddescription p-2 flex-1 flex flex-col pt-0">
+        <h3 class="mb-1 text-2xl"><a href="customiseAllCards/" class="text-black no-underline hover:underline">Customise all cards</a></h3>
+        <div class="mb-1 flex-1">
+           <p class="pb-1">How do you:</p>
+           <ul>
+             <li> Select a different card template? </li>
+             <li> Change the number of cards per row?</li>
+             <li> Change/remove "Engage"? </li>
+             <li> Change the order of cards?</li>
+           </ul>
+        </div>
+        <p>&nbsp;<br> </p>
+        <div class="p-2 absolute pin-r pin-b">
+           <a href="customiseAllCards/" class="gu-engage"><div class="hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">
+               Engage
+        </div></a>
+        </div>
+      </div>
+    </div>
+  </div></p>
+</div>
+
+<h2 id="inspiration">Inspiration<a class="headerlink" href="#inspiration" title="Permanent link">&para;</a></h2>
+<p>Initial inspiration from <a href="http://tweaks.github.io/Tweaks/">the Blackboard Tweaks building block</a>.</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<p>Jones, D. (2019). <a href="https://djon.es/blog/2019/08/08/exploring-knowledge-reuse-in-design-for-digital-learning-tweaks-h5p-constructive-templates-and-casa/">Exploring knowledge reuse in design for digital learning: Tweaks, H5P, CASA and constructive templates</a>. In Y. W. Chew, K. M. Chan, &amp; A. Alphonso (Eds.), Personalised Learning. Diverse Goals. One Heart. ASCILITE 2019 (pp. 139–148).</p>
+<h2 id="attribution">Attribution<a class="headerlink" href="#attribution" title="Permanent link">&para;</a></h2>
+<p><a href="https://www.flickr.com/photos/omcoc/6751047205">"Question mark, Ipswich, 21 January 2010"</a> by <a href="https://www.flickr.com/photos/omcoc/6751047205">ed_needs_a_bicycle</a> is licensed under [CC BY-NC-SA 2.0](http://creativecommons.org/licenses/by-nc-sa/2.</p>
+<p><a href="https://www.flickr.com/photos/92559558@N04/15323880649/">"Creation"</a> by <a href="https://www.flickr.com/photos/92559558@N04/">Ha Jeong Jeong</a> is licensed under [CC BY-SA 2.0](http://creativecommons.org/licenses/by-sa/2.</p>
+<p><a href="https://www.flickr.com/photos/86755183@N04/9720306280/">"Custom"</a> by <a href="https://www.flickr.com/photos/86755183@N04/">Fred More</a> is licensed under [CC BY-NC 2.0](http://creativecommons.org/licenses/by-nc/2.</p>
+<p><a href="https://www.flickr.com/photos/rayinmanila/49629884077/">"Nakuru, The Lake of 1,000,000 Flamingos"</a> by <a href="ihttps://www.flickr.com/photos/rayinmanila/">Ray in Manilla</a> is licensed under [CC BY 2.0](http://creativecommons.org/licenses/by/2.</p>
                 
               
               
