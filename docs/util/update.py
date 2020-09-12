@@ -9,13 +9,12 @@ import mammoth
 from pathlib import Path
 import os
 
-#DESTINATION="\\staff.ad.griffith.edu.au\ud\fr\s2986288\Documents\GitHub\Card-Interface-Tweak\docs"
+DESTINATION=r"\\staff.ad.griffith.edu.au\ud\fr\s2986288\Documents\GitHub\Card-Interface-Tweak\docs"
 #DESTINATION="\\staff.ad.griffith.edu.au\ud\fr\s2986288\Documents\GitHub\Card-Interface-Tweak\docs"
 
 print( os.name)
 print(Path.home())
-SOURCE="C:\\Users\\s2986288\\OneDrive - Griffith University\\Software Development\\Documentation\\Card Interface Demo-Instructions"
-
+SOURCE=r"C:\\Users\\s2986288\\OneDrive - Griffith University\\Software Development\\Documentation\\Card Interface Demo-Instructions"
 
 STYLE_MAP = """
      p[style-name='Section Title'] => h1:fresh
@@ -75,15 +74,23 @@ STYLE_MAP = """
 
 PAGES = [
     {
-        "SOURCE" : "%s\Card Demo - update styles.docx" % SOURCE,
-        "DESTINATION" : "%s\\whatWhy.md" % DESTINATION
-    }
+        "SOURCE" : r"%s\Card Demo - update styles.docx" % SOURCE,
+        "DESTINATION" : r"%s\\whatWhy.md" % DESTINATION
+    },
+    {
+        "SOURCE" : r"%s\001 - How to create cards\How to create cards.docx" % SOURCE,
+        "DESTINATION" : r"%s\\createCards.md" % DESTINATION
+    },
+    {
+        "SOURCE" : r"%s\002 - How to customise a card\How to customise individual cards.docx" % SOURCE,
+        "DESTINATION" : r"%s\\customiseACard.md" % DESTINATION
+    },
 ]
 
 for page in PAGES: 
     with open( page["SOURCE"], "rb") as docx_file:
         result = mammoth.convert_to_markdown( docx_file)
 
-        with open( page["DESTINATION"], "wb") as md_file:
+        with open( page["DESTINATION"], "w", encoding="utf-8") as md_file:
            md_file.write(result.value) 
 #        print(result.value)
