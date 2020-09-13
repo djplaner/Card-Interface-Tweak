@@ -6,7 +6,7 @@
 # - hard-coded for a specific box
 
 import mammoth
-import commonmark
+import html2markdown
 from pathlib import Path
 import os
 
@@ -57,6 +57,7 @@ STYLE_MAP = """
      p[style-name='Note']:unordered-list(1) => div.ael-note > div.instructions > ul > li:fresh
      p[style-name='Note'] => div.ael-note > div.instructions > p:fresh
      p[style-name='Blackboard Card'] => div.bbCard:fresh
+     p[style-name='Heading 1'] => h2
      p[style-name='Blackboard Item Heading'] => h1.blackboard
      p[style-name='Blackboard Item Heading 2'] => h2.blackboard
      r[style-name='Blackboard Item Link'] => span.blackboardLink
@@ -88,16 +89,11 @@ PAGES = [
     },
 ]
 
-md_parser = commonmark.Parser()
-renderer = commonmark.HtmlRenderer()
-
 for page in PAGES: 
     with open( page["SOURCE"], "rb") as docx_file:
         result = mammoth.convert_to_html( docx_file)
-#        print(result.value)
 
-        ast = md_parser.parse(result.value)
-        html = renderer.render(ast)
+        md = html2markdown.convert(result.value)
         with open( page["DESTINATION"], "w", encoding="utf-8") as md_file:
-           md_file.write(html) 
+           md_file.write(md) 
 #        print(result.value)

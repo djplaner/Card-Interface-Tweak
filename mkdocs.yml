@@ -19,5 +19,8 @@ nav:
   - Customise a card: 'customiseACard.md'
   - Customise all cards: 'customiseAllCards.md'
 markdown_extensions:
-  - markdown.extensions.toc:
-      permalink: true
+  - toc:
+      permalink: '#'
+      baselevel: 1
+#  - markdown.extensions.toc:
+#      permalink: '#'
