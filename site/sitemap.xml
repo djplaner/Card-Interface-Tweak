@@ -1,43 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://djplaner.github.io/Card-Interface-Tweak/</loc>
-<<<<<<< HEAD
-     <lastmod>2020-09-05</lastmod>
+     <lastmod>2020-09-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://djplaner.github.io/Card-Interface-Tweak/whatWhy/</loc>
-     <lastmod>2020-09-05</lastmod>
+     <lastmod>2020-09-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://djplaner.github.io/Card-Interface-Tweak/createCards/</loc>
-     <lastmod>2020-09-05</lastmod>
+     <lastmod>2020-09-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://djplaner.github.io/Card-Interface-Tweak/customiseACard/</loc>
-     <lastmod>2020-09-05</lastmod>
+     <lastmod>2020-09-12</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/</loc>
-     <lastmod>2020-09-05</lastmod>
-=======
-     <lastmod>2020-09-06</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://djplaner.github.io/Card-Interface-Tweak/whatWhy/</loc>
-     <lastmod>2020-09-06</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://djplaner.github.io/Card-Interface-Tweak/createCards/</loc>
-     <lastmod>2020-09-06</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://djplaner.github.io/Card-Interface-Tweak/customiseACard/</loc>
-     <lastmod>2020-09-06</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/</loc>
-     <lastmod>2020-09-06</lastmod>
->>>>>>> 7b7dfb770bf0f2f80748d2fb16d131954fcee9b4
+     <lastmod>2020-09-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

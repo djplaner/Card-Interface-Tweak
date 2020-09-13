@@ -6,7 +6,6 @@
 # - hard-coded for a specific box
 
 import mammoth
-import commonmark
 from pathlib import Path
 import os
 
@@ -88,16 +87,10 @@ PAGES = [
     },
 ]
 
-md_parser = commonmark.Parser()
-renderer = commonmark.HtmlRenderer()
-
 for page in PAGES: 
     with open( page["SOURCE"], "rb") as docx_file:
-        result = mammoth.convert_to_html( docx_file)
-#        print(result.value)
+        result = mammoth.convert_to_markdown( docx_file)
 
-        ast = md_parser.parse(result.value)
-        html = renderer.render(ast)
         with open( page["DESTINATION"], "w", encoding="utf-8") as md_file:
-           md_file.write(html) 
+           md_file.write(result.value) 
 #        print(result.value)
