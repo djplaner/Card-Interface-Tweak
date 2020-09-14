@@ -22,5 +22,3 @@ markdown_extensions:
   - toc:
       permalink: '#'
       baselevel: 1
-#  - markdown.extensions.toc:
-#      permalink: '#'

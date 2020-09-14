@@ -1,6 +1,6 @@
-How to create cards
+# How to create cards
 
-# Introduction
+## Introduction
 
 To use the Card Interface you:
 
