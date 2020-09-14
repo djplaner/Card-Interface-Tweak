@@ -29,7 +29,7 @@ STYLE_MAP = """
      p[style-name='Normal'] => p:fresh
      p[style-name='Text body'] => p:fresh
      p[style-name='Textbody1'] => p:fresh
-     p[style-name='Picture'] => div.picture
+     p[style-name='Picture'] => div.picture > p:fresh
      p[style-name='Picture Right'] => div.pictureRight
      p[style-name='PictureRight'] => div.pictureRight
      r[style-name='University Date'] => span.universityDate
@@ -48,7 +48,7 @@ STYLE_MAP = """
      p[style-name='Reading']:ordered-list(1) => div.reading > div.instructions > ol > li:fresh
      p[style-name='Reading']:unordered-list(1) => div.reading > div.instructions > ul > li:fresh
      p[style-name='Reading'] => div.reading > div.instructions > p:fresh
-     p[style-name='Title'] => div.invisible
+     p[style-name='Title'] => h1
      p[style-name='Card'] => div.gu_card
      r[style-name='Emphasis'] => em:fresh
      p[style-name='Timeout'] => span.timeout
@@ -58,8 +58,10 @@ STYLE_MAP = """
      p[style-name='Note'] => div.ael-note > div.instructions > p:fresh
      p[style-name='Blackboard Card'] => div.bbCard:fresh
      p[style-name='Heading 1'] => h2
-     p[style-name='Blackboard Item Heading'] => h1.blackboard
-     p[style-name='Blackboard Item Heading 2'] => h2.blackboard
+     p[style-name='Heading 2'] => h3
+     p[style-name='Heading 3'] => h4
+     p[style-name='Blackboard Item Heading'] => h2.blackboard
+     p[style-name='Blackboard Item Heading 2'] => h1.blackboard
      r[style-name='Blackboard Item Link'] => span.blackboardLink
      p[style-name='Blackboard Item Link'] => span.blackboardlink
      r[style-name='Blackboard Item Link Char'] => span.blackboardLink
@@ -91,7 +93,7 @@ PAGES = [
 
 for page in PAGES: 
     with open( page["SOURCE"], "rb") as docx_file:
-        result = mammoth.convert_to_html( docx_file)
+        result = mammoth.convert_to_html( docx_file, style_map=STYLE_MAP)
 
         md = html2markdown.convert(result.value)
         with open( page["DESTINATION"], "w", encoding="utf-8") as md_file:
