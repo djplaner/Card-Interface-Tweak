@@ -1,6 +1,6 @@
-Card Interface Demonstration and Instructions
+# Card Interface Demonstration and Instructions
 
-# What? 
+## What? 
 
 The Card Interface transforms a list of [Blackboard Learn](https://en.wikipedia.org/wiki/Blackboard_Learn) items (e.g. Figure 1) into a visual, responsive and contemporary [card interface](https://www.smashingmagazine.com/2016/10/designing-card-based-user-interfaces/) (Figure 2). 
 
@@ -10,7 +10,7 @@ The Card Interface is a [collection of HTML and Javascript](https://raw.githubus
 
 Once a Blackboard page has finished being displayed the Card Interface will hide the original Blackboard items and displays the matching cards.
 
-# Why?
+## Why?
 
 Creating engaging, specific, visual and responsive content in Blackboard is hard. But at the same time, such content offers a better user experience and used appropriately can improve student cognition, emotions, interest and motivation (Leutner, 2014; Mayer, 2017). Fanshawe et al ([2020](https://er.educause.edu/blogs/2020/8/creating-emotional-engagement-in-online-learning)) suggests that the type of clear and logical organisation enabled by the Card Interface “positively impacts students’ performance, and helps students to feel like the experience they have accessing the course content and activities is important to the lecturer”.
 
