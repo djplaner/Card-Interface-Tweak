@@ -21,8 +21,5 @@ nav:
 markdown_extensions:
   - toc:
       permalink: '#'
-<<<<<<< HEAD
       baselevel: 1
-=======
-      baselevel: 1
->>>>>>> fa9298da1da569deb189e44241c51c791ce5168f
+      toc_depth: 2
