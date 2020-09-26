@@ -89,9 +89,14 @@ PAGES = [
         "SOURCE" : r"%s\002 - How to customise a card\How to customise individual cards.docx" % SOURCE,
         "DESTINATION" : r"%s\\customiseACard.md" % DESTINATION
     },
+    {
+        "SOURCE" : r"%s\003 - How to customise the card interface\How to customise the card interface.docx" % SOURCE,
+        "DESTINATION" : r"%s\\customiseAllCards.md" % DESTINATION
+    }
 ]
 
 for page in PAGES: 
+    print("WOrking on %s " % page["SOURCE"] )
     with open( page["SOURCE"], "rb") as docx_file:
         result = mammoth.convert_to_html( docx_file, style_map=STYLE_MAP)
 
