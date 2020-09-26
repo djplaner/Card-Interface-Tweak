@@ -633,7 +633,7 @@ INTRO_HTML = `
                     </h1>
                 </header>
                 <div class="p-2 md:p-4">
-                    <p>Changes may stop the Card Interface from working.</p>
+                    <p>Changes to this item may stop the Card Interface from working.</p>
                 </div>
             </article>
         </div>
@@ -647,7 +647,7 @@ INTRO_HTML = `
                     </h1>
                 </header>
                 <div class="p-2 md:p-4">
-                    <p>If hidden the Card Interface will not work.</p>
+                    <p>If this item is hidden the Card Interface will not work.</p>
                 </div>
             </article>
         </div>
@@ -662,7 +662,7 @@ INTRO_HTML = `
                 </header>
                 <div class="p-2 md:p-4">
                     <p>
-                        You can add content to the Card Interface using the <a href="https://help.blackboard.com/Learn/Administrator/Hosting/Tools_Management/Content_Editor"> 
+                        You can add content to the Card Interface item using the <a target="_blank" href="https://help.blackboard.com/Learn/Administrator/Hosting/Tools_Management/Content_Editor"> 
                             Blackboard content editor</a>. But the cards will always appear after your content.
                     </p>
                 </div>
@@ -677,7 +677,7 @@ INTRO_HTML = `
 // Specify where the documentation is located
 
 // Blackboard version
-DOCUMENTATION_LINKS = {
+/*DOCUMENTATION_LINKS = {
     'what' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110115_1&amp;course_id=_82534_1&amp;mode=quick',
     'addingCI': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110120_1&amp;course_id=_82534_1&amp;content_id=_5110129_1',
     // Customise cards
@@ -698,32 +698,34 @@ DOCUMENTATION_LINKS = {
     'arrangeVertical': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#3',
     'cardsPerRow': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#4',
     'assessment': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#5'
-}
+}*/
 
 // Github version
-/*DOCUMENTATION_LINKS = {
+DOCUMENTATION_LINKS = {
     'what' : 'https://djplaner.github.io/Card-Interface-Tweak/whatWhy/',
     'addingCI': 'https://djplaner.github.io/Card-Interface-Tweak/createCards/',
     'cardTypes': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#types-of-cards-information-and-navigation',
     'cardComponents': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#the-components-of-a-card',
     'addImage': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-an-image',
-    'imageFit': '',
-    'backgroundColour': '',
-    'useVideo': '',
-    'changeDate': '',
-    'changeCardLabel': '',
-    'hideCard' : '',
-    'enableReview' : ''
+    'imageFit': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-how-the-image-fits-the-card',
+    'backgroundColour': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#using-a-background-colour',
+    'useVideo': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#use-a-video-powerpoint-presentation-etc-instead',
+    'changeDate': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-a-date-or-date-range',
+    'changeCardLabel': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-label',
+    'hideCard' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card',
+    'enableReview' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#enabling-review-status',
     // customise all cards
-    'changeOrder' : '',
-    'changeEngage' : '',
-    'templatesAndAttributes' : '',
-    'arrangeVertical': '',
-    'cardsPerRow': '',
-    'assessment': ''
-}*/
+    'changeOrder' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-order-of-cards',
+    'changeEngage' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-or-remove-the-engage-button',
+    'templatesAndAttributes' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-customise-templates-and-attributes',
+    'arrangeVertical': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-arrange-cards-vertically-using-templatevertical',
+    'cardsPerRow': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-number-of-cards-per-row-using-templateb1y123456',
+    'assessment': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-use-the-assessment-template-templateassessment'
+}
 
 DOCUMENTATION_HTML = `
+
+<div id="gu_card_intro"></div>
 
 <h3>More information</h3>
 
@@ -785,7 +787,7 @@ DOCUMENTATION_HTML = `
         How do you...   
          <ul>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeOrder}">Change the card order</a>. </li>
-           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeEngage}">Change the engageButton</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeEngage}">Change the engage button</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.arrangeVertical}">Arrange cards vertically</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.cardsPerRow}">Change the number of cards per row</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.assessment}">Use the assessment template</a>. </li>
@@ -797,44 +799,6 @@ DOCUMENTATION_HTML = `
 
     </div>
 </div>
-`;
-
-NEW_DOCUMENTATION_HTML = `
-<h3>How do I...</h3>
-
-<table style="width:100%;padding:2px">
-  <tr>
-    <td class="bg-grey"> Get started </td>
-    <td class="bg-grey-light"> Change a card </td>
-    <td class="bg-grey-lighter"> Change the appearance of all cards </td>
-  </tr>
-  <tr>
-    <td class="bg-grey">
-<ul style="padding-left:1.2em">
-  <li> <a href="https://griffitheduau-my.sharepoint.com/:w:/g/personal/d_jones6_griffith_edu_au/ETGyerxSf5pMuHFxsn1nA14BHDJlNgGezO_gW2p5uQm_IQ?e=VjWJ60" target="_blank">learn the basics about the Card Interface</a> </li>
-  <li> <a href="">Add a card</a> </li>
-  <li> <a href="">set up a new Card Interface (elsewhere)</a> </li>
-</ul>
-    </td>
-    <td class="bg-grey-light">
-        <ul style="padding-left:1.2em">
-        <li> <a href="">adding/changing an image</a> </li>
-        <li> <a href="">adding a card colour</a> </li>
-        <li> <a href="">adding a card video</a> (or a Padlet or other embeddable content) </li>
-        <li> <a href="">change the date or date label</a> </li>        
-        <li> <a href="">change the card label (e.g. Module) or number</a> </li>        
-    </ul>
-    </td>
-    <td class="bg-grey-lighter">
-  
-    <ul style="padding-left:1.2em">
-        <li> <a href="">changing the number of cards per row</a> </li>
-        <li> <a href="">using different card templates</a> </li>
-    </ul>
-    </td>
-    </table>
-  
-
 `;
 
 // Big kludge for HDR
