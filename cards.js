@@ -654,6 +654,55 @@ INTRO_HTML = `
   </div>
 `;
 
+//---------------------
+// Specify where the documentation is located
+
+// Blackboard version
+DOCUMENTATION_LINKS = {
+    'what' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110115_1&amp;course_id=_82534_1&amp;mode=quick',
+    'addingCI': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110120_1&amp;course_id=_82534_1&amp;content_id=_5110129_1',
+    // Customise cards
+    'cardTypes': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#2',
+    'cardComponents': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#3',
+    'addImage': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#4',
+    'imageFit': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#5',
+    'backgroundColour': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#6',
+    'useVideo': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#7',
+    'changeDate': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#8',
+    'changeCardLabel' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#9',
+    'hideCard' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#10',
+    'enableReview' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#11', 
+    // Customise all cards
+    'changeOrder' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#7',
+    'changeEngage' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#6',
+    'templatesAndAttributes' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#2',
+    'arrangeVertical': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#3',
+    'cardsPerRow': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#4',
+    'assessment': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#5'
+}
+
+// Github version
+/*DOCUMENTATION_LINKS = {
+    'what' : 'https://djplaner.github.io/Card-Interface-Tweak/whatWhy/',
+    'addingCI': 'https://djplaner.github.io/Card-Interface-Tweak/createCards/',
+    'cardTypes': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#types-of-cards-information-and-navigation',
+    'cardComponents': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#the-components-of-a-card',
+    'addImage': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-an-image',
+    'imageFit': '',
+    'backgroundColour': '',
+    'useVideo': '',
+    'changeDate': '',
+    'changeCardLabel': '',
+    'hideCard' : '',
+    'enableReview' : ''
+    // customise all cards
+    'changeOrder' : '',
+    'changeEngage' : '',
+    'templatesAndAttributes' : '',
+    'arrangeVertical': '',
+    'cardsPerRow': '',
+    'assessment': ''
+}*/
 
 DOCUMENTATION_HTML = `
 
@@ -671,10 +720,12 @@ DOCUMENTATION_HTML = `
                 <div class="p-2 md:p-4">
                     Learn about
                     <ul class="p-0 m-0">
-                     <li class="p-0"> the <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110115_1&amp;course_id=_82534_1&amp;mode=quick">
+                     <li class="p-0"> the <a target="_blank" href="${DOCUMENTATION_LINKS.what}">
                        what and why</a> of the Card Interface.</li>
-                      <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110120_1&amp;course_id=_82534_1&amp;content_id=_5110129_1">
+                      <li> <a target="_blank" href="${DOCUMENTATION_LINKS.addingCI}">
                    adding the Card Interface</a> to a new Blackboard page. </li>
+                      <li> <a target="_blank" href="${DOCUMENTATION_LINKS.cardTypes}">types of cards</a>.</li>
+                      <li> <a target="_blank" href="${DOCUMENTATION_LINKS.cardComponents}">card components</a>.</li>
                   </ul>
 
                 </div>
@@ -691,15 +742,15 @@ DOCUMENTATION_HTML = `
                 <div class="p-2 md:p-4">
         How do you...
         <ul>
-           <li> Add an image to a card <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#2">using a URL</a> or <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#3">by uploading</a>. 
-          </li>
-           <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#4">Make an image fit neatly</a> in a card. </li>
-           <li> <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#5">Use a background colour</a>, rather than an image. </li>
-           <li> Add or <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#6">change the date</a>. </li>
-           <li> Use <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#7">different card types and labels</a>. </li>
-           <li> Hide <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&amp;course_id=_82534_1&amp;mode=quick&amp;content_id=_5110132_1#8">a card</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.addImage}">Add an image to a card</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.imageFit}">fit an image</a> in a card. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.backgroundColour}">Use a background colour</a>, rather than an image. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.useVideo}">Add video or other embed type</a> to a card.</li>
+           <li> Add or <a target="_blank" href="${DOCUMENTATION_LINKS.changeDate}">change the date or date range</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardLabel}">Change the card label</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.hideCard}">Hide a card</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.enableReview}">Enable "Review Status"</a>. </li>
         </ul>
-
                 </div>
             </article>
         </div>
@@ -714,18 +765,13 @@ DOCUMENTATION_HTML = `
                 <div class="p-2 md:p-4">
         How do you...   
          <ul>
-           <li> Change the <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&amp;course_id=_82534_1&amp;content_id=_5110408_1#4">
-              number of cards per row</a> </li>
-            <li> Change or remove <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&amp;course_id=_82534_1&amp;content_id=_5110408_1#6">
-              the engage button</a> </li>
-             <li> Arrange <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&amp;course_id=_82534_1&amp;content_id=_5110408_1#3">
-               cards vertically</a> </li>
-             <li> Learn the basics of <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&amp;course_id=_82534_1&amp;content_id=_5110408_1#2">
-                  templates and attributes</a> </li>
-             <li> Use the <a href="https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110122_1&amp;course_id=_82534_1&amp;content_id=_5110408_1#5">
-                assessment template</a> </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeOrder}">Change the card order</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeEngage}">Change the engageButton</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.arrangeVertical}">Arrange cards vertically</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.cardsPerRow}">Change the number of cards per row</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.assessment}">Use the assessment template</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.templatesAndAttributes}">Learn about templates and attributes</a>. </li>
           </ul>
-
                 </div>
             </article>
         </div>
