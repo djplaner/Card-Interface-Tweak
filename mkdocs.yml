@@ -14,7 +14,7 @@ theme:
 
 nav:
   - Home: 'index.md'
-  - Why & What: 'whatWhy.md'
+  - What & Why: 'whatWhy.md'
   - Create Cards: 'createCards.md' 
   - Customise a card: 'customiseACard.md'
   - Customise all cards: 'customiseAllCards.md'
