@@ -921,8 +921,11 @@ function cardsInterface($) {
 
     LOCATION = location.href.indexOf("listContent.jsp");
 
-    var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
-
+    var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter( function(x) {
+            return this.innerText.toLowerCase().includes("card interface");
+        }
+        ).eq(0);
+    
     if (cardInterface.length === 0) {
         return false;
     }
@@ -1254,7 +1257,10 @@ function addCardInterface(items) {
     var REVIEWED = "Reviewed";
 
     // get the content item with h3 heading containing Card Interface
-    var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter(':contains("Card Interface")').eq(0);
+    var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter( function(x) {
+            return this.innerText.toLowerCase().includes("card interface");
+        }
+        ).eq(0);
 
 
     if (cardInterface.length === 0) {
