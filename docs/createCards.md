@@ -1,3 +1,6 @@
+
+<link rel="stylesheet" type="text/css" 
+   href="https://s3.amazonaws.com/filebucketdave/banner.js/gu_study_md.css">
 # How to create cards
 
 ## Introduction
