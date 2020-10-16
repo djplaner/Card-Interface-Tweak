@@ -1027,9 +1027,10 @@ function extractCardsFromContent(myCards) {
         // - get rid of any &nbsp; inserted by Bb
         description = description.replace(/&nbsp;/gi, ' ');
 
-        var re = new RegExp("card image\s*:\s*([^<]*)", "i");
-        //m = description.match(/[Cc]ard [Ii]mage\s*: *([^\s<]*)/ );
+        // get the card image line - regardless of what's there
+        var re = new RegExp("card image\s*:(.*)$", "im" ); //\s*(.*)#/im; //new RegExp("card image\s*:\s*(.*)", "i");
         m = description.match(re);
+
         if (m) {
             // TODO need to parse the m[1] to see if it's a URL
             // OR a colour to be set
@@ -1039,6 +1040,7 @@ function extractCardsFromContent(myCards) {
             // Otherwise undefined
 
             cardBGcolour = identifyCardBackgroundColour(m[1]);
+            // extract the URL from what should be the picUrl section
             picUrl = identifyPicUrl(m[1]);
 
             //picUrl=m[1];
@@ -1751,6 +1753,12 @@ function identifyCardBackgroundColour(input) {
 //   Otherwise return the value
 
 function identifyPicUrl(value) {
+    let re = new RegExp('href="([^"]*)', "i" );
+    let m = value.match( re );
+
+    if (m) {
+        return m[1];
+    }
 
     return value;
 }
