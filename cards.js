@@ -1678,6 +1678,7 @@ function handleDate(description) {
 // - return picUrl if there is an active card image, but it's
 //   not the date
 // - return activePicUrl if there is one and it's not the date
+
 function setImage(card) {
     // only use activePicURL if it is set and there are dates on
     // the card
@@ -1760,6 +1761,10 @@ function identifyPicUrl(value) {
         return m[1];
     }
 
+    console.log(`before value ${value}`);
+    const regex = /<\/[^>]*>$/m;
+    value = value.replace(regex, '');
+    console.log(`after value ${value}`);
     return value;
 }
 
