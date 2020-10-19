@@ -1022,7 +1022,7 @@ function extractCardsFromContent(myCards) {
         review = getReviewStatus(this);
 
         // Parse the description and remove the Card Image data	    
-        var description = jQuery(this).html(), picUrl;
+        var description = jQuery(this).html(), picUrl="";
 
         // - get rid of any &nbsp; inserted by Bb
         description = description.replace(/&nbsp;/gi, ' ');
@@ -1038,10 +1038,16 @@ function extractCardsFromContent(myCards) {
             // Return a three element list of rgb colours
             // if the Card Image: value is a valid colour
             // Otherwise undefined
-
+            
+            const regex = /\s*<\/[^>]*>\s*$/m;
+            m[1] = m[1].replace(regex, '');
+    
             cardBGcolour = identifyCardBackgroundColour(m[1]);
+     
             // extract the URL from what should be the picUrl section
-            picUrl = identifyPicUrl(m[1]);
+            if (typeof cardBGcolour==='undefined') {
+                picUrl = identifyPicUrl(m[1]);
+            }
 
             //picUrl=m[1];
             description = description.replace("<p>" + m[0] + "</p>", "");
@@ -1761,8 +1767,6 @@ function identifyPicUrl(value) {
         return m[1];
     }
 
-    const regex = /\s*<\/[^>]*>\s*$/m;
-    value = value.replace(regex, '');
     return value;
 }
 
