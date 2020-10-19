@@ -1761,10 +1761,8 @@ function identifyPicUrl(value) {
         return m[1];
     }
 
-    console.log(`before value ${value}`);
-    const regex = /<\/[^>]*>$/m;
+    const regex = /\s*<\/[^>]*>\s*$/m;
     value = value.replace(regex, '');
-    console.log(`after value ${value}`);
     return value;
 }
 
