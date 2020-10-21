@@ -1032,24 +1032,27 @@ function extractCardsFromContent(myCards) {
         m = description.match(re);
 
         if (m) {
-            // TODO need to parse the m[1] to see if it's a URL
-            // OR a colour to be set
-
-            // Return a three element list of rgb colours
-            // if the Card Image: value is a valid colour
-            // Otherwise undefined
+            // m[1] contains the bit after "card image:"
             
-            const regex = /\s*<\/[^>]*>\s*$/m;
-            m[1] = m[1].replace(regex, '');
-    
-            cardBGcolour = identifyCardBackgroundColour(m[1]);
-     
-            // extract the URL from what should be the picUrl section
-            if (typeof cardBGcolour==='undefined') {
-                picUrl = identifyPicUrl(m[1]);
+            
+            // get rid of the </p> or similar tag at the end of the line
+            let regex = /\s*<\/[^>]*>\s*$/m;
+            m[1] = m[1].replace(regex, '').trim();
+            
+            // is it a data uri?
+            regex = /^data:((?:\w+\/(?:(?!;).)+)?)((?:;[\w\W]*?[^;])*),(.+)$/;
+            if ( regex.test(m[1])){
+                // set the picUrl to the data uri
+                picUrl = m[1];
+            } else {
+                // check to see if it's a colour, rather than an image
+                cardBGcolour = identifyCardBackgroundColour(m[1]);
+                
+                // if not a colour, get the URL
+                if (typeof cardBGcolour==='undefined') {
+                    picUrl = identifyPicUrl(m[1]);
+                }
             }
-
-            //picUrl=m[1];
             description = description.replace("<p>" + m[0] + "</p>", "");
             description = description.replace(m[0], "");
         }
@@ -1760,13 +1763,15 @@ function identifyCardBackgroundColour(input) {
 //   Otherwise return the value
 
 function identifyPicUrl(value) {
+    
     let re = new RegExp('href="([^"]*)', "i" );
     let m = value.match( re );
-
+    
+    // if it's a <a href="picUrl"></a> return the picUrl
     if (m) {
         return m[1];
     }
-
+    // must be just a lone URL TODO check it actually does
     return value;
 }
 
