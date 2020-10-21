@@ -1737,8 +1737,8 @@ function setImage(card) {
 
 function identifyCardBackgroundColour(input) {
 
-    // don't both if it's an empty string or a URL
-    url = input.match(/^\s*http/i);
+    // don't both if it's an empty string or a URL (or relative URL)
+    url = input.match(/^\s*http/i) || input.match(/^\//);
     if (input === "" || url) {
         return undefined;
     }
