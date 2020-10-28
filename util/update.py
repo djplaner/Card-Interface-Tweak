@@ -10,12 +10,19 @@ import html2markdown
 from pathlib import Path
 import os
 
+
+from bs4 import BeautifulSoup
+
 DESTINATION=r"\\staff.ad.griffith.edu.au\ud\fr\s2986288\Documents\GitHub\Card-Interface-Tweak\docs"
 #DESTINATION="\\staff.ad.griffith.edu.au\ud\fr\s2986288\Documents\GitHub\Card-Interface-Tweak\docs"
 
-print( os.name)
-print(Path.home())
 SOURCE=r"C:\\Users\\s2986288\\OneDrive - Griffith University\\Software Development\\Documentation\\Card Interface Demo-Instructions"
+
+CSS= """
+<link rel="stylesheet" type="text/css" 
+   href="https://s3.amazonaws.com/filebucketdave/banner.js/gu_study_md.css">
+"""
+
 
 STYLE_MAP = """
      p[style-name='Section Title'] => h1:fresh
@@ -95,12 +102,45 @@ PAGES = [
     }
 ]
 
-for page in PAGES: 
-    print("WOrking on %s " % page["SOURCE"] )
-    with open( page["SOURCE"], "rb") as docx_file:
-        result = mammoth.convert_to_html( docx_file, style_map=STYLE_MAP)
 
-        md = html2markdown.convert(result.value)
-        with open( page["DESTINATION"], "w", encoding="utf-8") as md_file:
-           md_file.write(md) 
+#----------------------------------
+# html = updateHtml( inHtml)
+# - do some processing on the HTML to prepare for github
+
+def updateHtml( inHtml ):
+    soup = BeautifulSoup(inHtml, features="html5lib")
+
+    for span in soup.findAll('span',{'class':'embed'}):
+        if span.string is None: 
+            continue
+        newSoup = BeautifulSoup( span.string, 'html.parser')
+        span.string.replace_with(newSoup)
+        
+    return soup.body.encode_contents()
+
+#    return inHtml
+
+
+
+#------------------------------------------------------------
+# loop through all the pages, convert Word doc to markdown and save
+
+def updatePages(): 
+    for page in PAGES: 
+        print("WOrking on %s " % page["SOURCE"] ) 
+        with open( page["SOURCE"], "rb") as docx_file: 
+            result = mammoth.convert_to_html( docx_file, style_map=STYLE_MAP) 
+            #-- need to do some HTML processing here
+            # - find embed spans 
+            html = updateHtml(result.value)
+
+            md = html2markdown.convert(html)
+            with open( page["DESTINATION"], "w", encoding="utf-8") as md_file: 
+                md_file.write(CSS) # add some css at the end 
+                md_file.write(md) 
 #        print(result.value)
+
+
+if __name__ == "__main__":
+    updatePages()
+
