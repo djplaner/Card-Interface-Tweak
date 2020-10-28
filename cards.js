@@ -1006,7 +1006,7 @@ function getCardItems($) {
 
     return cards;
 }
-
+ 
 
 
 function extractCardsFromContent(myCards) {
@@ -1033,7 +1033,6 @@ function extractCardsFromContent(myCards) {
 
         if (m) {
             // m[1] contains the bit after "card image:"
-            
             
             // get rid of the </p> or similar tag at the end of the line
             let regex = /\s*<\/[^>]*>\s*$/m;
@@ -1172,7 +1171,7 @@ function extractCardsFromContent(myCards) {
         // need to get back to the header which is up one div, a sibling, then span
         var header = jQuery(this).parent().siblings(".item").find("span")[2];
         var title = jQuery(header).html(), link, linkTarget = '';
-
+        
         //--------------------------------
         // Three options for link
         // 1. A link on the header (e.g. content folder)
@@ -1391,8 +1390,11 @@ function addCardInterface(items) {
             // So that the card doesn't duplicate it, but the information is 
             // still there in Blackboard
             var regex = new RegExp('^' + idx.label + '\\s*' + checkForNum +
-                '\\s*[-:]*\\s*(.*)')
+                '\\s*[-:]*\\s*(.*)', "s");
+            //const regex = /^Week\s*1\s*[-:]*\s*(.*)/gs;
+            
             var m = idx.title.match(regex);
+            //var m = regex.test(idx.title);
             if (m) {
                 idx.title = m[1];
             }
@@ -1771,6 +1773,10 @@ function identifyPicUrl(value) {
     if (m) {
         return m[1];
     }
+    // remove all html
+    let tmp = document.createElement("DIV");
+    tmp.innerHTML = value;
+    value = tmp.textContent || tmp.innerText || "";
     // must be just a lone URL TODO check it actually does
     return value;
 }
