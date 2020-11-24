@@ -1033,10 +1033,8 @@ function extractCardsFromContent(myCards) {
 
         if (m) {
             // m[1] contains the bit after "card image:"
-            
             // get rid of the </p> or similar tag at the end of the line
-            let regex = /\s*<\/[^>]*>\s*$/m;
-            m[1] = m[1].replace(regex, '').trim();
+            m[1] = m[1].replace(/(<([^>]+)>)/gi, "");
             
             // is it a data uri?
             regex = /^data:((?:\w+\/(?:(?!;).)+)?)((?:;[\w\W]*?[^;])*),(.+)$/;
