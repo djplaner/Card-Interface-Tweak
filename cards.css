@@ -28,6 +28,16 @@
   transform: scale(1.2);
 }
 
+.carddescription ul {
+  list-style: disc;
+  margin-left: 1em;
+}
+
+.carddescription ol {
+  list-style: decimal; 
+  margin-left: 1em;
+}
+
 /* Document
    ========================================================================== */
 
