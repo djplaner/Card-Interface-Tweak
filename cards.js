@@ -1545,7 +1545,7 @@ function addCardInterface(items) {
         }
 
         // If need add the date visualisation
-        if (idx.date.start.month) {
+        if (typeof(idx.date.start)!=='undefined' && 'month' in idx.date.start) {
             // Do we have dual dates - both start and stop?
             if (idx.date.stop.month) {
                 // start and stop dates
@@ -1612,6 +1612,10 @@ function addCardInterface(items) {
 // - optional pass day of the week, add more days Monday=0
 
 function getTermDate(week, startWeek = true, dayOfWeek = 'Monday') {
+
+    if ( typeof TERM_DATES[TERM]==='undefined') {
+        return undefined
+    }
 
     dayOfWeek = dayOfWeek.toLowerCase()
     //console.log("TERM is " + TERM + " week is " + week);
