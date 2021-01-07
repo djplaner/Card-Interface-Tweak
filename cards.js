@@ -1147,6 +1147,7 @@ function extractCardsFromContent(myCards) {
 
         // - get rid of any &nbsp; inserted by Bb
         description = description.replace(/&nbsp;/gi, ' ');
+        description = description.replace(/\n/gi, '');
 
         // get the card image line - regardless of what's there
         var re = new RegExp("card image\s*:(.*)$", "im" ); //\s*(.*)#/im; //new RegExp("card image\s*:\s*(.*)", "i");
