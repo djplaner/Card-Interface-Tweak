@@ -1143,6 +1143,11 @@ function extractCardsFromContent(myCards) {
         review = getReviewStatus(this);
 
         // Parse the description and remove the Card Image data	    
+        jQuery(this).children('div.vtbegenerated_div').replaceWith(
+            function(){
+                return jQuery("<p />", {html: jQuery(this).html()});
+            }
+        );
         var description = jQuery(this).html(), picUrl="";
 
         // - get rid of any &nbsp; inserted by Bb
