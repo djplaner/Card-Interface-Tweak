@@ -755,8 +755,9 @@ INTRO_HTML = `
                 </header>
                 <div class="p-2 md:p-4">
                     <p>Changes to this item may stop the Card Interface from working.</p>
-                    <p class="bg-yellow"><strong>      <i class="fa fa-exclamation-triangle text-red"></i> Error (8 Jan 2021)</strong><br />
+                                        <p class="bg-yellow"><strong>      <i class="fa fa-exclamation-triangle text-red"></i> Error (8 Jan 2021)</strong><br />
                     Due to a change made by Blackboard there may be some minor display issues with the card interface. It's being addressed.</p>
+
                 </div>
             </article>
         </div>
@@ -1132,43 +1133,57 @@ function getCardItems($) {
  
 
 //-------------------------------------------------------------
-// hash = extractMetaData( jQuery object)
+// hash = extractCardMetaData( jQuery object)
+// - given the description jQuery element
 // - return a hash that contains 
-//   - one entry for each Card meta data containing the html for just that meta data
-//   - description entry - the rest of the jQuery object after the meta data has been
+//   - one entry for each Card meta data 
+//     containing the html for just that meta data
+//   - description entry - 
+//     the rest of the jQuery object after the meta data has been
 //     removed
+// ??Assumes that metadata is divided into paragraphs
+// Problem
+
 
 const CARD_METADATA_FIELDS = [
-    "card image:", "card image iframe", "card image size:", "card image active:",
-    "card label:", 
-    "card date:", "card date label",
-    "card number:"
+    "card image", "card image iframe", "card image size", "card image active",
+    "card label", 
+    "card date", "card date label",
+    "card number"
 ];
 
-function extractMetaData( description ) {
+function extractCardMetaData( descriptionObject ) {
     // define hash to put values into it
     let metaDataValues = {};
-
-    // for each CARD_METADATA_FIELD
+    let description = jQuery(descriptionObject).html();
+    // loop through all the possible meta data items and look for each
     CARD_METADATA_FIELDS.forEach( function(element) {
-        // find the paragraph that contains it
-        let elementContent = jQuery(description).find("p").filter( function(x){
-            return this.innerText.toLowerCase().includes(element);
-        });
-
-        // extract the HTML
-        let html = jQuery(elementContent).html();
-
-        // add it to the hash
-        metaDataValues[element] = html;
-
-        // remove it from the description
-        description = description.replace( html, '' );
+        
+        // regex to remove the metadata element from the value
+        var re = new RegExp( element + "\s*:\s*", "im" );
+    
+        // find all the paragraphs
+        let elementContent = jQuery(descriptionObject).find("p");
+        
+        // just get the one with the current metadata element
+        let x = jQuery(elementContent).filter( function(index) {
+            return jQuery(this).text().toLowerCase().includes(element);
+        })
+        
+        // if we found an element, then get it ready to pass back
+        if ( jQuery(x).length===1) {
+            /*console.log("FFFFFF F OUND " + jQuery(x).length);
+            console.log(x);*/
+            // remove the meta data field from the html that will be evaluated
+            metaDataValues[element] = jQuery(x).html().replace( re, '');
+            description = description.replace(metaDataValues[element], '');
+        }
     });
 
     // add the description to the hash
-
+    metaDataValues['description'] = description;
     // return the hash
+    return metaDataValues;
 }
 
 //--------------------------------
@@ -1199,9 +1214,21 @@ function extractCardsFromContent(myCards) {
         description = description.replace(/&nbsp;/gi, ' ');
         description = description.replace(/\n/gi, '');
 
- //       console.log(this);
         // extract all the possible meta data
-//        let cardMetaData = extractCardMetaData(this);
+        let cardMetaData = extractCardMetaData(this);
+        console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+        console.log(cardMetaData);
+
+        // now have cardMetaData with all meta data and the non meta data 
+        // description. Need to make the necessary changes based on data
+        
+        // loop through each of the elements (but not description)
+        console.log("TTTTTTTTTTTTTTT ime to handle");
+        for ( let index in cardMetaData) {
+            if ( index!=='description'){
+                console.log(cardMetaData[index]);
+            }
+        }
 
         // get the card image line - regardless of what's there
         var re = new RegExp("card image\s*:(.*)$", "im" ); //\s*(.*)#/im; //new RegExp("card image\s*:\s*(.*)", "i");
