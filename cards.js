@@ -755,6 +755,8 @@ INTRO_HTML = `
                 </header>
                 <div class="p-2 md:p-4">
                     <p>Changes to this item may stop the Card Interface from working.</p>
+                    <p class="bg-yellow"><strong>      <i class="fa fa-exclamation-triangle text-red"></i> Error (8 Jan 2021)</strong><br />
+                    Due to a change made by Blackboard there may be some minor display issues with the card interface. It's being addressed.</p>
                 </div>
             </article>
         </div>
@@ -1129,6 +1131,49 @@ function getCardItems($) {
 }
  
 
+//-------------------------------------------------------------
+// hash = extractMetaData( jQuery object)
+// - return a hash that contains 
+//   - one entry for each Card meta data containing the html for just that meta data
+//   - description entry - the rest of the jQuery object after the meta data has been
+//     removed
+
+const CARD_METADATA_FIELDS = [
+    "card image:", "card image iframe", "card image size:", "card image active:",
+    "card label:", 
+    "card date:", "card date label",
+    "card number:"
+];
+
+function extractMetaData( description ) {
+    // define hash to put values into it
+    let metaDataValues = {};
+
+    // for each CARD_METADATA_FIELD
+    CARD_METADATA_FIELDS.forEach( function(element) {
+        // find the paragraph that contains it
+        let elementContent = jQuery(description).find("p").filter( function(x){
+            return this.innerText.toLowerCase().includes(element);
+        });
+
+        // extract the HTML
+        let html = jQuery(elementContent).html();
+
+        // add it to the hash
+        metaDataValues[element] = html;
+
+        // remove it from the description
+        description = description.replace( html, '' );
+    });
+
+    // add the description to the hash
+
+    // return the hash
+}
+
+//--------------------------------
+// extractCardsFromContent( myCard)
+// - given an array of cards (HTML) convert into a reasonabl edatastructure
 
 function extractCardsFromContent(myCards) {
 
@@ -1153,6 +1198,10 @@ function extractCardsFromContent(myCards) {
         // - get rid of any &nbsp; inserted by Bb
         description = description.replace(/&nbsp;/gi, ' ');
         description = description.replace(/\n/gi, '');
+
+ //       console.log(this);
+        // extract all the possible meta data
+//        let cardMetaData = extractCardMetaData(this);
 
         // get the card image line - regardless of what's there
         var re = new RegExp("card image\s*:(.*)$", "im" ); //\s*(.*)#/im; //new RegExp("card image\s*:\s*(.*)", "i");
