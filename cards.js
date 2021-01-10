@@ -384,7 +384,10 @@ var TERM_DATES = {
     }
 
 };
-var TERM = "3191", YEAR = 2019, SET_DATE = "";
+
+// TERM/YEAR specify default period
+// SET_DATE is used for testing activePic, specify a date strong for now
+var TERM = "2207", YEAR = 2020, SET_DATE = "";
 var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 
@@ -1184,7 +1187,7 @@ function extractCardMetaData( descriptionObject ) {
     });
     
     // handle the inline image
-    let inlineImage = jQuery(this).find('img').attr('title', 'Card Image');
+    let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
     if (inlineImage.length) {
         console.log("(((((((((((((((((((((((((((((((((((");
         metaDataValues['card image'] = inlineImage[0].src;
@@ -1228,7 +1231,7 @@ function handleCardImage(param) {
     // TODO/CHECK previously there was a test to remove a trainling </p> from end
     // Maybe this should be handled in the picURL
     
-   return [ picUrl, cardBGcolour];
+   return [ picUrl.trim(), cardBGcolour];
 }
 
 // handleCardImageIframe
@@ -1391,7 +1394,7 @@ function extractCardsFromContent(myCards) {
                 return jQuery("<p />", {html: jQuery(this).html()});
             }
         );
-        var description = jQuery(this).html();//, picUrl="";
+        var description = jQuery(this).html();
 
         // - get rid of any &nbsp; inserted by Bb
         description = description.replace(/&nbsp;/gi, ' ');
@@ -1777,7 +1780,7 @@ function addCardInterface(items) {
         }
 
         // If need add the date visualisation
-        if (typeof(idx.date.start)!=='undefined' && 'month' in idx.date.start) {
+        if (typeof(idx.date)!=="undefined" && typeof(idx.date.start)!=='undefined' && 'month' in idx.date.start) {
             // Do we have dual dates - both start and stop?
             if (idx.date.stop.month) {
                 // start and stop dates
@@ -1893,26 +1896,35 @@ function getTermDate(week, startWeek = true, dayOfWeek = 'Monday') {
 // - return activePicUrl if there is one and it's not the date
 
 function setImage(card) {
+    
     // only use activePicURL if it is set and there are dates on
     // the card
     if (card.activePicUrl !== '' &&
-        card.date.start.date !== "") {
+        typeof(card.date) !== "undefined") {
         // there is an activePicUrl, check if it should be active
 
         // active means that the current date falls within the start/stop
         // dates for the card
         var start, stop, now;
+        
+        // Set now to current date OR SET_DATE if we want to do testing
         if (SET_DATE === "") {
             now = new Date();
         } else {
             now = new Date(SET_DATE);
         }
 
+        // set the start date
         if (card.date.start.hasOwnProperty('month') &&
             card.date.start.month !== "") {
 
             start = new Date(parseInt(YEAR), MONTHS.indexOf(card.date.start.month), parseInt(card.date.start.date));
         }
+        
+        // set the card stop date
+        // - to card.date.stop if valid
+        // - to the end of the week if using a week
+        // - to the end of the day if no stop
         if (card.date.stop.hasOwnProperty('month') &&
             card.date.stop.month !== '') {
             stop = new Date(YEAR, MONTHS.indexOf(card.date.stop.month), card.date.stop.date);
@@ -1920,8 +1932,16 @@ function setImage(card) {
         } else if (card.date.start.hasOwnProperty('week')) {
             // there's no end date, but there is a start week
             // so set stop to end of that week
-            stop = new Date(TERM_DATES[TERM][card.date.start.week].stop);
-            stop.setHours(23, 59, 0);
+            if ( card.date.start.week in TERM_DATES[TERM]) {
+                stop = new Date(TERM_DATES[TERM][card.date.start.week].stop);
+                stop.setHours(23, 59, 0);
+            } else {
+              // problem with week, just set it to end of date
+              if (typeof(start)!=="undefined") {
+                stop = new Date(start.getTime());
+                stop.setHours(23, 59, 0);
+              }
+            }
         } else { // no week for stop, meaning it's just on the day
             stop = new Date(start.getTime());
             stop.setHours(23, 59, 0);
