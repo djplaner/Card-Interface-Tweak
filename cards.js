@@ -1156,7 +1156,7 @@ const CARD_METADATA_FIELDS = [
     "card image", "card image iframe", "card image size", "card image active",
     "card label", "card number",
     "card date", "card date label",
-    "assessmentType", "assessmentWeighting", "assessmentOutcomes"
+    "assessment type", "assessment weighting", "assessment outcomes"
 ];
 
 function extractCardMetaData( descriptionObject ) {
@@ -1347,7 +1347,13 @@ function handleCardLabelNumber(label,number) {
     // Handle the cases where label is
     // - empty - we don't want a label
     // - undefined - we want the default label
-    if (label==="") {
+    
+    // ensure label is empty HTML (incl &nbsp; as empty)
+    const aux = document.createElement('div');
+    aux.innerHTML = label;
+    const trimLabel = aux.innerText.trim();
+    
+    if (trimLabel==="") {
         return [ "", ""]
     } else if ( typeof(label)==="undefined") {
         label=DEFAULT_CARD_LABEL;
@@ -1388,8 +1394,11 @@ function extractCardsFromContent(myCards) {
         //------- check for any review status element
         review = getReviewStatus(this);
 
-        // Parse the description and remove the Card Image data	    
-        jQuery(this).children('div.vtbegenerated_div').replaceWith(
+        // Parse the description and remove the Card Image data	  
+        // vtbegenerated_div is specific to Blackboard.
+        // But it also appears to change all <p> with a class to div with 
+        // the match class, hence the not[class] selector
+        jQuery(this).children('div.vtbegenerated_div,div:not([class=""])').replaceWith(
             function(){
                 return jQuery("<p />", {html: jQuery(this).html()});
             }
@@ -1433,13 +1442,13 @@ function extractCardsFromContent(myCards) {
                 case "card date label": 
                     dateLabel=cardMetaData[index]; 
                     break;
-                case "assessmentType": 
+                case "assessment type": 
                     assessmentType=cardMetaData[index]; 
                     break; 
-                case "assessmentWeighting": 
+                case "assessment weighting": 
                     assessmentWeighting=cardMetaData[index]; 
                     break;
-                case "assessmentOutcomes": 
+                case "assessment outcomes": 
                     assessmentOutcomes=cardMetaData[index]; 
                     break;
             }
