@@ -817,30 +817,6 @@ INTRO_HTML = `
 //---------------------
 // Specify where the documentation is located
 
-// Blackboard version
-/*DOCUMENTATION_LINKS = {
-    'what' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110115_1&amp;course_id=_82534_1&amp;mode=quick',
-    'addingCI': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110120_1&amp;course_id=_82534_1&amp;content_id=_5110129_1',
-    // Customise cards
-    'cardTypes': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#2',
-    'cardComponents': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#3',
-    'addImage': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#4',
-    'imageFit': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#5',
-    'backgroundColour': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#6',
-    'useVideo': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#7',
-    'changeDate': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#8',
-    'changeCardLabel' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#9',
-    'hideCard' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#10',
-    'enableReview' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?content_id=_5110121_1&course_id=_82534_1&mode=quick&content_id=_5110132_1#11', 
-    // Customise all cards
-    'changeOrder' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#7',
-    'changeEngage' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#6',
-    'templatesAndAttributes' : 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#2',
-    'arrangeVertical': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#3',
-    'cardsPerRow': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#4',
-    'assessment': 'https://bblearn.griffith.edu.au/webapps/blackboard/content/listContent.jsp?course_id=_82534_1&content_id=_5110122_1#5'
-}*/
-
 // Github version
 DOCUMENTATION_LINKS = {
     'what' : 'https://djplaner.github.io/Card-Interface-Tweak/whatWhy/',
@@ -848,6 +824,7 @@ DOCUMENTATION_LINKS = {
     'cardTypes': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#types-of-cards-information-and-navigation',
     'cardComponents': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#the-components-of-a-card',
     'addImage': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-an-image',
+    'addActiveImage': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-an-_active-_image',
     'imageFit': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-how-the-image-fits-the-card',
     'backgroundColour': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#using-a-background-colour',
     'useVideo': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#use-a-video-powerpoint-presentation-etc-instead',
@@ -898,13 +875,14 @@ DOCUMENTATION_HTML = `
             <article class="overlow-hidden rounded-lg shadow-lg h-full">
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
                     <h1 class="text-lg">
-                            Changing a card
+                            Customising a card
                     </h1>
                 </header>
                 <div class="p-2 md:p-4">
         How do you...
         <ul>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.addImage}">Add an image to a card</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.addActiveImage}">Add an <em>active</em> image to a card</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.imageFit}">fit an image</a> in a card. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.backgroundColour}">Use a background colour</a>, rather than an image. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.useVideo}">Add video or other embed type</a> to a card.</li>
@@ -921,7 +899,7 @@ DOCUMENTATION_HTML = `
             <article class="overlow-hidden rounded-lg shadow-lg h-full">
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
                     <h1 class="text-lg">
-                           Change appearance of all cards 
+                           Customising all cards 
                     </h1>
                 </header>
                 <div class="p-2 md:p-4">
