@@ -1308,9 +1308,9 @@ function handleCardDate(param) {
             date.start = getTermDate(week, true, day)
         } else {
             // TODO need to handle range here 
-            m = param.match(/ *: *([a-z]+) ([0-9]+)/i);
+            m = param.match(/ *([a-z]+) ([0-9]+)/i);
             if (m) {
-                x = param.match(/ *: *([a-z]+) ([0-9]+)-+([a-z]+) ([0-9]+)/i);
+                x = param.match(/ *([a-z]+) ([0-9]+)-+([a-z]+) ([0-9]+)/i);
                 if (x) {
                     date.start = { month: x[1], date: x[2] }
                     date.stop = { month: x[3], date: x[4] }
@@ -1319,7 +1319,7 @@ function handleCardDate(param) {
                 }
             } else {
                 // Fall back to check for exam period
-                m = param.match(/ *: *exam *(period)*/i);
+                m = param.match(/ *exam *(period)*/i);
                 if (m) {
                     date.start = getTermDate('exam');
                     date.stop = getTermDate('exam', false);
