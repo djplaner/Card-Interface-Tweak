@@ -758,9 +758,8 @@ INTRO_HTML = `
                 </header>
                 <div class="p-2 md:p-4">
                     <p>Changes to this item may stop the Card Interface from working.</p>
-                                        <p class="bg-yellow"><strong>      <i class="fa fa-exclamation-triangle text-red"></i> Error (8 Jan 2021)</strong><br />
-                    Due to a change made by Blackboard there may be some minor display issues with the card interface. It's being addressed.</p>
-
+                                        <p><strong>      <i class="fa fa-exclamation-triangle text-green"></i> Update (11 Jan 2021)</strong><br />
+                    A change made by Blackboard required updates to the Card Interface. If you see any issues, please <a href="mailto:d.jones6@griffith.edu.au">email David Jones</a>.</p>
                 </div>
             </article>
         </div>
@@ -1331,6 +1330,13 @@ function handleCardDate(param) {
     return date;
 }                
 
+// Given some HTML, remove all the HTML code, trim and return the text
+
+function cleanTrimHtml(html) {
+    const aux = document.createElement('div');
+    aux.innerHTML = html;
+    return aux.innerText.trim();
+}
 // handleCardLabelNumber
 // - given hash with last number for each label type and label and number
 //   return the appropriate [ label, number] to use for the card
@@ -1339,6 +1345,7 @@ function handleCardDate(param) {
 // - number specify card number, 
 //   - if nothing & nothing in numbering element set to 1, 
 //   - else set to the next value from numbering element
+// Labels can only ever be text
 
 // storage for the multiple label numberings used across all cards
 var CARD_LABEL_NUMBERING = {};
@@ -1349,32 +1356,30 @@ function handleCardLabelNumber(label,number) {
     // - undefined - we want the default label
     
     // ensure label is empty HTML (incl &nbsp; as empty)
-    const aux = document.createElement('div');
-    aux.innerHTML = label;
-    const trimLabel = aux.innerText.trim();
+    trimLabel = cleanTrimHtml(label);    
     
     if (trimLabel==="") {
         return [ "", ""]
     } else if ( typeof(label)==="undefined") {
-        label=DEFAULT_CARD_LABEL;
+        trimLabel=DEFAULT_CARD_LABEL;
     }
     
     // Update the numbering schemes
     // - no existing numbering, set to 1
     // - otherwise increment existing
-    if ( !(label in CARD_LABEL_NUMBERING) ) {
-        CARD_LABEL_NUMBERING[label]=1;
+    if ( !(trimLabel in CARD_LABEL_NUMBERING) ) {
+        CARD_LABEL_NUMBERING[trimLabel]=1;
     }
     else { // if it does exist increment to next value 
-        CARD_LABEL_NUMBERING[label]+=1;
+        CARD_LABEL_NUMBERING[trimLabel]+=1;
     }
     
     // if specific number specified, set numbering to that
     if ( typeof(number)!=="undefined") {
-        CARD_LABEL_NUMBERING[label]=parseInt(number);
+        CARD_LABEL_NUMBERING[trimLabel]=parseInt(number);
     }
     
-    return [label,CARD_LABEL_NUMBERING[label]];
+    return [trimLabel,CARD_LABEL_NUMBERING[trimLabel]];
 }
 
 //--------------------------------
