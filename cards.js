@@ -387,8 +387,23 @@ var TERM_DATES = {
 
 // TERM/YEAR specify default period
 // SET_DATE is used for testing activePic, specify a date strong for now
-var TERM = "2207", YEAR = 2020, SET_DATE = "";
+var TERM = "2207", DEFAULT_YEAR = 2021, SET_DATE = "";
 var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+const MONTHS_HASH = {
+    "Jan" : 0, "January": 0,
+    "Feb" : 1, "February": 1,
+    "Mar" : 2, "March":2,
+    "Apr" : 3, "April":3,
+    "May" : 4, 
+    "Jun" : 5, "June":5,
+    "Jul" : 6, "July":6,
+    "Aug" : 7, "August":7,
+    "Sep" : 8, "September":8,
+    "Oct" : 9, "October":9,
+    "Nov" : 10, "November":10,
+    "Dec" : 11, "December":11
+}
 
 
 // Interface design from https://codepen.io/njs/pen/BVdwZB
@@ -1009,7 +1024,7 @@ function cardsInterface($) {
             if (mm) {
                 YEAR = 20 + mm[1];
             } else {
-                YEAR = 2019;
+                YEAR = DEFAULT_YEAR;
             }
         } else {
             // check for a normal GU course
@@ -1027,7 +1042,7 @@ function cardsInterface($) {
                 if (mm) {
                     YEAR = 20 + mm[1];
                 } else {
-                    YEAR = 2019;
+                    YEAR = DEFAULT_YEAR;
                 }
             } else {
                 breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])$');
@@ -1042,7 +1057,7 @@ function cardsInterface($) {
                     if (mm) {
                         YEAR = 20 + mm[1];
                     } else {
-                        YEAR = 2019;
+                        YEAR = DEFAULT_YEAR;
                     }
                 }
             }
@@ -1433,7 +1448,7 @@ function extractCardsFromContent(myCards) {
                     [picUrl,cardBGcolour]=handleCardImage(cardMetaData[index]);
                     break;
                 case "card image active": 
-                    activePicUrl=handleCardImage(cardMetaData[index]); 
+                    [activePicUrl,cardBGcolour]=handleCardImage(cardMetaData[index]); 
                     break;
                 case "card image iframe": 
                     iframe=handleCardImageIframe(cardMetaData[index]); 
@@ -1721,6 +1736,7 @@ function addCardInterface(items) {
             cardHtml = cardHtml.replace(/{BG_SIZE}/, 'bg-cover');
         }
 
+        // figure out which image we're going to show
         var picUrl = setImage(idx);
 
         // replace the {IMAGE_URL} variable if none set
@@ -1932,7 +1948,10 @@ function setImage(card) {
         if (card.date.start.hasOwnProperty('month') &&
             card.date.start.month !== "") {
 
-            start = new Date(parseInt(YEAR), MONTHS.indexOf(card.date.start.month), parseInt(card.date.start.date));
+            start = new Date(parseInt(DEFAULT_YEAR), 
+                    //MONTHS.indexOf(card.date.start.month), 
+                    MONTHS_HASH[card.date.start.month],
+                    parseInt(card.date.start.date));
         }
         
         // set the card stop date
@@ -1941,7 +1960,7 @@ function setImage(card) {
         // - to the end of the day if no stop
         if (card.date.stop.hasOwnProperty('month') &&
             card.date.stop.month !== '') {
-            stop = new Date(YEAR, MONTHS.indexOf(card.date.stop.month), card.date.stop.date);
+            stop = new Date(DEFAULT_YEAR, MONTHS_HASH[card.date.stop.month], card.date.stop.date);
             stop.setHours(23, 59, 0);
         } else if (card.date.start.hasOwnProperty('week')) {
             // there's no end date, but there is a start week
