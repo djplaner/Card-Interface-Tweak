@@ -1340,6 +1340,7 @@ function cleanTrimHtml(html) {
 //   - else set to the next value from numbering element
 // Labels can only ever be text
 
+
 // storage for the multiple label numberings used across all cards
 var CARD_LABEL_NUMBERING = {};
     
@@ -1745,9 +1746,10 @@ function addCardInterface(items) {
             cardHtml = cardHtml.replace('{LINK_ITEM}', linkHtml);
             // if there is a label and no hard coded moduleNum, 
             //  then increment the module number
-            if (idx.label !== "" && !idx.moduleNum) {
+            // TENTATIVE
+  /*          if (idx.label !== "" && !idx.moduleNum) {
                 moduleNum++;
-            }
+            }*/
         } else {// if (template!==HORIZONTAL_NOENGAGE) {
             // remove the link, as there isn't one
             cardHtml = cardHtml.replace('{LINK_ITEM}', '');
@@ -1757,7 +1759,7 @@ function addCardInterface(items) {
             cardHtml = cardHtml.replace('hover:outline-none', '');
             cardHtml = cardHtml.replace('hover:shadow-outline', '');
             // don't count it as a module
-            cardHtml = cardHtml.replace(idx.label + ' ' + moduleNum, '');
+          //  cardHtml = cardHtml.replace(idx.label + ' ' + moduleNum, '');
             //moduleNum--;
         }
 
