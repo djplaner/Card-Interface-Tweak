@@ -830,6 +830,7 @@ DOCUMENTATION_LINKS = {
     'useVideo': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#use-a-video-powerpoint-presentation-etc-instead',
     'changeDate': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-a-date-or-date-range',
     'changeCardLabel': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-label',
+    'changeCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-number',
     'hideCard' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card',
     'enableReview' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#enabling-review-status',
     // customise all cards
@@ -888,6 +889,7 @@ DOCUMENTATION_HTML = `
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.useVideo}">Add video or other embed type</a> to a card.</li>
            <li> Add or <a target="_blank" href="${DOCUMENTATION_LINKS.changeDate}">change the date or date range</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardLabel}">Change the card label</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardNumber}">Change the card number</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.hideCard}">Hide a card</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.enableReview}">Enable "Review Status"</a>. </li>
         </ul>
