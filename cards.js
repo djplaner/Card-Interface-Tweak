@@ -139,6 +139,65 @@ var TERM_DATES = {
             "13": { "start": "2021-06-07", "stop": "2021-03-13" },
             "exam": { "start": "2021-06-10", "stop": "2021-06-19" }
         },
+                // QCM 2021 Trimester 3
+                // TODO - currently a copy of normal Griffith
+                "3218QCM": {
+                    "0": { "start": "2021-11-01", "stop": "2021-11-07" },
+                    "1": { "start": "2021-11-08", "stop": "2021-11-14" },
+                    "2": { "start": "2021-11-15", "stop": "2021-11-21" },
+                    "3": { "start": "2021-11-22", "stop": "2021-11-28" },
+                    "4": { "start": "2021-11-29", "stop": "2021-12-05" },
+                    "5": { "start": "2021-12-06", "stop": "2021-12-12" },
+                    "6": { "start": "2021-12-13", "stop": "2021-12-19" },
+                    "7": { "start": "2021-12-20", "stop": "2021-12-26" },
+                    "8": { "start": "2022-01-10", "stop": "2022-01-16" },
+                    "9": { "start": "2022-01-17", "stop": "2022-01-23" },
+                    "10": { "start": "2022-01-24", "stop": "2022-01-30" },
+                    "11": { "start": "2022-01-31", "stop": "2022-01-06" },
+                    "12": { "start": "2022-02-07", "stop": "2022-02-13" },
+                    "13": { "start": "2022-02-14", "stop": "2022-02-20" },
+                    "exam": { "start": "2022-02-17", "stop": "2022-02-26" }
+                },
+                // QCM 2021 Trimester 2
+                // TODO - currently a copy of normal Griffith
+                "3215QCM": {
+                    "0": { "start": "2021-07-12", "stop": "2021-07-18" },
+                    "1": { "start": "2021-07-19", "stop": "2021-07-25" },
+                    "2": { "start": "2021-07-26", "stop": "2021-08-01" },
+                    "3": { "start": "2021-08-02", "stop": "2021-08-08" },
+                    "4": { "start": "2021-08-16", "stop": "2021-08-22" },
+                    "5": { "start": "2021-08-23", "stop": "2021-08-29" },
+                    "6": { "start": "2021-08-30", "stop": "2021-09-05" },
+                    "7": { "start": "2021-09-06", "stop": "2021-09-12" },
+                    "8": { "start": "2021-09-13", "stop": "2021-09-19" },
+                    "9": { "start": "2021-09-20", "stop": "2021-09-26" },
+                    "10": { "start": "2021-09-27", "stop": "2021-10-03" },
+                    "11": { "start": "2021-10-04", "stop": "2021-10-10" },
+                    "12": { "start": "2021-10-11", "stop": "2021-10-17" },
+                    "13": { "start": "2021-10-18", "stop": "2021-10-24" },
+                    "14": { "start": "2021-10-25", "stop": "2021-10-31" },
+                    "exam": { "start": "2021-10-21", "stop": "2021-10-31" }
+                },
+                // QCM 2021 Trimester 1
+                // TODO - currently a copy of normal Griffith
+                "3211QCM": {
+                    "0": { "start": "2021-03-01", "stop": "2021-03-07" },
+                    "1": { "start": "2021-03-08", "stop": "2021-03-14" },
+                    "2": { "start": "2021-03-15", "stop": "2021-03-21" },
+                    "3": { "start": "2021-03-22", "stop": "2021-03-29" },
+                    "4": { "start": "2021-03-29", "stop": "2021-04-04" },
+                    "5": { "start": "2021-04-12", "stop": "2021-03-18" },
+                    "6": { "start": "2021-04-19", "stop": "2021-04-25" },
+                    "7": { "start": "2021-04-26", "stop": "2021-05-02" },
+                    "8": { "start": "2021-05-03", "stop": "2021-05-09" },
+                    "9": { "start": "2021-05-10", "stop": "2021-05-16" },
+                    "10": { "start": "2021-05-17", "stop": "2021-05-23" },
+                    "11": { "start": "2021-05-24", "stop": "2021-05-30" },
+                    "12": { "start": "2021-05-31", "stop": "2021-06-06" },
+                    "13": { "start": "2021-06-07", "stop": "2021-03-13" },
+                    "exam": { "start": "2021-06-10", "stop": "2021-06-19" }
+                },
+
 
     // OUA 2020 Study Period 1
     "2201": {
@@ -773,8 +832,6 @@ INTRO_HTML = `
                 </header>
                 <div class="p-2 md:p-4">
                     <p>Changes to this item may stop the Card Interface from working.</p>
-                                        <p><strong>      <i class="fa fa-exclamation-triangle text-green"></i> Update (11 Jan 2021)</strong><br />
-                    A change made by Blackboard required updates to the Card Interface. If you see any issues, please <a href="mailto:d.jones6@griffith.edu.au">email David Jones</a>.</p>
                 </div>
             </article>
         </div>
@@ -982,67 +1039,7 @@ function cardsInterface($) {
     // courseId. If it doesn't parse, just leave it as the default
     // initialised term
 
-    // get the course id which will be in brackets
-    //idRe = new RegExp('\((.*)\)');
-    m = courseTitle.match(/^.*\((.+)\)/);
-    // we found a course Id, get the STRM value
-    //console.log("got title " + courseTitle );
-    if (m) {
-        id = m[1];
-        // break the course Id up into its components
-        // This is the RE for COMM10 - OUA course?
-        breakIdRe = new RegExp('^([A-Z]+[0-9]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
-        m = id.match(breakIdRe);
-
-
-        // found an actual course site (rather than org site)	    
-        if (m) {
-            TERM = m[2];
-
-            // set the year
-            mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
-            if (mm) {
-                YEAR = 20 + mm[1];
-            } else {
-                YEAR = DEFAULT_YEAR;
-            }
-        } else {
-            // check for a normal GU course
-            breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
-            // Following is broken
-
-            m = id.match(breakIdRe);
-
-            // found an actual course site (rather than org site)	    
-            if (m) {
-                TERM = m[2];
-
-                // set the year
-                mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
-                if (mm) {
-                    YEAR = 20 + mm[1];
-                } else {
-                    YEAR = DEFAULT_YEAR;
-                }
-            } else {
-                breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])$');
-
-                m = id.match(breakIdRe);
-
-                // found an actual course site (rather than org site)	    
-                if (m) {
-                    TERM = m[2];
-                    // set the year
-                    mm = TERM.match(/^[0-9]([0-9][0-9])[0-9]$/);
-                    if (mm) {
-                        YEAR = 20 + mm[1];
-                    } else {
-                        YEAR = DEFAULT_YEAR;
-                    }
-                }
-            }
-        }
-    }
+    [ TERM, DEFAULT_YEAR ] = calculateTermYear( courseTitle);
 
     LOCATION = location.href.indexOf("listContent.jsp");
 
@@ -1107,6 +1104,95 @@ function cardsInterface($) {
     if (HIDE_IMAGES) {
         jQuery(".bg-cover").hide();
     }
+}
+
+/**
+ * @desc Identify course term and year from course title
+ * @param {string} courseTitle course code, name and id in brackets
+ * @return {Array} term and year
+ * 
+ * TODO
+ * - how to handle QCM courses with different calendar
+ */
+
+function calculateTermYear( courseTitle) {
+    let term = TERM, year = DEFAULT_YEAR;
+
+    // get the course id which will be in brackets
+    // e.g. 
+    //    Collapse 1731QCM Creative Studio Practices 1 (1731QCM_3211_SB)
+
+    m = courseTitle.match(/^.*\((.+)\)/);
+    // we found a course Id, get the STRM value
+    if (m) {
+        id = m[1];
+        // break the course Id up into its components
+
+        // Check for an OUA course (e.g. com10) where the letters are first
+        breakIdRe = new RegExp('^([A-Z]+[0-9]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
+        m = id.match(breakIdRe);
+
+        // found an actual course site (rather than org site)	    
+        if (m) {
+            term = m[2];
+
+            // set the year
+            mm = term.match(/^[0-9]([0-9][0-9])[0-9]$/);
+            if (mm) {
+                year = 20 + mm[1];
+            } else {
+                year = DEFAULT_YEAR;
+            }
+        } else {
+            // check for a normal GU course, numbers first
+
+            // match an unjoined course
+            //  course code_STRM_offering - 1731QCM_3211_SB
+            //  
+            breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
+            m = id.match(breakIdRe);
+
+            if (m) {
+                // found an actual course site (rather than org site)	    
+                term = m[2];
+
+                // set the year
+                mm = term.match(/^[0-9]([0-9][0-9])[0-9]$/);
+                if (mm) {
+                    year = 20 + mm[1];
+                } else {
+                    year = DEFAULT_YEAR;
+                }
+            } else {
+                // Match a joined course (no offering on the end)
+                breakIdRe = new RegExp('^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])$');
+
+                m = id.match(breakIdRe);
+
+                // found an actual course site (rather than org site)	    
+                if (m) {
+                    term = m[2];
+                    // set the year
+                    mm = term.match(/^[0-9]([0-9][0-9])[0-9]$/);
+                    if (mm) {
+                        year = 20 + mm[1];
+                    } else {
+                        year = DEFAULT_YEAR;
+                    } 
+                }
+            }
+        }
+        // if this is a QCM course (either offering of joined), then update term
+        qcmRe = new RegExp('^([0-9]+QCM)_([0-9][0-9][0-9][0-9])');
+        m = qcmRe.match(id);
+        console.log(m);
+        if (m) {
+            term = term+ "QCM";
+        }
+    }
+
+    console.log( `cards.js::calculateTermYear - id is ${id} Term is ${term} Year is ${year}`);
+    return [term, year];
 }
 
 /***
@@ -1183,7 +1269,6 @@ function extractCardMetaData( descriptionObject ) {
     // handle the inline image
     let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
     if (inlineImage.length) {
-        console.log("(((((((((((((((((((((((((((((((((((");
         metaDataValues['card image'] = inlineImage[0].src;
         //console.log("item html" + inlineImage[0].outerHTML);
         description = description.replace(inlineImage[0].outerHTML, "");
