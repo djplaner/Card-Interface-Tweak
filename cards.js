@@ -1215,22 +1215,52 @@ function getCardItems($) {
 
 
 const CARD_METADATA_FIELDS = [
-    "card image", "card image iframe", "card image size", "card image active",
     "card label", "card number",
     "card date", "card date label",
-    "assessment type", "assessment weighting", "assessment outcomes"
+    "assessment type", "assessment weighting", "assessment outcomes",
+    "card image", "card image iframe", "card image size", "card image active"
 ];
+
+/**
+ * noCardMetaData 
+ * @param {String} ignoreMetaData name of meta data to ignore when checking
+ * @param {String} htmlString  string to check for other card meta data
+ * @returns {Boolean} 
+ */
+
+function noCardMetaData( ignoreMetaData, htmlString) {
+
+
+    // for all card meta data check if the html contains it
+    for (i=0; i<CARD_METADATA_FIELDS.length; i++) {
+        // ignore the current meta data
+        if ( ignoreMetaData===CARD_METADATA_FIELDS[i] ) {
+            continue
+        }
+
+        // if there is a card_meta data return false
+        let re = new RegExp( CARD_METADATA_FIELDS[i] + "\\s*:\\s*", "im" );
+        let m = htmlString.match( re);
+        if (m) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 
 function extractCardMetaData( descriptionObject ) {
     // define hash to put values into it
     let metaDataValues = {};
     let description = jQuery(descriptionObject).html();
+
     // loop through all the possible meta data items and look for each
     CARD_METADATA_FIELDS.forEach( function(element) {
         // regex to remove the metadata element from the value
         let re = new RegExp( element + "\\s*:\\s*", "im" );
     
-        // find all the paragraphs
+        // find all the paragraphs left in descriptionObject
         let elementContent = jQuery(descriptionObject).find("p");
         
         // just get the one with the current metadata element
@@ -1239,12 +1269,33 @@ function extractCardMetaData( descriptionObject ) {
         })
         
         // if we found an element, then get it ready to pass back
-        if ( jQuery(x).length!==0) {
+        if ( jQuery(x).length!==0 && 
+              noCardMetaData(element, jQuery(elementContent).html())) {
             // remove the meta data field from the html that will be evaluated
             metaDataValues[element] = jQuery(x).html().replace( re, '');
             
             description = description.replace(jQuery(x).html(), '');
             metaDataValues[element]=metaDataValues[element].trim();
+        } else { // didn't find a p do other searches to find meta data
+            console.log(`cards.js::extratCardMetaData: didn't find match for ${element}`);
+
+            // create a tmp version of the original description
+            let tmpDescription = jQuery(descriptionObject).html();
+            let fallBackRe = new RegExp( element + "\\s*:\\s*([^<]*)");
+            let m = tmpDescription.match( fallBackRe);
+            if (m) {
+                metaDataValues[element] = m[1];
+                description = description.replace( fallBackRe, '');
+                tmpDescription = tmpDescription.replace(fallBackRe,'');
+                // now replace descriptionObject with what's in description
+                // - empty out descriptionObject
+                jQuery(descriptionObject).empty();
+                // - create a set of nodes based on what's in description
+                let htmlDescription = jQuery.parseHTML(tmpDescription);
+                // - insert it into descriptionObject
+                jQuery(descriptionObject).append(htmlDescription);
+            }
+
         }
     });
     
