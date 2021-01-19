@@ -1236,18 +1236,24 @@ function extractCardMetaData( descriptionObject ) {
     // remove new lines from description
     description = description.replace(/(?:\r\n|\r|\n)/g, ' ');
 
-    // break up description into collection of ps
-    let elementContent = jQuery(descriptionObject).find("p");
+    // break up description into collection of ps and focus
+    // just on the innerHtml
+    let elementHtmlObjects = jQuery(descriptionObject).find("p");
+//    console.log(typeof elementHtmlObjects);
+    let elementContent = jQuery(elementHtmlObjects).toArray().map( x => x.innerHTML);
+//   console.log(elementContent);
 
     let tmpMetaData = [];
 
     // check and break up the ps into individual bits of meta data
-    for ( i=0; i<elementContent.length; i++) {
-    /*    console.log(typeof elementContent[i]);
-        console.log( `Item ${i} with html ${elementContent[i].innerHTML}`);*/
+    let maxLength = elementContent.length;
+    for ( i=0; i<maxLength; i++) {
+        console.log(typeof elementContent[i]);
+        console.log( `Item ${i} with html ${elementContent[i]}`);
 
         // work on a temp copy of description
-        let partialDescription = elementContent[i].innerHTML;
+        //let partialDescription = elementContent[i].innerHTML;
+        let partialDescription = elementContent[i];
         // no need for this here, doing it above??
         partialDescription = partialDescription.replace(/(?:\r\n|\r|\n)/g, ' ');
 
@@ -1258,9 +1264,11 @@ function extractCardMetaData( descriptionObject ) {
             // look for match in what's left of partial description
             let m = partialDescription.match(re);
             if (m) {
-//                console.log(`FOUND(1) Search for ${element} found ${m[1]}`);
-                // remove match from partialDescription
-                partialDescription = partialDescription.replace(re,'');
+                console.log(`FOUND(1) Search for ${element} found ${m[1]}`);
+                // remove match from partialDescription, leaving any other potential
+                // card stuff there for later
+                partialDescription = partialDescription.replace(m[1],'');
+                console.log(`   leaving ${partialDescription}`);
                 description = description.replace(re,'');
                 // added element for later processing
                 tmpMetaData.push(m[1]);
@@ -1269,14 +1277,14 @@ function extractCardMetaData( descriptionObject ) {
                 re = new RegExp( "(" + element + "\\s*:\\s*.*)$", "mi" );
                 m = partialDescription.match(re);
                 if (m) {
-//                    console.log(`FOUND(2) Search for ${element} found ${m[1]}`);
+                    console.log(`FOUND(2) Search for ${element} found ${m[1]}`);
                     // remove it from partial description
                     partialDescription = partialDescription.replace(re,'');
                     description = description.replace(re,'');
                     // added element for later processing
                     tmpMetaData.push(m[1]);
                 } else {
-//                    console.log(`      Search for ${element} no match`);
+                    console.log(`      Search for ${element} no match`);
                 }
             }
 
@@ -1778,7 +1786,6 @@ function addCardInterface(items) {
         var cardHtml = cardHtmlTemplate[template];
         cardHtml = cardHtml.replace('{WIDTH}', WIDTH);
 
-        console.log( `template ${template} is ${cardHtml}`);
         // replace the default background colour if a different one
         // is specific
         if (idx.cardBGcolour) {
