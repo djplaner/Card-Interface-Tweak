@@ -444,7 +444,7 @@ const MONTHS_HASH = {
     "Oct" : 9, "October":9,
     "Nov" : 10, "November":10,
     "Dec" : 11, "December":11
-}
+};
 
 
 // Interface design from https://codepen.io/njs/pen/BVdwZB
@@ -879,7 +879,7 @@ DOCUMENTATION_LINKS = {
     'arrangeVertical': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-arrange-cards-vertically-using-templatevertical',
     'cardsPerRow': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-number-of-cards-per-row-using-templateb1y123456',
     'assessment': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-use-the-assessment-template-templateassessment'
-}
+};
 
 DOCUMENTATION_HTML = `
 
@@ -1191,7 +1191,9 @@ function getCardItems($) {
 
     var bbItems = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).children(".details").children('.vtbegenerated').filter(
         function () {
-            return match = this.innerHTML.match(cardRE);
+            return this.innerHTML.match(cardRE);
+            // SKETCHY TODO
+            //return match = this.innerHTML.match(cardRE);
         }
     );
 
@@ -1235,7 +1237,7 @@ function noCardMetaData( ignoreMetaData, htmlString) {
     for (i=0; i<CARD_METADATA_FIELDS.length; i++) {
         // ignore the current meta data
         if ( ignoreMetaData===CARD_METADATA_FIELDS[i] ) {
-            continue
+            continue;
         }
 
         // if there is a card_meta data return false
@@ -1254,51 +1256,85 @@ function extractCardMetaData( descriptionObject ) {
     // define hash to put values into it
     let metaDataValues = {};
     let description = jQuery(descriptionObject).html();
+    // remove new lines from description
+    description = description.replace(/(?:\r\n|\r|\n)/g, ' ');
 
-    // loop through all the possible meta data items and look for each
-    CARD_METADATA_FIELDS.forEach( function(element) {
-        // regex to remove the metadata element from the value
-        let re = new RegExp( element + "\\s*:\\s*", "im" );
-    
-        // find all the paragraphs left in descriptionObject
-        let elementContent = jQuery(descriptionObject).find("p");
-        
-        // just get the one with the current metadata element
-        let x = jQuery(elementContent).filter( function(index) {
-            return jQuery(this).text().match(re);
-        })
-        
-        // if we found an element, then get it ready to pass back
-        if ( jQuery(x).length!==0 && 
-              noCardMetaData(element, jQuery(elementContent).html())) {
-            // remove the meta data field from the html that will be evaluated
-            metaDataValues[element] = jQuery(x).html().replace( re, '');
-            
-            description = description.replace(jQuery(x).html(), '');
-            metaDataValues[element]=metaDataValues[element].trim();
-        } else { // didn't find a p do other searches to find meta data
-            console.log(`cards.js::extratCardMetaData: didn't find match for ${element}`);
+    // break up description into collection of ps
+    let elementContent = jQuery(descriptionObject).find("p");
 
-            // create a tmp version of the original description
-            let tmpDescription = jQuery(descriptionObject).html();
-            let fallBackRe = new RegExp( element + "\\s*:\\s*([^<]*)");
-            let m = tmpDescription.match( fallBackRe);
+    let tmpMetaData = [];
+
+    // check and break up the ps into individual bits of meta data
+    for ( i=0; i<elementContent.length; i++) {
+    /*    console.log(typeof elementContent[i]);
+        console.log( `Item ${i} with html ${elementContent[i].innerHTML}`);*/
+
+        // work on a temp copy of description
+        let partialDescription = elementContent[i].innerHTML;
+        // no need for this here, doing it above??
+        partialDescription = partialDescription.replace(/(?:\r\n|\r|\n)/g, ' ');
+
+        CARD_METADATA_FIELDS.forEach( function(element) {
+            // search re for this element, and want to save the string that was found
+            let re = new RegExp( "(" + element + "\\s*:\\s*.*)card ", "mi" );
+
+            // look for match in what's left of partial description
+            let m = partialDescription.match(re);
             if (m) {
-                metaDataValues[element] = m[1];
-                description = description.replace( fallBackRe, '');
-                tmpDescription = tmpDescription.replace(fallBackRe,'');
-                // now replace descriptionObject with what's in description
-                // - empty out descriptionObject
-                jQuery(descriptionObject).empty();
-                // - create a set of nodes based on what's in description
-                let htmlDescription = jQuery.parseHTML(tmpDescription);
-                // - insert it into descriptionObject
-                jQuery(descriptionObject).append(htmlDescription);
+//                console.log(`FOUND(1) Search for ${element} found ${m[1]}`);
+                // remove match from partialDescription
+                partialDescription = partialDescription.replace(re,'');
+                description = description.replace(re,'');
+                // added element for later processing
+                tmpMetaData.push(m[1]);
+            } else {
+                // bad at RE, so check if it's the last one
+                re = new RegExp( "(" + element + "\\s*:\\s*.*)$", "mi" );
+                m = partialDescription.match(re);
+                if (m) {
+//                    console.log(`FOUND(2) Search for ${element} found ${m[1]}`);
+                    // remove it from partial description
+                    partialDescription = partialDescription.replace(re,'');
+                    description = description.replace(re,'');
+                    // added element for later processing
+                    tmpMetaData.push(m[1]);
+                } else {
+//                    console.log(`      Search for ${element} no match`);
+                }
             }
 
+        });
+    }
+
+    // At this stage tmpMetaData contains "html" for each card meta data
+    // format should be "card label: value"
+    console.log(tmpMetaData);
+    console.log(`description is now ${description}`);
+
+    metaDataValues['description'] = description;
+
+    // Loop thru each tmpMetaData element and extract value appropriately
+    for (i=0; i<tmpMetaData.length; i++) {
+        // extract the metaData label m[1] and value m[2]
+        let re = new RegExp( "\\s*(card\\s*[^:]*)\\s*:\\s*(.*)", "im" );
+        let m = tmpMetaData[i].match( re, "im");
+
+        if (m) {
+            // extract label and value
+            // ensure label matches METADATA name archetypes
+            let label = m[1].trim().replace(/\\s*/, ' ').toLowerCase();
+            let value = m[2]
+
+            metaDataValues[label] = value;
+
+ //           console.log(`found **${label}** and ${value} from ${tmpMetaData[i]}`);
+        } else {
+ //           console.log(`   XXXX no match for ${tmpMetaData[i]}`);
         }
-    });
-    
+    }
+
+//    console.log(metaDataValues);
+
     // handle the inline image
     let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
     if (inlineImage.length) {
@@ -1314,7 +1350,7 @@ function extractCardMetaData( descriptionObject ) {
     }
 
     // add the description to the hash
-    metaDataValues['description'] = description;
+    //metaDataValues['description'] = description;
     // return the hash
     return metaDataValues;
 }
@@ -1392,10 +1428,10 @@ function handleCardImageSize(param) {
 //          Card Date: Mon Week 5
 
 function handleCardDate(param) {
-    var month, endMonth, date, endDate, week = "", endWeek = "";
-    var empty1 = { date: "", week: "" };
-    var empty2 = { date: "", week: "" };
-    var date = { start: empty1, stop: empty2 }; // object to return 
+    let month, endMonth, endDate, week = "", endWeek = "";
+    let empty1 = { date: "", week: "" };
+    let empty2 = { date: "", week: "" };
+    let date = { start: empty1, stop: empty2 }; // object to return 
     // date by griffith week    
 
     m = param.match(/ *week ([0-9]*)/i);
@@ -1409,7 +1445,7 @@ function handleCardDate(param) {
         } else {
             week = m[1];
         }
-        date.start = getTermDate(week)
+        date.start = getTermDate(week);
     } else {
         // Handle the day of a semester week 
         // start date becomes start of week + number of days in
@@ -1418,15 +1454,15 @@ function handleCardDate(param) {
         if (m) {
             day = m[1];
             week = m[m.length - 1];
-            date.start = getTermDate(week, true, day)
+            date.start = getTermDate(week, true, day);
         } else {
             // TODO need to handle range here 
             m = param.match(/ *([a-z]+) ([0-9]+)/i);
             if (m) {
                 x = param.match(/ *([a-z]+) ([0-9]+)-+([a-z]+) ([0-9]+)/i);
                 if (x) {
-                    date.start = { month: x[1], date: x[2] }
-                    date.stop = { month: x[3], date: x[4] }
+                    date.start = { month: x[1], date: x[2] };
+                    date.stop = { month: x[3], date: x[4] };
                 } else {
                     date.start = { month: m[1], date: m[2] };
                 }
@@ -1473,7 +1509,7 @@ function handleCardLabelNumber(label,number) {
     trimLabel = cleanTrimHtml(label);    
     
     if (trimLabel==="") {
-        return [ "", ""]
+        return [ "", ""];
     } else if ( typeof(label)==="undefined") {
         trimLabel=DEFAULT_CARD_LABEL;
     }
@@ -1680,7 +1716,7 @@ function addCardInterface(items) {
     var engageVerb = 'Engage';
 
     // Define the text for Review Status
-    var MARK_REVIEWED = "Mark Reviewed"
+    var MARK_REVIEWED = "Mark Reviewed";
     var REVIEWED = "Reviewed";
 
     // get the content item with h3 heading containing Card Interface
@@ -1777,12 +1813,12 @@ function addCardInterface(items) {
             //   reviewed
             if (idx.review.match(/markUnreviewed/)) {
                 reviewTemplate = markUnReviewedLinkHtmlTemplate[template];
-                reviewTemplate = reviewTemplate.replace('{REVIEWED}', REVIEWED)
+                reviewTemplate = reviewTemplate.replace('{REVIEWED}', REVIEWED);
             } else {
                 // it's the other one which indicates it has not been reviewed
                 reviewTemplate = markReviewLinkHtmlTemplate[template];
 
-                reviewTemplate = reviewTemplate.replace('{MARK_REVIEWED}', MARK_REVIEWED)
+                reviewTemplate = reviewTemplate.replace('{MARK_REVIEWED}', MARK_REVIEWED);
             }
             // set the right link
             reviewTemplate = reviewTemplate.replace('{LINK}', idx.review);
@@ -1844,7 +1880,7 @@ function addCardInterface(items) {
         } else {
             cardHtml = cardHtml.replace(/{IFRAME}/g, idx.iframe);
             // set pic URl to empty so non is provided
-            picUrl = ''
+            picUrl = '';
         }
         cardHtml = cardHtml.replace(/{PIC_URL}/g, picUrl);
         cardHtml = cardHtml.replace('{TITLE}', idx.title);
@@ -1930,7 +1966,7 @@ function addCardInterface(items) {
                 } else {
                     // if exam, use that template
                     // other wise construct dual week
-                    var weekHtml = examPeriodTemplate;
+                    let weekHtml = examPeriodTemplate;
                     if (idx.date.start.week !== 'exam') {
                         weekHtml = dualWeekHtmlTemplate.replace('{WEEK_START}',
                             idx.date.start.week);
@@ -1947,13 +1983,14 @@ function addCardInterface(items) {
                 cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
                 if (!idx.date.start.hasOwnProperty('week')) {
                     cardHtml = cardHtml.replace('{WEEK}', '');
-                } else 
-                    var weekReplace = "Week " + idx.date.start.week;
+                } else { // SKETCHY TODO change added block around else
+                    let weekReplace = "Week " + idx.date.start.week;
                     if ( idx.date.start.hasOwnProperty('day')) {
                         weekReplace = idx.date.start.day + " " + weekReplace;
                     }
-                    var weekHtml = weekHtmlTemplate.replace('{WEEK}', weekReplace);
-                cardHtml = cardHtml.replace('{WEEK}', weekHtml);
+                    let weekHtml = weekHtmlTemplate.replace('{WEEK}', weekReplace); 
+                    cardHtml = cardHtml.replace('{WEEK}', weekHtml);
+                }
             }
         } else {
             // no dates at all
@@ -1979,10 +2016,10 @@ function addCardInterface(items) {
 function getTermDate(week, startWeek = true, dayOfWeek = 'Monday') {
 
     if ( typeof TERM_DATES[TERM]==='undefined') {
-        return undefined
+        return undefined;
     }
 
-    dayOfWeek = dayOfWeek.toLowerCase()
+    dayOfWeek = dayOfWeek.toLowerCase();
     //console.log("TERM is " + TERM + " week is " + week);
     var date = { date: "", month: "", week: week };
     if ((week < 0) || (week > 15)) {
@@ -2163,7 +2200,7 @@ function getReviewStatus(vtbgen) {
     review = jQuery(parent).find("a.button-5");
 
     if (review.length === 0) {
-        return undefined
+        return undefined;
     } else {
         return jQuery(review).attr("href");
     }
@@ -2175,19 +2212,19 @@ function getReviewStatus(vtbgen) {
 
 function parse_parameters(cmdline) {
     //    var re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
-    var re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
-    var next_arg = ['', '', cmdline];
-    var args = [];
+    let re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
+    let next_arg = ['', '', cmdline];
+    let args = [];
     while (next_arg = re_next_arg.exec(next_arg[2])) {
-        var quoted_arg = next_arg[1];
-        var unquoted_arg = "";
+        let quoted_arg = next_arg[1];
+        let unquoted_arg = "";
         while (quoted_arg.length > 0) {
             if (/^"/.test(quoted_arg)) {
-                var quoted_part = /^"((?:\\.|[^"])*)"(.*)$/.exec(quoted_arg);
+                let quoted_part = /^"((?:\\.|[^"])*)"(.*)$/.exec(quoted_arg);
                 unquoted_arg += quoted_part[1].replace(/\\(.)/g, "$1");
                 quoted_arg = quoted_part[2];
             } else if (/^'/.test(quoted_arg)) {
-                var quoted_part = /^'([^']*)'(.*)$/.exec(quoted_arg);
+                let quoted_part = /^'([^']*)'(.*)$/.exec(quoted_arg);
                 unquoted_arg += quoted_part[1];
                 quoted_arg = quoted_part[2];
             } else if (/^\\/.test(quoted_arg)) {
