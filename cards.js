@@ -1167,7 +1167,6 @@ function calculateTermYear( courseTitle) {
         // if this is a QCM course (either offering of joined), then update term
         qcmRe = new RegExp('^([0-9]+QCM)_([0-9][0-9][0-9][0-9])');
         m = qcmRe.match(id);
-        console.log(m);
         if (m) {
             term = term+ "QCM";
         }
@@ -1215,6 +1214,12 @@ function getCardItems($) {
 // ??Assumes that metadata is divided into paragraphs
 // Problem
 
+/**
+ * @function extractCardMetaData
+ * @param {jQuery} descriptionObject contain content of Blackboard content item
+ * @returns {Object} Each field has a meta data value extracted from descriptionObject
+ */
+
 
 const CARD_METADATA_FIELDS = [
     "card label", "card number",
@@ -1222,34 +1227,6 @@ const CARD_METADATA_FIELDS = [
     "assessment type", "assessment weighting", "assessment outcomes",
     "card image", "card image iframe", "card image size", "card image active"
 ];
-
-/**
- * noCardMetaData 
- * @param {String} ignoreMetaData name of meta data to ignore when checking
- * @param {String} htmlString  string to check for other card meta data
- * @returns {Boolean} 
- */
-
-function noCardMetaData( ignoreMetaData, htmlString) {
-
-
-    // for all card meta data check if the html contains it
-    for (i=0; i<CARD_METADATA_FIELDS.length; i++) {
-        // ignore the current meta data
-        if ( ignoreMetaData===CARD_METADATA_FIELDS[i] ) {
-            continue;
-        }
-
-        // if there is a card_meta data return false
-        let re = new RegExp( CARD_METADATA_FIELDS[i] + "\\s*:\\s*", "im" );
-        let m = htmlString.match( re);
-        if (m) {
-            return false;
-        }
-    }
-
-    return true;
-}
 
 
 function extractCardMetaData( descriptionObject ) {
@@ -1310,6 +1287,10 @@ function extractCardMetaData( descriptionObject ) {
     // format should be "card label: value"
     console.log(tmpMetaData);
     console.log(`description is now ${description}`);
+    let div = document.createElement('div');
+    div.innerHTML=description;
+    description = div.innerHTML;
+    console.log(`cleaned? description is now ${description}`);
 
     metaDataValues['description'] = description;
 
@@ -1323,7 +1304,7 @@ function extractCardMetaData( descriptionObject ) {
             // extract label and value
             // ensure label matches METADATA name archetypes
             let label = m[1].trim().replace(/\\s*/, ' ').toLowerCase();
-            let value = m[2]
+            let value = m[2];
 
             metaDataValues[label] = value;
 
@@ -1567,6 +1548,8 @@ function extractCardsFromContent(myCards) {
         // extract all the possible meta data
         let cardMetaData = extractCardMetaData(this);
         
+        console.log("------------------ cardMetaData");
+        console.log(cardMetaData);
         // now have cardMetaData with all meta data and the non meta data 
         // description. Need to make the necessary changes based on data
         // loop through each of the elements (but not description)
@@ -1794,6 +1777,8 @@ function addCardInterface(items) {
     items.forEach(function (idx) {
         var cardHtml = cardHtmlTemplate[template];
         cardHtml = cardHtml.replace('{WIDTH}', WIDTH);
+
+        console.log( `template ${template} is ${cardHtml}`);
         // replace the default background colour if a different one
         // is specific
         if (idx.cardBGcolour) {
@@ -1889,6 +1874,7 @@ function addCardInterface(items) {
         cardHtml = cardHtml.replace(/\{LEARNING_OUTCOMES\}/g, idx.assessmentOutcomes);
 
         // Get rid of some crud Bb inserts into the HTML
+        console.log(`descriptoin is ${idx.description}`);
         description = idx.description.replace(/<p/g, '<p class="pb-2"');
         description = description.replace(/<a/g, '<a class="underline"');
         cardHtml = cardHtml.replace('{DESCRIPTION}', description);
@@ -1996,6 +1982,7 @@ function addCardInterface(items) {
             // no dates at all
             cardHtml = cardHtml.replace('{DATE}', '');
         }
+        console.log(`Finished with cardHtml ${cardHtml}`);
         cards = cards.concat(cardHtml);
     });
 
