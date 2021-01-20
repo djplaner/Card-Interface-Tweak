@@ -1497,13 +1497,17 @@ function handleCardLabelNumber(label,number) {
     trimLabel = cleanTrimHtml(label);    
     
     if (trimLabel==="") {
+        // return no label or number if the label is empty (but defined)
         return [ "", ""];
-    } else if (trimLabel.match( /none/i )) { 
-        // TODO would none ever be accepted?
+    } else if (typeof(number)!=="undefined" && number.match( /none/i )) { 
+        // if there is a card number and it is the word "none", then
+        // return the label and an empty number
         // TODO enable CardNumber=none as a parameter to card interface
         return [ label, ""];
     } else if ( typeof(label)==="undefined") {
-        trimLabel=DEFAU/extLT_CARD_LABEL;
+        // set the label to the DEFAULT if no label specified
+        // numbering gets decided below
+        trimLabel=DEFAULT_CARD_LABEL;
     }
     
     // Update the numbering schemes
@@ -1712,6 +1716,7 @@ function addCardInterface(items) {
     // Define the text for Review Status
     var MARK_REVIEWED = "Mark Reviewed";
     var REVIEWED = "Reviewed";
+    var NO_CARD_NUMBER = false;
 
     // get the content item with h3 heading containing Card Interface
     var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter( function(x) {
@@ -1730,8 +1735,9 @@ function addCardInterface(items) {
 
         //Extract parameters
         var m = cardInterfaceTitle.match(/Card Interface *([^<]*)/i);
-        WIDTH = 'md:w-1/3';
-        HIDE_IMAGES = false;
+        var WIDTH = 'md:w-1/3';
+        var HIDE_IMAGES = false;
+
         if (m) {
             newParams = parse_parameters(m[1]);
 
@@ -1743,7 +1749,9 @@ function addCardInterface(items) {
                         template = VERTICAL;
                     } else if (element.match(/template=['"]horizontal['"]/i)) {
                         template = HORIZONTAL;
-                    } else if (element.match(/noimages/)) {
+                    } else if ( element.match(/nocardnumber/i)) {
+                        NO_CARD_NUMBER = true;
+                    } else if (element.match(/noimages/i)) {
                         HIDE_IMAGES = true;
                     } else if (x = element.match(/template=by([2-6])/i)) {
                         WIDTH = "md:w-1/" + x[1];
@@ -1823,14 +1831,19 @@ function addCardInterface(items) {
         // Only show module number if there's a label
         if (idx.label !== '') {
             var checkForNum = idx.moduleNum;
-            if (idx.moduleNum) {
+            if ( NO_CARD_NUMBER) {
+                // global setting not to show card numbers
+                cardHtml = cardHtml.replace('{MODULE_NUM}', '');
+                checkForNum = '';
+            } else if (idx.moduleNum) {
                 // if there's a hard coded moduleNum use that
                 cardHtml = cardHtml.replace('{MODULE_NUM}', idx.moduleNum);
             } else {
                 // use the one we're calculating
                 //cardHtml = cardHtml.replace('{MODULE_NUM}',moduleNum);
-                cardHtml = cardHtml.replace(/\{MODULE_NUM\}/g, moduleNum);
-                checkForNum = moduleNum;
+                cardHtml = cardHtml.replace(/\{MODULE_NUM\}/g, idx.moduleNum);
+                // checkForNum probably not required
+                checkForNum = idx.moduleNum;
             }
 
             // Update the title, check to see if it starts with label and 
