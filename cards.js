@@ -1494,7 +1494,8 @@ function handleCardLabelNumber(label,number) {
     // - undefined - we want the default label
     
     // ensure label is empty HTML (incl &nbsp; as empty)
-    trimLabel = cleanTrimHtml(label);    
+    //trimLabel = cleanTrimHtml(label);    
+    trimLabel = label;
     
     if (trimLabel==="") {
         // return no label or number if the label is empty (but defined)
@@ -1502,11 +1503,12 @@ function handleCardLabelNumber(label,number) {
     } else if (typeof(number)!=="undefined" && number.match( /none/i )) { 
         // if there is a card number and it is the word "none", then
         // return the label and an empty number
-        // TODO enable CardNumber=none as a parameter to card interface
+        // TODO, should this be label of trimLabel. i.e allow user defined
+        // html to be included as part of the label?
         return [ label, ""];
     } else if ( typeof(label)==="undefined") {
         // set the label to the DEFAULT if no label specified
-        // numbering gets decided below
+        // numbering gets decided below. 
         trimLabel=DEFAULT_CARD_LABEL;
     }
     
