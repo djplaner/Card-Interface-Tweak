@@ -1286,10 +1286,24 @@ function extractCardMetaData( descriptionObject ) {
         console.log(` ---- description is now ${description}`);
     }
 
+    // handle the inline image
+    let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
+    if (inlineImage.length) {
+        metaDataValues['card image'] = inlineImage[0].src;
+        //console.log("item html" + inlineImage[0].outerHTML);
+        description = description.replace(inlineImage[0].outerHTML, "");
+        // Bb also adds stuff when images inserted, remove it from 
+        // description to be placed into card
+        var bb = jQuery.parseHTML(description);
+        // This will find the class
+        stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html();
+        description = description.replace(stringToRemove, '');
+    }
+
     // At this stage tmpMetaData contains "html" for each card meta data
     // format should be "card label: value"
-    console.log(tmpMetaData);
-    console.log(`description is now ${description}`);
+    console.log(metaDataValues);
+//    console.log(`description is now ${description}`);
     // Make sure that the description is valid HTML (mostly closing tags)
     let div = document.createElement('div');
     div.innerHTML=description;
@@ -1320,19 +1334,6 @@ function extractCardMetaData( descriptionObject ) {
 
 //    console.log(metaDataValues);
 
-    // handle the inline image
-    let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
-    if (inlineImage.length) {
-        metaDataValues['card image'] = inlineImage[0].src;
-        //console.log("item html" + inlineImage[0].outerHTML);
-        description = description.replace(inlineImage[0].outerHTML, "");
-        // Bb also adds stuff when images inserted, remove it from 
-        // description to be placed into card
-        var bb = jQuery.parseHTML(description);
-        // This will find the class
-        stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html();
-        description = description.replace(stringToRemove, '');
-    }
 
     // add the description to the hash
     //metaDataValues['description'] = description;
@@ -1495,8 +1496,12 @@ function handleCardLabelNumber(label,number) {
     
     if (trimLabel==="") {
         return [ "", ""];
+    } else if (trimLabel.match( /none/i )) { 
+        // TODO would none ever be accepted?
+        // TODO enable CardNumber=none as a parameter to card interface
+        return [ label, ""];
     } else if ( typeof(label)==="undefined") {
-        trimLabel=DEFAULT_CARD_LABEL;
+        trimLabel=DEFAU/extLT_CARD_LABEL;
     }
     
     // Update the numbering schemes
