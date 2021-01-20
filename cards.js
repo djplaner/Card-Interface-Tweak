@@ -1216,6 +1216,7 @@ const CARD_METADATA_FIELDS = [
     "card label", "card number",
     "card date", "card date label",
     "assessment type", "assessment weighting", "assessment outcomes",
+    "card image", "card image iframe", "card image size", "card image active"
 ];
 
 
@@ -1249,6 +1250,7 @@ function extractCardMetaData( descriptionObject ) {
 
         console.log(` --- description starting as ${description}`);
         CARD_METADATA_FIELDS.forEach( function(element) {
+            console.log(`****** Search for ${element}`);
             // search re for this element, and want to save the string that was found
             let re = new RegExp( "(" + element + "\\s*:\\s*.*)card ", "mi" );
 
@@ -1285,31 +1287,11 @@ function extractCardMetaData( descriptionObject ) {
         console.log(` ---- description is now ${description}`);
     }
 
-    // handle the inline image
-    let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
-    if (inlineImage.length) {
-        metaDataValues['card image'] = inlineImage[0].src;
-        //console.log("item html" + inlineImage[0].outerHTML);
-        description = description.replace(inlineImage[0].outerHTML, "");
-        // Bb also adds stuff when images inserted, remove it from 
-        // description to be placed into card
-        var bb = jQuery.parseHTML(description);
-        // This will find the class
-        stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html();
-        description = description.replace(stringToRemove, '');
-    }
 
     // At this stage tmpMetaData contains "html" for each card meta data
     // format should be "card label: value"
-    console.log(metaDataValues);
 //    console.log(`description is now ${description}`);
     // Make sure that the description is valid HTML (mostly closing tags)
-    let div = document.createElement('div');
-    div.innerHTML=description;
-    description = div.innerHTML;
-    console.log(`cleaned? description is now ${description}`);
-
-    metaDataValues['description'] = description;
 
     // Loop thru each tmpMetaData element and extract value appropriately
     for (i=0; i<tmpMetaData.length; i++) {
@@ -1331,9 +1313,30 @@ function extractCardMetaData( descriptionObject ) {
         }
     }
 
-//    console.log(metaDataValues);
+    // handle the inline image
+    let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
+    if (inlineImage.length) {
+        // add the inline src to the end of tmpMetaData
+        metaDataValues['card image'] = inlineImage[0].src; 
+        //console.log("item html" + inlineImage[0].outerHTML);
+        description = description.replace(inlineImage[0].outerHTML, "");
+        // Bb also adds stuff when images inserted, remove it from 
+        // description to be placed into card
+        var bb = jQuery.parseHTML(description);
+        // This will find the class
+        stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html();
+        description = description.replace(stringToRemove, '');
+    }
 
+    console.log(`tmpMetaData ${tmpMetaData}`);
+    let div = document.createElement('div');
+    div.innerHTML=description;
+    description = div.innerHTML;
+    console.log(`cleaned? description is now ${description}`);
 
+    metaDataValues['description'] = description;
+
+    console.log(metaDataValues);
     // add the description to the hash
     //metaDataValues['description'] = description;
     // return the hash
