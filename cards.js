@@ -1225,7 +1225,6 @@ const CARD_METADATA_FIELDS = [
     "card label", "card number",
     "card date", "card date label",
     "assessment type", "assessment weighting", "assessment outcomes",
-    "card image", "card image iframe", "card image size", "card image active"
 ];
 
 
@@ -1269,7 +1268,7 @@ function extractCardMetaData( descriptionObject ) {
                 // card stuff there for later
                 partialDescription = partialDescription.replace(m[1],'');
                 console.log(`   leaving ${partialDescription}`);
-                description = description.replace(re,'');
+                description = description.replace(m[1],'');
                 // added element for later processing
                 tmpMetaData.push(m[1]);
             } else {
