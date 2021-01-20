@@ -1216,7 +1216,6 @@ const CARD_METADATA_FIELDS = [
     "card label", "card number",
     "card date", "card date label",
     "assessment type", "assessment weighting", "assessment outcomes",
-    "card image", "card image iframe", "card image size", "card image active"
 ];
 
 
