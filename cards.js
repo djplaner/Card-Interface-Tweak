@@ -1202,22 +1202,13 @@ function getCardItems($) {
 }
  
 
-//-------------------------------------------------------------
-// hash = extractCardMetaData( jQuery object)
-// - given the description jQuery element
-// - return a hash that contains 
-//   - one entry for each Card meta data 
-//     containing the html for just that meta data
-//   - description entry - 
-//     the rest of the jQuery object after the meta data has been
-//     removed
-// ??Assumes that metadata is divided into paragraphs
-// Problem
 
 /**
  * @function extractCardMetaData
  * @param {jQuery} descriptionObject contain content of Blackboard content item
  * @returns {Object} Each field has a meta data value extracted from descriptionObject
+ * 
+ * Assumes description is broken in <p> but checks with.
  */
 
 
@@ -1256,6 +1247,7 @@ function extractCardMetaData( descriptionObject ) {
         // no need for this here, doing it above??
         partialDescription = partialDescription.replace(/(?:\r\n|\r|\n)/g, ' ');
 
+        console.log(` --- description starting as ${description}`);
         CARD_METADATA_FIELDS.forEach( function(element) {
             // search re for this element, and want to save the string that was found
             let re = new RegExp( "(" + element + "\\s*:\\s*.*)card ", "mi" );
@@ -1263,37 +1255,41 @@ function extractCardMetaData( descriptionObject ) {
             // look for match in what's left of partial description
             let m = partialDescription.match(re);
             if (m) {
-                console.log(`FOUND(1) Search for ${element} found ${m[1]}`);
+                console.log(`FOUND(1) Search for ${element} found **${m[1]}**`);
                 // remove match from partialDescription, leaving any other potential
                 // card stuff there for later
                 partialDescription = partialDescription.replace(m[1],'');
                 console.log(`   leaving ${partialDescription}`);
+                // remove the match from the broader description 
                 description = description.replace(m[1],'');
-                // added element for later processing
-                tmpMetaData.push(m[1]);
+                // added element for later processing - but remove the &nbsp;
+                tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
             } else {
                 // bad at RE, so check if it's the last one
                 re = new RegExp( "(" + element + "\\s*:\\s*.*)$", "mi" );
                 m = partialDescription.match(re);
                 if (m) {
-                    console.log(`FOUND(2) Search for ${element} found ${m[1]}`);
+                    console.log(`FOUND(2) Search for ${element} found **${m[1]}**`);
                     // remove it from partial description
                     partialDescription = partialDescription.replace(re,'');
-                    description = description.replace(re,'');
-                    // added element for later processing
-                    tmpMetaData.push(m[1]);
+                    // remove the match from the broader description 
+                    description = description.replace(m[1],'');
+                    // added element for later processing - but remove any &nbsp;
+                    tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
                 } else {
                     console.log(`      Search for ${element} no match`);
                 }
             }
 
         });
+        console.log(` ---- description is now ${description}`);
     }
 
     // At this stage tmpMetaData contains "html" for each card meta data
     // format should be "card label: value"
     console.log(tmpMetaData);
     console.log(`description is now ${description}`);
+    // Make sure that the description is valid HTML (mostly closing tags)
     let div = document.createElement('div');
     div.innerHTML=description;
     description = div.innerHTML;
