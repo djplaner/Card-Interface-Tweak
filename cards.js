@@ -1202,22 +1202,13 @@ function getCardItems($) {
 }
  
 
-//-------------------------------------------------------------
-// hash = extractCardMetaData( jQuery object)
-// - given the description jQuery element
-// - return a hash that contains 
-//   - one entry for each Card meta data 
-//     containing the html for just that meta data
-//   - description entry - 
-//     the rest of the jQuery object after the meta data has been
-//     removed
-// ??Assumes that metadata is divided into paragraphs
-// Problem
 
 /**
  * @function extractCardMetaData
  * @param {jQuery} descriptionObject contain content of Blackboard content item
  * @returns {Object} Each field has a meta data value extracted from descriptionObject
+ * 
+ * Assumes description is broken in <p> but checks with.
  */
 
 
@@ -1264,25 +1255,25 @@ function extractCardMetaData( descriptionObject ) {
             // look for match in what's left of partial description
             let m = partialDescription.match(re);
             if (m) {
-                console.log(`FOUND(1) Search for ${element} found ${m[1]}`);
+                console.log(`FOUND(1) Search for ${element} found **${m[1]}**`);
                 // remove match from partialDescription, leaving any other potential
                 // card stuff there for later
                 partialDescription = partialDescription.replace(m[1],'');
                 console.log(`   leaving ${partialDescription}`);
                 description = description.replace(re,'');
-                // added element for later processing
-                tmpMetaData.push(m[1]);
+                // added element for later processing - but remove the &nbsp;
+                tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
             } else {
                 // bad at RE, so check if it's the last one
                 re = new RegExp( "(" + element + "\\s*:\\s*.*)$", "mi" );
                 m = partialDescription.match(re);
                 if (m) {
-                    console.log(`FOUND(2) Search for ${element} found ${m[1]}`);
+                    console.log(`FOUND(2) Search for ${element} found **${m[1]}**`);
                     // remove it from partial description
                     partialDescription = partialDescription.replace(re,'');
                     description = description.replace(re,'');
-                    // added element for later processing
-                    tmpMetaData.push(m[1]);
+                    // added element for later processing - but remove any &nbsp;
+                    tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
                 } else {
                     console.log(`      Search for ${element} no match`);
                 }
