@@ -1248,6 +1248,7 @@ function extractCardMetaData( descriptionObject ) {
         // no need for this here, doing it above??
         partialDescription = partialDescription.replace(/(?:\r\n|\r|\n)/g, ' ');
 
+        console.log(` --- description starting as ${description}`);
         CARD_METADATA_FIELDS.forEach( function(element) {
             // search re for this element, and want to save the string that was found
             let re = new RegExp( "(" + element + "\\s*:\\s*.*)card ", "mi" );
@@ -1260,7 +1261,8 @@ function extractCardMetaData( descriptionObject ) {
                 // card stuff there for later
                 partialDescription = partialDescription.replace(m[1],'');
                 console.log(`   leaving ${partialDescription}`);
-                description = description.replace(re,'');
+                // remove the match from the broader description 
+                description = description.replace(m[1],'');
                 // added element for later processing - but remove the &nbsp;
                 tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
             } else {
@@ -1271,7 +1273,8 @@ function extractCardMetaData( descriptionObject ) {
                     console.log(`FOUND(2) Search for ${element} found **${m[1]}**`);
                     // remove it from partial description
                     partialDescription = partialDescription.replace(re,'');
-                    description = description.replace(re,'');
+                    // remove the match from the broader description 
+                    description = description.replace(m[1],'');
                     // added element for later processing - but remove any &nbsp;
                     tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
                 } else {
@@ -1280,12 +1283,14 @@ function extractCardMetaData( descriptionObject ) {
             }
 
         });
+        console.log(` ---- description is now ${description}`);
     }
 
     // At this stage tmpMetaData contains "html" for each card meta data
     // format should be "card label: value"
     console.log(tmpMetaData);
     console.log(`description is now ${description}`);
+    // Make sure that the description is valid HTML (mostly closing tags)
     let div = document.createElement('div');
     div.innerHTML=description;
     description = div.innerHTML;
