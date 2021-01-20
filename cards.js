@@ -1494,8 +1494,7 @@ function handleCardLabelNumber(label,number) {
     // - undefined - we want the default label
     
     // ensure label is empty HTML (incl &nbsp; as empty)
-    //trimLabel = cleanTrimHtml(label);    
-    trimLabel = label;
+    trimLabel = cleanTrimHtml(label);    
     
     if (trimLabel==="") {
         // return no label or number if the label is empty (but defined)
@@ -1510,6 +1509,7 @@ function handleCardLabelNumber(label,number) {
         // set the label to the DEFAULT if no label specified
         // numbering gets decided below. 
         trimLabel=DEFAULT_CARD_LABEL;
+        label=DEFAULT_CARD_LABEL;
     }
     
     // Update the numbering schemes
@@ -1527,7 +1527,7 @@ function handleCardLabelNumber(label,number) {
         CARD_LABEL_NUMBERING[trimLabel]=parseInt(number);
     }
     
-    return [trimLabel,CARD_LABEL_NUMBERING[trimLabel]];
+    return [label,CARD_LABEL_NUMBERING[trimLabel]];
 }
 
 //--------------------------------
