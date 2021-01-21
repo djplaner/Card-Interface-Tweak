@@ -1301,8 +1301,12 @@ function extractCardMetaData( descriptionObject ) {
             // ensure label matches METADATA name archetypes
             let label = m[1].trim().replace(/\\s*/, ' ').toLowerCase();
             let value = m[2];
+            // make sure the HTML in value is valid
+            let div = document.createElement('div');
+            div.innerHTML=value;
+            let newValue = div.innerHTML;
 
-            metaDataValues[label] = value;
+            metaDataValues[label] = newValue;
         } else {
         }
     }
@@ -1316,7 +1320,7 @@ function extractCardMetaData( descriptionObject ) {
         description = description.replace(inlineImage[0].outerHTML, "");
         // Bb also adds stuff when images inserted, remove it from 
         // description to be placed into card
-        var bb = jQuery.parseHTML(description);
+        let bb = jQuery.parseHTML(description);
         // This will find the class
         stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html();
         description = description.replace(stringToRemove, '');
