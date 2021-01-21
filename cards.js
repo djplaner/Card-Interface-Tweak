@@ -459,6 +459,9 @@ const NUM_TEMPLATES = 6, HORIZONTAL = 0, // original 3 cards per row
     PEOPLE = 5,
     ASSESSMENT = 6; // horizontal but show off people (BCI) version
 
+// Whether the images will be hidden
+var HIDE_IMAGES = false;
+
 // Whether or not xAPI logging is turned on
 // - turned on by adding "logging" to Card Interface
 var LOGGING = false;
@@ -1238,38 +1241,29 @@ function extractCardMetaData( descriptionObject ) {
     // break up description into collection of ps and focus
     // just on the innerHtml
     let elementHtmlObjects = jQuery(descriptionObject).find("p");
-//    console.log(typeof elementHtmlObjects);
     let elementContent = jQuery(elementHtmlObjects).toArray().map( x => x.innerHTML);
-//   console.log(elementContent);
 
     let tmpMetaData = [];
 
     // check and break up the ps into individual bits of meta data
     let maxLength = elementContent.length;
     for ( i=0; i<maxLength; i++) {
-        console.log(typeof elementContent[i]);
-        console.log( `Item ${i} with html ${elementContent[i]}`);
-
         // work on a temp copy of description
         //let partialDescription = elementContent[i].innerHTML;
         let partialDescription = elementContent[i];
         // no need for this here, doing it above??
         partialDescription = partialDescription.replace(/(?:\r\n|\r|\n)/g, ' ');
 
-        console.log(` --- description starting as ${description}`);
         CARD_METADATA_FIELDS.forEach( function(element) {
-            console.log(`****** Search for ${element}`);
             // search re for this element, and want to save the string that was found
             let re = new RegExp( "(" + element + "\\s*:\\s*.*)card ", "mi" );
 
             // look for match in what's left of partial description
             let m = partialDescription.match(re);
             if (m) {
-                console.log(`FOUND(1) Search for ${element} found **${m[1]}**`);
                 // remove match from partialDescription, leaving any other potential
                 // card stuff there for later
                 partialDescription = partialDescription.replace(m[1],'');
-                console.log(`   leaving ${partialDescription}`);
                 // remove the match from the broader description 
                 description = description.replace(m[1],'');
                 // added element for later processing - but remove the &nbsp;
@@ -1279,7 +1273,6 @@ function extractCardMetaData( descriptionObject ) {
                 re = new RegExp( "(" + element + "\\s*:\\s*.*)$", "mi" );
                 m = partialDescription.match(re);
                 if (m) {
-                    console.log(`FOUND(2) Search for ${element} found **${m[1]}**`);
                     // remove it from partial description
                     partialDescription = partialDescription.replace(re,'');
                     // remove the match from the broader description 
@@ -1287,21 +1280,17 @@ function extractCardMetaData( descriptionObject ) {
                     // added element for later processing - but remove any &nbsp;
                     tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
                 } else {
-                    console.log(`      Search for ${element} no match`);
+                    //console.log(`      Search for ${element} no match`);
                 }
             }
 
         });
-        console.log(` ---- description is now ${description}`);
     }
-
 
     // At this stage tmpMetaData contains "html" for each card meta data
     // format should be "card label: value"
-//    console.log(`description is now ${description}`);
-    // Make sure that the description is valid HTML (mostly closing tags)
-
     // Loop thru each tmpMetaData element and extract value appropriately
+    //  place in an object label -> value
     for (i=0; i<tmpMetaData.length; i++) {
         // extract the metaData label m[1] and value m[2]
         let re = new RegExp( "\\s*(card\\s*[^:]*)\\s*:\\s*(.*)", "im" );
@@ -1314,10 +1303,7 @@ function extractCardMetaData( descriptionObject ) {
             let value = m[2];
 
             metaDataValues[label] = value;
-
- //           console.log(`found **${label}** and ${value} from ${tmpMetaData[i]}`);
         } else {
- //           console.log(`   XXXX no match for ${tmpMetaData[i]}`);
         }
     }
 
@@ -1336,18 +1322,13 @@ function extractCardMetaData( descriptionObject ) {
         description = description.replace(stringToRemove, '');
     }
 
-    console.log(`tmpMetaData ${tmpMetaData}`);
+    // Make sure that the description is valid HTML (mostly closing tags)
     let div = document.createElement('div');
     div.innerHTML=description;
     description = div.innerHTML;
-    console.log(`cleaned? description is now ${description}`);
 
     metaDataValues['description'] = description;
 
-    console.log(metaDataValues);
-    // add the description to the hash
-    //metaDataValues['description'] = description;
-    // return the hash
     return metaDataValues;
 }
 
@@ -1573,8 +1554,6 @@ function extractCardsFromContent(myCards) {
         // extract all the possible meta data
         let cardMetaData = extractCardMetaData(this);
         
-        console.log("------------------ cardMetaData");
-        console.log(cardMetaData);
         // now have cardMetaData with all meta data and the non meta data 
         // description. Need to make the necessary changes based on data
         // loop through each of the elements (but not description)
@@ -1665,7 +1644,6 @@ function extractCardsFromContent(myCards) {
 
         // get the itemId to allow for "edit" link in card
         var itemId = jQuery(this).parents('.liItem').attr('id');
-        //console.log("Item id " + itemId + " for link " + link );
         // Hide the contentItem  TODO Only do this if display page
         var tweak_bb_active_url_pattern = "listContent.jsp";
         if (location.href.indexOf(tweak_bb_active_url_pattern) > 0) {
@@ -1746,7 +1724,6 @@ function addCardInterface(items) {
         //Extract parameters
         var m = cardInterfaceTitle.match(/Card Interface *([^<]*)/i);
         var WIDTH = 'md:w-1/3';
-        var HIDE_IMAGES = false;
 
         if (m) {
             newParams = parse_parameters(m[1]);
@@ -1907,7 +1884,6 @@ function addCardInterface(items) {
         cardHtml = cardHtml.replace(/\{LEARNING_OUTCOMES\}/g, idx.assessmentOutcomes);
 
         // Get rid of some crud Bb inserts into the HTML
-        console.log(`descriptoin is ${idx.description}`);
         description = idx.description.replace(/<p/g, '<p class="pb-2"');
         description = description.replace(/<a/g, '<a class="underline"');
         cardHtml = cardHtml.replace('{DESCRIPTION}', description);
@@ -2015,7 +1991,6 @@ function addCardInterface(items) {
             // no dates at all
             cardHtml = cardHtml.replace('{DATE}', '');
         }
-        console.log(`Finished with cardHtml ${cardHtml}`);
         cards = cards.concat(cardHtml);
     });
 
