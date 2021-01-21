@@ -875,7 +875,7 @@ DOCUMENTATION_LINKS = {
     'changeDate': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-a-date-or-date-range',
     'changeCardLabel': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-label',
     'changeCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-number',
-    'noCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#no-card-number',
+    'noCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#removing-the-card-number',
     'hideCard' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card',
     'enableReview' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#enabling-review-status',
     // customise all cards
