@@ -506,7 +506,9 @@ cardHtmlTemplate[HORIZONTAL] = `
       <div class="{BG_SIZE} h-48" style="background-image: url('{PIC_URL}'); background-color: rgb(255,255,255)">{IFRAME}
       </div>
       <div class="carddescription p-4 flex-1 flex flex-col">
+        <span class="cardLabel">
         {LABEL} {MODULE_NUM}
+        </span>
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
         <div class="mb-4 flex-1">
           {DESCRIPTION}
@@ -551,8 +553,9 @@ cardHtmlTemplate[HORIZONTAL_NOENGAGE] = `
           {IFRAME}
       </div>
       <div class="p-4 flex-1 flex flex-col">
-       
+        <span class="cardLabel"> 
         {LABEL} {MODULE_NUM}
+        </span>
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
         <div class="carddescription mb-4 flex-1">
           {DESCRIPTION}
@@ -581,7 +584,9 @@ cardHtmlTemplate[PEOPLE] = `
       <div class="w-full"><iframe src='https://player.vimeo.com/video/226525600?&title=0&byline=0'></iframe></div></a>
       <div class="p-4 flex-1 flex flex-col">
        <a href="{LINK}">
+        <span class="cardLabel">
         {LABEL} {MODULE_NUM}
+        </span>
         <h3 class="mb-4 text-2xl">{TITLE}</h3>
         <div class="carddescription mb-4 flex-1">
           {DESCRIPTION}
@@ -870,6 +875,7 @@ DOCUMENTATION_LINKS = {
     'changeDate': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-a-date-or-date-range',
     'changeCardLabel': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-label',
     'changeCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-number',
+    'noCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#no-card-number',
     'hideCard' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card',
     'enableReview' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#enabling-review-status',
     // customise all cards
@@ -929,6 +935,8 @@ DOCUMENTATION_HTML = `
            <li> Add or <a target="_blank" href="${DOCUMENTATION_LINKS.changeDate}">change the date or date range</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardLabel}">Change the card label</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardNumber}">Change the card number</a>. </li>
+           <li> <i class="fa fa-plus-square text-green"></i>
+           <a target="_blank" href="${DOCUMENTATION_LINKS.noCardNumber}">Remove the card number</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.hideCard}">Hide a card</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.enableReview}">Enable "Review Status"</a>. </li>
         </ul>
@@ -1487,7 +1495,7 @@ function cleanTrimHtml(html) {
 
 // storage for the multiple label numberings used across all cards
 var CARD_LABEL_NUMBERING = {};
-    
+   
 function handleCardLabelNumber(label,number) {
     // Handle the cases where label is
     // - empty - we don't want a label
