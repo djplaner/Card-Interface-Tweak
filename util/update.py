@@ -107,20 +107,37 @@ PAGES = [
 # html = updateHtml( inHtml)
 # - do some processing on the HTML to prepare for github
 
+STYLE_PREPEND = {
+    "reading" : '<div class="readingImage"></div>',
+    "activity": '<div class="activityImage"></div>', 
+    "flashback" : '<div class="flashbackImage"><img src="https://s3.amazonaws.com/filebucketdave/banner.js/images/com14/flashback.png" alt="Flashback logo" /></div>',
+    "canaryExercise" : '<div class="canaryImage"><img src="https://s3.amazonaws.com/filebucketdave/banner.js/images/com14/Tweety.svg.png"  alt="Tweety bird"  /></div>',
+    "ael-note" : '<div class="noteImage"></div>',
+    "weeklyWorkout" : '<div class="weeklyWorkoutImage"><img src="https://filebucketdave.s3.amazonaws.com/banner.js/images/com14/weeklyWorkout.png" alt="Female weight lifter" /></div>', 
+    "comingSoon" : '<div class="comingSoonImage"></div>',
+}
+
 def updateHtml( inHtml ):
     soup = BeautifulSoup(inHtml, features="html5lib")
 
+    ## Look for embed objects and translate HTML entities to HTML tags
     for span in soup.findAll('span',{'class':'embed'}):
+        # sometimes .string is None but there is stuff in .txt
         if span.string is None: 
-            continue
+            span.string = span.text
+            if span.string is None: 
+                continue
         newSoup = BeautifulSoup( span.string, 'html.parser')
         span.string.replace_with(newSoup)
+
+    ## work through STYLE_PREPEND and prepend the specified
+    for divClass in STYLE_PREPEND:
+        # loop through each div with the class
+        for divElement in soup.findAll('div',{'class':divClass}):
+            toAppend = BeautifulSoup( STYLE_PREPEND[divClass], 'html.parser')
+            divElement.insert( 0, toAppend )
         
     return soup.body.encode_contents()
-
-#    return inHtml
-
-
 
 #------------------------------------------------------------
 # loop through all the pages, convert Word doc to markdown and save
