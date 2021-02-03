@@ -446,6 +446,8 @@ const MONTHS_HASH = {
     "Dec" : 11, "December":11
 };
 
+// kludge to parse card image when Blackboard inserts one of its icons
+const BBIMG = "/images/ci/icons/cmlink_generic.gif";
 
 // Interface design from https://codepen.io/njs/pen/BVdwZB
 
@@ -1315,17 +1317,25 @@ function extractCardMetaData( descriptionObject ) {
 
     // handle the inline image
     let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
-    if (inlineImage.length) {
-        // add the inline src to the end of tmpMetaData
-        metaDataValues['card image'] = inlineImage[0].src; 
-        //console.log("item html" + inlineImage[0].outerHTML);
-        description = description.replace(inlineImage[0].outerHTML, "");
-        // Bb also adds stuff when images inserted, remove it from 
-        // description to be placed into card
-        let bb = jQuery.parseHTML(description);
-        // This will find the class
-        stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html();
-        description = description.replace(stringToRemove, '');
+    //   Exclude /images/ci/icon/cmlink_generic.gif from img
+
+
+    if ( inlineImage.length) { 
+        console.log(`testing ${inlineImage[0].src} excludeImg ${BBIMG} ${inlineImage[0].src.includes(BBIMG)}`);
+    }
+
+    if (inlineImage.length && ! inlineImage[0].src.includes(BBIMG)) {
+            // we have real image
+            // add the inline src to the end of tmpMetaData
+            metaDataValues['card image'] = inlineImage[0].src; 
+            console.log("item html" + inlineImage[0].outerHTML); 
+            description = description.replace(inlineImage[0].outerHTML, ""); 
+            // Bb also adds stuff when images inserted, remove it from 
+            // description to be placed into card 
+            let bb = jQuery.parseHTML(description); 
+            // This will find the class 
+            stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html(); 
+            description = description.replace(stringToRemove, '');
     }
 
     // Make sure that the description is valid HTML (mostly closing tags)
@@ -1334,6 +1344,13 @@ function extractCardMetaData( descriptionObject ) {
     description = div.innerHTML;
 
     metaDataValues['description'] = description;
+    console.log(metaDataValues);
+
+    // TODO
+    // - Card image contains instead of actual image
+    //    https://bblearn-blaed.griffith.edu.au/images/ci/icons/cmlink_generic.gif
+    // - It's extracting the image embedded before the rest
+    // 
 
     return metaDataValues;
 }
@@ -2155,16 +2172,28 @@ function identifyCardBackgroundColour(input) {
 //**************************************************************
 // picUrl = identifyPicUrl( value )
 // TODO - return "" if value is not a valid URI
-//   Otherwise return the value
+//   Otherwise return the value 
 
 function identifyPicUrl(value) {
-    // try an img tag (without Card Image)
-    let re = new RegExp('img src="([^"]*)', "i" );
+    let re = new RegExp(/img src="([^"]*)/, "i" );
     let m = value.match( re );
     
-    // if it is return the picUrl
+    // found an image
     if (m) {
-        return m[1];
+        // not a BBIMG, then return it
+        if ( ! m[1].includes(BBIMG)){
+            console.log("-- doens't include BBIMG");
+            return m[1];
+        }
+        // is a BBIMG try extract the link
+        // kludge because I couldn't get registers to work in JS REs
+        re = new RegExp(/<a href="([^"]*)">([^>]*)<\/a>/, "i" );
+        m = value.match( re );
+        if (m) {
+            if ( m[1]===m[2]) {
+                return m[1]
+            }
+        }
     }
     
     // is there a link to the image
