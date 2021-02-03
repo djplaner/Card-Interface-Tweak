@@ -1249,9 +1249,11 @@ function extractCardMetaData( descriptionObject ) {
 
     let tmpMetaData = [];
 
+    //console.log("----------------------- extractCardMetaData");
     // check and break up the ps into individual bits of meta data
     let maxLength = elementContent.length;
     for ( i=0; i<maxLength; i++) {
+ //       console.log(`    _____________ working on para ${i} == ${elementContent[i]}`);
         // work on a temp copy of description
         //let partialDescription = elementContent[i].innerHTML;
         let partialDescription = elementContent[i];
@@ -1259,12 +1261,14 @@ function extractCardMetaData( descriptionObject ) {
         partialDescription = partialDescription.replace(/(?:\r\n|\r|\n)/g, ' ');
 
         CARD_METADATA_FIELDS.forEach( function(element) {
+//            console.log(`     -- working on element ${element}`);
             // search re for this element, and want to save the string that was found
             let re = new RegExp( "(" + element + "\\s*:\\s*.*)card ", "mi" );
 
             // look for match in what's left of partial description
             let m = partialDescription.match(re);
             if (m) {
+  //              console.log(`     -- found partial Descripiton match ${m[1]}`);
                 // remove match from partialDescription, leaving any other potential
                 // card stuff there for later
                 partialDescription = partialDescription.replace(m[1],'');
@@ -1274,6 +1278,7 @@ function extractCardMetaData( descriptionObject ) {
                 tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
             } else {
                 // bad at RE, so check if it's the last one
+   //             console.log("     -- bad RE???");
                 re = new RegExp( "(" + element + "\\s*:\\s*.*)$", "mi" );
                 m = partialDescription.match(re);
                 if (m) {
@@ -1291,6 +1296,8 @@ function extractCardMetaData( descriptionObject ) {
         });
     }
 
+//    console.log("---------------------- Finished parsing Ps");
+ //   console.log(tmpMetaData);
     // At this stage tmpMetaData contains "html" for each card meta data
     // format should be "card label: value"
     // Loop thru each tmpMetaData element and extract value appropriately
@@ -1328,8 +1335,28 @@ function extractCardMetaData( descriptionObject ) {
             // description to be placed into card 
             let bb = jQuery.parseHTML(description); 
             // This will find the class 
-            stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html(); 
-            description = description.replace(stringToRemove, '');
+            // TODO - this is currently removing permanent URL links which we.
+            //   This removes it on all the .contextMenuContainers.  Need to do
+            //   it just on the one wrapped around the image
+            let stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html(); 
+            let linkStringToRemove = jQuery(inlineImage[0]).parent().find('.contextMenuContainer').clone().html(); 
+            description = description.replace(linkStringToRemove, '');
+    }
+
+    // there may also be other .contextMenuContainer elements that will need to be removed
+    // because Bb needs to do more work, but only does it if they are in .vtbgenerated (which cards are not)
+
+    // there may be other Bb additions that need cleaning
+    // e.g. 
+    // - spans with attr data-ally-scoreindicator
+
+    // work with what's left of description (after previous tidy ups)
+    let bb = jQuery.parseHTML(description);
+    // find the .contextMenuContainers (they aren't in DOM, so can't just remove)
+    let menuContainers = jQuery(bb).find('.contextMenuContainer'); 
+    for ( let i=0; i<menuContainers.length; i++){
+        let stringToRemove = jQuery(menuContainers[i]).clone().html();
+        description = description.replace(stringToRemove,'');
     }
 
     // Make sure that the description is valid HTML (mostly closing tags)
