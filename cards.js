@@ -1317,18 +1317,12 @@ function extractCardMetaData( descriptionObject ) {
 
     // handle the inline image
     let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
+
     //   Exclude /images/ci/icon/cmlink_generic.gif from img
-
-
-    if ( inlineImage.length) { 
-        console.log(`testing ${inlineImage[0].src} excludeImg ${BBIMG} ${inlineImage[0].src.includes(BBIMG)}`);
-    }
-
     if (inlineImage.length && ! inlineImage[0].src.includes(BBIMG)) {
             // we have real image
             // add the inline src to the end of tmpMetaData
             metaDataValues['card image'] = inlineImage[0].src; 
-            console.log("item html" + inlineImage[0].outerHTML); 
             description = description.replace(inlineImage[0].outerHTML, ""); 
             // Bb also adds stuff when images inserted, remove it from 
             // description to be placed into card 
@@ -1344,13 +1338,6 @@ function extractCardMetaData( descriptionObject ) {
     description = div.innerHTML;
 
     metaDataValues['description'] = description;
-    console.log(metaDataValues);
-
-    // TODO
-    // - Card image contains instead of actual image
-    //    https://bblearn-blaed.griffith.edu.au/images/ci/icons/cmlink_generic.gif
-    // - It's extracting the image embedded before the rest
-    // 
 
     return metaDataValues;
 }
