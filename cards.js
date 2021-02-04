@@ -1248,7 +1248,7 @@ function extractCardMetaData( descriptionObject ) {
     // TODO: Does this change screw up the complex shit that other people can
     //  do when they use line breaks, include HTML etc
     let elementHtmlObjects = jQuery(descriptionObject).find("p");
-    let elementContent = jQuery(elementHtmlObjects).toArray().map( x => x.outerHTML);
+    let elementContent = jQuery(elementHtmlObjects).toArray().map( x => x.innerHTML);
 
     let tmpMetaData = [];
 
@@ -1268,10 +1268,21 @@ function extractCardMetaData( descriptionObject ) {
             // search re for this element, and want to save the string that was found
             // TODO why is there "card" at the end of the RE here
 //            let re = new RegExp( "(" + element + "\\s*:\\s*.*)card ", "mi" );
-            let re = new RegExp( "<p.*(" + element + "\\s*:\\s*.*)</p>$", "mi" );
 
-            // look for match in what's left of partial description
+            // search for the element, but initially assume that there is another
+            // metadata variable within the current item (i.e. <p> </p>)
+            // This happens when a <br> is used, rather than <p> between metadata
+            // look for element, followed by a card metadata
+            let re = new RegExp( "(" + element + "\\s*:\\s*.*)card[^:]*:", "mi" );
             let m = partialDescription.match(re);
+            // if not, check for assessment
+            if (!m) {
+                re = new RegExp( "(" + element + "\\s*:\\s*.*)assessment[^:]*:", "mi" );
+                m = partialDescription.match(re);
+            }
+
+            // if found, then we need extract just the matched element, leaving
+            // the rest for a later iteration
             if (m) {
   //              console.log(`     -- found partial Descripiton match ${m[1]}`);
                 // remove match from partialDescription, leaving any other potential
@@ -1280,23 +1291,24 @@ function extractCardMetaData( descriptionObject ) {
                 // remove the match from the broader description 
                 //description = description.replace(m[1],'');
                 // TODO does raise the question of why m[0] okay here 
-                description = description.replace(m[0],'');
+                description = description.replace(m[1],'');
                 // added element for later processing - but remove the &nbsp;
                 tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
             } else {
+                // the <p> contains just the one metadata, replace the whole para
                 // bad at RE, so check if it's the last one
    //             console.log("     -- bad RE???");
-//                re = new RegExp( "(" + element + "\\s*:\\s*.*)$", "mi" );
-                re = new RegExp( "<p.*(" + element + "\\s*:\\s*.*)</p>$", "mi" );
+                re = new RegExp( "(" + element + "\\s*:\\s*.*)", "mi" );
+//                re = new RegExp( "<p.*(" + element + "\\s*:\\s*.*)</p>$", "mi" );
                 m = partialDescription.match(re);
                 if (m) {
                     // remove it from partial description
                     //partialDescription = partialDescription.replace(re,'');
-                    partialDescription = partialDescription.replace(m[0],'');
+                    partialDescription = partialDescription.replace(m[1],'');
                     // remove the match from the broader description 
                     // TODO doesn't remove the surrounding <p> </p>
 //                    description = description.replace(m[1],'');
-                    description = description.replace(m[0],'');
+                    description = description.replace(m[1],'');
                     // added element for later processing - but remove any &nbsp;
                     tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
                 } else {
@@ -1400,7 +1412,8 @@ function extractCardMetaData( descriptionObject ) {
     // Make sure that the description is valid HTML (mostly closing tags)
     div.innerHTML=description;
     description = div.innerHTML;
-
+    // remove any empty <p> tags from desciption
+    description = description.replace(/<p>\s*<\/p>/g, '');
     metaDataValues['description'] = description;
 
     return metaDataValues;
@@ -1485,10 +1498,11 @@ function handleCardDate(param) {
     let date = { start: empty1, stop: empty2 }; // object to return 
     // date by griffith week    
 
-    m = param.match(/ *week ([0-9]*)/i);
+    // try to extract week number first
+    m = param.match(/^\s*week\s*([0-9]*)\s*$/i);
     if (m) {
         // check to see if a range was specified
-        x = param.match(/ *week ([0-9]*)-([0-9]*)/i);
+        x = param.match(/\s*week\s*([0-9]*)-([0-9]*)\s*$/i);
         if (x) {
             week = x[1];
             endWeek = x[2];
@@ -1501,7 +1515,7 @@ function handleCardDate(param) {
         // Handle the day of a semester week 
         // start date becomes start of week + number of days in
         m = param.match(
-            / *\b(((mon|tues|wed(nes)?|thur(s)?|fri|sat(ur)?|sun)(day)?))\b *week *([0-9]*)/i);
+            /^\s*\b(((mon|tues|wed(nes)?|thur(s)?|fri|sat(ur)?|sun)(day)?))\b\s*week *([0-9]*)\s*$/i);
         if (m) {
             day = m[1];
             week = m[m.length - 1];
