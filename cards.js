@@ -1348,7 +1348,7 @@ function extractCardMetaData( descriptionObject ) {
 
     // there may be other Bb additions that need cleaning
     // e.g. 
-    // - spans with attr data-ally-scoreindicator
+    // - TODO spans with attr data-ally-scoreindicator
 
     // work with what's left of description (after previous tidy ups)
     let bb = jQuery.parseHTML(description);
