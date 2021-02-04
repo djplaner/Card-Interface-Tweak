@@ -1243,9 +1243,12 @@ function extractCardMetaData( descriptionObject ) {
     description = description.replace(/(?:\r\n|\r|\n)/g, ' ');
 
     // break up description into collection of ps and focus
-    // just on the innerHtml
+    // use outerHTML to get the surrounding <p> etc so that it can be removed from
+    // the description
+    // TODO: Does this change screw up the complex shit that other people can
+    //  do when they use line breaks, include HTML etc
     let elementHtmlObjects = jQuery(descriptionObject).find("p");
-    let elementContent = jQuery(elementHtmlObjects).toArray().map( x => x.innerHTML);
+    let elementContent = jQuery(elementHtmlObjects).toArray().map( x => x.outerHTML);
 
     let tmpMetaData = [];
 
@@ -1257,35 +1260,43 @@ function extractCardMetaData( descriptionObject ) {
         // work on a temp copy of description
         //let partialDescription = elementContent[i].innerHTML;
         let partialDescription = elementContent[i];
-        // no need for this here, doing it above??
+        // get rid of newlines (definitely needed)
         partialDescription = partialDescription.replace(/(?:\r\n|\r|\n)/g, ' ');
 
         CARD_METADATA_FIELDS.forEach( function(element) {
 //            console.log(`     -- working on element ${element}`);
             // search re for this element, and want to save the string that was found
-            let re = new RegExp( "(" + element + "\\s*:\\s*.*)card ", "mi" );
+            // TODO why is there "card" at the end of the RE here
+//            let re = new RegExp( "(" + element + "\\s*:\\s*.*)card ", "mi" );
+            let re = new RegExp( "<p.*(" + element + "\\s*:\\s*.*)</p>$", "mi" );
 
             // look for match in what's left of partial description
             let m = partialDescription.match(re);
             if (m) {
   //              console.log(`     -- found partial Descripiton match ${m[1]}`);
                 // remove match from partialDescription, leaving any other potential
-                // card stuff there for later
+                // card stuff there for later (hence why m[1], not m[0])
                 partialDescription = partialDescription.replace(m[1],'');
                 // remove the match from the broader description 
-                description = description.replace(m[1],'');
+                //description = description.replace(m[1],'');
+                // TODO does raise the question of why m[0] okay here 
+                description = description.replace(m[0],'');
                 // added element for later processing - but remove the &nbsp;
                 tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
             } else {
                 // bad at RE, so check if it's the last one
    //             console.log("     -- bad RE???");
-                re = new RegExp( "(" + element + "\\s*:\\s*.*)$", "mi" );
+//                re = new RegExp( "(" + element + "\\s*:\\s*.*)$", "mi" );
+                re = new RegExp( "<p.*(" + element + "\\s*:\\s*.*)</p>$", "mi" );
                 m = partialDescription.match(re);
                 if (m) {
                     // remove it from partial description
-                    partialDescription = partialDescription.replace(re,'');
+                    //partialDescription = partialDescription.replace(re,'');
+                    partialDescription = partialDescription.replace(m[0],'');
                     // remove the match from the broader description 
-                    description = description.replace(m[1],'');
+                    // TODO doesn't remove the surrounding <p> </p>
+//                    description = description.replace(m[1],'');
+                    description = description.replace(m[0],'');
                     // added element for later processing - but remove any &nbsp;
                     tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
                 } else {
