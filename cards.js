@@ -1499,7 +1499,8 @@ function handleCardDate(param) {
     // date by griffith week    
 
     // try to extract week number first
-    m = param.match(/^\s*week\s*([0-9]*)\s*$/i);
+    //m = param.match(/^\s*week\s*([0-9]*)\s*$/i);
+    m = param.match(/^\s*week\s*([0-9]*)/i);
     if (m) {
         // check to see if a range was specified
         x = param.match(/\s*week\s*([0-9]*)-([0-9]*)\s*$/i);
