@@ -1356,6 +1356,8 @@ function extractCardMetaData( descriptionObject ) {
     div.innerHTML=description;
     // not used in inlineImage (yet)
 
+
+
     // handle the inline image
     let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
 
@@ -1369,28 +1371,33 @@ function extractCardMetaData( descriptionObject ) {
             // this really isn't being sustainable
             oldHtml = oldHtml.replace(/title="card image"/i, ' ').replace(/  /g, ' ');
             console.log(`oldHtml ${oldHtml}`);
+            // remove it from the div jQuery element NOT HTML
             let img = jQuery(div).find(`img[src="${inlineImage[0].src}"]`).remove();
 
 
             // use jQuery to identify the img tag by src
             // newHtml and oldHtml contains the title attribute
             // But description does not and I can't find where it gets removed
-            let newHtml = jQuery(inlineImage[0]).parent().html();
+//            let newHtml = jQuery(inlineImage[0]).parent().html();
+// TODO need to test if there's no image found
+            let newHtml = inlineImage[0].outerHTML;
             // remove new lines from description
-   //         newHtml = newHtml.replace(/(?:\r\n|\r|\n)/g, ' ');
-            newHtml = newHtml.replace(/ *title="card image" */i, '');
-            description = description.replace(oldHtml, ""); 
-            console.log(`description after replace ${description}`);
+            newHtml = newHtml.replace(/(?:\r\n|\r|\n)/g, ' ');
+   //         newHtml = newHtml.replace(/ *title="card image" */i, '');
+            //description = description.replace(newHtml, ""); 
+            //console.log(`description after replace ${description}`);
             // Bb also adds stuff when images inserted, remove it from 
             // description to be placed into card 
-            let bb = jQuery.parseHTML(description); 
+            // Removed because we're no doing it with div
+            //let bb = jQuery.parseHTML(description); 
             // This will find the class 
             // TODO - this is currently removing permanent URL links which we.
             //   This removes it on all the .contextMenuContainers.  Need to do
             //   it just on the one wrapped around the image
-            let stringToRemove = jQuery(description).find('.contextMenuContainer').parent().clone().html(); 
+            let stringToRemove = jQuery(div).find('.contextMenuContainer').parent().clone().html(); 
+            // TODO this should be modified to user jQuery div
             let linkStringToRemove = jQuery(inlineImage[0]).parent().find('.contextMenuContainer').clone().html(); 
-            description = description.replace(linkStringToRemove, '');
+            //description = description.replace(linkStringToRemove, '');
     }
 
     // there may also be other .contextMenuContainer elements that will need to be removed
@@ -1401,16 +1408,16 @@ function extractCardMetaData( descriptionObject ) {
     // - TODO spans with attr data-ally-scoreindicator
 
     // work with what's left of description (after previous tidy ups)
-    let bb = jQuery.parseHTML(description);
+//    let bb = jQuery.parseHTML(description);
     // find the .contextMenuContainers (they aren't in DOM, so can't just remove)
-    let menuContainers = jQuery(bb).find('.contextMenuContainer'); 
-    for ( let i=0; i<menuContainers.length; i++){
+    let menuContainers = jQuery(div).find('.contextMenuContainer').remove(); 
+/*    for ( let i=0; i<menuContainers.length; i++){
         let stringToRemove = jQuery(menuContainers[i]).clone().html();
         description = description.replace(stringToRemove,'');
-    }
+    }*/
 
     // Make sure that the description is valid HTML (mostly closing tags)
-    div.innerHTML=description;
+    //div.innerHTML=description;
     description = div.innerHTML;
     // remove any empty <p> tags from desciption
     description = description.replace(/<p>\s*<\/p>/g, '');
@@ -1426,12 +1433,12 @@ function extractCardMetaData( descriptionObject ) {
 // - given value associated with "card image", could be URL or html
 
 function handleCardImage(param) {
-    let picUrl = "", cardBGcolour;
+    let picUrl = "", cardBGcolour = "black";
     
     // is it a data URI, just return it
     regex = /^data:((?:\w+\/(?:(?!;).)+)?)((?:;[\w\W]*?[^;])*),(.+)$/;
     if ( regex.test(param)){
-        return param;
+        return [ param, cardBGcolour];
     } 
     
     // check to see if it's a colour, rather than an image
