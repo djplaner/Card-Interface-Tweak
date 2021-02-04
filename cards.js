@@ -1307,6 +1307,12 @@ function extractCardMetaData( descriptionObject ) {
         let re = new RegExp( "\\s*(card\\s*[^:]*)\\s*:\\s*(.*)", "im" );
         let m = tmpMetaData[i].match( re, "im");
 
+        // didn't find a card value, try one of the assessment ones
+        if (!m) { 
+            re = new RegExp( "\\s*(assessment\\s*[^:]*)\\s*:\\s*(.*)", "im" );
+            m = tmpMetaData[i].match( re, "im");
+        }
+
         if (m) {
             // extract label and value
             // ensure label matches METADATA name archetypes
@@ -1322,6 +1328,11 @@ function extractCardMetaData( descriptionObject ) {
         }
     }
 
+    // used to edit the description element and ensure that it is correct HTML
+    let div = document.createElement('div');
+    div.innerHTML=description;
+    // not used in inlineImage (yet)
+
     // handle the inline image
     let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
 
@@ -1330,7 +1341,23 @@ function extractCardMetaData( descriptionObject ) {
             // we have real image
             // add the inline src to the end of tmpMetaData
             metaDataValues['card image'] = inlineImage[0].src; 
-            description = description.replace(inlineImage[0].outerHTML, ""); 
+            let oldHtml = inlineImage[0].outerHTML;
+            //oldHtml = oldHtml.replace(/(?:\r\n|\r|\n)/g, ' ')
+            // this really isn't being sustainable
+            oldHtml = oldHtml.replace(/title="card image"/i, ' ').replace(/  /g, ' ');
+            console.log(`oldHtml ${oldHtml}`);
+            let img = jQuery(div).find(`img[src="${inlineImage[0].src}"]`).remove();
+
+
+            // use jQuery to identify the img tag by src
+            // newHtml and oldHtml contains the title attribute
+            // But description does not and I can't find where it gets removed
+            let newHtml = jQuery(inlineImage[0]).parent().html();
+            // remove new lines from description
+   //         newHtml = newHtml.replace(/(?:\r\n|\r|\n)/g, ' ');
+            newHtml = newHtml.replace(/ *title="card image" */i, '');
+            description = description.replace(oldHtml, ""); 
+            console.log(`description after replace ${description}`);
             // Bb also adds stuff when images inserted, remove it from 
             // description to be placed into card 
             let bb = jQuery.parseHTML(description); 
@@ -1360,7 +1387,6 @@ function extractCardMetaData( descriptionObject ) {
     }
 
     // Make sure that the description is valid HTML (mostly closing tags)
-    let div = document.createElement('div');
     div.innerHTML=description;
     description = div.innerHTML;
 
