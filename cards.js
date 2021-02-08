@@ -1895,7 +1895,7 @@ function addCardInterface(items) {
             // moduleNum.  If it does, remove them from the title
             // So that the card doesn't duplicate it, but the information is 
             // still there in Blackboard
-            var regex = new RegExp('^' + idx.label + '\\s*' + checkForNum +
+            var regex = new RegExp('^' + idx.label.trim() + '\\s*' + checkForNum +
                 '\\s*[-:]*\\s*(.*)', "s");
             //const regex = /^Week\s*1\s*[-:]*\s*(.*)/gs;
             
@@ -1903,6 +1903,8 @@ function addCardInterface(items) {
             //var m = regex.test(idx.title);
             if (m) {
                 idx.title = m[1];
+                // kludge for COM14 which has a <br> after label in title
+                idx.title = idx.title.replace( /^<br\s*\/*>/i, '');
             }
         } else {
             cardHtml = cardHtml.replace('{MODULE_NUM}', '');
