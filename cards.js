@@ -1273,11 +1273,11 @@ function extractCardMetaData( descriptionObject ) {
             // metadata variable within the current item (i.e. <p> </p>)
             // This happens when a <br> is used, rather than <p> between metadata
             // look for element, followed by a card metadata
-            let re = new RegExp( "(" + element + "\\s*:\\s*.*)card[^:]*:", "mi" );
+            let re = new RegExp( "(" + element + "\\s*:\\s*.*)card\s+(?:label|number|date|date label|image size|image active)[^:]*:", "mi" );
             let m = partialDescription.match(re);
             // if not, check for assessment
             if (!m) {
-                re = new RegExp( "(" + element + "\\s*:\\s*.*)assessment[^:]*:", "mi" );
+                re = new RegExp( "(" + element + "\\s*:\\s*.*)assessment\s+(?:type|weighting|outcomes)[^:]*:", "mi" );
                 m = partialDescription.match(re);
             }
 
