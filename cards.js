@@ -1010,6 +1010,7 @@ function hideJourney($) {
  */
 
 function cardsInterface($) {
+    jQuery("ul#content_listContainer").hide();
 
     /* define variables based on Bb page type */
     /* used to identify important components in html */
@@ -1052,7 +1053,8 @@ function cardsInterface($) {
     var items = getCardItems($);
 
     /* generate the cards interface for the tiems */
-    addCardInterface(items);
+    //addCardInterface(items);
+    jQuery( window ).on( "load", addCardInterface(items) );
 
     // remove click event handler from engage buttons
 
@@ -1095,12 +1097,19 @@ function cardsInterface($) {
         }, false);
     }
 
-
-
     // if we want the images to be hidden, hide them at the end
     if (HIDE_IMAGES) {
         jQuery(".bg-cover").hide();
     }
+    // check if the item icons exists, before trying to remove them
+    let checkIcon = setInterval( function() {
+        if (jQuery("img.item_icon").length ) {
+            removeBlackboardIcon( cardInterface);
+            clearInterval(checkIcon);
+        }
+    }, 100);
+
+    jQuery("ul#content_listContainer").show();
 }
 
 /**
@@ -1743,6 +1752,21 @@ function extractCardsFromContent(myCards) {
     //console.log(items);
     return items;
 }
+
+/**
+ * @function removeBlackboardIcon
+ * @param {Object} cardInterface jQuery object for where the card interface will go 
+ * @description If exists, update cardInterface to remove Blackboard icon
+ */
+
+ function removeBlackboardIcon( cardInterface) {
+    let container = jQuery(cardInterface).parent().parent();
+    // hide the icon
+    let icon = jQuery(container ).find( "img.item_icon").css("display", "none");
+    // update the padding on the div
+    let div = jQuery(container).find("div.details").css("padding-left", "10px");
+ }
+
 
 /****
  * addCardInterface( items )
