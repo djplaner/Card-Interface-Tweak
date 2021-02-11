@@ -510,6 +510,7 @@ cardHtmlTemplate[HORIZONTAL] = `
       <a href="{LINK}" class="cardmainlink"></a>
       <div class="{BG_SIZE} h-48" style="background-image: url('{PIC_URL}'); background-color: rgb(255,255,255)">{IFRAME}
       </div>
+      {COMING_SOON}
       <div class="carddescription p-4 flex-1 flex flex-col">
         <span class="cardLabel">
         {LABEL} {MODULE_NUM}
@@ -539,6 +540,7 @@ cardHtmlTemplate[VERTICAL] = `
     <div class="p-2 m-2 lg:flex md:w-1/5 lg:w-1/5 sm:w-full">
         <h3>{TITLE}</h3>
     </div>
+    {COMING_SOON}
     <div class="carddescription m-2 p-2 lg:flex-initial md:w-1/2 lg:w-1/2 sm:w-full">
       <p class="text-grey-darker text-base">
         {DESCRIPTION} 
@@ -557,6 +559,7 @@ cardHtmlTemplate[HORIZONTAL_NOENGAGE] = `
       <div class="{BG_SIZE} h-48" style="background-image: url('{PIC_URL}');">
           {IFRAME}
       </div>
+      {COMING_SOON}
       <div class="p-4 flex-1 flex flex-col">
         <span class="cardLabel"> 
         {LABEL} {MODULE_NUM}
@@ -622,6 +625,7 @@ cardHtmlTemplate[ASSESSMENT] = `
         
     </div>
 	<div class="m-2">&nbsp;</div>
+    {COMING_SOON}
 	<div class="carddescription m-2">
           <div class="mb-4">
 			<h3 class="font-bold">{TITLE}</h3>
@@ -764,6 +768,18 @@ dualDateHtmlTemplate[ASSESSMENT] = `
           </div>
          </div> 
 `;
+
+var comingSoonHtmlTemplate = Array(NUM_TEMPLATES);
+
+comingSoonHtmlTemplate[HORIZONTAL]=`
+<div class="cardComingSoon p-4 flex bg-yellow-dark"> 
+    <span>🚧</span>&nbsp;
+    <span>{COMING_SOON_LABEL} {COMING_SOON_DATE}</span>
+</div>
+`;
+comingSoonHtmlTemplate[HORIZONTAL_NOENGAGE] = comingSoonHtmlTemplate[HORIZONTAL];
+comingSoonHtmlTemplate[PEOPLE] = comingSoonHtmlTemplate[HORIZONTAL_NOENGAGE];
+comingSoonHtmlTemplate[VERTICAL] = comingSoonHtmlTemplate[HORIZONTAL_NOENGAGE];
 
 weekHtmlTemplate = `
     <div class="bg-yellow-lighter text-black py-1">
@@ -1239,6 +1255,7 @@ function getCardItems($) {
 const CARD_METADATA_FIELDS = [
     "card label", "card number",
     "card date", "card date label",
+    "card coming soon", "card coming soon label",
     "assessment type", "assessment weighting", "assessment outcomes",
     "card image", "card image iframe", "card image size", "card image active"
 ];
@@ -1273,11 +1290,6 @@ function extractCardMetaData( descriptionObject ) {
         partialDescription = partialDescription.replace(/(?:\r\n|\r|\n)/g, ' ');
 
         CARD_METADATA_FIELDS.forEach( function(element) {
-//            console.log(`     -- working on element ${element}`);
-            // search re for this element, and want to save the string that was found
-            // TODO why is there "card" at the end of the RE here
-//            let re = new RegExp( "(" + element + "\\s*:\\s*.*)card ", "mi" );
-
             // search for the element, but initially assume that there is another
             // metadata variable within the current item (i.e. <p> </p>)
             // This happens when a <br> is used, rather than <p> between metadata
@@ -1523,6 +1535,16 @@ function handleCardDate(param) {
     return date;
 }                
 
+/**
+ * @function handleComingSoon
+ * @param {description} String
+ * @description Calcualte the data for coming soon, same process as card date
+ */
+
+ function handleComingSoon( description ) {
+
+ }
+
 // Given some HTML, remove all the HTML code, trim and return the text
 
 function cleanTrimHtml(html) {
@@ -1628,7 +1650,7 @@ function extractCardsFromContent(myCards) {
         // tmp variables used to hold results before putting into single card object
         let bgSize = "", dateLabel="Commencing", picUrl, cardBGcolour;
         let label = DEFAULT_CARD_LABEL, activePicUrl = "", number="&nbsp;", iframe="";
-        let date;
+        let date, comingSoon, comingSoonLabel;
         let assessmentType = "", assessmentWeighting = "", assessmentOutcomes = "";
         
         for ( let index in cardMetaData) {
@@ -1650,6 +1672,12 @@ function extractCardsFromContent(myCards) {
                     break; 
                 case "card date label": 
                     dateLabel=cardMetaData[index]; 
+                    break;
+                case "card coming soon": 
+                    comingSoon=handleCardDate(cardMetaData[index]); 
+                    break; 
+                case "card coming soon label": 
+                    comingSoonLabel=cardMetaData[index]; 
                     break;
                 case "assessment type": 
                     assessmentType=cardMetaData[index]; 
@@ -1726,6 +1754,7 @@ function extractCardsFromContent(myCards) {
             link: link, linkTarget: linkTarget,
             review: review,
             dateLabel: dateLabel, id: itemId, activePicUrl: activePicUrl,
+            comingSoon: comingSoon, comingSoonLabel: comingSoonLabel,
             assessmentWeighting: assessmentWeighting,
             assessmentOutcomes: assessmentOutcomes,
             assessmentType: assessmentType
@@ -2024,12 +2053,45 @@ function addCardInterface(items) {
             cardHtml = cardHtml.replace(/{EDIT_ITEM}/, editLink);
         }
 
-        // If need add the date visualisation
-        if (typeof(idx.date)!=="undefined" && typeof(idx.date.start)!=='undefined' && 'month' in idx.date.start) {
-            // Do we have dual dates - both start and stop?
+        // standard date
+        let date = '';
+        date = generateDateHtml( template, idx);
+        cardHtml = cardHtml.replace('{DATE}', date);
+
+        // coming soon
+        cardHtml = cardHtml.replace('{COMING_SOON}', '');
+
+        // add the individual card html to the collection
+        cards = cards.concat(cardHtml);
+    });
+
+    // STick the cards into the complete card HTML
+    var interfaceHtml = interfaceHtmlTemplate[template];
+    interfaceHtml = interfaceHtml.replace('{CARDS}', cards);
+    // Insert the HTML to the selected item(s)
+    //return false;
+    jQuery(firstItem).append(interfaceHtml);
+}
+
+/** 
+ * @function generateDateHtml
+ * @params template {Number} integer indicating which template for the card interface
+ * @params idx {Object} the date data structure
+ * @description parse the date object and use the correct template to 
+ * construct date html to be added to the card
+ */
+
+ function generateDateHtml( template, idx) { 
+     // by default no html
+     let cardHtml = '';
+
+     if (typeof(idx.date)!=="undefined" && 
+            typeof(idx.date.start)!=='undefined' && 'month' in idx.date.start) { 
+            // Do we have dual dates - both start and stop? 
             if (idx.date.stop.month) {
                 // start and stop dates
-                cardHtml = cardHtml.replace('{DATE}', dualDateHtmlTemplate[template]);
+                //cardHtml = cardHtml.replace('{DATE}', dualDateHtmlTemplate[template]);
+                cardHtml = dualDateHtmlTemplate[template];
                 cardHtml = cardHtml.replace(/{MONTH_START}/g,
                     idx.date.start.month);
                 cardHtml = cardHtml.replace(/{DATE_START}/g,
@@ -2056,7 +2118,8 @@ function addCardInterface(items) {
                 }
             } else {
                 // just start date
-                cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template]);
+                //cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template]);
+                cardHtml = dateHtmlTemplate[template];
                 cardHtml = cardHtml.replace(/{MONTH}/g, idx.date.start.month);
                 cardHtml = cardHtml.replace(/{DATE}/g, idx.date.start.date);
                 cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
@@ -2071,20 +2134,9 @@ function addCardInterface(items) {
                     cardHtml = cardHtml.replace('{WEEK}', weekHtml);
                 }
             }
-        } else {
-            // no dates at all
-            cardHtml = cardHtml.replace('{DATE}', '');
-        }
-        cards = cards.concat(cardHtml);
-    });
-
-    // STick the cards into the complete card HTML
-    var interfaceHtml = interfaceHtmlTemplate[template];
-    interfaceHtml = interfaceHtml.replace('{CARDS}', cards);
-    // Insert the HTML to the selected item(s)
-    //return false;
-    jQuery(firstItem).append(interfaceHtml);
-}
+        } 
+        return cardHtml;
+    }
 
 //*********************
 // getTermDate( week, day )
