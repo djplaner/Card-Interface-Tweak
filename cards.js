@@ -504,6 +504,8 @@ interfaceHtmlTemplate[ASSESSMENT] = interfaceHtmlTemplate[HORIZONTAL];
 
 var cardHtmlTemplate = Array(NUM_TEMPLATES);
 
+// the extract string for the hovers is used in a replace
+//  Don't change it (Kludegy)
 cardHtmlTemplate[HORIZONTAL] = `
   <div class="clickablecard w-full sm:w-1/2 {WIDTH} flex flex-col p-3">
     <div class="hover:outline-none hover:shadow-outline bg-white rounded-lg shadow-lg overflow-hidden flex-1 flex flex-col relative"> <!-- Relative could go -->
@@ -772,14 +774,28 @@ dualDateHtmlTemplate[ASSESSMENT] = `
 var comingSoonHtmlTemplate = Array(NUM_TEMPLATES);
 
 comingSoonHtmlTemplate[HORIZONTAL]=`
-<div class="cardComingSoon p-4 flex bg-yellow-dark"> 
+<div class="cardComingSoon p-4 flex bg-yellow-light"> 
     <span>🚧</span>&nbsp;
-    <span>{COMING_SOON_LABEL} {COMING_SOON_DATE}</span>
+    <span>{COMING_SOON_LABEL} {MONTH} {DATE}</span>
 </div>
 `;
 comingSoonHtmlTemplate[HORIZONTAL_NOENGAGE] = comingSoonHtmlTemplate[HORIZONTAL];
 comingSoonHtmlTemplate[PEOPLE] = comingSoonHtmlTemplate[HORIZONTAL_NOENGAGE];
 comingSoonHtmlTemplate[VERTICAL] = comingSoonHtmlTemplate[HORIZONTAL_NOENGAGE];
+
+var dualComingSoonHtmlTemplate = Array(NUM_TEMPLATES);
+
+dualComingSoonHtmlTemplate[HORIZONTAL]=`
+<div class="cardComingSoon p-4 flex bg-yellow-light"> 
+    <span>🚧</span>&nbsp;
+    <span>{COMING_SOON_LABEL} {MONTH_START} {DATE_START}-{MONTH_STOP} {DATE_STOP}</span>
+</div>
+`;
+dualComingSoonHtmlTemplate[HORIZONTAL_NOENGAGE] = dualComingSoonHtmlTemplate[HORIZONTAL];
+dualComingSoonHtmlTemplate[PEOPLE] = dualComingSoonHtmlTemplate[HORIZONTAL_NOENGAGE];
+dualComingSoonHtmlTemplate[VERTICAL] = dualComingSoonHtmlTemplate[HORIZONTAL_NOENGAGE];
+
+// week templates
 
 weekHtmlTemplate = `
     <div class="bg-yellow-lighter text-black py-1">
@@ -849,7 +865,7 @@ INTRO_HTML = `
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
                     <h1 class="text-lg">
                             <i class="fa fa-exclamation-triangle text-red"></i>
-                            Do not hide the tweak code
+                            Do not hide <a target="_blank" href="https://raw.githubusercontent.com/djplaner/Card-Interface-Tweak/master/tweak.js">the tweak code</a>
                     </h1>
                 </header>
                 <div class="p-2 md:p-4">
@@ -1026,7 +1042,7 @@ function hideJourney($) {
  */
 
 function cardsInterface($) {
-    jQuery("ul#content_listContainer").hide();
+//    jQuery("ul#content_listContainer").hide();
 
     /* define variables based on Bb page type */
     /* used to identify important components in html */
@@ -1412,7 +1428,7 @@ function extractCardMetaData( descriptionObject ) {
 //------------------------------------------------------
 // FUNCTIONS to handle card meta data changes
 
-// handleCardImage()
+//handleCardImage()
 // - given value associated with "card image", could be URL or html
 
 function handleCardImage(param) {
@@ -1480,6 +1496,7 @@ function handleCardImageSize(param) {
 // - specify a day of the week
 //          Card Date: Monday Week 5
 //          Card Date: Mon Week 5
+// TODO it needs to set year
 
 function handleCardDate(param) {
     let month, endMonth, endDate, week = "", endWeek = "";
@@ -1517,10 +1534,10 @@ function handleCardDate(param) {
             if (m) {
                 x = param.match(/ *([a-z]+) ([0-9]+)-+([a-z]+) ([0-9]+)/i);
                 if (x) {
-                    date.start = { month: x[1], date: x[2] };
-                    date.stop = { month: x[3], date: x[4] };
+                    date.start = { month: x[1], date: x[2], year: "one" };
+                    date.stop = { month: x[3], date: x[4], year: "two" };
                 } else {
-                    date.start = { month: m[1], date: m[2] };
+                    date.start = { month: m[1], date: m[2], year: "three" };
                 }
             } else {
                 // Fall back to check for exam period
@@ -1650,7 +1667,7 @@ function extractCardsFromContent(myCards) {
         // tmp variables used to hold results before putting into single card object
         let bgSize = "", dateLabel="Commencing", picUrl, cardBGcolour;
         let label = DEFAULT_CARD_LABEL, activePicUrl = "", number="&nbsp;", iframe="";
-        let date, comingSoon, comingSoonLabel;
+        let date, comingSoon, comingSoonLabel = "Available";
         let assessmentType = "", assessmentWeighting = "", assessmentOutcomes = "";
         
         for ( let index in cardMetaData) {
@@ -1809,13 +1826,14 @@ function extractCardsFromContent(myCards) {
 function addCardInterface(items) {
 
     // Define which template to use 
-    var template = HORIZONTAL;
-    var engageVerb = 'Engage';
+    let template = HORIZONTAL;
+    let linkTemplate = HORIZONTAL;
+    let engageVerb = 'Engage';
 
     // Define the text for Review Status
-    var MARK_REVIEWED = "Mark Reviewed";
-    var REVIEWED = "Reviewed";
-    var NO_CARD_NUMBER = false;
+    let MARK_REVIEWED = "Mark Reviewed";
+    let REVIEWED = "Reviewed";
+    let NO_CARD_NUMBER = false;
 
     // get the content item with h3 heading containing Card Interface
     var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter( function(x) {
@@ -1860,7 +1878,7 @@ function addCardInterface(items) {
                     } else if (element.match(/people/i)) {
                         template = PEOPLE;
                     } else if (element.match(/noengage/i)) {
-                        template = HORIZONTAL_NOENGAGE;
+                        linkTemplate = HORIZONTAL_NOENGAGE;
                     } else if (element.match(/logging/i)) {
                         LOGGING = true;
                     } else if (m = element.match(/engage=([^']*)/)) {
@@ -1892,7 +1910,35 @@ function addCardInterface(items) {
     var cards = "";
     var moduleNum = 1;
     items.forEach(function (idx) {
-        var cardHtml = cardHtmlTemplate[template];
+        let cardHtml = cardHtmlTemplate[template];
+        let linkHtml = linkItemHtmlTemplate[linkTemplate];
+
+        // coming soon
+        // By default comingSoon is empty
+        let comingSoon = ''
+        // TODO need to only display this if outside the date
+        if ( typeof(idx.comingSoon)!=="undefined" ) {
+            if ( ! inDateRange( idx.comingSoon, false)) {
+                // we have coming soon and in the date range
+                // generate the html
+                comingSoon = generateDateHtml( comingSoonHtmlTemplate[template],
+                                dualComingSoonHtmlTemplate[template], 
+                                idx.comingSoon);
+                comingSoon = comingSoon.replace('{COMING_SOON_LABEL}', idx.comingSoonLabel);
+
+                // don't show an engage button
+                linkHtml=''
+                // remove the clickableCard link and hover shadow
+                cardHtml = cardHtml.replace('clickablecard','').replace(
+                "hover:outline-none hover:shadow-outline ", ''
+                );
+            } 
+        }
+        cardHtml = cardHtml.replace('{COMING_SOON}', comingSoon);
+
+
+        // TODO either here, or above in the link section need to remove
+        // the link
         cardHtml = cardHtml.replace('{WIDTH}', WIDTH);
 
         // replace the default background colour if a different one
@@ -2005,7 +2051,6 @@ function addCardInterface(items) {
         if (idx.link) {
             // add the link
 
-            linkHtml = linkItemHtmlTemplate[template];
             linkHtml = linkHtml.replace('{ENGAGE}', engageVerb);
             cardHtml = cardHtml.replace('{LINK_ITEM}', linkHtml);
             // if there is a label and no hard coded moduleNum, 
@@ -2055,11 +2100,11 @@ function addCardInterface(items) {
 
         // standard date
         let date = '';
-        date = generateDateHtml( template, idx);
+        date = generateDateHtml( dateHtmlTemplate[template], 
+                                dualDateHtmlTemplate[template], idx.date);
+        date = date.replace('{DATE_LABEL}', idx.dateLabel);
         cardHtml = cardHtml.replace('{DATE}', date);
 
-        // coming soon
-        cardHtml = cardHtml.replace('{COMING_SOON}', '');
 
         // add the individual card html to the collection
         cards = cards.concat(cardHtml);
@@ -2075,60 +2120,61 @@ function addCardInterface(items) {
 
 /** 
  * @function generateDateHtml
- * @params template {Number} integer indicating which template for the card interface
- * @params idx {Object} the date data structure
+ * @params singleTemplate {String} HTML for a single date
+ * @params dualTemplate {String} HTML for a dual date
+ * @params date {Object} the date data structure
  * @description parse the date object and use the correct template to 
  * construct date html to be added to the card
  */
 
- function generateDateHtml( template, idx) { 
+ function generateDateHtml( singleTemplate, dualTemplate, date) { 
      // by default no html
      let cardHtml = '';
 
-     if (typeof(idx.date)!=="undefined" && 
-            typeof(idx.date.start)!=='undefined' && 'month' in idx.date.start) { 
+     if (typeof(date)!=="undefined" && 
+            typeof(date.start)!=='undefined' && 'month' in date.start) { 
             // Do we have dual dates - both start and stop? 
-            if (idx.date.stop.month) {
+            if (date.stop.month) {
                 // start and stop dates
                 //cardHtml = cardHtml.replace('{DATE}', dualDateHtmlTemplate[template]);
-                cardHtml = dualDateHtmlTemplate[template];
+                cardHtml = dualTemplate;
                 cardHtml = cardHtml.replace(/{MONTH_START}/g,
-                    idx.date.start.month);
+                    date.start.month);
                 cardHtml = cardHtml.replace(/{DATE_START}/g,
-                    idx.date.start.date);
+                    date.start.date);
                 cardHtml = cardHtml.replace(/{MONTH_STOP}/g,
-                    idx.date.stop.month);
+                    date.stop.month);
                 cardHtml = cardHtml.replace(/{DATE_STOP}/g,
-                    idx.date.stop.date);
-                cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
+                    date.stop.date);
+ //               cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
                 //           console.log(idx.date);
-                if (!idx.date.start.hasOwnProperty('week')) {
+                if (!date.start.hasOwnProperty('week')) {
                     cardHtml = cardHtml.replace('{WEEK}', '');
                 } else {
                     // if exam, use that template
                     // other wise construct dual week
                     let weekHtml = examPeriodTemplate;
-                    if (idx.date.start.week !== 'exam') {
+                    if (date.start.week !== 'exam') {
                         weekHtml = dualWeekHtmlTemplate.replace('{WEEK_START}',
-                            idx.date.start.week);
+                            date.start.week);
                         weekHtml = weekHtml.replace('{WEEK_STOP}',
-                            idx.date.stop.week);
+                            date.stop.week);
                     }
                     cardHtml = cardHtml.replace('{WEEK}', weekHtml);
                 }
             } else {
                 // just start date
                 //cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template]);
-                cardHtml = dateHtmlTemplate[template];
-                cardHtml = cardHtml.replace(/{MONTH}/g, idx.date.start.month);
-                cardHtml = cardHtml.replace(/{DATE}/g, idx.date.start.date);
-                cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
-                if (!idx.date.start.hasOwnProperty('week')) {
+                cardHtml = singleTemplate;
+                cardHtml = cardHtml.replace(/{MONTH}/g, date.start.month);
+                cardHtml = cardHtml.replace(/{DATE}/g, date.start.date);
+//                cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
+                if (!date.start.hasOwnProperty('week')) {
                     cardHtml = cardHtml.replace('{WEEK}', '');
                 } else { // SKETCHY TODO change added block around else
-                    let weekReplace = "Week " + idx.date.start.week;
-                    if ( idx.date.start.hasOwnProperty('day')) {
-                        weekReplace = idx.date.start.day + " " + weekReplace;
+                    let weekReplace = "Week " + date.start.week;
+                    if ( date.start.hasOwnProperty('day')) {
+                        weekReplace = date.start.day + " " + weekReplace;
                     }
                     let weekHtml = weekHtmlTemplate.replace('{WEEK}', weekReplace); 
                     cardHtml = cardHtml.replace('{WEEK}', weekHtml);
@@ -2137,6 +2183,96 @@ function addCardInterface(items) {
         } 
         return cardHtml;
     }
+
+    /**
+     * @function checkYear
+     * @param {now} Date obj with current date/time
+     * @param {int} year
+     * @param {int} MONTH
+     * @param {int} date
+     * @returns {int} year either year or year+1 if 
+     *    now = Feb 14 2020
+     *    date/month/year =Jan 03 2020 - returned year should be 2021 
+     */
+
+     function checkYear( now, year, month, date){
+
+     }
+
+/**
+ * @function inDateRange
+ * @param cardDate {Object} card.date object
+ * @param assumeStop {Boolean} true if assuming a stop date if one not specified
+ * @returns {Boolean} true if the current time (or SET_DATE) is within the
+ *                  date range
+ */
+
+ function inDateRange( cardDate, assumeStop=true ) {
+     let month, year;
+
+    if ( typeof(cardDate) !== "undefined") {
+        let start, stop, now;
+        
+        // Set now to current date OR SET_DATE if we want to do testing
+        if (SET_DATE === "") {
+            now = new Date();
+        } else {
+            now = new Date(SET_DATE);
+        }
+
+        // set the start date
+        if (cardDate.start.hasOwnProperty('month') &&
+            cardDate.start.month !== "") {
+
+            start = new Date( //parseInt(DEFAULT_YEAR), 
+                    cardDate.start.year,
+                    //MONTHS.indexOf(card.date.start.month), 
+                    MONTHS_HASH[cardDate.start.month],
+                    parseInt(cardDate.start.date));
+        }
+        
+        // set the card stop date
+        // - to card.date.stop if valid
+        // - to the end of the week if using a week
+        // - to the end of the day if no stop
+        // TODO where using DEFAULT_YEAR, need to do a check if the month is
+        //  past the current month.  If it is, then use DEFAULT_YEAR+1
+        if (cardDate.stop.hasOwnProperty('month') &&
+            cardDate.stop.month !== '') {
+            //stop = new Date(DEFAULT_YEAR, MONTHS_HASH[cardDate.stop.month], cardDate.stop.date);
+            stop = new Date(cardDate.stop.year, MONTHS_HASH[cardDate.stop.month], cardDate.stop.date);
+            stop.setHours(23, 59, 0);
+        } else if (cardDate.start.hasOwnProperty('week')) {
+            // there's no end date, but there is a start week
+            // so set stop to end of that week, but only if inWeek is true
+            if ( cardDate.start.week in TERM_DATES[TERM]) {
+                if (assumeStop) {
+                    stop = new Date(TERM_DATES[TERM][cardDate.start.week].stop);
+                    stop.setHours(23, 59, 0);
+                }
+            } else {
+              // problem with week, just set it to end of date
+              if (typeof(start)!=="undefined" && assumeStop) {
+                stop = new Date(start.getTime());
+                stop.setHours(23, 59, 0);
+              }
+            }
+        } else { // no week for stop, meaning it's just on the day
+            stop = new Date(start.getTime());
+            stop.setHours(23, 59, 0);
+        }
+
+        // figure out if we're in range
+        if (typeof(stop)!=="undefined") {
+            // if stop defined, check in range
+            return (now >= start && now <= stop);
+        } else {
+            // check passed start
+            return ( now>=start );
+        }        
+    }
+    return false;
+ }
 
 //*********************
 // getTermDate( week, day )
@@ -2152,7 +2288,7 @@ function getTermDate(week, startWeek = true, dayOfWeek = 'Monday') {
 
     dayOfWeek = dayOfWeek.toLowerCase();
     //console.log("TERM is " + TERM + " week is " + week);
-    var date = { date: "", month: "", week: week };
+    var date = { date: "", month: "", week: week, year: 0 };
     if ((week < 0) || (week > 15)) {
         if (week !== 'exam') {
             return date;
@@ -2181,6 +2317,7 @@ function getTermDate(week, startWeek = true, dayOfWeek = 'Monday') {
 
     date.month = MONTHS[d.getMonth()];
     date.date = d.getDate();
+    date.year = d.getFullYear();
 
     return date;
 }
