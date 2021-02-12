@@ -914,6 +914,7 @@ DOCUMENTATION_LINKS = {
     'changeCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-number',
     'noCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#removing-the-card-number',
     'hideCard' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card',
+    'comingSoon': '',
     'enableReview' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#enabling-review-status',
     // customise all cards
     'changeOrder' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-order-of-cards',
@@ -977,6 +978,8 @@ DOCUMENTATION_HTML = `
            <li> <i class="fa fa-plus-square text-green"></i>
            <a target="_blank" href="${DOCUMENTATION_LINKS.noCardNumber}">Remove the card number</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.hideCard}">Hide a card</a>. </li>
+           <li> <i class="fa fa-plus-square text-green"></i>
+           Turn a card to a <a target="_blank" href="${DOCUMENTATION_LINKS.comingSoon}">"Coming Soon" (🚧) card</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.enableReview}">Enable "Review Status"</a>. </li>
         </ul>
                 </div>
@@ -2192,21 +2195,6 @@ function addCardInterface(items) {
         return cardHtml;
     }
 
-    /**
-     * @function checkYear
-     * @param {now} Date obj with current date/time
-     * @param {int} year
-     * @param {int} MONTH
-     * @param {int} date
-     * @returns {int} year either year or year+1 if 
-     *    now = Feb 14 2020
-     *    date/month/year =Jan 03 2020 - returned year should be 2021 
-     */
-
-     function checkYear( now, year, month, date){
-
-     }
-
 /**
  * @function inDateRange
  * @param cardDate {Object} card.date object
@@ -2271,10 +2259,6 @@ function addCardInterface(items) {
             stop.setHours(23, 59, 0); */
         }
 
-        console.log(`inDateRange: ${start} - ${now} - ${stop} && ${now>=start}`);
-        console.log(cardDate);
-        console.log(`typeoof start ${typeof(start)} and now ${typeof(now)}`);
-        console.log(start);
         // figure out if we're in range
         if (typeof(stop)!=="undefined") {
             // if stop defined, check in range
