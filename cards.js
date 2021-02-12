@@ -1141,7 +1141,7 @@ function cardsInterface($) {
         }
     }, 100);
 
-    jQuery("ul#content_listContainer").show();
+//    jQuery("ul#content_listContainer").show();
 }
 
 /**
@@ -1533,11 +1533,13 @@ function handleCardDate(param) {
             m = param.match(/ *([a-z]+) ([0-9]+)/i);
             if (m) {
                 x = param.match(/ *([a-z]+) ([0-9]+)-+([a-z]+) ([0-9]+)/i);
+                // TODO is this where DEFAULT_YEAR might need to be incremented??
+                // Or do that originally 
                 if (x) {
-                    date.start = { month: x[1], date: x[2], year: "one" };
-                    date.stop = { month: x[3], date: x[4], year: "two" };
+                    date.start = { month: x[1], date: x[2], year: DEFAULT_YEAR };
+                    date.stop = { month: x[3], date: x[4], year: DEFAULT_YEAR };
                 } else {
-                    date.start = { month: m[1], date: m[2], year: "three" };
+                    date.start = { month: m[1], date: m[2], year: DEFAULT_YEAR };
                 }
             } else {
                 // Fall back to check for exam period
@@ -1834,6 +1836,7 @@ function addCardInterface(items) {
     let MARK_REVIEWED = "Mark Reviewed";
     let REVIEWED = "Reviewed";
     let NO_CARD_NUMBER = false;
+    let NO_COMING_SOON = false;
 
     // get the content item with h3 heading containing Card Interface
     var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter( function(x) {
@@ -1867,6 +1870,8 @@ function addCardInterface(items) {
                         template = HORIZONTAL;
                     } else if ( element.match(/nocardnumber/i)) {
                         NO_CARD_NUMBER = true;
+                    } else if ( element.match(/nocomingsoon/i)) {
+                        NO_COMING_SOON = true;
                     } else if (element.match(/noimages/i)) {
                         HIDE_IMAGES = true;
                     } else if (x = element.match(/template=by([2-6])/i)) {
@@ -1917,7 +1922,7 @@ function addCardInterface(items) {
         // By default comingSoon is empty
         let comingSoon = ''
         // TODO need to only display this if outside the date
-        if ( typeof(idx.comingSoon)!=="undefined" ) {
+        if ( typeof(idx.comingSoon)!=="undefined" && ! NO_COMING_SOON ) {
             if ( ! inDateRange( idx.comingSoon, false)) {
                 // we have coming soon and in the date range
                 // generate the html
@@ -1926,12 +1931,15 @@ function addCardInterface(items) {
                                 idx.comingSoon);
                 comingSoon = comingSoon.replace('{COMING_SOON_LABEL}', idx.comingSoonLabel);
 
-                // don't show an engage button
-                linkHtml=''
-                // remove the clickableCard link and hover shadow
-                cardHtml = cardHtml.replace('clickablecard','').replace(
+                // if students are viewing remove the link stuff
+                if ( window.tweak_bb.display_view) { 
+                    // don't show an engage button 
+                    linkHtml='';
+                    // remove the clickableCard link and hover shadow 
+                    cardHtml = cardHtml.replace('clickablecard','').replace(
                 "hover:outline-none hover:shadow-outline ", ''
-                );
+                    );
+                }
             } 
         }
         cardHtml = cardHtml.replace('{COMING_SOON}', comingSoon);
@@ -2242,7 +2250,8 @@ function addCardInterface(items) {
             //stop = new Date(DEFAULT_YEAR, MONTHS_HASH[cardDate.stop.month], cardDate.stop.date);
             stop = new Date(cardDate.stop.year, MONTHS_HASH[cardDate.stop.month], cardDate.stop.date);
             stop.setHours(23, 59, 0);
-        } else if (cardDate.start.hasOwnProperty('week')) {
+        } else if (cardDate.start.hasOwnProperty('week') &&
+                cardDate.start.week !=='') {
             // there's no end date, but there is a start week
             // so set stop to end of that week, but only if inWeek is true
             if ( cardDate.start.week in TERM_DATES[TERM]) {
@@ -2257,11 +2266,15 @@ function addCardInterface(items) {
                 stop.setHours(23, 59, 0);
               }
             }
-        } else { // no week for stop, meaning it's just on the day
+/*        } else { // no week for stop, meaning it's just on the day
             stop = new Date(start.getTime());
-            stop.setHours(23, 59, 0);
+            stop.setHours(23, 59, 0); */
         }
 
+        console.log(`inDateRange: ${start} - ${now} - ${stop} && ${now>=start}`);
+        console.log(cardDate);
+        console.log(`typeoof start ${typeof(start)} and now ${typeof(now)}`);
+        console.log(start);
         // figure out if we're in range
         if (typeof(stop)!=="undefined") {
             // if stop defined, check in range
