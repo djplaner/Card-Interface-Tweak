@@ -914,7 +914,7 @@ DOCUMENTATION_LINKS = {
     'changeCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-number',
     'noCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#removing-the-card-number',
     'hideCard' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card',
-    'comingSoon': '',
+    'comingSoon': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#making-a-coming-soon-card',
     'enableReview' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#enabling-review-status',
     // customise all cards
     'changeOrder' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-order-of-cards',
