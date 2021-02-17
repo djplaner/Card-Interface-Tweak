@@ -1562,16 +1562,6 @@ function handleCardDate(param) {
     return date;
 }                
 
-/**
- * @function handleComingSoon
- * @param {description} String
- * @description Calcualte the data for coming soon, same process as card date
- */
-
- function handleComingSoon( description ) {
-
- }
-
 // Given some HTML, remove all the HTML code, trim and return the text
 
 function cleanTrimHtml(html) {
