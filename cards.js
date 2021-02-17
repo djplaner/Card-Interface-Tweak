@@ -2312,7 +2312,7 @@ function getTermDate(week, startWeek = true, dayOfWeek = 'Monday') {
         var dayToNum = { 'tuesday' : 1, 'tue': 1,
             'wednesday': 2, 'wed': 2, 'thursday':3, 'thu': 3,
             'friday':4, 'fri': 4, 'saturday': 5, 'sat': 5,
-            'sunday': 6, 'sun': 6 };
+            'sunday': 6, 'sun': 6};
         // add in the day abbreviation so it can appear
         date.day = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.substr(1,2);
         if ( dayOfWeek in dayToNum ) { 
