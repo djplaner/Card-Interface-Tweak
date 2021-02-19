@@ -1496,17 +1496,109 @@ function handleCardImageSize(param) {
 // Options include
 // - specify specific date by text
 //          Card Date: Mar 5     
+// - specify date by text and time
+//          Card Date: HH:MM Mar 5
 // - specify date by week of Griffith term (monday)
 //          Card Date: Week 1
+// - specify date by week of Griffith term (monday) and time
+//          Card Date: HH:MM Week 1
 // - specify a date range
 //          Card Date: Mar 5-Mar 10
 //          Card Date: Week 3-5
 // - specify a day of the week
 //          Card Date: Monday Week 5
 //          Card Date: Mon Week 5
-// TODO it needs to set year
+// - specify a day of the week
+//          Add HH::MM to the front of the above
 
 function handleCardDate(param) {
+    let empty1 = { date: "", week: "" };
+    let empty2 = { date: "", week: "" };
+    let date = { start: empty1, stop: empty2 }; // object to return 
+
+    // is it a range (i.e. contain a -)
+    let m = param.match(/^(.*)-(.*)$/);
+
+    if (m) {
+        // get first date and break it down
+        date.start = parseDate( m[1]);
+        // get second date and break it down
+        // TODO Week 3-5 results in m[2] being just 5 (need to add week)
+        // m[2]==int then add week
+        if ( /^\+?(0|[1-9]\d*)$/.test(m[2].trim()) ) {
+            m[2] = "Week ".concat(m[2].trim());
+        }
+        date.stop = parseDate(m[2]);
+    } else { // not a range
+        // get the date and break it down
+        date.start = parseDate(param);
+    }
+    return date;
+}
+
+/**
+ * @function parseDate
+ * @param {String} param 
+ * @returns {Object} date
+ * @description Convert string date - (HH:MM) (Week 1) (Mar 25) into date
+ */
+
+function parseDate(param) {
+    let date; // object to return 
+    let time = "";
+
+    // TODO does it have a time 
+    // check for a time at the start of the date and save it away
+    //  then add it at the end
+    // HH:MM 24-hour format, optional leading 0, but with whitespace at end
+    const regex = /^\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\s+/;
+    let m = param.match(regex);
+
+    if (m) {
+        // save the time
+        time = m[0];
+        // remove time from param
+        param = param.replace(regex, '');
+    }
+
+    // is it a week of trimester
+    m = param.match(/^\s*week\s*([0-9]*)/i);
+    if (m) { 
+        week = m[1];
+        date = getTermDate(week);
+    } else {
+        // does it have a day of week
+        // start date becomes start of week + number of days in
+        m = param.match(
+            /^\s*\b(((mon|tues|wed(nes)?|thur(s)?|fri|sat(ur)?|sun)(day)?))\b\s*week *([0-9]*)\s*$/i);
+        if (m) {
+            day = m[1];
+            week = m[m.length - 1];
+            date = getTermDate(week, true, day);
+        } else {
+            // is it the an actual date
+            m = param.match(/ *([a-z]+) ([0-9]+)/i);
+            if (m) { 
+                date = { month: m[1], date: m[2], year: DEFAULT_YEAR };
+            } 
+            //else {
+                // Fall back to check for exam period
+            //   m = param.match(/ *exam *(period)*/i);
+            //   if (m) {
+            //       date.start = getTermDate('exam');
+            //       date.stop = getTermDate('exam', false);
+            //    }
+           // }
+        }
+    }
+    if ( time!=='') {
+        date.time = time;
+    }
+    return date;
+}
+
+
+function handleCardOldDate(param) {
     let month, endMonth, endDate, week = "", endWeek = "";
     let empty1 = { date: "", week: "" };
     let empty2 = { date: "", week: "" };
@@ -1515,6 +1607,8 @@ function handleCardDate(param) {
 
     // try to extract week number first
     //m = param.match(/^\s*week\s*([0-9]*)\s*$/i);
+    //m = param.match(/^\s*week\s*([0-9]*)/i);
+    // just add the HH:MM RE as an optional extra?
     m = param.match(/^\s*week\s*([0-9]*)/i);
     if (m) {
         // check to see if a range was specified
