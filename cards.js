@@ -2311,8 +2311,6 @@ function addCardInterface(items) {
         // - to card.date.stop if valid
         // - to the end of the week if using a week
         // - to the end of the day if no stop
-        // TODO where using DEFAULT_YEAR, need to do a check if the month is
-        //  past the current month.  If it is, then use DEFAULT_YEAR+1
         if (cardDate.stop.hasOwnProperty('month') &&
             cardDate.stop.month !== '') {
             cardDate.stop.time="23:59";
