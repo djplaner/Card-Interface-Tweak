@@ -1527,10 +1527,12 @@ function handleCardDate(param) {
         // get second date and break it down
         // TODO Week 3-5 results in m[2] being just 5 (need to add week)
         // m[2]==int then add week
-        if ( /^\+?(0|[1-9]\d*)$/.test(m[2].trim()) ) {
-            m[2] = "Week ".concat(m[2].trim());
-        }
-        date.stop = parseDate(m[2]);
+
+        date.stop = parseDate(m[2].trim());
+//        if ( /^\+?(0|[1-9]\d*)$/.test(m[2].trim()) ) {
+ //           m[2] = "Week ".concat(m[2].trim());
+  //      }
+   //     date.stop = parseDate(m[2]);
         if ( date.stop.time===""){
             date.stop.time="23:59";
         }
@@ -1556,7 +1558,6 @@ function parseDate(param) {
     let date; // object to return 
     let time = "";
 
-    // TODO does it have a time 
     // check for a time at the start of the date and save it away
     //  then add it at the end
     // HH:MM 24-hour format, optional leading 0, but with whitespace at end
@@ -1568,6 +1569,11 @@ function parseDate(param) {
         time = m[0];
         // remove time from param
         param = param.replace(regex, '');
+    }
+    // a number by itself is the scond part of a week period
+    // add week
+    if ( /^\+?(0|[1-9]\d*)$/.test(param) ) { 
+        param = "Week ".concat(param);
     }
 
     // is it a week of trimester
@@ -2313,7 +2319,9 @@ function addCardInterface(items) {
         // - to the end of the day if no stop
         if (cardDate.stop.hasOwnProperty('month') &&
             cardDate.stop.month !== '') {
-            cardDate.stop.time="23:59";
+            if ( cardDate.stop.time==="") {
+                cardDate.stop.time="23:59";
+            }
             stop = convertToDate( cardDate.stop );
         } else if (cardDate.start.hasOwnProperty('week') &&
                 cardDate.start.week !=='') {
