@@ -781,7 +781,7 @@ var comingSoonHtmlTemplate = Array(NUM_TEMPLATES);
 comingSoonHtmlTemplate[HORIZONTAL]=`
 <div class="cardComingSoon p-4 flex bg-yellow-light"> 
     <span>🚧</span>&nbsp;
-    <span>{COMING_SOON_LABEL} {MONTH} {DATE}</span>
+    <span>{COMING_SOON_LABEL} {MONTH} {DATE} ({TIME})</span>
 </div>
 `;
 comingSoonHtmlTemplate[HORIZONTAL_NOENGAGE] = comingSoonHtmlTemplate[HORIZONTAL];
@@ -793,7 +793,7 @@ var dualComingSoonHtmlTemplate = Array(NUM_TEMPLATES);
 dualComingSoonHtmlTemplate[HORIZONTAL]=`
 <div class="cardComingSoon p-4 flex bg-yellow-light"> 
     <span>🚧</span>&nbsp;
-    <span>{COMING_SOON_LABEL} {MONTH_START} {DATE_START}-{MONTH_STOP} {DATE_STOP}</span>
+    <span>{COMING_SOON_LABEL} {MONTH_START} {DATE_START} ({TIME_START})-{MONTH_STOP} {DATE_STOP} ({TIME_STOP})</span>
 </div>
 `;
 dualComingSoonHtmlTemplate[HORIZONTAL_NOENGAGE] = dualComingSoonHtmlTemplate[HORIZONTAL];
@@ -1516,6 +1516,8 @@ function handleCardDate(param) {
     let empty2 = { date: "", week: "" };
     let date = { start: empty1, stop: empty2 }; // object to return 
 
+    param = param.replace( /<[^>]+>/, '');
+
     // is it a range (i.e. contain a -)
     let m = param.match(/^(.*)-(.*)$/);
 
@@ -1529,9 +1531,16 @@ function handleCardDate(param) {
             m[2] = "Week ".concat(m[2].trim());
         }
         date.stop = parseDate(m[2]);
+        if ( date.stop.time===""){
+            date.stop.time="23:59";
+        }
     } else { // not a range
         // get the date and break it down
         date.start = parseDate(param);
+    }
+    // if no time defined, set the default (midnight)
+    if ( date.start.time==="") {
+        date.start.time="0:01";
     }
     return date;
 }
@@ -1551,7 +1560,7 @@ function parseDate(param) {
     // check for a time at the start of the date and save it away
     //  then add it at the end
     // HH:MM 24-hour format, optional leading 0, but with whitespace at end
-    const regex = /^\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\s+/;
+    const regex = /\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\s*$/;
     let m = param.match(regex);
 
     if (m) {
@@ -1593,68 +1602,13 @@ function parseDate(param) {
     }
     if ( time!=='') {
         date.time = time;
+    } else {
+        date.time = "";
     }
+
     return date;
 }
 
-
-function handleCardOldDate(param) {
-    let month, endMonth, endDate, week = "", endWeek = "";
-    let empty1 = { date: "", week: "" };
-    let empty2 = { date: "", week: "" };
-    let date = { start: empty1, stop: empty2 }; // object to return 
-    // date by griffith week    
-
-    // try to extract week number first
-    //m = param.match(/^\s*week\s*([0-9]*)\s*$/i);
-    //m = param.match(/^\s*week\s*([0-9]*)/i);
-    // just add the HH:MM RE as an optional extra?
-    m = param.match(/^\s*week\s*([0-9]*)/i);
-    if (m) {
-        // check to see if a range was specified
-        x = param.match(/\s*week\s*([0-9]*)-([0-9]*)\s*$/i);
-        if (x) {
-            week = x[1];
-            endWeek = x[2];
-            date.stop = getTermDate(endWeek, false);
-        } else {
-            week = m[1];
-        }
-        date.start = getTermDate(week);
-    } else {
-        // Handle the day of a semester week 
-        // start date becomes start of week + number of days in
-        m = param.match(
-            /^\s*\b(((mon|tues|wed(nes)?|thur(s)?|fri|sat(ur)?|sun)(day)?))\b\s*week *([0-9]*)\s*$/i);
-        if (m) {
-            day = m[1];
-            week = m[m.length - 1];
-            date.start = getTermDate(week, true, day);
-        } else {
-            // TODO need to handle range here 
-            m = param.match(/ *([a-z]+) ([0-9]+)/i);
-            if (m) {
-                x = param.match(/ *([a-z]+) ([0-9]+)-+([a-z]+) ([0-9]+)/i);
-                // TODO is this where DEFAULT_YEAR might need to be incremented??
-                // Or do that originally 
-                if (x) {
-                    date.start = { month: x[1], date: x[2], year: DEFAULT_YEAR };
-                    date.stop = { month: x[3], date: x[4], year: DEFAULT_YEAR };
-                } else {
-                    date.start = { month: m[1], date: m[2], year: DEFAULT_YEAR };
-                }
-            } else {
-                // Fall back to check for exam period
-                m = param.match(/ *exam *(period)*/i);
-                if (m) {
-                    date.start = getTermDate('exam');
-                    date.stop = getTermDate('exam', false);
-                }
-            }
-        }
-    }
-    return date;
-}                
 
 // Given some HTML, remove all the HTML code, trim and return the text
 
@@ -2218,6 +2172,45 @@ function addCardInterface(items) {
     jQuery(firstItem).append(interfaceHtml);
 }
 
+/**
+ * @function to12
+ * @param {String} t 24 hour 
+ * @returns {String} time converted to 12 hour with am/pm
+ */
+
+ function to12( t) {
+
+    if (typeof(t)==="undefined") {
+        return "";
+    }
+     // break home and set hh, m
+    const regex = /^\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])\s*/;
+    let m = t.match(regex);
+
+    // we have a 24 hour time, convert it
+    if (m) { 
+        let h, hh, mins, dd="AM";            
+        hh=parseInt(m[1]);
+        mins=parseInt(m[2]);
+
+        h=hh; 
+        // set PM 
+        if (h>=12) { 
+            h = hh-12;
+            dd="PM"; 
+        } 
+        if (h==0) { 
+            h=12; 
+        }
+        if (mins<10) {
+            mins = `0${mins}`;
+        }
+        return `${h}:${mins} ${dd}`;
+    }
+    // not a 24 hour time show nothing
+    return "";
+ }
+
 /** 
  * @function generateDateHtml
  * @params singleTemplate {String} HTML for a single date
@@ -2246,8 +2239,10 @@ function addCardInterface(items) {
                     date.stop.month);
                 cardHtml = cardHtml.replace(/{DATE_STOP}/g,
                     date.stop.date);
- //               cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
-                //           console.log(idx.date);
+                cardHtml = cardHtml.replace(/{TIME_STOP}/g,
+                    to12(date.stop.time));
+                cardHtml = cardHtml.replace(/{TIME_START}/g,
+                    to12(date.start.time));
                 if (!date.start.hasOwnProperty('week')) {
                     cardHtml = cardHtml.replace('{WEEK}', '');
                 } else {
@@ -2268,6 +2263,7 @@ function addCardInterface(items) {
                 cardHtml = singleTemplate;
                 cardHtml = cardHtml.replace(/{MONTH}/g, date.start.month);
                 cardHtml = cardHtml.replace(/{DATE}/g, date.start.date);
+                cardHtml = cardHtml.replace(/{TIME}/g, to12(date.start.time));
 //                cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
                 if (!date.start.hasOwnProperty('week')) {
                     cardHtml = cardHtml.replace('{WEEK}', '');
@@ -2293,7 +2289,6 @@ function addCardInterface(items) {
  */
 
  function inDateRange( cardDate, assumeStop=true ) {
-     let month, year;
 
     if ( typeof(cardDate) !== "undefined") {
         let start, stop, now;
@@ -2309,11 +2304,7 @@ function addCardInterface(items) {
         if (cardDate.start.hasOwnProperty('month') &&
             cardDate.start.month !== "") {
 
-            start = new Date( //parseInt(DEFAULT_YEAR), 
-                    cardDate.start.year,
-                    //MONTHS.indexOf(card.date.start.month), 
-                    MONTHS_HASH[cardDate.start.month],
-                    parseInt(cardDate.start.date));
+            start = convertToDate( cardDate.start );
         }
         
         // set the card stop date
@@ -2324,9 +2315,8 @@ function addCardInterface(items) {
         //  past the current month.  If it is, then use DEFAULT_YEAR+1
         if (cardDate.stop.hasOwnProperty('month') &&
             cardDate.stop.month !== '') {
-            //stop = new Date(DEFAULT_YEAR, MONTHS_HASH[cardDate.stop.month], cardDate.stop.date);
-            stop = new Date(cardDate.stop.year, MONTHS_HASH[cardDate.stop.month], cardDate.stop.date);
-            stop.setHours(23, 59, 0);
+            cardDate.stop.time="23:59";
+            stop = convertToDate( cardDate.stop );
         } else if (cardDate.start.hasOwnProperty('week') &&
                 cardDate.start.week !=='') {
             // there's no end date, but there is a start week
@@ -2359,6 +2349,32 @@ function addCardInterface(items) {
     }
     return false;
  }
+
+ /**
+  * @function convertToDate
+  * @param {Object} dateObj
+  * @returns {Date} Javascript date object
+  * Converts the simple date object into a Javascript date object
+  */
+
+  function convertToDate( dateObj) { 
+
+    // check for valid month??
+    let date = new Date( dateObj.year, MONTHS_HASH[dateObj.month],
+                        parseInt(dateObj.date));
+
+    // if time set time
+    if ( dateObj.hasOwnProperty('time') && dateObj.time !=="") { 
+        // split into hours minutes
+        let m = dateObj.time.match(/^\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])\s+/ );
+
+        if (m) {
+            date.setHours(m[1], m[2], 0);
+        }
+    }
+    return date;
+        
+  }
 
 //*********************
 // getTermDate( week, day )
