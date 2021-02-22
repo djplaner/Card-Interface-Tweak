@@ -1555,7 +1555,7 @@ function handleCardDate(param) {
  */
 
 function parseDate(param) {
-    let date; // object to return 
+    let date = {}; // object to return 
     let time = "";
 
     // check for a time at the start of the date and save it away
