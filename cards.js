@@ -854,10 +854,10 @@ INTRO_HTML = `
         <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
             <article class="overlow-hidden rounded-lg shadow-lg h-full">
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
-                    <h1 class="text-lg">
+                    <h4>
                             <i class="fa fa-exclamation-triangle text-red"></i>
                             Change with care
-                    </h1>
+                    </h4>
                 </header>
                 <div class="p-2 md:p-4">
                     <p>Changes to this item may stop the Card Interface from working.</p>
@@ -868,10 +868,10 @@ INTRO_HTML = `
         <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
             <article class="overlow-hidden rounded-lg shadow-lg h-full">
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
-                    <h1 class="text-lg">
+                    <h4>
                             <i class="fa fa-exclamation-triangle text-red"></i>
                             Do not hide <a target="_blank" href="https://raw.githubusercontent.com/djplaner/Card-Interface-Tweak/master/tweak.js">the tweak code</a>
-                    </h1>
+                    </h4>
                 </header>
                 <div class="p-2 md:p-4">
                     <p>If this item is hidden the Card Interface will not work.</p>
@@ -882,10 +882,10 @@ INTRO_HTML = `
         <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
             <article class="overlow-hidden rounded-lg shadow-lg h-full">
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
-                    <h1 class="text-lg">
+                    <h4>
                             <i class="fa fa-info-circle text-orange"></i>
                             Cards are always last
-                    </h1>
+                    </h4>
                 </header>
                 <div class="p-2 md:p-4">
                     <p>
@@ -941,14 +941,14 @@ DOCUMENTATION_HTML = `
         <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
             <article class="overlow-hidden rounded-lg shadow-lg h-full">
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
-                    <h1 class="text-lg">
+                    <h4 class="text-lg">
                             Getting started
-                    </h1>
+                    </h4>
                 </header>
                 <div class="p-2 md:p-4">
                     Learn about
-                    <ul class="p-0 m-0">
-                     <li class="p-0"> the <a target="_blank" href="${DOCUMENTATION_LINKS.what}">
+                    <ul style="padding-left:1em; margin-left:0">
+                     <li> the <a target="_blank" href="${DOCUMENTATION_LINKS.what}">
                        what and why</a> of the Card Interface.</li>
                       <li> <a target="_blank" href="${DOCUMENTATION_LINKS.addingCI}">
                    adding the Card Interface</a> to a new Blackboard page. </li>
@@ -963,13 +963,13 @@ DOCUMENTATION_HTML = `
         <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
             <article class="overlow-hidden rounded-lg shadow-lg h-full">
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
-                    <h1 class="text-lg">
+                    <h4 class="text-lg">
                             Customising a card
-                    </h1>
+                    </h4>
                 </header>
                 <div class="p-2 md:p-4">
         How do you...
-        <ul>
+        <ul style="padding-left:1em; margin-left:0">
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.addImage}">Add an image to a card</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.addActiveImage}">Add an <em>active</em> image to a card</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.imageFit}">fit an image</a> in a card. </li>
@@ -994,13 +994,13 @@ DOCUMENTATION_HTML = `
         <div class="my-1 px-1 w-full md:w-1/2 lg:my-4 lg:px-4 lg:w-1/3">
             <article class="overlow-hidden rounded-lg shadow-lg h-full">
                 <header class="flex items-center justify-between leading-tight p-2 md:p-4 border-b">
-                    <h1 class="text-lg">
+                    <h4 class="text-lg">
                            Customising all cards 
-                    </h1>
+                    </h4>
                 </header>
                 <div class="p-2 md:p-4">
         How do you...   
-         <ul>
+        <ul style="padding-left:1em; margin-left:0">
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeOrder}">Change the card order</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeEngage}">Change the engage button</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.arrangeVertical}">Arrange cards vertically</a>. </li>
