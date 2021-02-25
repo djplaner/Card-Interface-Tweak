@@ -1585,7 +1585,7 @@ function parseDate(param) {
         // does it have a day of week
         // start date becomes start of week + number of days in
         m = param.match(
-            /^\s*\b(((mon|tues|wed(nes)?|thur(s)?|fri|sat(ur)?|sun)(day)?))\b\s*week *([0-9]*)\s*$/i);
+            /^\s*\b(((mon|tues|wed(nes)?|thu|thur(s)?|fri|sat(ur)?|sun)(day)?))\b\s*week *([0-9]*)\s*$/i);
         if (m) {
             day = m[1];
             week = m[m.length - 1];
