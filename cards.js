@@ -1168,7 +1168,7 @@ function calculateTermYear( courseTitle) {
     // e.g. 
     //    Collapse 1731QCM Creative Studio Practices 1 (1731QCM_3211_SB)
 
-    m = courseTitle.match(/^.*\((.+)\)/);
+    let m = courseTitle.match(/^.*\((.+)\)/);
     // we found a course Id, get the STRM value
     if (m) {
         id = m[1];
@@ -1225,13 +1225,28 @@ function calculateTermYear( courseTitle) {
                     } else {
                         year = DEFAULT_YEAR;
                     } 
+                } else {
+                    // Match Y1 QCM courses e.g. 3526QCM_Y1_3211_SB
+                    breakIdRe = new RegExp('^([0-9]+[A-Z]+)_(Y[0-9])_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
+                    m = id.match(breakIdRe);
+                    if (m) {
+                        term=m[3]
+                        mm = term.match(/^[0-9]([0-9][0-9])[0-9]$/);
+                        if (mm) {
+                            year = 20 + mm[1];
+                        } else {
+                            year = DEFAULT_YEAR;
+                        } 
+                    }
                 }
             }
         }
         // if this is a QCM course (either offering of joined), then update term
-        qcmRe = new RegExp('^([0-9]+QCM)_([0-9][0-9][0-9][0-9])');
+        let qcmRe = new RegExp('^([0-9]+QCM)_([0-9][0-9][0-9][0-9])');
+        let qcmRe2 = new RegExp('^([0-9]+QCM)_(Y[0-9])_([0-9][0-9][0-9][0-9])');
         m = qcmRe.match(id);
-        if (m) {
+        let m2 = qcmRe2.match(id);
+        if (m || m2) {
             term = term+ "QCM";
         }
     }
@@ -1976,7 +1991,7 @@ function addCardInterface(items) {
         // TODO need to only display this if outside the date
         if ( typeof(idx.comingSoon)!=="undefined" && ! NO_COMING_SOON ) {
             if ( ! inDateRange( idx.comingSoon, false)) {
-                // we have coming soon and in the date range
+                // we have coming soon and NOT in the available date range
                 // generate the html
                 comingSoon = generateDateHtml( comingSoonHtmlTemplate[template],
                                 dualComingSoonHtmlTemplate[template], 
