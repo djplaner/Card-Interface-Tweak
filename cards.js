@@ -1543,7 +1543,7 @@ function handleCardDate(param) {
         // TODO Week 3-5 results in m[2] being just 5 (need to add week)
         // m[2]==int then add week
 
-        date.stop = parseDate(m[2].trim());
+        date.stop = parseDate(m[2].trim(), true);
 //        if ( /^\+?(0|[1-9]\d*)$/.test(m[2].trim()) ) {
  //           m[2] = "Week ".concat(m[2].trim());
   //      }
@@ -1565,11 +1565,13 @@ function handleCardDate(param) {
 /**
  * @function parseDate
  * @param {String} param 
+ * @param {Boolean} endRange is the date the end of a date range?
  * @returns {Object} date
  * @description Convert string date - (HH:MM) (Week 1) (Mar 25) into date
+ *   If endRange and date is trimester week, then get the date for Friday
  */
 
-function parseDate(param) {
+function parseDate(param, endRange=false) {
     let date = {}; // object to return 
     let time = "";
 
@@ -1595,7 +1597,13 @@ function parseDate(param) {
     m = param.match(/^\s*week\s*([0-9]*)/i);
     if (m) { 
         week = m[1];
-        date = getTermDate(week);
+        if (! endRange) { 
+            // if not end of range, just get Monday
+            date = getTermDate(week);
+        } else {
+            // end of range should be set to Friday
+            date = getTermDate(week,true,"Fri");
+        }
     } else {
         // does it have a day of week
         // start date becomes start of week + number of days in
