@@ -1555,8 +1555,13 @@ function handleCardDate(param) {
         // get the date and break it down
         date.start = parseDate(param);
     }
+
+    if ( typeof(date)==="undefined") {
+        return { start: empty1, stop: empty2};
+    }
+
     // if no time defined, set the default (midnight)
-    if ( date.start.time==="") {
+    if ( typeof(date.start)!=="undefined" && date.start.time==="") {
         date.start.time="0:01";
     }
     return date;
@@ -1629,10 +1634,12 @@ function parseDate(param, endRange=false) {
            // }
         }
     }
-    if ( time!=='') {
+    if (typeof date !== "undefined") {
+      if (time !== "") {
         date.time = time;
-    } else {
+      } else {
         date.time = "";
+      }
     }
 
     return date;
