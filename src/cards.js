@@ -1200,8 +1200,8 @@ function parseDate(param, endRange = false) {
         m = param.match(
             /^\s*\b(((mon|tues|wed(nes)?|thu|thur(s)?|fri|sat(ur)?|sun)(day)?))\b\s*week *([0-9]*)\s*$/i);
         if (m) {
-            day = m[1];
-            week = m[m.length - 1];
+            const day = m[1];
+            const week = m[m.length - 1];
             date = getTermDate(week, true, day);
         } else {
             // is it the an actual date
@@ -1417,11 +1417,11 @@ function extractCardsFromContent(myCards) {
         // if link is empty, must be content item
         if (link === undefined) {
             // check to see if there are attached fileds
-            filesThere = jQuery(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Attached Files:')");
+            let filesThere = jQuery(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Attached Files:')");
 
             if (filesThere !== undefined) {
                 // get a list of all attached files
-                lis = jQuery(this).parent().find('.contextItemDetailsHeaders').children('.detailsValue').children('ul').children('li');
+                let lis = jQuery(this).parent().find('.contextItemDetailsHeaders').children('.detailsValue').children('ul').children('li');
 
                 // loop through the files and get the link
                 lis.each(function (idx, li) {
@@ -1522,7 +1522,7 @@ function addCardInterface(items) {
     let NO_COMING_SOON = false;
 
     // get the content item with h3 heading containing Card Interface
-    var cardInterface = jQuery(tweak_bb.page_id + ' > ' + tweak_bb.row_element).find('.item h3').filter(function (x) {
+    var cardInterface = jQuery(window.tweak_bb.page_id + ' > ' + window.tweak_bb.row_element).find('.item h3').filter(function (x) {
         return this.innerText.toLowerCase().includes('card interface');
     },
     ).eq(0);
@@ -1540,11 +1540,12 @@ function addCardInterface(items) {
 
         if (m) {
             let newParams = parse_parameters(m[1]);
+            let x = '';
 
             if (newParams) {
                 newParams.forEach(function (element) {
                     m = element.match(/template=["']vertical['"]/i);
-                    m1 = element.match(/template=vertical/i);
+                    let m1 = element.match(/template=vertical/i);
                     if (m || m1) {
                         template = VERTICAL;
                     } else if (element.match(/template=['"]horizontal['"]/i)) {
@@ -1776,7 +1777,7 @@ function addCardInterface(items) {
 
         // Should we add a link to edit/view the original content
         if (location.href.indexOf('listContentEditable.jsp') > 0) {
-            editLink = editLinkTemplate.replace('{ID}', idx.id);
+            const editLink = editLinkTemplate.replace('{ID}', idx.id);
             cardHtml = cardHtml.replace(/{EDIT_ITEM}/, editLink);
         } else {
             // cardHtml = cardHtml.replace(/{EDIT_ITEM}/,'');
