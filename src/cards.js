@@ -19,7 +19,7 @@
  */
 
 var TERM_DATES = {
-    
+
     // OUA 2021 Study Period 1
     "2211": {
         "0": { "start": "2021-02-22", "stop": "2021-02-28" },
@@ -84,106 +84,106 @@ var TERM_DATES = {
     },
     // OUA 2021 Study Period 4 
     // TODO Yet to be added
-        // Griffith 2021 Trimester 3
-        "3218": {
-            "0": { "start": "2021-11-01", "stop": "2021-11-07" },
-            "1": { "start": "2021-11-08", "stop": "2021-11-14" },
-            "2": { "start": "2021-11-15", "stop": "2021-11-21" },
-            "3": { "start": "2021-11-22", "stop": "2021-11-28" },
-            "4": { "start": "2021-11-29", "stop": "2021-12-05" },
-            "5": { "start": "2021-12-06", "stop": "2021-12-12" },
-            "6": { "start": "2021-12-13", "stop": "2021-12-19" },
-            "7": { "start": "2021-12-20", "stop": "2021-12-26" },
-            "8": { "start": "2022-01-10", "stop": "2022-01-16" },
-            "9": { "start": "2022-01-17", "stop": "2022-01-23" },
-            "10": { "start": "2022-01-24", "stop": "2022-01-30" },
-            "11": { "start": "2022-01-31", "stop": "2022-01-06" },
-            "12": { "start": "2022-02-07", "stop": "2022-02-13" },
-            "13": { "start": "2022-02-14", "stop": "2022-02-20" },
-            "14": { "start": "2022-02-21", "stop": "2022-02-27" },
-            "15": { "start": "2022-02-28", "stop": "2022-03-06" },
-            "exam": { "start": "2022-02-17", "stop": "2022-02-26" }
-        },
-        // Griffith 2021 Trimester 2
-        "3215": {
-            "0": { "start": "2021-07-12", "stop": "2021-07-18" },
-            "1": { "start": "2021-07-19", "stop": "2021-07-25" },
-            "2": { "start": "2021-07-26", "stop": "2021-08-01" },
-            "3": { "start": "2021-08-02", "stop": "2021-08-08" },
-            "4": { "start": "2021-08-16", "stop": "2021-08-22" },
-            "5": { "start": "2021-08-23", "stop": "2021-08-29" },
-            "6": { "start": "2021-08-30", "stop": "2021-09-05" },
-            "7": { "start": "2021-09-06", "stop": "2021-09-12" },
-            "8": { "start": "2021-09-13", "stop": "2021-09-19" },
-            "9": { "start": "2021-09-20", "stop": "2021-09-26" },
-            "10": { "start": "2021-09-27", "stop": "2021-10-03" },
-            "11": { "start": "2021-10-04", "stop": "2021-10-10" },
-            "12": { "start": "2021-10-11", "stop": "2021-10-17" },
-            "13": { "start": "2021-10-18", "stop": "2021-10-24" },
-            "14": { "start": "2021-10-25", "stop": "2021-10-31" },
-            "15": { "start": "2021-11-01", "stop": "2021-11-07" },
-            "exam": { "start": "2021-10-21", "stop": "2021-10-31" }
-        },
-        // Griffith 2021 Trimester 1
-        "3211": {
-            "0": { "start": "2021-03-01", "stop": "2021-03-07" },
-            "1": { "start": "2021-03-08", "stop": "2021-03-14" },
-            "2": { "start": "2021-03-15", "stop": "2021-03-21" },
-            "3": { "start": "2021-03-22", "stop": "2021-03-29" },
-            "4": { "start": "2021-03-29", "stop": "2021-04-04" },
-            "5": { "start": "2021-04-12", "stop": "2021-03-18" },
-            "6": { "start": "2021-04-19", "stop": "2021-04-25" },
-            "7": { "start": "2021-04-26", "stop": "2021-05-02" },
-            "8": { "start": "2021-05-03", "stop": "2021-05-09" },
-            "9": { "start": "2021-05-10", "stop": "2021-05-16" },
-            "10": { "start": "2021-05-17", "stop": "2021-05-23" },
-            "11": { "start": "2021-05-24", "stop": "2021-05-30" },
-            "12": { "start": "2021-05-31", "stop": "2021-06-06" },
-            "13": { "start": "2021-06-07", "stop": "2021-06-13" },
-            "14": { "start": "2021-06-14", "stop": "2021-06-20" },
-            "15": { "start": "2021-06-21", "stop": "2021-06-27" },
-            "exam": { "start": "2021-06-10", "stop": "2021-06-19" }
-        },
-                // QCM 2021 Trimester 2
-                "3215QCM": {
-                    "0": { "start": "2021-07-12", "stop": "2021-07-18" },
-                    "1": { "start": "2021-07-19", "stop": "2021-07-25" },
-                    "2": { "start": "2021-07-26", "stop": "2021-08-01" },
-                    "3": { "start": "2021-08-02", "stop": "2021-08-08" },
-                    "4": { "start": "2021-08-09", "stop": "2021-08-15" },
-                    "5": { "start": "2021-08-16", "stop": "2021-08-22" },
-                    "6": { "start": "2021-08-30", "stop": "2021-09-05" },
-                    "7": { "start": "2021-09-06", "stop": "2021-09-12" },
-                    "8": { "start": "2021-09-13", "stop": "2021-09-19" },
-                    "9": { "start": "2021-09-20", "stop": "2021-09-26" },
-                    "10": { "start": "2021-10-04", "stop": "2021-10-10" },
-                    "11": { "start": "2021-10-11", "stop": "2021-10-17" },
-                    "12": { "start": "2021-10-18", "stop": "2021-10-24" },
-                    "13": { "start": "2021-10-25", "stop": "2021-10-31" },
-                    "14": { "start": "2021-11-01", "stop": "2021-11-07" },
-                    "15": { "start": "2021-11-08", "stop": "2021-11-14" },
-                    "exam": { "start": "2021-10-30", "stop": "2021-11-13" }
-                },
-                // QCM 2021 Trimester 1
-                "3211QCM": {
-                    "0": { "start": "2021-02-22", "stop": "2021-02-28" },
-                    "1": { "start": "2021-03-01", "stop": "2021-03-07" },
-                    "2": { "start": "2021-03-08", "stop": "2021-03-14" },
-                    "3": { "start": "2021-03-15", "stop": "2021-03-21" },
-                    "4": { "start": "2021-03-22", "stop": "2021-03-29" },
-                    "5": { "start": "2021-03-29", "stop": "2021-04-04" },
-                    "6": { "start": "2021-04-12", "stop": "2021-03-18" },
-                    "7": { "start": "2021-04-19", "stop": "2021-04-25" },
-                    "8": { "start": "2021-04-26", "stop": "2021-05-02" },
-                    "9": { "start": "2021-05-10", "stop": "2021-05-16" },
-                    "10": { "start": "2021-05-17", "stop": "2021-05-23" },
-                    "11": { "start": "2021-05-24", "stop": "2021-05-30" },
-                    "12": { "start": "2021-05-31", "stop": "2021-06-06" },
-                    "13": { "start": "2021-06-07", "stop": "2021-03-13" },
-                    "14": { "start": "2021-06-14", "stop": "2021-03-20" },
-                    "15": { "start": "2021-06-21", "stop": "2021-03-26" },
-                    "exam": { "start": "2021-06-12", "stop": "2021-06-26" }
-                },
+    // Griffith 2021 Trimester 3
+    "3218": {
+        "0": { "start": "2021-11-01", "stop": "2021-11-07" },
+        "1": { "start": "2021-11-08", "stop": "2021-11-14" },
+        "2": { "start": "2021-11-15", "stop": "2021-11-21" },
+        "3": { "start": "2021-11-22", "stop": "2021-11-28" },
+        "4": { "start": "2021-11-29", "stop": "2021-12-05" },
+        "5": { "start": "2021-12-06", "stop": "2021-12-12" },
+        "6": { "start": "2021-12-13", "stop": "2021-12-19" },
+        "7": { "start": "2021-12-20", "stop": "2021-12-26" },
+        "8": { "start": "2022-01-10", "stop": "2022-01-16" },
+        "9": { "start": "2022-01-17", "stop": "2022-01-23" },
+        "10": { "start": "2022-01-24", "stop": "2022-01-30" },
+        "11": { "start": "2022-01-31", "stop": "2022-01-06" },
+        "12": { "start": "2022-02-07", "stop": "2022-02-13" },
+        "13": { "start": "2022-02-14", "stop": "2022-02-20" },
+        "14": { "start": "2022-02-21", "stop": "2022-02-27" },
+        "15": { "start": "2022-02-28", "stop": "2022-03-06" },
+        "exam": { "start": "2022-02-17", "stop": "2022-02-26" }
+    },
+    // Griffith 2021 Trimester 2
+    "3215": {
+        "0": { "start": "2021-07-12", "stop": "2021-07-18" },
+        "1": { "start": "2021-07-19", "stop": "2021-07-25" },
+        "2": { "start": "2021-07-26", "stop": "2021-08-01" },
+        "3": { "start": "2021-08-02", "stop": "2021-08-08" },
+        "4": { "start": "2021-08-16", "stop": "2021-08-22" },
+        "5": { "start": "2021-08-23", "stop": "2021-08-29" },
+        "6": { "start": "2021-08-30", "stop": "2021-09-05" },
+        "7": { "start": "2021-09-06", "stop": "2021-09-12" },
+        "8": { "start": "2021-09-13", "stop": "2021-09-19" },
+        "9": { "start": "2021-09-20", "stop": "2021-09-26" },
+        "10": { "start": "2021-09-27", "stop": "2021-10-03" },
+        "11": { "start": "2021-10-04", "stop": "2021-10-10" },
+        "12": { "start": "2021-10-11", "stop": "2021-10-17" },
+        "13": { "start": "2021-10-18", "stop": "2021-10-24" },
+        "14": { "start": "2021-10-25", "stop": "2021-10-31" },
+        "15": { "start": "2021-11-01", "stop": "2021-11-07" },
+        "exam": { "start": "2021-10-21", "stop": "2021-10-31" }
+    },
+    // Griffith 2021 Trimester 1
+    "3211": {
+        "0": { "start": "2021-03-01", "stop": "2021-03-07" },
+        "1": { "start": "2021-03-08", "stop": "2021-03-14" },
+        "2": { "start": "2021-03-15", "stop": "2021-03-21" },
+        "3": { "start": "2021-03-22", "stop": "2021-03-29" },
+        "4": { "start": "2021-03-29", "stop": "2021-04-04" },
+        "5": { "start": "2021-04-12", "stop": "2021-03-18" },
+        "6": { "start": "2021-04-19", "stop": "2021-04-25" },
+        "7": { "start": "2021-04-26", "stop": "2021-05-02" },
+        "8": { "start": "2021-05-03", "stop": "2021-05-09" },
+        "9": { "start": "2021-05-10", "stop": "2021-05-16" },
+        "10": { "start": "2021-05-17", "stop": "2021-05-23" },
+        "11": { "start": "2021-05-24", "stop": "2021-05-30" },
+        "12": { "start": "2021-05-31", "stop": "2021-06-06" },
+        "13": { "start": "2021-06-07", "stop": "2021-06-13" },
+        "14": { "start": "2021-06-14", "stop": "2021-06-20" },
+        "15": { "start": "2021-06-21", "stop": "2021-06-27" },
+        "exam": { "start": "2021-06-10", "stop": "2021-06-19" }
+    },
+    // QCM 2021 Trimester 2
+    "3215QCM": {
+        "0": { "start": "2021-07-12", "stop": "2021-07-18" },
+        "1": { "start": "2021-07-19", "stop": "2021-07-25" },
+        "2": { "start": "2021-07-26", "stop": "2021-08-01" },
+        "3": { "start": "2021-08-02", "stop": "2021-08-08" },
+        "4": { "start": "2021-08-09", "stop": "2021-08-15" },
+        "5": { "start": "2021-08-16", "stop": "2021-08-22" },
+        "6": { "start": "2021-08-30", "stop": "2021-09-05" },
+        "7": { "start": "2021-09-06", "stop": "2021-09-12" },
+        "8": { "start": "2021-09-13", "stop": "2021-09-19" },
+        "9": { "start": "2021-09-20", "stop": "2021-09-26" },
+        "10": { "start": "2021-10-04", "stop": "2021-10-10" },
+        "11": { "start": "2021-10-11", "stop": "2021-10-17" },
+        "12": { "start": "2021-10-18", "stop": "2021-10-24" },
+        "13": { "start": "2021-10-25", "stop": "2021-10-31" },
+        "14": { "start": "2021-11-01", "stop": "2021-11-07" },
+        "15": { "start": "2021-11-08", "stop": "2021-11-14" },
+        "exam": { "start": "2021-10-30", "stop": "2021-11-13" }
+    },
+    // QCM 2021 Trimester 1
+    "3211QCM": {
+        "0": { "start": "2021-02-22", "stop": "2021-02-28" },
+        "1": { "start": "2021-03-01", "stop": "2021-03-07" },
+        "2": { "start": "2021-03-08", "stop": "2021-03-14" },
+        "3": { "start": "2021-03-15", "stop": "2021-03-21" },
+        "4": { "start": "2021-03-22", "stop": "2021-03-29" },
+        "5": { "start": "2021-03-29", "stop": "2021-04-04" },
+        "6": { "start": "2021-04-12", "stop": "2021-03-18" },
+        "7": { "start": "2021-04-19", "stop": "2021-04-25" },
+        "8": { "start": "2021-04-26", "stop": "2021-05-02" },
+        "9": { "start": "2021-05-10", "stop": "2021-05-16" },
+        "10": { "start": "2021-05-17", "stop": "2021-05-23" },
+        "11": { "start": "2021-05-24", "stop": "2021-05-30" },
+        "12": { "start": "2021-05-31", "stop": "2021-06-06" },
+        "13": { "start": "2021-06-07", "stop": "2021-03-13" },
+        "14": { "start": "2021-06-14", "stop": "2021-03-20" },
+        "15": { "start": "2021-06-21", "stop": "2021-03-26" },
+        "exam": { "start": "2021-06-12", "stop": "2021-06-26" }
+    },
 
 
     // OUA 2020 Study Period 1
@@ -437,18 +437,18 @@ var TERM = "2207", DEFAULT_YEAR = 2021, SET_DATE = "";
 var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 const MONTHS_HASH = {
-    "Jan" : 0, "January": 0,
-    "Feb" : 1, "February": 1,
-    "Mar" : 2, "March":2,
-    "Apr" : 3, "April":3,
-    "May" : 4, 
-    "Jun" : 5, "June":5,
-    "Jul" : 6, "July":6,
-    "Aug" : 7, "August":7,
-    "Sep" : 8, "September":8,
-    "Oct" : 9, "October":9,
-    "Nov" : 10, "November":10,
-    "Dec" : 11, "December":11
+    "Jan": 0, "January": 0,
+    "Feb": 1, "February": 1,
+    "Mar": 2, "March": 2,
+    "Apr": 3, "April": 3,
+    "May": 4,
+    "Jun": 5, "June": 5,
+    "Jul": 6, "July": 6,
+    "Aug": 7, "August": 7,
+    "Sep": 8, "September": 8,
+    "Oct": 9, "October": 9,
+    "Nov": 10, "November": 10,
+    "Dec": 11, "December": 11
 };
 
 // kludge to parse card image when Blackboard inserts one of its icons
@@ -778,7 +778,7 @@ dualDateHtmlTemplate[ASSESSMENT] = `
 
 var comingSoonHtmlTemplate = Array(NUM_TEMPLATES);
 
-comingSoonHtmlTemplate[HORIZONTAL]=`
+comingSoonHtmlTemplate[HORIZONTAL] = `
 <div class="cardComingSoon p-4 flex bg-yellow-light"> 
     <span>🚧</span>&nbsp;
     <span>{COMING_SOON_LABEL} {MONTH} {DATE} ({TIME})</span>
@@ -790,7 +790,7 @@ comingSoonHtmlTemplate[VERTICAL] = comingSoonHtmlTemplate[HORIZONTAL_NOENGAGE];
 
 var dualComingSoonHtmlTemplate = Array(NUM_TEMPLATES);
 
-dualComingSoonHtmlTemplate[HORIZONTAL]=`
+dualComingSoonHtmlTemplate[HORIZONTAL] = `
 <div class="cardComingSoon p-4 flex bg-yellow-light"> 
     <span>🚧</span>&nbsp;
     <span>{COMING_SOON_LABEL} {MONTH_START} {DATE_START} ({TIME_START})-{MONTH_STOP} {DATE_STOP} ({TIME_STOP})</span>
@@ -802,19 +802,19 @@ dualComingSoonHtmlTemplate[VERTICAL] = dualComingSoonHtmlTemplate[HORIZONTAL_NOE
 
 // week templates
 
-weekHtmlTemplate = `
+var weekHtmlTemplate = `
     <div class="bg-yellow-lighter text-black py-1">
       {WEEK}
     </div>
     `;
 
-dualWeekHtmlTemplate = `
+var dualWeekHtmlTemplate = `
     <div class="bg-yellow-lighter text-black py-1 border-l border-r border-black">
       Week {WEEK_START} to {WEEK_STOP}
     </div>
     `;
 
-examPeriodTemplate = `
+var examPeriodTemplate = `
 <div class="bg-yellow-lighter text-black py-1 border-l border-r border-black">
       Exam Period
     </div>
@@ -838,12 +838,12 @@ var editLinkTemplate = `
 	        </div>`;
 
 // Message to display on a card if EDIT mode on and the item is hidden
-HIDDEN_FROM_STUDENTS = `<div class="inline-block bg-yellow text-black text-xs rounded-t rounded-b">This item is <strong>hidden from students</strong></div>`;
+const HIDDEN_FROM_STUDENTS = `<div class="inline-block bg-yellow text-black text-xs rounded-t rounded-b">This item is <strong>hidden from students</strong></div>`;
 
 // LOCATION > 0 means view mode. < 0 means EDIT mode
 var LOCATION = 1;
 
-INTRO_HTML = `
+const INTRO_HTML = `
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
   <h3>Note</h3>
@@ -904,8 +904,8 @@ INTRO_HTML = `
 // Specify where the documentation is located
 
 // Github version
-DOCUMENTATION_LINKS = {
-    'what' : 'https://djplaner.github.io/Card-Interface-Tweak/whatWhy/',
+const DOCUMENTATION_LINKS = {
+    'what': 'https://djplaner.github.io/Card-Interface-Tweak/whatWhy/',
     'addingCI': 'https://djplaner.github.io/Card-Interface-Tweak/createCards/',
     'cardTypes': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#types-of-cards-information-and-navigation',
     'cardComponents': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#the-components-of-a-card',
@@ -918,19 +918,19 @@ DOCUMENTATION_LINKS = {
     'changeCardLabel': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-label',
     'changeCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-number',
     'noCardNumber': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#removing-the-card-number',
-    'hideCard' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card',
+    'hideCard': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card',
     'comingSoon': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#making-a-coming-soon-card',
-    'enableReview' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#enabling-review-status',
+    'enableReview': 'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#enabling-review-status',
     // customise all cards
-    'changeOrder' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-order-of-cards',
-    'changeEngage' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-or-remove-the-engage-button',
-    'templatesAndAttributes' : 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-customise-templates-and-attributes',
+    'changeOrder': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-order-of-cards',
+    'changeEngage': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-or-remove-the-engage-button',
+    'templatesAndAttributes': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-customise-templates-and-attributes',
     'arrangeVertical': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-arrange-cards-vertically-using-templatevertical',
     'cardsPerRow': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-number-of-cards-per-row-using-templateb1y123456',
     'assessment': 'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-use-the-assessment-template-templateassessment'
 };
 
-DOCUMENTATION_HTML = `
+const DOCUMENTATION_HTML = `
 
 <div id="gu_card_intro"></div>
 
@@ -1018,7 +1018,7 @@ DOCUMENTATION_HTML = `
 
 // GLOBALS
 
-const DEFAULT_CARD_LABEL="Module";
+const DEFAULT_CARD_LABEL = "Module";
 
 // Big kludge for HDR
 
@@ -1049,8 +1049,10 @@ function hideJourney($) {
  *     i.e. an overview that goes over the top? or perhaps just shade bottom same blue as the border with white text
  */
 
-function cardsInterface($) {
-//    jQuery("ul#content_listContainer").hide();
+document.addEventListener( 'DOMContentLoaded', cardsInterface);
+
+export default function cardsInterface() {
+    //    jQuery("ul#content_listContainer").hide();
 
     /* define variables based on Bb page type */
     /* used to identify important components in html */
@@ -1064,7 +1066,7 @@ function cardsInterface($) {
     /* Calculate actual term by using id="courseMenuLink"
      * - which includes the courseId */
 
-    courseTitle = $("#courseMenu_link").attr('title');
+    let courseTitle = jQuery("#courseMenu_link").attr('title');
     if (location.href.indexOf("listContent.jsp") > 0) {
         $(".gutweak").parents("li").hide();
     }
@@ -1077,15 +1079,15 @@ function cardsInterface($) {
     // courseId. If it doesn't parse, just leave it as the default
     // initialised term
 
-    [ TERM, DEFAULT_YEAR ] = calculateTermYear( courseTitle);
+    [TERM, DEFAULT_YEAR] = calculateTermYear(courseTitle);
 
     LOCATION = location.href.indexOf("listContent.jsp");
 
-    var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter( function(x) {
-            return this.innerText.toLowerCase().includes("card interface");
-        }
-        ).eq(0);
-    
+    var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter(function (x) {
+        return this.innerText.toLowerCase().includes("card interface");
+    }
+    ).eq(0);
+
     if (cardInterface.length === 0) {
         return false;
     }
@@ -1094,7 +1096,7 @@ function cardsInterface($) {
 
     /* generate the cards interface for the tiems */
     //addCardInterface(items);
-    jQuery( window ).on( "load", addCardInterface(items) );
+    jQuery(window).on("load", addCardInterface(items));
 
     // remove click event handler from engage buttons
 
@@ -1125,7 +1127,7 @@ function cardsInterface($) {
     for (i = 0; i < cards.length; i++) {
         cards[i].addEventListener('click', function (event) {
             var link = this.querySelector(".cardmainlink");
-            
+
             if (link !== null) {
                 // prevent clicking on a undefined blackboard link
                 if (link.match(/blackboard\/content\/undefined$/)) {
@@ -1142,14 +1144,14 @@ function cardsInterface($) {
         jQuery(".bg-cover").hide();
     }
     // check if the item icons exists, before trying to remove them
-    let checkIcon = setInterval( function() {
-        if (jQuery("img.item_icon").length ) {
-            removeBlackboardIcon( cardInterface);
+    let checkIcon = setInterval(function () {
+        if (jQuery("img.item_icon").length) {
+            removeBlackboardIcon(cardInterface);
             clearInterval(checkIcon);
         }
     }, 100);
 
-//    jQuery("ul#content_listContainer").show();
+    //    jQuery("ul#content_listContainer").show();
 }
 
 /**
@@ -1161,7 +1163,7 @@ function cardsInterface($) {
  * - how to handle QCM courses with different calendar
  */
 
-function calculateTermYear( courseTitle) {
+function calculateTermYear(courseTitle) {
     let term = TERM, year = DEFAULT_YEAR;
 
     // get the course id which will be in brackets
@@ -1224,19 +1226,19 @@ function calculateTermYear( courseTitle) {
                         year = 20 + mm[1];
                     } else {
                         year = DEFAULT_YEAR;
-                    } 
+                    }
                 } else {
                     // Match Y1 QCM courses e.g. 3526QCM_Y1_3211_SB
                     breakIdRe = new RegExp('^([0-9]+[A-Z]+)_(Y[0-9])_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$');
                     m = id.match(breakIdRe);
                     if (m) {
-                        term=m[3]
+                        term = m[3];
                         mm = term.match(/^[0-9]([0-9][0-9])[0-9]$/);
                         if (mm) {
                             year = 20 + mm[1];
                         } else {
                             year = DEFAULT_YEAR;
-                        } 
+                        }
                     }
                 }
             }
@@ -1244,14 +1246,16 @@ function calculateTermYear( courseTitle) {
         // if this is a QCM course (either offering of joined), then update term
         let qcmRe = new RegExp('^([0-9]+QCM)_([0-9][0-9][0-9][0-9])');
         let qcmRe2 = new RegExp('^([0-9]+QCM)_(Y[0-9])_([0-9][0-9][0-9][0-9])');
-        m = qcmRe.match(id);
-        let m2 = qcmRe2.match(id);
+        //m = qcmRe.match(id);
+        m = id.match(qcmRe);
+        //let m2 = qcmRe2.match(id);
+        let m2 = id.match(qcmRe2);
         if (m || m2) {
-            term = term+ "QCM";
+            term = term + "QCM";
         }
     }
 
-//    console.log( `cards.js::calculateTermYear - id is ${id} Term is ${term} Year is ${year}`);
+    //    console.log( `cards.js::calculateTermYear - id is ${id} Term is ${term} Year is ${year}`);
     return [term, year];
 }
 
@@ -1279,7 +1283,7 @@ function getCardItems($) {
 
     return cards;
 }
- 
+
 
 
 /**
@@ -1291,19 +1295,19 @@ function getCardItems($) {
  */
 
 
-const CARD_METADATA_FIELDS = [
-    "card label", "card number",
-    "card date", "card date label",
-    "card coming soon", "card coming soon label",
-    "assessment type", "assessment weighting", "assessment outcomes",
-    "card image", "card image iframe", "card image size", "card image active"
-];
 
-
-function extractCardMetaData( descriptionObject ) {
+function extractCardMetaData(descriptionObject) {
     // define hash to put values into it
     let metaDataValues = {};
     let description = jQuery(descriptionObject).html();
+    const CARD_METADATA_FIELDS = [
+        "card label", "card number",
+        "card date", "card date label",
+        "card coming soon", "card coming soon label",
+        "assessment type", "assessment weighting", "assessment outcomes",
+        "card image", "card image iframe", "card image size", "card image active"
+    ];
+
     // remove new lines from description
     description = description.replace(/(?:\r\n|\r|\n)/g, ' ');
 
@@ -1313,62 +1317,62 @@ function extractCardMetaData( descriptionObject ) {
     // TODO: Does this change screw up the complex shit that other people can
     //  do when they use line breaks, include HTML etc
     let elementHtmlObjects = jQuery(descriptionObject).find("p");
-    let elementContent = jQuery(elementHtmlObjects).toArray().map( x => x.innerHTML);
+    let elementContent = jQuery(elementHtmlObjects).toArray().map(x => x.innerHTML);
 
     let tmpMetaData = [];
 
     //console.log("----------------------- extractCardMetaData");
     // check and break up the ps into individual bits of meta data
     let maxLength = elementContent.length;
-    for ( i=0; i<maxLength; i++) {
- //       console.log(`    _____________ working on para ${i} == ${elementContent[i]}`);
+    for (i = 0; i < maxLength; i++) {
+        //       console.log(`    _____________ working on para ${i} == ${elementContent[i]}`);
         // work on a temp copy of description
         //let partialDescription = elementContent[i].innerHTML;
         let partialDescription = elementContent[i];
         // get rid of newlines (definitely needed)
         partialDescription = partialDescription.replace(/(?:\r\n|\r|\n)/g, ' ');
 
-        CARD_METADATA_FIELDS.forEach( function(element) {
+        CARD_METADATA_FIELDS.forEach(function (element) {
             // search for the element, but initially assume that there is another
             // metadata variable within the current item (i.e. <p> </p>)
             // This happens when a <br> is used, rather than <p> between metadata
             // look for element, followed by a card metadata
-            let re = new RegExp( "(" + element + "\\s*:\\s*.*)card\s+(?:label|number|date|date label|image size|image active)[^:]*:", "mi" );
+            let re = new RegExp("(" + element + "\\s*:\\s*.*)card\s+(?:label|number|date|date label|image size|image active)[^:]*:", "mi");
             let m = partialDescription.match(re);
             // if not, check for assessment
             if (!m) {
-                re = new RegExp( "(" + element + "\\s*:\\s*.*)assessment\s+(?:type|weighting|outcomes)[^:]*:", "mi" );
+                re = new RegExp("(" + element + "\\s*:\\s*.*)assessment\s+(?:type|weighting|outcomes)[^:]*:", "mi");
                 m = partialDescription.match(re);
             }
 
             // if found, then we need extract just the matched element, leaving
             // the rest for a later iteration
             if (m) {
-  //              console.log(`     -- found partial Descripiton match ${m[1]}`);
+                //              console.log(`     -- found partial Descripiton match ${m[1]}`);
                 // remove match from partialDescription, leaving any other potential
                 // card stuff there for later (hence why m[1], not m[0])
-                partialDescription = partialDescription.replace(m[1],'');
+                partialDescription = partialDescription.replace(m[1], '');
                 // remove the match from the broader description 
                 //description = description.replace(m[1],'');
                 // TODO does raise the question of why m[0] okay here 
-                description = description.replace(m[1],'');
+                description = description.replace(m[1], '');
                 // added element for later processing - but remove the &nbsp;
                 tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
             } else {
                 // the <p> contains just the one metadata, replace the whole para
                 // bad at RE, so check if it's the last one
-   //             console.log("     -- bad RE???");
-                re = new RegExp( "(" + element + "\\s*:\\s*.*)", "mi" );
-//                re = new RegExp( "<p.*(" + element + "\\s*:\\s*.*)</p>$", "mi" );
+                //             console.log("     -- bad RE???");
+                re = new RegExp("(" + element + "\\s*:\\s*.*)", "mi");
+                //                re = new RegExp( "<p.*(" + element + "\\s*:\\s*.*)</p>$", "mi" );
                 m = partialDescription.match(re);
                 if (m) {
                     // remove it from partial description
                     //partialDescription = partialDescription.replace(re,'');
-                    partialDescription = partialDescription.replace(m[1],'');
+                    partialDescription = partialDescription.replace(m[1], '');
                     // remove the match from the broader description 
                     // TODO doesn't remove the surrounding <p> </p>
-//                    description = description.replace(m[1],'');
-                    description = description.replace(m[1],'');
+                    //                    description = description.replace(m[1],'');
+                    description = description.replace(m[1], '');
                     // added element for later processing - but remove any &nbsp;
                     tmpMetaData.push(m[1].replace(/&nbsp;/gi, " "));
                 } else {
@@ -1379,21 +1383,21 @@ function extractCardMetaData( descriptionObject ) {
         });
     }
 
-//    console.log("---------------------- Finished parsing Ps");
- //   console.log(tmpMetaData);
+    //    console.log("---------------------- Finished parsing Ps");
+    //   console.log(tmpMetaData);
     // At this stage tmpMetaData contains "html" for each card meta data
     // format should be "card label: value"
     // Loop thru each tmpMetaData element and extract value appropriately
     //  place in an object label -> value
-    for (i=0; i<tmpMetaData.length; i++) {
+    for (i = 0; i < tmpMetaData.length; i++) {
         // extract the metaData label m[1] and value m[2]
-        let re = new RegExp( "\\s*(card\\s*[^:]*)\\s*:\\s*(.*)", "im" );
-        let m = tmpMetaData[i].match( re, "im");
+        let re = new RegExp("\\s*(card\\s*[^:]*)\\s*:\\s*(.*)", "im");
+        let m = tmpMetaData[i].match(re, "im");
 
         // didn't find a card value, try one of the assessment ones
-        if (!m) { 
-            re = new RegExp( "\\s*(assessment\\s*[^:]*)\\s*:\\s*(.*)", "im" );
-            m = tmpMetaData[i].match( re, "im");
+        if (!m) {
+            re = new RegExp("\\s*(assessment\\s*[^:]*)\\s*:\\s*(.*)", "im");
+            m = tmpMetaData[i].match(re, "im");
         }
 
         if (m) {
@@ -1403,7 +1407,7 @@ function extractCardMetaData( descriptionObject ) {
             let value = m[2];
             // make sure the HTML in value is valid
             let div = document.createElement('div');
-            div.innerHTML=value;
+            div.innerHTML = value;
             let newValue = div.innerHTML;
 
             metaDataValues[label] = newValue;
@@ -1413,19 +1417,19 @@ function extractCardMetaData( descriptionObject ) {
 
     // used to edit the description element and ensure that it is correct HTML
     let div = document.createElement('div');
-    div.innerHTML=description;
+    div.innerHTML = description;
     // not used in inlineImage (yet)
 
     // handle the inline image
     let inlineImage = jQuery(descriptionObject).find('img').attr('title', 'Card Image');
 
     //   Exclude /images/ci/icon/cmlink_generic.gif from img
-    if (inlineImage.length && ! inlineImage[0].src.includes(BBIMG)) {
-            // we have real image
-            // replace the card image value with the inline image
-            metaDataValues['card image'] = inlineImage[0].src; 
-            // remove the inline image content from the description
-            let img = jQuery(div).find(`img[src="${inlineImage[0].src}"]`).remove();
+    if (inlineImage.length && !inlineImage[0].src.includes(BBIMG)) {
+        // we have real image
+        // replace the card image value with the inline image
+        metaDataValues['card image'] = inlineImage[0].src;
+        // remove the inline image content from the description
+        let img = jQuery(div).find(`img[src="${inlineImage[0].src}"]`).remove();
     }
 
     // there may also be other .contextMenuContainer elements that will need to be removed
@@ -1435,7 +1439,7 @@ function extractCardMetaData( descriptionObject ) {
     // - TODO spans with attr data-ally-scoreindicator
 
     // remove the .contextMenuContainers from description
-    let menuContainers = jQuery(div).find('.contextMenuContainer').remove(); 
+    let menuContainers = jQuery(div).find('.contextMenuContainer').remove();
 
     // Make sure that the description is valid HTML (mostly closing tags)
     // jQuery handles this by default
@@ -1456,23 +1460,23 @@ function extractCardMetaData( descriptionObject ) {
 
 function handleCardImage(param) {
     let picUrl = "", cardBGcolour = "black";
-    
+
     // is it a data URI, just return it
     regex = /^data:((?:\w+\/(?:(?!;).)+)?)((?:;[\w\W]*?[^;])*),(.+)$/;
-    if ( regex.test(param)){
-        return [ param, cardBGcolour];
-    } 
-    
+    if (regex.test(param)) {
+        return [param, cardBGcolour];
+    }
+
     // check to see if it's a colour, rather than an image
     // TODO might need to modify identifyPicUrl to remove extraneous
     // lead html if there is a href?? after img src is checked??
     picUrl = identifyPicUrl(param);
     cardBGcolour = identifyCardBackgroundColour(param);
-                
+
     // TODO/CHECK previously there was a test to remove a trainling </p> from end
     // Maybe this should be handled in the picURL
-    
-   return [ picUrl.trim(), cardBGcolour];
+
+    return [picUrl.trim(), cardBGcolour];
 }
 
 // handleCardImageIframe
@@ -1496,12 +1500,12 @@ function handleCardImageIframe(param) {
 // - return contain if set
 
 function handleCardImageSize(param) {
-    if ( param.includes("contain")  ) {
+    if (param.includes("contain")) {
         return "contain";
     }
     return "";
 }
-    
+
 //**************************************************
 // handleCardDate( description )
 // - given a description for an item find and parse Card Date
@@ -1531,38 +1535,38 @@ function handleCardDate(param) {
     let empty2 = { date: "", week: "" };
     let date = { start: empty1, stop: empty2 }; // object to return 
 
-    param = param.replace( /<[^>]+>/, '');
+    param = param.replace(/<[^>]+>/, '');
 
     // is it a range (i.e. contain a -)
     let m = param.match(/^(.*)-(.*)$/);
 
     if (m) {
         // get first date and break it down
-        date.start = parseDate( m[1]);
+        date.start = parseDate(m[1]);
         // get second date and break it down
         // TODO Week 3-5 results in m[2] being just 5 (need to add week)
         // m[2]==int then add week
 
         date.stop = parseDate(m[2].trim(), true);
-//        if ( /^\+?(0|[1-9]\d*)$/.test(m[2].trim()) ) {
- //           m[2] = "Week ".concat(m[2].trim());
-  //      }
-   //     date.stop = parseDate(m[2]);
-        if ( date.stop.time===""){
-            date.stop.time="23:59";
+        //        if ( /^\+?(0|[1-9]\d*)$/.test(m[2].trim()) ) {
+        //           m[2] = "Week ".concat(m[2].trim());
+        //      }
+        //     date.stop = parseDate(m[2]);
+        if (date.stop.time === "") {
+            date.stop.time = "23:59";
         }
     } else { // not a range
         // get the date and break it down
         date.start = parseDate(param);
     }
 
-    if ( typeof(date)==="undefined") {
-        return { start: empty1, stop: empty2};
+    if (typeof (date) === "undefined") {
+        return { start: empty1, stop: empty2 };
     }
 
     // if no time defined, set the default (midnight)
-    if ( typeof(date.start)!=="undefined" && date.start.time==="") {
-        date.start.time="0:01";
+    if (typeof (date.start) !== "undefined" && date.start.time === "") {
+        date.start.time = "0:01";
     }
     return date;
 }
@@ -1576,7 +1580,7 @@ function handleCardDate(param) {
  *   If endRange and date is trimester week, then get the date for Friday
  */
 
-function parseDate(param, endRange=false) {
+function parseDate(param, endRange = false) {
     let date = {}; // object to return 
     let time = "";
 
@@ -1594,20 +1598,20 @@ function parseDate(param, endRange=false) {
     }
     // a number by itself is the scond part of a week period
     // add week
-    if ( /^\+?(0|[1-9]\d*)$/.test(param) ) { 
+    if (/^\+?(0|[1-9]\d*)$/.test(param)) {
         param = "Week ".concat(param);
     }
 
     // is it a week of trimester
     m = param.match(/^\s*week\s*([0-9]*)/i);
-    if (m) { 
+    if (m) {
         week = m[1];
-        if (! endRange) { 
+        if (!endRange) {
             // if not end of range, just get Monday
             date = getTermDate(week);
         } else {
             // end of range should be set to Friday
-            date = getTermDate(week,true,"Fri");
+            date = getTermDate(week, true, "Fri");
         }
     } else {
         // does it have a day of week
@@ -1621,25 +1625,25 @@ function parseDate(param, endRange=false) {
         } else {
             // is it the an actual date
             m = param.match(/ *([a-z]+) ([0-9]+)/i);
-            if (m) { 
+            if (m) {
                 date = { month: m[1], date: m[2], year: DEFAULT_YEAR };
-            } 
+            }
             //else {
-                // Fall back to check for exam period
+            // Fall back to check for exam period
             //   m = param.match(/ *exam *(period)*/i);
             //   if (m) {
             //       date.start = getTermDate('exam');
             //       date.stop = getTermDate('exam', false);
             //    }
-           // }
+            // }
         }
     }
     if (typeof date !== "undefined") {
-      if (time !== "") {
-        date.time = time;
-      } else {
-        date.time = "";
-      }
+        if (time !== "") {
+            date.time = time;
+        } else {
+            date.time = "";
+        }
     }
 
     return date;
@@ -1666,47 +1670,47 @@ function cleanTrimHtml(html) {
 
 // storage for the multiple label numberings used across all cards
 var CARD_LABEL_NUMBERING = {};
-   
-function handleCardLabelNumber(label,number) {
+
+function handleCardLabelNumber(label, number) {
     // Handle the cases where label is
     // - empty - we don't want a label
     // - undefined - we want the default label
-    
+
     // ensure label is empty HTML (incl &nbsp; as empty)
-    trimLabel = cleanTrimHtml(label);    
-    
-    if (trimLabel==="") {
+    trimLabel = cleanTrimHtml(label);
+
+    if (trimLabel === "") {
         // return no label or number if the label is empty (but defined)
-        return [ "", ""];
-    } else if (typeof(number)!=="undefined" && number.match( /none/i )) { 
+        return ["", ""];
+    } else if (typeof (number) !== "undefined" && number.match(/none/i)) {
         // if there is a card number and it is the word "none", then
         // return the label and an empty number
         // TODO, should this be label of trimLabel. i.e allow user defined
         // html to be included as part of the label?
-        return [ label, ""];
-    } else if ( typeof(label)==="undefined") {
+        return [label, ""];
+    } else if (typeof (label) === "undefined") {
         // set the label to the DEFAULT if no label specified
         // numbering gets decided below. 
-        trimLabel=DEFAULT_CARD_LABEL;
-        label=DEFAULT_CARD_LABEL;
+        trimLabel = DEFAULT_CARD_LABEL;
+        label = DEFAULT_CARD_LABEL;
     }
-    
+
     // Update the numbering schemes
     // - no existing numbering, set to 1
     // - otherwise increment existing
-    if ( !(trimLabel in CARD_LABEL_NUMBERING) ) {
-        CARD_LABEL_NUMBERING[trimLabel]=1;
+    if (!(trimLabel in CARD_LABEL_NUMBERING)) {
+        CARD_LABEL_NUMBERING[trimLabel] = 1;
     }
     else { // if it does exist increment to next value 
-        CARD_LABEL_NUMBERING[trimLabel]+=1;
+        CARD_LABEL_NUMBERING[trimLabel] += 1;
     }
-    
+
     // if specific number specified, set numbering to that
-    if ( typeof(number)!=="undefined") {
-        CARD_LABEL_NUMBERING[trimLabel]=parseInt(number);
+    if (typeof (number) !== "undefined") {
+        CARD_LABEL_NUMBERING[trimLabel] = parseInt(number);
     }
-    
-    return [label,CARD_LABEL_NUMBERING[trimLabel]];
+
+    return [label, CARD_LABEL_NUMBERING[trimLabel]];
 }
 
 //--------------------------------
@@ -1717,8 +1721,8 @@ function extractCardsFromContent(myCards) {
 
     let items = [];
     // reset card numbering
-    CARD_LABEL_NUMBERING={};
-        
+    CARD_LABEL_NUMBERING = {};
+
     // Loop through each card and construct the items array with card data
     myCards.each(function (idx) {
         // jQuery(this) - is the vtbgenerated div for a BbItem
@@ -1731,8 +1735,8 @@ function extractCardsFromContent(myCards) {
         // But it also appears to change all <p> with a class to div with 
         // the match class, hence the not[class] selector
         jQuery(this).children('div.vtbegenerated_div,div:not([class=""])').replaceWith(
-            function(){
-                return jQuery("<p />", {html: jQuery(this).html()});
+            function () {
+                return jQuery("<p />", { html: jQuery(this).html() });
             }
         );
         var description = jQuery(this).html();
@@ -1743,61 +1747,61 @@ function extractCardsFromContent(myCards) {
 
         // extract all the possible meta data
         let cardMetaData = extractCardMetaData(this);
-        
+
         // now have cardMetaData with all meta data and the non meta data 
         // description. Need to make the necessary changes based on data
         // loop through each of the elements (but not description)
-        
+
         // tmp variables used to hold results before putting into single card object
-        let bgSize = "", dateLabel="Commencing", picUrl, cardBGcolour;
-        let label = DEFAULT_CARD_LABEL, activePicUrl = "", number="&nbsp;", iframe="";
+        let bgSize = "", dateLabel = "Commencing", picUrl, cardBGcolour;
+        let label = DEFAULT_CARD_LABEL, activePicUrl = "", number = "&nbsp;", iframe = "";
         let date, comingSoon, comingSoonLabel = "Available";
         let assessmentType = "", assessmentWeighting = "", assessmentOutcomes = "";
-        
-        for ( let index in cardMetaData) {
+
+        for (let index in cardMetaData) {
             switch (index) {
-                case "card image": 
-                    [picUrl,cardBGcolour]=handleCardImage(cardMetaData[index]);
+                case "card image":
+                    [picUrl, cardBGcolour] = handleCardImage(cardMetaData[index]);
                     break;
-                case "card image active": 
-                    [activePicUrl,cardBGcolour]=handleCardImage(cardMetaData[index]); 
+                case "card image active":
+                    [activePicUrl, cardBGcolour] = handleCardImage(cardMetaData[index]);
                     break;
-                case "card image iframe": 
-                    iframe=handleCardImageIframe(cardMetaData[index]); 
+                case "card image iframe":
+                    iframe = handleCardImageIframe(cardMetaData[index]);
                     break;
-                case "card image size": 
-                    bgSize=handleCardImageSize(cardMetaData[index]); 
-                    break; 
-                case "card date": 
-                    date=handleCardDate(cardMetaData[index]); 
-                    break; 
-                case "card date label": 
-                    dateLabel=cardMetaData[index]; 
+                case "card image size":
+                    bgSize = handleCardImageSize(cardMetaData[index]);
                     break;
-                case "card coming soon": 
-                    comingSoon=handleCardDate(cardMetaData[index]); 
-                    break; 
-                case "card coming soon label": 
-                    comingSoonLabel=cardMetaData[index]; 
+                case "card date":
+                    date = handleCardDate(cardMetaData[index]);
                     break;
-                case "assessment type": 
-                    assessmentType=cardMetaData[index]; 
-                    break; 
-                case "assessment weighting": 
-                    assessmentWeighting=cardMetaData[index]; 
+                case "card date label":
+                    dateLabel = cardMetaData[index];
                     break;
-                case "assessment outcomes": 
-                    assessmentOutcomes=cardMetaData[index]; 
+                case "card coming soon":
+                    comingSoon = handleCardDate(cardMetaData[index]);
+                    break;
+                case "card coming soon label":
+                    comingSoonLabel = cardMetaData[index];
+                    break;
+                case "assessment type":
+                    assessmentType = cardMetaData[index];
+                    break;
+                case "assessment weighting":
+                    assessmentWeighting = cardMetaData[index];
+                    break;
+                case "assessment outcomes":
+                    assessmentOutcomes = cardMetaData[index];
                     break;
             }
         }
         // handle card label and card number together
-        [ label, number ] = handleCardLabelNumber(
-                cardMetaData['card label'], cardMetaData['card number']);
-                                    
+        [label, number] = handleCardLabelNumber(
+            cardMetaData['card label'], cardMetaData['card number']);
+
         // description changed to remove all the meta data 
         description = cardMetaData["description"];
-       
+
         // TODO is this still used?
         // Find any ItemDetailsHeaders that indicate the item is hidden
         hidden = jQuery(this).parent().find('.contextItemDetailsHeaders').filter(":contains('Item is hidden from students.')");
@@ -1807,7 +1811,7 @@ function extractCardsFromContent(myCards) {
         // need to get back to the header which is up one div, a sibling, then span
         var header = jQuery(this).parent().siblings(".item").find("span")[2];
         var title = jQuery(header).html(), link, linkTarget = '';
-        
+
         //--------------------------------
         // Three options for link
         // 1. A link on the header (e.g. content folder)
@@ -1889,13 +1893,13 @@ function extractCardsFromContent(myCards) {
  * @description If exists, update cardInterface to remove Blackboard icon
  */
 
- function removeBlackboardIcon( cardInterface) {
+function removeBlackboardIcon(cardInterface) {
     let container = jQuery(cardInterface).parent().parent();
     // hide the icon
-    let icon = jQuery(container ).find( "img.item_icon").css("display", "none");
+    let icon = jQuery(container).find("img.item_icon").css("display", "none");
     // update the padding on the div
     let div = jQuery(container).find("div.details").css("padding-left", "10px");
- }
+}
 
 
 /****
@@ -1921,10 +1925,10 @@ function addCardInterface(items) {
     let NO_COMING_SOON = false;
 
     // get the content item with h3 heading containing Card Interface
-    var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter( function(x) {
-            return this.innerText.toLowerCase().includes("card interface");
-        }
-        ).eq(0);
+    var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element).find(".item h3").filter(function (x) {
+        return this.innerText.toLowerCase().includes("card interface");
+    }
+    ).eq(0);
 
 
     if (cardInterface.length === 0) {
@@ -1950,9 +1954,9 @@ function addCardInterface(items) {
                         template = VERTICAL;
                     } else if (element.match(/template=['"]horizontal['"]/i)) {
                         template = HORIZONTAL;
-                    } else if ( element.match(/nocardnumber/i)) {
+                    } else if (element.match(/nocardnumber/i)) {
                         NO_CARD_NUMBER = true;
-                    } else if ( element.match(/nocomingsoon/i)) {
+                    } else if (element.match(/nocomingsoon/i)) {
                         NO_COMING_SOON = true;
                     } else if (element.match(/noimages/i)) {
                         HIDE_IMAGES = true;
@@ -2002,27 +2006,27 @@ function addCardInterface(items) {
 
         // coming soon
         // By default comingSoon is empty
-        let comingSoon = ''
+        let comingSoon = '';
         // TODO need to only display this if outside the date
-        if ( typeof(idx.comingSoon)!=="undefined" && ! NO_COMING_SOON ) {
-            if ( ! inDateRange( idx.comingSoon, false)) {
+        if (typeof (idx.comingSoon) !== "undefined" && !NO_COMING_SOON) {
+            if (!inDateRange(idx.comingSoon, false)) {
                 // we have coming soon and NOT in the available date range
                 // generate the html
-                comingSoon = generateDateHtml( comingSoonHtmlTemplate[template],
-                                dualComingSoonHtmlTemplate[template], 
-                                idx.comingSoon);
+                comingSoon = generateDateHtml(comingSoonHtmlTemplate[template],
+                    dualComingSoonHtmlTemplate[template],
+                    idx.comingSoon);
                 comingSoon = comingSoon.replace('{COMING_SOON_LABEL}', idx.comingSoonLabel);
 
                 // if students are viewing remove the link stuff
-                if ( window.tweak_bb.display_view) { 
+                if (window.tweak_bb.display_view) {
                     // don't show an engage button 
-                    linkHtml='';
+                    linkHtml = '';
                     // remove the clickableCard link and hover shadow 
-                    cardHtml = cardHtml.replace('clickablecard','').replace(
-                "hover:outline-none hover:shadow-outline ", ''
+                    cardHtml = cardHtml.replace('clickablecard', '').replace(
+                        "hover:outline-none hover:shadow-outline ", ''
                     );
                 }
-            } 
+            }
         }
         cardHtml = cardHtml.replace('{COMING_SOON}', comingSoon);
 
@@ -2065,7 +2069,7 @@ function addCardInterface(items) {
         // Only show module number if there's a label
         if (idx.label !== '') {
             var checkForNum = idx.moduleNum;
-            if ( NO_CARD_NUMBER) {
+            if (NO_CARD_NUMBER) {
                 // global setting not to show card numbers
                 cardHtml = cardHtml.replace('{MODULE_NUM}', '');
                 checkForNum = '';
@@ -2087,13 +2091,13 @@ function addCardInterface(items) {
             var regex = new RegExp('^' + idx.label.trim() + '\\s*' + checkForNum +
                 '\\s*[-:]*\\s*(.*)', "s");
             //const regex = /^Week\s*1\s*[-:]*\s*(.*)/gs;
-            
+
             var m = idx.title.match(regex);
             //var m = regex.test(idx.title);
             if (m) {
                 idx.title = m[1];
                 // kludge for COM14 which has a <br> after label in title
-                idx.title = idx.title.replace( /^<br\s*\/*>/i, '');
+                idx.title = idx.title.replace(/^<br\s*\/*>/i, '');
             }
         } else {
             cardHtml = cardHtml.replace('{MODULE_NUM}', '');
@@ -2146,9 +2150,9 @@ function addCardInterface(items) {
             // if there is a label and no hard coded moduleNum, 
             //  then increment the module number
             // TENTATIVE
-  /*          if (idx.label !== "" && !idx.moduleNum) {
-                moduleNum++;
-            }*/
+            /*          if (idx.label !== "" && !idx.moduleNum) {
+                          moduleNum++;
+                      }*/
         } else {// if (template!==HORIZONTAL_NOENGAGE) {
             // remove the link, as there isn't one
             cardHtml = cardHtml.replace('{LINK_ITEM}', '');
@@ -2158,7 +2162,7 @@ function addCardInterface(items) {
             cardHtml = cardHtml.replace('hover:outline-none', '');
             cardHtml = cardHtml.replace('hover:shadow-outline', '');
             // don't count it as a module
-          //  cardHtml = cardHtml.replace(idx.label + ' ' + moduleNum, '');
+            //  cardHtml = cardHtml.replace(idx.label + ' ' + moduleNum, '');
             //moduleNum--;
         }
 
@@ -2190,8 +2194,8 @@ function addCardInterface(items) {
 
         // standard date
         let date = '';
-        date = generateDateHtml( dateHtmlTemplate[template], 
-                                dualDateHtmlTemplate[template], idx.date);
+        date = generateDateHtml(dateHtmlTemplate[template],
+            dualDateHtmlTemplate[template], idx.date);
         date = date.replace('{DATE_LABEL}', idx.dateLabel);
         cardHtml = cardHtml.replace('{DATE}', date);
 
@@ -2214,38 +2218,38 @@ function addCardInterface(items) {
  * @returns {String} time converted to 12 hour with am/pm
  */
 
- function to12( t) {
+function to12(t) {
 
-    if (typeof(t)==="undefined") {
+    if (typeof (t) === "undefined") {
         return "";
     }
-     // break home and set hh, m
+    // break home and set hh, m
     const regex = /^\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])\s*/;
     let m = t.match(regex);
 
     // we have a 24 hour time, convert it
-    if (m) { 
-        let h, hh, mins, dd="AM";            
-        hh=parseInt(m[1]);
-        mins=parseInt(m[2]);
+    if (m) {
+        let h, hh, mins, dd = "AM";
+        hh = parseInt(m[1]);
+        mins = parseInt(m[2]);
 
-        h=hh; 
+        h = hh;
         // set PM 
-        if (h>=12) { 
-            h = hh-12;
-            dd="PM"; 
-        } 
-        if (h==0) { 
-            h=12; 
+        if (h >= 12) {
+            h = hh - 12;
+            dd = "PM";
         }
-        if (mins<10) {
+        if (h == 0) {
+            h = 12;
+        }
+        if (mins < 10) {
             mins = `0${mins}`;
         }
         return `${h}:${mins} ${dd}`;
     }
     // not a 24 hour time show nothing
     return "";
- }
+}
 
 /** 
  * @function generateDateHtml
@@ -2256,65 +2260,65 @@ function addCardInterface(items) {
  * construct date html to be added to the card
  */
 
- function generateDateHtml( singleTemplate, dualTemplate, date) { 
-     // by default no html
-     let cardHtml = '';
+function generateDateHtml(singleTemplate, dualTemplate, date) {
+    // by default no html
+    let cardHtml = '';
 
-     if (typeof(date)!=="undefined" && 
-            typeof(date.start)!=='undefined' && 'month' in date.start) { 
-            // Do we have dual dates - both start and stop? 
-            if (date.stop.month) {
-                // start and stop dates
-                //cardHtml = cardHtml.replace('{DATE}', dualDateHtmlTemplate[template]);
-                cardHtml = dualTemplate;
-                cardHtml = cardHtml.replace(/{MONTH_START}/g,
-                    date.start.month);
-                cardHtml = cardHtml.replace(/{DATE_START}/g,
-                    date.start.date);
-                cardHtml = cardHtml.replace(/{MONTH_STOP}/g,
-                    date.stop.month);
-                cardHtml = cardHtml.replace(/{DATE_STOP}/g,
-                    date.stop.date);
-                cardHtml = cardHtml.replace(/{TIME_STOP}/g,
-                    to12(date.stop.time));
-                cardHtml = cardHtml.replace(/{TIME_START}/g,
-                    to12(date.start.time));
-                if (!date.start.hasOwnProperty('week')) {
-                    cardHtml = cardHtml.replace('{WEEK}', '');
-                } else {
-                    // if exam, use that template
-                    // other wise construct dual week
-                    let weekHtml = examPeriodTemplate;
-                    if (date.start.week !== 'exam') {
-                        weekHtml = dualWeekHtmlTemplate.replace('{WEEK_START}',
-                            date.start.week);
-                        weekHtml = weekHtml.replace('{WEEK_STOP}',
-                            date.stop.week);
-                    }
-                    cardHtml = cardHtml.replace('{WEEK}', weekHtml);
-                }
+    if (typeof (date) !== "undefined" &&
+        typeof (date.start) !== 'undefined' && 'month' in date.start) {
+        // Do we have dual dates - both start and stop? 
+        if (date.stop.month) {
+            // start and stop dates
+            //cardHtml = cardHtml.replace('{DATE}', dualDateHtmlTemplate[template]);
+            cardHtml = dualTemplate;
+            cardHtml = cardHtml.replace(/{MONTH_START}/g,
+                date.start.month);
+            cardHtml = cardHtml.replace(/{DATE_START}/g,
+                date.start.date);
+            cardHtml = cardHtml.replace(/{MONTH_STOP}/g,
+                date.stop.month);
+            cardHtml = cardHtml.replace(/{DATE_STOP}/g,
+                date.stop.date);
+            cardHtml = cardHtml.replace(/{TIME_STOP}/g,
+                to12(date.stop.time));
+            cardHtml = cardHtml.replace(/{TIME_START}/g,
+                to12(date.start.time));
+            if (!date.start.hasOwnProperty('week')) {
+                cardHtml = cardHtml.replace('{WEEK}', '');
             } else {
-                // just start date
-                //cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template]);
-                cardHtml = singleTemplate;
-                cardHtml = cardHtml.replace(/{MONTH}/g, date.start.month);
-                cardHtml = cardHtml.replace(/{DATE}/g, date.start.date);
-                cardHtml = cardHtml.replace(/{TIME}/g, to12(date.start.time));
-//                cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
-                if (!date.start.hasOwnProperty('week')) {
-                    cardHtml = cardHtml.replace('{WEEK}', '');
-                } else { // SKETCHY TODO change added block around else
-                    let weekReplace = "Week " + date.start.week;
-                    if ( date.start.hasOwnProperty('day')) {
-                        weekReplace = date.start.day + " " + weekReplace;
-                    }
-                    let weekHtml = weekHtmlTemplate.replace('{WEEK}', weekReplace); 
-                    cardHtml = cardHtml.replace('{WEEK}', weekHtml);
+                // if exam, use that template
+                // other wise construct dual week
+                let weekHtml = examPeriodTemplate;
+                if (date.start.week !== 'exam') {
+                    weekHtml = dualWeekHtmlTemplate.replace('{WEEK_START}',
+                        date.start.week);
+                    weekHtml = weekHtml.replace('{WEEK_STOP}',
+                        date.stop.week);
                 }
+                cardHtml = cardHtml.replace('{WEEK}', weekHtml);
             }
-        } 
-        return cardHtml;
+        } else {
+            // just start date
+            //cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template]);
+            cardHtml = singleTemplate;
+            cardHtml = cardHtml.replace(/{MONTH}/g, date.start.month);
+            cardHtml = cardHtml.replace(/{DATE}/g, date.start.date);
+            cardHtml = cardHtml.replace(/{TIME}/g, to12(date.start.time));
+            //                cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
+            if (!date.start.hasOwnProperty('week')) {
+                cardHtml = cardHtml.replace('{WEEK}', '');
+            } else { // SKETCHY TODO change added block around else
+                let weekReplace = "Week " + date.start.week;
+                if (date.start.hasOwnProperty('day')) {
+                    weekReplace = date.start.day + " " + weekReplace;
+                }
+                let weekHtml = weekHtmlTemplate.replace('{WEEK}', weekReplace);
+                cardHtml = cardHtml.replace('{WEEK}', weekHtml);
+            }
+        }
     }
+    return cardHtml;
+}
 
 /**
  * @function inDateRange
@@ -2324,11 +2328,11 @@ function addCardInterface(items) {
  *                  date range
  */
 
- function inDateRange( cardDate, assumeStop=true ) {
+function inDateRange(cardDate, assumeStop = true) {
 
-    if ( typeof(cardDate) !== "undefined") {
+    if (typeof (cardDate) !== "undefined") {
         let start, stop, now;
-        
+
         // Set now to current date OR SET_DATE if we want to do testing
         if (SET_DATE === "") {
             now = new Date();
@@ -2340,77 +2344,77 @@ function addCardInterface(items) {
         if (cardDate.start.hasOwnProperty('month') &&
             cardDate.start.month !== "") {
 
-            start = convertToDate( cardDate.start );
+            start = convertToDate(cardDate.start);
         }
-        
+
         // set the card stop date
         // - to card.date.stop if valid
         // - to the end of the week if using a week
         // - to the end of the day if no stop
         if (cardDate.stop.hasOwnProperty('month') &&
             cardDate.stop.month !== '') {
-            if ( cardDate.stop.time==="") {
-                cardDate.stop.time="23:59";
+            if (cardDate.stop.time === "") {
+                cardDate.stop.time = "23:59";
             }
-            stop = convertToDate( cardDate.stop );
+            stop = convertToDate(cardDate.stop);
         } else if (cardDate.start.hasOwnProperty('week') &&
-                cardDate.start.week !=='') {
+            cardDate.start.week !== '') {
             // there's no end date, but there is a start week
             // so set stop to end of that week, but only if inWeek is true
-            if ( cardDate.start.week in TERM_DATES[TERM]) {
+            if (cardDate.start.week in TERM_DATES[TERM]) {
                 if (assumeStop) {
                     stop = new Date(TERM_DATES[TERM][cardDate.start.week].stop);
                     stop.setHours(23, 59, 0);
                 }
             } else {
-              // problem with week, just set it to end of date
-              if (typeof(start)!=="undefined" && assumeStop) {
-                stop = new Date(start.getTime());
-                stop.setHours(23, 59, 0);
-              }
+                // problem with week, just set it to end of date
+                if (typeof (start) !== "undefined" && assumeStop) {
+                    stop = new Date(start.getTime());
+                    stop.setHours(23, 59, 0);
+                }
             }
-/*        } else { // no week for stop, meaning it's just on the day
-            stop = new Date(start.getTime());
-            stop.setHours(23, 59, 0); */
+            /*        } else { // no week for stop, meaning it's just on the day
+                        stop = new Date(start.getTime());
+                        stop.setHours(23, 59, 0); */
         }
 
         // figure out if we're in range
-        if (typeof(stop)!=="undefined") {
+        if (typeof (stop) !== "undefined") {
             // if stop defined, check in range
             return (now >= start && now <= stop);
         } else {
             // check passed start
-            return ( now>=start );
-        }        
+            return (now >= start);
+        }
     }
     return false;
- }
+}
 
- /**
-  * @function convertToDate
-  * @param {Object} dateObj
-  * @returns {Date} Javascript date object
-  * Converts the simple date object into a Javascript date object
-  */
+/**
+ * @function convertToDate
+ * @param {Object} dateObj
+ * @returns {Date} Javascript date object
+ * Converts the simple date object into a Javascript date object
+ */
 
-  function convertToDate( dateObj) { 
+function convertToDate(dateObj) {
 
     // check for valid month??
-    let date = new Date( dateObj.year, MONTHS_HASH[dateObj.month],
-                        parseInt(dateObj.date));
+    let date = new Date(dateObj.year, MONTHS_HASH[dateObj.month],
+        parseInt(dateObj.date));
 
     // if time set time
-    if ( dateObj.hasOwnProperty('time') && dateObj.time !=="") { 
+    if (dateObj.hasOwnProperty('time') && dateObj.time !== "") {
         // split into hours minutes
-        let m = dateObj.time.match(/^\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])\s+/ );
+        let m = dateObj.time.match(/^\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])\s+/);
 
         if (m) {
             date.setHours(m[1], m[2], 0);
         }
     }
     return date;
-        
-  }
+
+}
 
 //*********************
 // getTermDate( week, day )
@@ -2420,7 +2424,7 @@ function addCardInterface(items) {
 
 function getTermDate(week, startWeek = true, dayOfWeek = 'Monday') {
 
-    if ( typeof TERM_DATES[TERM]==='undefined') {
+    if (typeof TERM_DATES[TERM] === 'undefined') {
         return undefined;
     }
 
@@ -2444,15 +2448,17 @@ function getTermDate(week, startWeek = true, dayOfWeek = 'Monday') {
     var d = new Date(start);
 
     // if dayOfWeek is not Monday, add some days
-    if ( dayOfWeek !== 'monday') {
-        var dayToNum = { 'tuesday' : 1, 'tue': 1,
-            'wednesday': 2, 'wed': 2, 'thursday':3, 'thu': 3,
-            'friday':4, 'fri': 4, 'saturday': 5, 'sat': 5,
-            'sunday': 6, 'sun': 6};
+    if (dayOfWeek !== 'monday') {
+        var dayToNum = {
+            'tuesday': 1, 'tue': 1,
+            'wednesday': 2, 'wed': 2, 'thursday': 3, 'thu': 3,
+            'friday': 4, 'fri': 4, 'saturday': 5, 'sat': 5,
+            'sunday': 6, 'sun': 6
+        };
         // add in the day abbreviation so it can appear
-        date.day = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.substr(1,2);
-        if ( dayOfWeek in dayToNum ) { 
-            d.setDate( d.getDate() + dayToNum[dayOfWeek.toLowerCase()]);
+        date.day = dayOfWeek.charAt(0).toUpperCase() + dayOfWeek.substr(1, 2);
+        if (dayOfWeek in dayToNum) {
+            d.setDate(d.getDate() + dayToNum[dayOfWeek.toLowerCase()]);
         }
     }
 
@@ -2472,17 +2478,17 @@ function getTermDate(week, startWeek = true, dayOfWeek = 'Monday') {
 // - return activePicUrl if there is one and it's not the date
 
 function setImage(card) {
-    
+
     // only use activePicURL if it is set and there are dates on
     // the card
     if (card.activePicUrl !== '' &&
-        typeof(card.date) !== "undefined") {
+        typeof (card.date) !== "undefined") {
         // there is an activePicUrl, check if it should be active
 
         // active means that the current date falls within the start/stop
         // dates for the card
         var start, stop, now;
-        
+
         // Set now to current date OR SET_DATE if we want to do testing
         if (SET_DATE === "") {
             now = new Date();
@@ -2494,12 +2500,12 @@ function setImage(card) {
         if (card.date.start.hasOwnProperty('month') &&
             card.date.start.month !== "") {
 
-            start = new Date(parseInt(DEFAULT_YEAR), 
-                    //MONTHS.indexOf(card.date.start.month), 
-                    MONTHS_HASH[card.date.start.month],
-                    parseInt(card.date.start.date));
+            start = new Date(parseInt(DEFAULT_YEAR),
+                //MONTHS.indexOf(card.date.start.month), 
+                MONTHS_HASH[card.date.start.month],
+                parseInt(card.date.start.date));
         }
-        
+
         // set the card stop date
         // - to card.date.stop if valid
         // - to the end of the week if using a week
@@ -2511,15 +2517,15 @@ function setImage(card) {
         } else if (card.date.start.hasOwnProperty('week')) {
             // there's no end date, but there is a start week
             // so set stop to end of that week
-            if ( card.date.start.week in TERM_DATES[TERM]) {
+            if (card.date.start.week in TERM_DATES[TERM]) {
                 stop = new Date(TERM_DATES[TERM][card.date.start.week].stop);
                 stop.setHours(23, 59, 0);
             } else {
-              // problem with week, just set it to end of date
-              if (typeof(start)!=="undefined") {
-                stop = new Date(start.getTime());
-                stop.setHours(23, 59, 0);
-              }
+                // problem with week, just set it to end of date
+                if (typeof (start) !== "undefined") {
+                    stop = new Date(start.getTime());
+                    stop.setHours(23, 59, 0);
+                }
             }
         } else { // no week for stop, meaning it's just on the day
             stop = new Date(start.getTime());
@@ -2566,36 +2572,36 @@ function identifyCardBackgroundColour(input) {
 //   Otherwise return the value 
 
 function identifyPicUrl(value) {
-    let re = new RegExp(/img src="([^"]*)/, "i" );
-    let m = value.match( re );
-    
+    let re = new RegExp(/img src="([^"]*)/, "i");
+    let m = value.match(re);
+
     // found an image
     if (m) {
         // not a BBIMG, then return it
-        if ( ! m[1].includes(BBIMG)){
+        if (!m[1].includes(BBIMG)) {
             console.log("-- doens't include BBIMG");
             return m[1];
         }
         // is a BBIMG try extract the link
         // kludge because I couldn't get registers to work in JS REs
-        re = new RegExp(/<a href="([^"]*)">([^>]*)<\/a>/, "i" );
-        m = value.match( re );
+        re = new RegExp(/<a href="([^"]*)">([^>]*)<\/a>/, "i");
+        m = value.match(re);
         if (m) {
-            if ( m[1]===m[2]) {
-                return m[1]
+            if (m[1] === m[2]) {
+                return m[1];
             }
         }
     }
-    
+
     // is there a link to the image
-    re = new RegExp('href="([^"]*)', "i" );
-    m = value.match( re );
-    
+    re = new RegExp('href="([^"]*)', "i");
+    m = value.match(re);
+
     // if it's a <a href="picUrl"></a> return the picUrl
     if (m) {
         return m[1];
     }
-    
+
     // remove all html and just use the text content that's left
     let tmp = document.createElement("DIV");
     tmp.innerHTML = value;
