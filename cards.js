@@ -1621,7 +1621,8 @@ function handleCardDate(param) {
     //           m[2] = "Week ".concat(m[2].trim());
     //      }
     //     date.stop = parseDate(m[2]);
-    if (date.stop.time === "") {
+    if (typeof date.start!=="undefined" && "stop" in date && 
+          "time" in date.stop && date.stop.time === "") {
       date.stop.time = "23:59";
     }
   } else {
