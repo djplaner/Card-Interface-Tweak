@@ -1135,10 +1135,16 @@ function cardsInterface($) {
 
   LOCATION = location.href.indexOf("listContent.jsp");
 
-  var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element)
+  // identify the content item to place the cards into
+  // Looking for the first item with "card interface" in the name
+  let cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element)
     .find(".item h3")
     .filter(function (x) {
-      return this.innerText.toLowerCase().includes("card interface");
+      // check the content of the item, this is the h3 heading
+      // the content is in the sibling (next) div after the parent of the h3
+      const isTweakCode = this.parentNode.nextElementSibling.innerHTML.includes('id="gu_card_intro"');
+      const titleIsCardInterface = this.innerText.toLowerCase().includes("card interface");
+      return ( titleIsCardInterface && ! isTweakCode );
     })
     .eq(0);
 
@@ -1150,7 +1156,7 @@ function cardsInterface($) {
 
   /* generate the cards interface for the tiems */
   //addCardInterface(items);
-  jQuery(window).on("load", addCardInterface(items));
+  jQuery(window).on("load", addCardInterface(cardInterface,items));
 
   // remove click event handler from engage buttons
 
@@ -2020,15 +2026,14 @@ function removeBlackboardIcon(cardInterface) {
 }
 
 /****
- * addCardInterface( items )
+ * addCardInterface( cardInterface, items )
  * - Given an array of items to translate into cards add the HTML etc
  *   to generate the card interface
- * - Add the card interface to any item that has a title including
- *     "Card Interface:" with an optional title
+ * - add it to cardInterface element
  *
  */
 
-function addCardInterface(items) {
+function addCardInterface(cardInterface,items) {
   // Define which template to use
   let template = HORIZONTAL;
   let linkTemplate = HORIZONTAL;
@@ -2039,14 +2044,6 @@ function addCardInterface(items) {
   let REVIEWED = "Reviewed";
   let NO_CARD_NUMBER = false;
   let NO_COMING_SOON = false;
-
-  // get the content item with h3 heading containing Card Interface
-  var cardInterface = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element)
-    .find(".item h3")
-    .filter(function (x) {
-      return this.innerText.toLowerCase().includes("card interface");
-    })
-    .eq(0);
 
   if (cardInterface.length === 0) {
     console.log(
