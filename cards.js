@@ -1378,6 +1378,7 @@ const CARD_METADATA_FIELDS = [
   "assessment outcomes",
   "card image",
   "card image iframe",
+  "card image background",
   "card image size",
   "card image active",
 ];
@@ -1848,7 +1849,8 @@ function extractCardsFromContent(myCards) {
     let bgSize = "",
       dateLabel = "Commencing",
       picUrl,
-      cardBGcolour;
+      cardBGcolour,
+      cardImageBGColour=undefined;
     let label = DEFAULT_CARD_LABEL,
       activePicUrl = "",
       number = "&nbsp;",
@@ -1862,6 +1864,9 @@ function extractCardsFromContent(myCards) {
 
     for (let index in cardMetaData) {
       switch (index) {
+        case "card image background":
+          cardImageBGColour = identifyCardBackgroundColour(cardMetaData[index]);
+          break;
         case "card image":
           [picUrl, cardBGcolour] = handleCardImage(cardMetaData[index]);
           break;
@@ -1966,6 +1971,10 @@ function extractCardsFromContent(myCards) {
       // TODO un comment this Reviewed
       jQuery(this).parent().parent().hide();
       //console.log( "content item " + contentItem.html());
+    }
+
+    if ( typeof(cardImageBGColour)!=="undefined"){
+      cardBGcolour=cardImageBGColour;
     }
     // save the item for later
     var item = {
