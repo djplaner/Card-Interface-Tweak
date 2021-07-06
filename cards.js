@@ -1510,10 +1510,18 @@ function extractCardMetaData(descriptionObject) {
   div.innerHTML = description;
   // not used in inlineImage (yet)
 
-  // handle the inline image
+  // Aim here is to what?
+  // - find any image that has a title Card Image **this one**
+  // - set any inline image to have a card title Card Image
+  const regex = /^card image$/i;
+
   let inlineImage = jQuery(descriptionObject)
     .find("img")
-    .attr("title", "Card Image");
+    .filter(function (x) {
+      const title = jQuery(this).attr("title") || "";
+      //return ( typeof(title)!=="undefined" && title.match(regex) );
+      return ( title.match(regex) );
+    })
 
   //   Exclude /images/ci/icon/cmlink_generic.gif from img
   if (inlineImage.length && !inlineImage[0].src.includes(BBIMG)) {
