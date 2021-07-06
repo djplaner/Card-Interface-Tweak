@@ -106,12 +106,14 @@ The first assessment item card in Figure 5 is defined by the Blackboard content 
 
 ## How to change or remove the engage button?
 
-By default the Card Interface displays an __Engage __button at the bottom of each Card that links to some other resource.
+By default the Card Interface displays an __Engage__ button at the bottom of each Card that links to some other resource.
 
 Changes you can make to the engage button, include:
 
 1.   Remove the engage button; or,
 2.   Change the label displayed on the button.
+
+<div class="ael-note"><div class="noteImage"></div><div class="instructions"><ol><li>Changes to the engage button can be made for both the entire collection of cards – explained below - or <a href="https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-a-cards-engage-button">each individual card – explained here</a>.</li><li>The Card specific method is checked first. It overrides this method.</li></ol></div></div>
 
 ### Remove the engage button - noengage
 

@@ -957,6 +957,8 @@ DOCUMENTATION_LINKS = {
     "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-number",
   noCardNumber:
     "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#removing-the-card-number",
+  changeCardEngage:
+    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-a-cards-engage-button",
   hideCard:
     "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card",
   comingSoon:
@@ -1025,14 +1027,12 @@ DOCUMENTATION_HTML = `
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.useVideo}">Add video or other embed type</a> to a card.</li>
            <li> Add or <a target="_blank" href="${DOCUMENTATION_LINKS.changeDate}">change the date or date range</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardLabel}">Change the card label</a>. <br />
-                <i class="fa fa-plus-square text-green"></i> now auto-increment multiple labels
            </li> 
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardNumber}">Change the card number</a>. </li>
-           <li> <i class="fa fa-plus-square text-green"></i>
-           <a target="_blank" href="${DOCUMENTATION_LINKS.noCardNumber}">Remove the card number</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.noCardNumber}">Remove the card number</a>. </li>
+           <li> <i class="fa fa-plus-square text-green"></i><a target="_blank" href="${DOCUMENTATION_LINKS.changeCardEngage}">Change a card's engage button</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.hideCard}">Hide a card</a>. </li>
-           <li> <i class="fa fa-plus-square text-green"></i>
-           Turn a card to a <a target="_blank" href="${DOCUMENTATION_LINKS.comingSoon}">"Coming Soon" (🚧) card</a>. </li>
+           <li> Turn a card to a <a target="_blank" href="${DOCUMENTATION_LINKS.comingSoon}">"Coming Soon" (🚧) card</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.enableReview}">Enable "Review Status"</a>. </li>
         </ul>
                 </div>
