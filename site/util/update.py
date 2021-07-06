@@ -13,12 +13,10 @@ import os
 
 from bs4 import BeautifulSoup
 
-#DESTINATION=r"\\staff.ad.griffith.edu.au\ud\fr\s2986288\Documents\GitHub\Card-Interface-Tweak\docs"
-DESTINATION="C:\\Users\\s2986288\\code\\Card-Interface-Tweak\\docs"
+DESTINATION=r"\\staff.ad.griffith.edu.au\ud\fr\s2986288\Documents\GitHub\Card-Interface-Tweak\docs"
 #DESTINATION="\\staff.ad.griffith.edu.au\ud\fr\s2986288\Documents\GitHub\Card-Interface-Tweak\docs"
 
-#SOURCE=r"C:\\Users\\s2986288\\OneDrive - Griffith University\\Software Development\\Documentation\\Card Interface Demo-Instructions"
-SOURCE="C:\\Users\\s2986288\\code\\Card-Interface-Tweak\\documentation"
+SOURCE=r"C:\\Users\\s2986288\\OneDrive - Griffith University\\Software Development\\Documentation\\Card Interface Demo-Instructions"
 
 CSS= """
 <link rel="stylesheet" type="text/css" 
