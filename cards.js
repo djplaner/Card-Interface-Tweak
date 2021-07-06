@@ -1371,6 +1371,7 @@ const CARD_METADATA_FIELDS = [
   "card number",
   "card date",
   "card date label",
+  "card engage",
   "card coming soon",
   "card coming soon label",
   "assessment type",
@@ -1863,6 +1864,7 @@ function extractCardsFromContent(myCards) {
     // tmp variables used to hold results before putting into single card object
     let bgSize = "",
       dateLabel = "Commencing",
+      engageLabel = "",
       picUrl,
       cardBGcolour,
       cardImageBGColour=undefined;
@@ -1899,6 +1901,9 @@ function extractCardsFromContent(myCards) {
           break;
         case "card date label":
           dateLabel = cardMetaData[index];
+          break;
+        case "card engage":
+          engageLabel = cardMetaData[index];
           break;
         case "card coming soon":
           comingSoon = handleCardDate(cardMetaData[index]);
@@ -2004,6 +2009,7 @@ function extractCardsFromContent(myCards) {
       linkTarget: linkTarget,
       review: review,
       dateLabel: dateLabel,
+      engageLabel: engageLabel,
       id: itemId,
       activePicUrl: activePicUrl,
       comingSoon: comingSoon,
@@ -2301,7 +2307,12 @@ function addCardInterface(cardInterface,items) {
     if (idx.link) {
       // add the link
 
-      linkHtml = linkHtml.replace("{ENGAGE}", engageVerb);
+      // replace engage with either card specific label or the default
+      if ( idx.engageLabel!==""){
+        linkHtml = linkHtml.replace("{ENGAGE}", idx.engageLabel);
+      } else {
+        linkHtml = linkHtml.replace("{ENGAGE}", engageVerb);
+      }
       cardHtml = cardHtml.replace("{LINK_ITEM}", linkHtml);
       // if there is a label and no hard coded moduleNum,
       //  then increment the module number
