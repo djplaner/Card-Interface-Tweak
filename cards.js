@@ -1586,6 +1586,8 @@ function handleCardImage(param) {
 
 function handleCardImageIframe(param) {
   // replace the width and height
+  // width should be 100%
+  // height auto
   x = param.match(/width="[^"]+"/i);
   if (x) {
     param = param.replace(x[0], 'width="100%"');
@@ -1593,6 +1595,11 @@ function handleCardImageIframe(param) {
   x = param.match(/height="[^"]+"/i);
   if (x) {
     param = param.replace(x[0], 'height="auto"');
+  }
+  // also need to replace any style attributes
+  x = param.match(/style="[^"]+"/i);
+  if (x) {
+    param = param.replace(x[0],'');    
   }
   return param;
 }
