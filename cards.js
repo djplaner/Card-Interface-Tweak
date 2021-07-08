@@ -876,6 +876,8 @@ INTRO_HTML = `
 
   <h3>Note</h3>
 
+  <p> <i class="fa fa-exclamation-triangle text-red"></i>
+
   <div class="mx-auto border-none box-content px-4 py-2">
     <div class="flex flex-wrap -mx-1 lg:-mx-4 p-0">
 
