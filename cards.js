@@ -933,7 +933,7 @@ INTRO_HTML = `
   <p><br /></p>
   <p> <i class="fa fa-exclamation-triangle text-red"></i> 
   Are your card images appearing in wrong place (in the description)? 
-  <a href="${DOCUMENTATION_LINKS.imageProblem}">This solution</a> might help</p>
+  <a target="_blank" href="${DOCUMENTATION_LINKS.imageProblem}">This solution</a> might help</p>
 
   <div class="mx-auto border-none box-content px-4 py-2">
     <div class="flex flex-wrap -mx-1 lg:-mx-4 p-0">
