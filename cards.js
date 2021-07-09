@@ -859,6 +859,8 @@ timeHtmlTemplate = `
     </div>
 `;
 
+//comingSoonHtmlTemplate = `{TIME_START}`;
+
 dualTimeHtmlTemplate = `
 <div class="bg-yellow-light text-black flex items-stretch py-1 border-l border-r border-black">
 <div class="w-1/2 flex-grow text-xs">{TIME_START}</div>
@@ -2206,7 +2208,8 @@ function addCardInterface(cardInterface, items) {
         comingSoon = generateDateHtml(
           comingSoonHtmlTemplate[template],
           dualComingSoonHtmlTemplate[template],
-          idx.comingSoon
+          idx.comingSoon,
+          true
         );
         comingSoon = comingSoon.replace(
           "{COMING_SOON_LABEL}",
@@ -2479,11 +2482,17 @@ function to12(t) {
  * @params singleTemplate {String} HTML for a single date
  * @params dualTemplate {String} HTML for a dual date
  * @params date {Object} the date data structure
+ * @params comingSoon {Boolean} indicate if it's a comingSoon date
  * @description parse the date object and use the correct template to
  * construct date html to be added to the card
  */
 
-function generateDateHtml(singleTemplate, dualTemplate, date) {
+function generateDateHtml(
+  singleTemplate,
+  dualTemplate,
+  date,
+  comingSoon = false
+) {
   // by default no html
   let cardHtml = "";
 
@@ -2536,9 +2545,7 @@ function generateDateHtml(singleTemplate, dualTemplate, date) {
       // handle the specific days for dual dates
       const startDay = "day" in date.start;
       const stopDay = "day" in date.stop;
-      if ( (!startDay && !stopDay) ||
-           (!startDay && date.stop.day==="Fri")
-      ) {
+      if ((!startDay && !stopDay) || (!startDay && date.stop.day === "Fri")) {
         // no specific days, don't add days
         cardHtml = cardHtml.replace("{DAYS}", "");
       } else {
@@ -2578,14 +2585,19 @@ function generateDateHtml(singleTemplate, dualTemplate, date) {
       }
       // handle the {TIME} variable for single date
       if ("time" in date.start) {
-        if (date.start.time === "0:01") {
+        // comingSoon dates include the default time
+        if (!comingSoon && date.start.time === "0:01") {
           // default time just remove {TIME}
           cardHtml = cardHtml.replace("{TIME}", "");
         } else {
           // show the non default time
-          let timeHtml = timeHtmlTemplate;
-          timeHtml = timeHtml.replace("{TIME_START}", to12(date.start.time));
-          cardHtml = cardHtml.replace("{TIME}", timeHtml);
+          if (!comingSoon) {
+            let timeHtml = timeHtmlTemplate;
+            timeHtml = timeHtml.replace("{TIME_START}", to12(date.start.time));
+            cardHtml = cardHtml.replace("{TIME}", timeHtml);
+          } else {
+            cardHtml = cardHtml.replace("{TIME}", to12(date.start.time));
+          }
         }
       }
     }
