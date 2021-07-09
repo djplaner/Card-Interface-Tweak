@@ -738,6 +738,7 @@ dateHtmlTemplate[HORIZONTAL] = `
              {DATE_LABEL}
           </div>
           {WEEK}
+          {TIME}
           <div class="bg-red text-white py-1 border-l border-r border-black">
       	     {MONTH}
           </div>
@@ -768,6 +769,8 @@ dualDateHtmlTemplate[HORIZONTAL] = `
              {DATE_LABEL}
           </div>
           {WEEK}
+          {DAYS}
+          {TIME}
           <div class="bg-red text-white flex items-stretch py-1 border-l border-r border-black">
               <div class="w-1/2 flex-grow">{MONTH_START}</div>
               <div class="flex items-stretch border-l border-black flex-grow  -mt-1 -mb-1"></div>
@@ -848,6 +851,31 @@ examPeriodTemplate = `
     </div>
 `;
 
+// time template
+
+timeHtmlTemplate = `
+    <div class="bg-yellow-light text-black py-1 text-xs">
+        {TIME_START}
+    </div>
+`;
+
+dualTimeHtmlTemplate = `
+<div class="bg-yellow-light text-black flex items-stretch py-1 border-l border-r border-black">
+<div class="w-1/2 flex-grow text-xs">{TIME_START}</div>
+<div class="flex items-stretch border-l border-black flex-grow  -mt-1 -mb-1"></div>
+<div class="w-1/2 text-xs">{TIME_STOP}</div>
+</div>
+`;
+
+// dual dates may have specific days, they need special handling
+dualDayHtmlTemplate = `
+<div class="bg-yellow-light text-black flex items-stretch py-1 border-l border-r border-black">
+<div class="w-1/2 flex-grow text-xs">{DAY_START}</div>
+<div class="flex items-stretch border-l border-black flex-grow  -mt-1 -mb-1"></div>
+<div class="w-1/2 text-xs">{DAY_STOP}</div>
+</div>
+`;
+
 dateHtmlTemplate[VERTICAL] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[HORIZONTAL_NOENGAGE] = dateHtmlTemplate[HORIZONTAL];
 dateHtmlTemplate[PEOPLE] = "";
@@ -876,7 +904,8 @@ var LOCATION = 1;
 
 // Github version
 DOCUMENTATION_LINKS = {
-  imageProblem:"https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#problem-with-image-appearing-in-the-description",
+  imageProblem:
+    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#problem-with-image-appearing-in-the-description",
   what: "https://djplaner.github.io/Card-Interface-Tweak/whatWhy/",
   addingCI: "https://djplaner.github.io/Card-Interface-Tweak/createCards/",
   cardTypes:
@@ -923,7 +952,6 @@ DOCUMENTATION_LINKS = {
   assessment:
     "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-use-the-assessment-template-templateassessment",
 };
-
 
 INTRO_HTML = `
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -987,7 +1015,6 @@ INTRO_HTML = `
   </div>
 `;
 
-
 DOCUMENTATION_HTML = `
 
 <div id="gu_card_intro"></div>
@@ -1033,7 +1060,9 @@ DOCUMENTATION_HTML = `
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.imageFit}">fit an image</a> in a card. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.backgroundColour}">Use a background colour</a>, rather than an image. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.useVideo}">Add video or other embed type</a> to a card.</li>
-           <li> Add or <a target="_blank" href="${DOCUMENTATION_LINKS.changeDate}">change the date or date range</a>. </li>
+           <li> Add or <a target="_blank" href="${DOCUMENTATION_LINKS.changeDate}">change the date or date range</a>. <br />
+           <i class="fa fa-plus-square text-green"></i> Updated features and documentation
+           </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardLabel}">Change the card label</a>. <br />
            </li> 
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardNumber}">Change the card number</a>. </li>
@@ -1150,9 +1179,14 @@ function cardsInterface($) {
     .filter(function (x) {
       // check the content of the item, this is the h3 heading
       // the content is in the sibling (next) div after the parent of the h3
-      const isTweakCode = this.parentNode.nextElementSibling.innerHTML.includes('id="gu_card_intro"');
-      const titleIsCardInterface = this.innerText.toLowerCase().includes("card interface");
-      return ( titleIsCardInterface && ! isTweakCode );
+      const isTweakCode =
+        this.parentNode.nextElementSibling.innerHTML.includes(
+          'id="gu_card_intro"'
+        );
+      const titleIsCardInterface = this.innerText
+        .toLowerCase()
+        .includes("card interface");
+      return titleIsCardInterface && !isTweakCode;
     })
     .eq(0);
 
@@ -1164,7 +1198,7 @@ function cardsInterface($) {
 
   /* generate the cards interface for the tiems */
   //addCardInterface(items);
-  jQuery(window).on("load", addCardInterface(cardInterface,items));
+  jQuery(window).on("load", addCardInterface(cardInterface, items));
 
   // remove click event handler from engage buttons
 
@@ -1529,8 +1563,8 @@ function extractCardMetaData(descriptionObject) {
     .filter(function (x) {
       const title = jQuery(this).attr("title") || "";
       //return ( typeof(title)!=="undefined" && title.match(regex) );
-      return ( title.match(regex) );
-    })
+      return title.match(regex);
+    });
 
   //   Exclude /images/ci/icon/cmlink_generic.gif from img
   if (inlineImage.length && !inlineImage[0].src.includes(BBIMG)) {
@@ -1608,7 +1642,7 @@ function handleCardImageIframe(param) {
   // also need to replace any style attributes
   x = param.match(/style="[^"]+"/i);
   if (x) {
-    param = param.replace(x[0],'');    
+    param = param.replace(x[0], "");
   }
   return param;
 }
@@ -1669,8 +1703,12 @@ function handleCardDate(param) {
     //           m[2] = "Week ".concat(m[2].trim());
     //      }
     //     date.stop = parseDate(m[2]);
-    if (typeof date.start!=="undefined" && "stop" in date && 
-          "time" in date.stop && date.stop.time === "") {
+    if (
+      typeof date.start !== "undefined" &&
+      "stop" in date &&
+      "time" in date.stop &&
+      date.stop.time === ""
+    ) {
       date.stop.time = "23:59";
     }
   } else {
@@ -1706,7 +1744,7 @@ function parseDate(param, endRange = false) {
   // check for a time at the start of the date and save it away
   //  then add it at the end
   // HH:MM 24-hour format, optional leading 0, but with whitespace at end
-  const regex = /\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\s*$/;
+  const regex = /\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\s*/;
   let m = param.match(regex);
 
   if (m) {
@@ -1736,7 +1774,7 @@ function parseDate(param, endRange = false) {
     // does it have a day of week
     // start date becomes start of week + number of days in
     m = param.match(
-      /^\s*\b(((mon|tues|wed(nes)?|thu|thur(s)?|fri|sat(ur)?|sun)(day)?))\b\s*week *([0-9]*)\s*$/i
+      /^\s*\b(((mon|tue(s)?|wed(nes)?|thu|thur(s)?|fri|sat(ur)?|sun)(day)?))\b\s*week *([0-9]*)\s*$/i
     );
     if (m) {
       day = m[1];
@@ -1875,7 +1913,7 @@ function extractCardsFromContent(myCards) {
       engageLabel = "",
       picUrl,
       cardBGcolour,
-      cardImageBGColour=undefined;
+      cardImageBGColour = undefined;
     let label = DEFAULT_CARD_LABEL,
       activePicUrl = "",
       number = "&nbsp;",
@@ -2001,8 +2039,8 @@ function extractCardsFromContent(myCards) {
       //console.log( "content item " + contentItem.html());
     }
 
-    if ( typeof(cardImageBGColour)!=="undefined"){
-      cardBGcolour=cardImageBGColour;
+    if (typeof cardImageBGColour !== "undefined") {
+      cardBGcolour = cardImageBGColour;
     }
     // save the item for later
     var item = {
@@ -2071,7 +2109,7 @@ function removeBlackboardIcon(cardInterface) {
  *
  */
 
-function addCardInterface(cardInterface,items) {
+function addCardInterface(cardInterface, items) {
   // Define which template to use
   let template = HORIZONTAL;
   let linkTemplate = HORIZONTAL;
@@ -2316,7 +2354,7 @@ function addCardInterface(cardInterface,items) {
       // add the link
 
       // replace engage with either card specific label or the default
-      if ( idx.engageLabel!==""){
+      if (idx.engageLabel !== "") {
         linkHtml = linkHtml.replace("{ENGAGE}", idx.engageLabel);
       } else {
         linkHtml = linkHtml.replace("{ENGAGE}", engageVerb);
@@ -2465,6 +2503,8 @@ function generateDateHtml(singleTemplate, dualTemplate, date) {
       cardHtml = cardHtml.replace(/{DATE_STOP}/g, date.stop.date);
       cardHtml = cardHtml.replace(/{TIME_STOP}/g, to12(date.stop.time));
       cardHtml = cardHtml.replace(/{TIME_START}/g, to12(date.start.time));
+
+      //-- handle the {WEEK} variable for dual dates
       if (!date.start.hasOwnProperty("week")) {
         cardHtml = cardHtml.replace("{WEEK}", "");
       } else {
@@ -2480,24 +2520,73 @@ function generateDateHtml(singleTemplate, dualTemplate, date) {
         }
         cardHtml = cardHtml.replace("{WEEK}", weekHtml);
       }
+      // handle the {TIME} variable for dual dates
+      const defaultStartTime = date.start.time === "0:01";
+      const defaultStopTime = date.stop.time === "23:59";
+      if (defaultStartTime && defaultStopTime) {
+        // default time just remove {TIME}
+        cardHtml = cardHtml.replace("{TIME}", "");
+      } else {
+        // show the non default time
+        let timeHtml = dualTimeHtmlTemplate;
+        timeHtml = timeHtml.replace("{TIME_START}", to12(date.start.time));
+        timeHtml = timeHtml.replace("{TIME_STOP}", to12(date.stop.time));
+        cardHtml = cardHtml.replace("{TIME}", timeHtml);
+      }
+      // handle the specific days for dual dates
+      const startDay = "day" in date.start;
+      const stopDay = "day" in date.stop;
+      if ( (!startDay && !stopDay) ||
+           (!startDay && date.stop.day==="Fri")
+      ) {
+        // no specific days, don't add days
+        cardHtml = cardHtml.replace("{DAYS}", "");
+      } else {
+        // at least one specific day
+        let dayHtml = dualDayHtmlTemplate;
+        if (startDay) {
+          dayHtml = dayHtml.replace("{DAY_START}", date.start.day);
+        } else {
+          dayHtml = dayHtml.replace("{DAY_START}", "Mon");
+        }
+        if (stopDay) {
+          dayHtml = dayHtml.replace("{DAY_STOP}", date.stop.day);
+        } else {
+          dayHtml = dayHtml.replace("{DAY_STOP}", "Fri");
+        }
+        cardHtml = cardHtml.replace("{DAYS}", dayHtml);
+      }
     } else {
       // just start date
       //cardHtml = cardHtml.replace('{DATE}', dateHtmlTemplate[template]);
       cardHtml = singleTemplate;
       cardHtml = cardHtml.replace(/{MONTH}/g, date.start.month);
       cardHtml = cardHtml.replace(/{DATE}/g, date.start.date);
-      cardHtml = cardHtml.replace(/{TIME}/g, to12(date.start.time));
+      // not yet
+      //      cardHtml = cardHtml.replace(/{TIME}/g, to12(date.start.time));
       //                cardHtml = cardHtml.replace(/{DATE_LABEL}/g, idx.dateLabel);
       if (!date.start.hasOwnProperty("week")) {
         cardHtml = cardHtml.replace("{WEEK}", "");
       } else {
         // SKETCHY TODO change added block around else
         let weekReplace = "Week " + date.start.week;
-        if (date.start.hasOwnProperty("day")) {
+        if ("day" in date.start) {
           weekReplace = date.start.day + " " + weekReplace;
         }
         let weekHtml = weekHtmlTemplate.replace("{WEEK}", weekReplace);
         cardHtml = cardHtml.replace("{WEEK}", weekHtml);
+      }
+      // handle the {TIME} variable for single date
+      if ("time" in date.start) {
+        if (date.start.time === "0:01") {
+          // default time just remove {TIME}
+          cardHtml = cardHtml.replace("{TIME}", "");
+        } else {
+          // show the non default time
+          let timeHtml = timeHtmlTemplate;
+          timeHtml = timeHtml.replace("{TIME_START}", to12(date.start.time));
+          cardHtml = cardHtml.replace("{TIME}", timeHtml);
+        }
       }
     }
   }
