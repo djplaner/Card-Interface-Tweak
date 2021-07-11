@@ -425,7 +425,7 @@ var TERM_DATES = {
 
 // TERM/YEAR specify default period
 // SET_DATE is used for testing activePic, specify a date strong for now
-var TERM = "2207",
+var TERM = "3215",
   DEFAULT_YEAR = 2021,
   SET_DATE = "";
 var MONTHS = [
@@ -2689,10 +2689,10 @@ function convertToDate(dateObj) {
   );
 
   // if time set time
-  if (dateObj.hasOwnProperty("time") && dateObj.time !== "") {
+  if ("time" in dateObj && dateObj.time !== "") {
     // split into hours minutes
     let m = dateObj.time.match(
-      /^\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])\s+/
+      /^\s*([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])\s*/
     );
 
     if (m) {
