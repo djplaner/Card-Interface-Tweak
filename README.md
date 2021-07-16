@@ -20,3 +20,9 @@ The [following conference paper](https://djon.es/blog/2019/08/08/exploring-knowl
 ### Inspiration
 
 This Tweak is inspiried by [the Blackboard Tweaks building block](http://tweaks.github.io/Tweaks/).
+
+## Development
+
+Install npm and packages
+npm run start for local testing
+npm run buil to build
