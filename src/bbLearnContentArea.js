@@ -22,8 +22,8 @@ export default class bbLearnContentArea {
     // get the data
     this.setup();
     this.pageDetails();
+    this.findCardInterfaces();
     this.calculateTermYear();
-    this.findCardInterface();
 
     this.showDetails();
   }
@@ -49,7 +49,7 @@ export default class bbLearnContentArea {
     console.log(`TERM is ${this.TERM} and YEAR is ${this.YEAR}`);
     console.log(`editMode ${this.editMode}`);
     console.log("---- cardInterface");
-    console.log(this.cardInterface);
+    console.log(this.cardInterfaces);
   }
 
   setup() {
@@ -59,6 +59,50 @@ export default class bbLearnContentArea {
     this.editMode = document.location.href.indexOf(bbUrlPattern) === -1;
     this.pageId = "#content_listContainer";
     this.rowElement = "li";
+
+    // get the content items
+    this.rawContentItems = document.querySelectorAll(
+      `${this.pageId} > ${this.rowElement}`
+    );
+    this.contentItems = [];
+    this.rawContentItems.forEach((item) => {
+      const heading = item.querySelector(".item h3");
+      let body = item.querySelector(".details");
+      console.log(`BEFORE body ${body.innerHTML}`);
+
+      // remove the vtbegenerated divs
+      let vtbegeneratedDivs = body.querySelectorAll(".vtbegenerated");
+      vtbegeneratedDivs.forEach((div) => {
+        while (div.childNodes.length > 0) {
+          body.insertBefore(div.childNodes[0], div);
+        }
+      });
+      console.log(`INTERMEDIATE body ${body.innerHTML}`);
+      // replace the vtbegenerated_divs with paragraph tags
+      vtbegeneratedDivs = body.querySelectorAll(
+        'div.vtbegenerated_div,div:not([class=""])'
+      );
+      vtbegeneratedDivs.forEach((div) => {
+        let p = document.createElement("p");
+        // insert the new p before the div
+        p = div.parentNode.insertBefore(p, div);
+        // put div's children into p
+        while (div.childNodes.length > 0) {
+          p.appendChild(div.childNodes[0]);
+        }
+        div.parentNode.removeChild(div);
+      });
+
+      // remove the context menuContainers and axScoreIndicator
+      let menuContainers = body.querySelectorAll(".contextMenuContainer,.axScoreIndicator");
+      menuContainers.forEach((menu) => {
+        menu.parentNode.removeChild(menu);
+      });
+
+      console.log(`AFTER body ${body.innerHTML}`);
+
+      this.contentItems.push({ header: heading, body: body });
+    });
   }
 
   pageDetails() {
@@ -178,20 +222,13 @@ export default class bbLearnContentArea {
     this.YEAR = year;
   }
 
-  findCardInterface() {
-    this.cardInterface = document.querySelectorAll(
-      `${this.pageId} > ${this.rowElement}`
-    );
-
-    /*    jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element)
-      .find(".item h3")
-      .filter(function (x) {
-        return this.innerText.toLowerCase().includes("card interface");
-      })
-      .eq(0);
-
-    if (cardInterface.length === 0) {
-      return false;
-    } */
+  findCardInterfaces() {
+    this.cardInterfaces = [];
+    this.rawContentItems.forEach((item) => {
+      const heading = item.querySelector(".item h3");
+      if (heading.innerText.toLowerCase().includes("card interface")) {
+        this.cardInterfaces.push(item);
+      }
+    });
   }
 }

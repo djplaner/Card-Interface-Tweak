@@ -67,49 +67,49 @@ const INTRO_HTML = `
 
 // Github version
 const DOCUMENTATION_LINKS = {
-  what: "https://djplaner.github.io/Card-Interface-Tweak/whatWhy/",
-  addingCI: "https://djplaner.github.io/Card-Interface-Tweak/createCards/",
+  what: 'https://djplaner.github.io/Card-Interface-Tweak/whatWhy/',
+  addingCI: 'https://djplaner.github.io/Card-Interface-Tweak/createCards/',
   cardTypes:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#types-of-cards-information-and-navigation",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#types-of-cards-information-and-navigation',
   cardComponents:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#the-components-of-a-card",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#the-components-of-a-card',
   addImage:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-an-image",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-an-image',
   addActiveImage:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-an-_active-_image",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-an-_active-_image',
   imageFit:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-how-the-image-fits-the-card",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-how-the-image-fits-the-card',
   backgroundColour:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#using-a-background-colour",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#using-a-background-colour',
   useVideo:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#use-a-video-powerpoint-presentation-etc-instead",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#use-a-video-powerpoint-presentation-etc-instead',
   changeDate:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-a-date-or-date-range",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#adding-a-date-or-date-range',
   changeCardLabel:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-label",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-label',
   changeCardNumber:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-number",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#changing-the-card-number',
   noCardNumber:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#removing-the-card-number",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#removing-the-card-number',
   hideCard:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#hiding-a-card',
   comingSoon:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#making-a-coming-soon-card",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#making-a-coming-soon-card',
   enableReview:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#enabling-review-status",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#enabling-review-status',
   // customise all cards
   changeOrder:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-order-of-cards",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-order-of-cards',
   changeEngage:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-or-remove-the-engage-button",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-or-remove-the-engage-button',
   templatesAndAttributes:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-customise-templates-and-attributes",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-customise-templates-and-attributes',
   arrangeVertical:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-arrange-cards-vertically-using-templatevertical",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-arrange-cards-vertically-using-templatevertical',
   cardsPerRow:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-number-of-cards-per-row-using-templateb1y123456",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-number-of-cards-per-row-using-templateb1y123456',
   assessment:
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-use-the-assessment-template-templateassessment",
+    'https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-use-the-assessment-template-templateassessment',
 };
 
 const DOCUMENTATION_HTML = `
@@ -199,8 +199,8 @@ const DOCUMENTATION_HTML = `
 `;
 
 export default function addCardDocumentation() {
-	console.log("----------------- addCardDocumentation");
+	console.log('----------------- addCardDocumentation');
 
-  document.querySelector("#gu_card_docs").innerHTML = DOCUMENTATION_HTML;
-  document.querySelector("#gu_card_intro").inenerHTML = INTRO_HTML;
+  document.querySelector('#gu_card_docs').innerHTML = DOCUMENTATION_HTML;
+  document.querySelector('#gu_card_intro').inenerHTML = INTRO_HTML;
 }
