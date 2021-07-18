@@ -11,7 +11,9 @@
  * Data
  * - the courseId
  * - page title
- * - contentItem
+ * - contentItems - array of dicts keyed on header and body containing cleaned up elements
+ * - rawContentItems
+ * - cardInterfaces - array of items that will become locations for card interfaces
  */
 
 const DEFAULT_YEAR = "2021";
@@ -68,7 +70,7 @@ export default class bbLearnContentArea {
     this.rawContentItems.forEach((item) => {
       const heading = item.querySelector(".item h3");
       let body = item.querySelector(".details");
-      console.log(`BEFORE body ${body.innerHTML}`);
+      // console.log(`BEFORE body ${body.innerHTML}`);
 
       // remove the vtbegenerated divs
       let vtbegeneratedDivs = body.querySelectorAll(".vtbegenerated");
@@ -77,8 +79,10 @@ export default class bbLearnContentArea {
           body.insertBefore(div.childNodes[0], div);
         }
       });
-      console.log(`INTERMEDIATE body ${body.innerHTML}`);
+      // console.log(`INTERMEDIATE body ${body.innerHTML}`);
       // replace the vtbegenerated_divs with paragraph tags
+      // - TODO spans with attr data-ally-scoreindicator
+
       vtbegeneratedDivs = body.querySelectorAll(
         'div.vtbegenerated_div,div:not([class=""])'
       );
@@ -94,12 +98,18 @@ export default class bbLearnContentArea {
       });
 
       // remove the context menuContainers and axScoreIndicator
-      let menuContainers = body.querySelectorAll(".contextMenuContainer,.axScoreIndicator");
+      let menuContainers = body.querySelectorAll(
+        ".contextMenuContainer,.axScoreIndicator"
+      );
       menuContainers.forEach((menu) => {
         menu.parentNode.removeChild(menu);
       });
 
-      console.log(`AFTER body ${body.innerHTML}`);
+      // console.log(`AFTER body ${body.innerHTML}`);
+      // remove newlines from the body innerHTML
+      body.innerHTML = body.innerHTML
+        .replace(/(?:\r\n|\r|\n)/g, " ")
+        .replace(/&nbsp;/gi, " ");
 
       this.contentItems.push({ header: heading, body: body });
     });
@@ -112,7 +122,7 @@ export default class bbLearnContentArea {
     // TODO move this to controller?
     /*if (document.location.href.indexOf("listContent.jsp") > 0) {
       $(".gutweak").parents("li").hide();
-    }*/
+    } */
   }
 
   /**
