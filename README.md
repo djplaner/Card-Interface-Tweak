@@ -20,3 +20,8 @@ The [following conference paper](https://djon.es/blog/2019/08/08/exploring-knowl
 ### Inspiration
 
 This Tweak is inspiried by [the Blackboard Tweaks building block](http://tweaks.github.io/Tweaks/).
+
+## Status
+
+Slowly converting to new method.  Up to the stage of correctly extract cardMetaData from one card
+- guCards.js
