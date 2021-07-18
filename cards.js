@@ -2870,7 +2870,7 @@ function identifyCardBackgroundColour(input) {
 //   Otherwise return the value
 
 function identifyPicUrl(value) {
-  let re = new RegExp(/img src="([^"]*)/, "i");
+  let re = new RegExp(/img\s.*src="([^"]*)/, "i");
   let m = value.match(re);
 
   // found an image
