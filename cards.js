@@ -2870,14 +2870,13 @@ function identifyCardBackgroundColour(input) {
 //   Otherwise return the value
 
 function identifyPicUrl(value) {
-  let re = new RegExp(/img\s.*src="([^"]*)/, "i");
+  let re = new RegExp(/img[^>]*src="([^"]*)"/, "i");
   let m = value.match(re);
 
   // found an image
   if (m) {
     // not a BBIMG, then return it
     if (!m[1].includes(BBIMG)) {
-      console.log("-- doens't include BBIMG");
       return m[1];
     }
     // is a BBIMG try extract the link
