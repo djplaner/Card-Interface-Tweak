@@ -25,3 +25,8 @@ This Tweak is inspiried by [the Blackboard Tweaks building block](http://tweaks.
 
 Slowly converting to new method.  Up to the stage of correctly extract cardMetaData from one card
 - guCards.js
+
+To do
+- finish the getParameters in guCards
+- finish the extractCardMeta data harness functions in guCards
+- start view render

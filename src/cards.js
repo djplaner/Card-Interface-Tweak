@@ -526,6 +526,7 @@ function hideJourney($) {
 import bbLearnContentArea from './bbLearnContentArea.js';
 import addCardDocumentation from './cardDocumentation.js';
 import guCards from './guCards.js';
+import guCardsView from './guCardsView.js'
 import TERM_DATES from './term-dates';
 
 //const bb = require("./bbLearnContentArea");
@@ -550,7 +551,20 @@ export default function cardsInterface() {
   LOCATION = bbPage.editMode;
   //LOCATION = location.href.indexOf("listContent.jsp");
 
-  cards = new guCards(bbPage);
+  // cardMetaDaa in cards.cardMetaData
+  let cards = new guCards(bbPage);
+
+  let display = new guCardsView(cards);
+  // html is a lit object
+  const html = display.render()
+
+  console.log("PARAMTERES");
+  console.log(cards.parameters);
+
+
+  /*window.addEventListener('load', (event) => {
+      addCardInterface(cards.cardMetaData);
+  }); */
 
   return false;
   //------------------------- ORIGINAL BELOW HERE  -------------------------
@@ -591,7 +605,7 @@ export default function cardsInterface() {
   // Does this unwrap actually do anything???
   // jQuery( ".cardmainlink[href='undefined'" ).contents().unwrap();
   // return true;
-  var cards = document.querySelectorAll('.clickablecard');
+  cards = document.querySelectorAll('.clickablecard');
   // var cards = document.querySelectorAll(".cardmainlink");
   for (i = 0; i < cards.length; i++) {
     cards[i].addEventListener(
@@ -942,60 +956,8 @@ function addCardInterface(items) {
       "Card: Can't find item with heading 'Card Interface' in which to insert card interface"
     );
     return false;
-  } else {
+  } 
     // get the title - text only, stripped of whitespace before/after
-    var cardInterfaceTitle = jQuery.trim(cardInterface.text());
-
-    // Extract parameters
-    var m = cardInterfaceTitle.match(/Card Interface *([^<]*)/i);
-    var WIDTH = 'md:w-1/3';
-
-    if (m) {
-      let newParams = parse_parameters(m[1]);
-      let x = '';
-
-      if (newParams) {
-        newParams.forEach(function (element) {
-          m = element.match(/template=["']vertical['"]/i);
-          let m1 = element.match(/template=vertical/i);
-          if (m || m1) {
-            template = VERTICAL;
-          } else if (element.match(/template=['"]horizontal['"]/i)) {
-            template = HORIZONTAL;
-          } else if (element.match(/nocardnumber/i)) {
-            NO_CARD_NUMBER = true;
-          } else if (element.match(/nocomingsoon/i)) {
-            NO_COMING_SOON = true;
-          } else if (element.match(/noimages/i)) {
-            HIDE_IMAGES = true;
-          } else if ((x = element.match(/template=by([2-6])/i))) {
-            WIDTH = 'md:w-1/' + x[1];
-          } else if ((x = element.match(/by([2-6])/i))) {
-            WIDTH = 'md:w-1/' + x[1];
-          } else if ((x = element.match(/[Bb][yY]1/))) {
-            WIDTH = 'md:w-full';
-          } else if (element.match(/people/i)) {
-            template = PEOPLE;
-          } else if (element.match(/noengage/i)) {
-            linkTemplate = HORIZONTAL_NOENGAGE;
-          } else if (element.match(/logging/i)) {
-            LOGGING = true;
-          } else if ((m = element.match(/engage=([^']*)/))) {
-            engageVerb = m[1];
-          } else if ((m = element.match(/template=assessment/i))) {
-            template = ASSESSMENT;
-          } else if ((m = element.match(/set[Dd]ate=([^\s]*)/))) {
-            SET_DATE = m[1];
-          } else if ((m = element.match(/^reviewed=([^']*)/iu))) {
-            REVIEWED = m[1];
-          } else if ((m = element.match(/^markReviewed=(.+)/i))) {
-            MARK_REVIEWED = m[1];
-          }
-        });
-      }
-    } // if no match, stay with default
-  }
-
   //  console.log("LOGGING IS " + LOGGING);
   // make the h3 for the Card Interface item disappear
   // (Can't hide the parent as then you can't edit via Bb)
@@ -1680,36 +1642,3 @@ function getReviewStatus(vtbgen) {
   }
 }
 
-//---------------------------------------------------------------------
-// Given a string of parameters use some Stack Overflow provided
-// regular expression magic to split it up into its component parts
-
-function parse_parameters(cmdline) {
-  //    var re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
-  let re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
-  let next_arg = ['', '', cmdline];
-  let args = [];
-  while ((next_arg = re_next_arg.exec(next_arg[2]))) {
-    let quoted_arg = next_arg[1];
-    let unquoted_arg = '';
-    while (quoted_arg.length > 0) {
-      if (/^"/.test(quoted_arg)) {
-        let quoted_part = /^"((?:\\.|[^"])*)"(.*)$/.exec(quoted_arg);
-        unquoted_arg += quoted_part[1].replace(/\\(.)/g, '$1');
-        quoted_arg = quoted_part[2];
-      } else if (/^'/.test(quoted_arg)) {
-        let quoted_part = /^'([^']*)'(.*)$/.exec(quoted_arg);
-        unquoted_arg += quoted_part[1];
-        quoted_arg = quoted_part[2];
-      } else if (/^\\/.test(quoted_arg)) {
-        unquoted_arg += quoted_arg[1];
-        quoted_arg = quoted_arg.substring(2);
-      } else {
-        unquoted_arg += quoted_arg[0];
-        quoted_arg = quoted_arg.substring(1);
-      }
-    }
-    args[args.length] = unquoted_arg;
-  }
-  return args;
-}

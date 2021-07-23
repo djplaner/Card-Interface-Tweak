@@ -6,12 +6,19 @@
  * - move to a factory model to support other page models
  */
 
+const HORIZONTAL = 0; // original 3 cards per row
+const VERTICAL = 1; // 1 card per row
+const HORIZONTAL_NOENGAGE = 2; // original, but no engage
+const PEOPLE = 5;
+const ASSESSMENT = 6; // horizontal but show off people (BCI) version
+
 export default class guCards {
   constructor(pageModel) {
     // get the data
     this.pageModel = pageModel;
 
     this.getCardItems();
+    this.getParameters();
   }
 
   //  extract and parse the card items from the pageModel
@@ -56,9 +63,9 @@ export default class guCards {
       console.log(description);
 
       // extract all the possible meta data
-      const cardMetaData = this.extractCardMetaData(cardItem);
+      this.cardMetaData = this.extractCardMetaData(cardItem);
       console.log('---------------------- card Meta Data');
-      console.log(cardMetaData);
+      console.log(this.cardMetaData);
     });
   }
   /*
@@ -234,14 +241,14 @@ export default class guCards {
 	} */
 
   /**
-	 * @function extractCardMetaData
-	 * @param {Array} cardBbItems array of elements containing Bb content items that are cards
-	 *
-	 * Parse the cardBbItems and create
-	 */
+   * @function extractCardMetaData
+   * @param {Array} cardBbItems array of elements containing Bb content items that are cards
+   *
+   * Parse the cardBbItems and create
+   */
 
   extractCardMetaData(cardBbItem) {
-	  this.done = 1; // KLUDGE TODO remove prevent lots of warnings
+    this.done = 1; // KLUDGE TODO remove prevent lots of warnings
     // define hash to put values into it
     const metaDataValues = {};
     let description = cardBbItem.body.innerHTML;
@@ -296,8 +303,10 @@ export default class guCards {
         // metadata variable within the current item (i.e. <p> </p>)
         // This happens when a <br> is used, rather than <p> between metadata
         // look for element, followed by a card metadata
-        let re = new RegExp(`(${element}\\s*:\\s*.*)cards+(?:label|number|date|date label|image size|image active)[^:]*:`,
-          'mi');
+        let re = new RegExp(
+          `(${element}\\s*:\\s*.*)cards+(?:label|number|date|date label|image size|image active)[^:]*:`,
+          'mi'
+        );
         /*	      "(" +
 						element +
 						"\\s*:\\s*.*)cards+(?:label|number|date|date label|image size|image active)[^:]*:",
@@ -306,8 +315,10 @@ export default class guCards {
         let m = partialDescription.match(re);
         // if not, check for assessment
         if (!m) {
-          re = new RegExp(`(${element}\\s*:\\s*.*)assessments+(?:type|weighting|outcomes)[^:]*:`,
-            'mi');
+          re = new RegExp(
+            `(${element}\\s*:\\s*.*)assessments+(?:type|weighting|outcomes)[^:]*:`,
+            'mi'
+          );
           /*		"(" +
 							  element +
 							  "\\s*:\\s*.*)assessments+(?:type|weighting|outcomes)[^:]*:",
@@ -413,4 +424,127 @@ export default class guCards {
 
     return metaDataValues;
   }
+
+  /**
+   * @function getParemeters
+   * @description find the Card Interface element and process parameters
+   */
+
+  getParameters() {
+    // TODO handle multiple Card Interface items
+    let cardInterface = this.pageModel.cardInterfaces[0];
+    let cardInterfaceTitle =
+      cardInterface.querySelector('div.item > h3').innerText;
+
+    // Extract parameters
+    let m = cardInterfaceTitle.match(/Card Interface *([^<]*)/i);
+    // TODO is this needed
+    // let WIDTH = 'md:w-1/3';
+
+	this.parameters = {
+		WIDTH: 'md:w-1/3'
+	};
+
+    if (m) {
+      let newParams = this.parse_parameters(m[1]);
+      let x = '';
+
+      if (newParams) {
+        newParams.forEach(function (element) {
+          m = element.match(/template=["']vertical['"]/i);
+          const m1 = element.match(/template=vertical/i);
+          if (m || m1) {
+            this.parameters.template = VERTICAL;
+          }
+		  if (element.match(/template=['"]horizontal['"]/i)) {
+            this.parameters.template = HORIZONTAL;
+          }
+		  if (element.match(/nocardnumber/i)) {
+            this.parameters.NO_CARD_NUMBER = true;
+          }
+		  if (element.match(/nocomingsoon/i)) {
+            this.parameters.NO_COMING_SOON = true;
+          }
+		  if (element.match(/noimages/i)) {
+            this.parameters.HIDE_IMAGES = true;
+          } 
+		  let x = element.match(/template=by([2-6])/i)
+		  if (x) {
+            this.parameters.WIDTH = 'md:w-1/' + x[1];
+          } 
+		  x = element.match(/by([2-6])/i)
+		  if (x) {
+            this.parameters.WIDTH = 'md:w-1/' + x[1];
+          } else {
+			  x = element.match(/[Bb][yY]1/)
+			  if (x){
+            	this.parameters.WIDTH = 'md:w-full';
+			  }
+          } 
+		  if (element.match(/people/i)) {
+            this.parameters.template = PEOPLE;
+          } 
+		  if (element.match(/noengage/i)) {
+            this.parameters.linkTemplate = HORIZONTAL_NOENGAGE;
+          } 
+		  if (element.match(/logging/i)) {
+            this.parameters.LOGGING = true;
+          }
+		  m = element.match(/engage=([^']*)/)
+		  if (m) {
+            this.parameters.engageVerb = m[1];
+          }
+		  m = element.match(/template=assessment/i)
+		  if (m) {
+            this.parameters.template = ASSESSMENT;
+          }
+		  m = element.match(/set[Dd]ate=([^\s]*)/)
+		  if (m) {
+            this.parameters.SET_DATE = m[1];
+          }
+		  m = element.match(/^reviewed=([^']*)/iu)
+		  if (m) {
+            this.parameters.REVIEWED = m[1];
+          }
+		  m = element.match(/^markReviewed=(.+)/i)
+		  if (m) {
+            this.parameters.MARK_REVIEWED = m[1];
+          }
+        }, this);
+      }
+    } // if no match, stay with default */
+  }
+
+  //---------------------------------------------------------------------
+  // Given a string of parameters use some Stack Overflow provided
+  // regular expression magic to split it up into its component parts
+
+  parse_parameters(cmdline) {
+	let re_next_arg = /^\s*((?:(?:"(?:\\.|[^"])*")|(?:'[^']*')|\\.|\S)+)\s*(.*)$/;
+	let next_arg = ['', '', cmdline];
+	let args = [];
+	while ((next_arg = re_next_arg.exec(next_arg[2]))) {
+		let quoted_arg = next_arg[1];
+		let unquoted_arg = '';
+		while (quoted_arg.length > 0) {
+			if (/^"/.test(quoted_arg)) {
+				let quoted_part = /^"((?:\\.|[^"])*)"(.*)$/.exec(quoted_arg);
+				unquoted_arg += quoted_part[1].replace(/\\(.)/g, '$1');
+				quoted_arg = quoted_part[2];
+			} else if (/^'/.test(quoted_arg)) {
+				let quoted_part = /^'([^']*)'(.*)$/.exec(quoted_arg);
+				unquoted_arg += quoted_part[1];
+				quoted_arg = quoted_part[2];
+			} else if (/^\\/.test(quoted_arg)) {
+				unquoted_arg += quoted_arg[1];
+				quoted_arg = quoted_arg.substring(2);
+			} else {
+				unquoted_arg += quoted_arg[0];
+				quoted_arg = quoted_arg.substring(1);
+			}
+		}
+		args[args.length] = unquoted_arg;
+	}
+	return args;
+}
 }
