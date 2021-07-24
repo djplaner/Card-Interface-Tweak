@@ -71,8 +71,6 @@ const MONTHS_HASH = {
   December: 11,
 };
 
-// kludge to parse card image when Blackboard inserts one of its icons
-const BBIMG = '/images/ci/icons/cmlink_generic.gif';
 
 // Interface design from https://codepen.io/njs/pen/BVdwZB
 
@@ -1550,76 +1548,6 @@ function setImage(card) {
   return card.picUrl;
 }
 
-//* *************************************************************
-// cardBGcolour = identifyCardBackgroundColour( value );
-// return undefined if value is not a valid CSS colour
-// Otherwise return rgb(X,Y,Z)
-
-function identifyCardBackgroundColour(input) {
-  // don't both if it's an empty string or a URL (or relative URL)
-  let url = input.match(/^\s*http/i) || input.match(/^\//);
-  if (input === '' || url) {
-    return undefined;
-  }
-  var div = document.createElement('div'),
-    m;
-  div.style.color = input;
-  // add to DOMTree to work
-  document.body.appendChild(div);
-
-  // extract the rgb numbers
-  m = getComputedStyle(div).color.match(
-    /^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i
-  );
-  if (m) {
-    return 'rgb(' + m[1] + ',' + m[2] + ',' + m[3] + ')';
-  }
-  return undefined;
-}
-
-//* *************************************************************
-// picUrl = identifyPicUrl( value )
-// TODO - return "" if value is not a valid URI
-//   Otherwise return the value
-
-function identifyPicUrl(value) {
-  let re = new RegExp(/img src="([^"]*)/, 'i');
-  let m = value.match(re);
-
-  // found an image
-  if (m) {
-    // not a BBIMG, then return it
-    if (!m[1].includes(BBIMG)) {
-      console.log("-- doens't include BBIMG");
-      return m[1];
-    }
-    // is a BBIMG try extract the link
-    // kludge because I couldn't get registers to work in JS REs
-    re = new RegExp(/<a href="([^"]*)">([^>]*)<\/a>/, 'i');
-    m = value.match(re);
-    if (m) {
-      if (m[1] === m[2]) {
-        return m[1];
-      }
-    }
-  }
-
-  // is there a link to the image
-  re = new RegExp('href="([^"]*)', 'i');
-  m = value.match(re);
-
-  // if it's a <a href="picUrl"></a> return the picUrl
-  if (m) {
-    return m[1];
-  }
-
-  // remove all html and just use the text content that's left
-  let tmp = document.createElement('DIV');
-  tmp.innerHTML = value;
-  value = tmp.textContent || tmp.innerText || '';
-  // must be just a lone URL TODO check it actually does
-  return value;
-}
 
 //-----------------------------------------------------------------
 // getReviewStatus

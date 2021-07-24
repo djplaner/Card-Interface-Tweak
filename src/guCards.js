@@ -21,11 +21,14 @@ const DEFAULT_CARD_LABEL = 'Module';
 const DEFAULT_DATE_LABEL = 'Commencing';
 const DEFAULT_COMING_SOON_LABEL = 'Available';
 
+// kludge to parse card image when Blackboard inserts one of its icons
+const BBIMG = '/images/ci/icons/cmlink_generic.gif';
+
 export default class guCards {
   constructor(pageModel) {
     // get the data
     this.pageModel = pageModel;
-	this.cardInterface = this.pageModel.cardInterfaces[0];
+    this.cardInterface = this.pageModel.cardInterfaces[0];
 
     this.getCardItems();
     this.getParameters();
@@ -82,60 +85,77 @@ export default class guCards {
       // loop through each of the elements (but not description)
 
       // tmp variables used to hold results before putting into single card object
-/*	    let bgSize = '', dateLabel = 'Commencing', picUrl, cardBGcolour;
+      /*	    let bgSize = '', dateLabel = 'Commencing', picUrl, cardBGcolour;
       let label = DEFAULT_CARD_LABEL, activePicUrl = '', number = '&nbsp;', iframe = '';
       let date, comingSoon, comingSoonLabel = 'Available';
       let assessmentType = '', assessmentWeighting = '', assessmentOutcomes = '';
 */
-      let card = { title: undefined, picUrl: undefined, bgSize: undefined, 
-        cardBGcolour: undefined, description: undefined, date: undefined,
-	      label: DEFAULT_CARD_LABEL, link: undefined, linkTarget: undefined,
-	      review: undefined, dateLabel: DEFAULT_DATE_LABEL, id: undefined,
-	      activePicUrl: undefined, comingSoon: undefined, iframe: undefined,
-        comingSoonLabel: DEFAULT_COMING_SOON_LABEL, assessmentWeighting: 
-        undefined, assessmentOutcomes: undefined, assessmentType: undefined,
-	    };
-
+      let card = {
+        title: undefined,
+        picUrl: undefined,
+        bgSize: undefined,
+        cardBGcolour: undefined,
+        description: undefined,
+        date: undefined,
+        label: DEFAULT_CARD_LABEL,
+        link: undefined,
+        linkTarget: undefined,
+        review: undefined,
+        dateLabel: DEFAULT_DATE_LABEL,
+        id: undefined,
+        activePicUrl: undefined,
+        comingSoon: undefined,
+        iframe: undefined,
+        comingSoonLabel: DEFAULT_COMING_SOON_LABEL,
+        assessmentWeighting: undefined,
+        assessmentOutcomes: undefined,
+        assessmentType: undefined,
+      };
 
       //for (let index in cardMetaData) {
       const mDataKeys = Object.keys(this.cardMetaData);
-      mDataKeys.forEach( (key,index) => {
-	      switch (index) { 
-//          case 'card image': [card.picUrl, card.cardBGcolour] = handleCardImage(cardMetaData[index]); 
- //         break; 
-  //        case 'card image active': [card.activePicUrl, card.cardBGcolour] = handleCardImage( cardMetaData[index]); 
-   //       break; 
-    //      case 'card image iframe': card.iframe = handleCardImageIframe(cardMetaData[index]); 
-     //     break; 
-//          case 'card image size': card.bgSize = handleCardImageSize(cardMetaData[index]); 
- //         break; 
-          case 'card date': card.date = this.handleCardDate(this.cardMetaData[index]); 
-          break; 
-          case 'card date label': card.dateLabel = this.cardMetaData[index]; 
-          break; 
-//          case 'card coming soon': card.comingSoon = handleCardDate(cardMetaData[index]); 
- //         break; 
-          case 'card coming soon label': card.comingSoonLabel = this.cardMetaData[index]; 
-          break; 
-          case 'assessment type': card.assessmentType = this.cardMetaData[index]; 
-          break; 
-          case 'assessment weighting': card.assessmentWeighting = this.cardMetaData[index]; 
-          break; 
-          case 'assessment outcomes': card.assessmentOutcomes = this.cardMetaData[index]; 
-          break;
-	      }
-	    });
+      mDataKeys.forEach((key, index) => {
+        switch (index) {
+          //          case 'card image': [card.picUrl, card.cardBGcolour] = handleCardImage(cardMetaData[index]);
+          //         break;
+          //        case 'card image active': [card.activePicUrl, card.cardBGcolour] = handleCardImage( cardMetaData[index]);
+          //       break;
+          //      case 'card image iframe': card.iframe = handleCardImageIframe(cardMetaData[index]);
+          //     break;
+          //          case 'card image size': card.bgSize = handleCardImageSize(cardMetaData[index]);
+          //         break;
+          //          case 'card date': card.date = this.handleCardDate(this.cardMetaData[index]);
+          //         break;
+          case 'card date label':
+            card.dateLabel = this.cardMetaData[index];
+            break;
+          //          case 'card coming soon': card.comingSoon = handleCardDate(cardMetaData[index]);
+          //         break;
+          case 'card coming soon label':
+            card.comingSoonLabel = this.cardMetaData[index];
+            break;
+          case 'assessment type':
+            card.assessmentType = this.cardMetaData[index];
+            break;
+          case 'assessment weighting':
+            card.assessmentWeighting = this.cardMetaData[index];
+            break;
+          case 'assessment outcomes':
+            card.assessmentOutcomes = this.cardMetaData[index];
+            break;
+        }
+      });
 
       this.cards.push(card);
 
-	    // handle card label and card number together
-/*	    [label, number] = handleCardLabelNumber(
+      // handle card label and card number together
+      /*	    [label, number] = handleCardLabelNumber(
 	      cardMetaData['card label'],
 	      cardMetaData['card number']
 	    ); */
     }, this);
   }
-/*
+  /*
 	    // description changed to remove all the meta data
 	    description = cardMetaData['description'];
 
@@ -292,7 +312,7 @@ export default class guCards {
     // console.log("----------------------- extractCardMetaData");
     // check and break up the ps into individual bits of meta data
     const maxLength = elementContent.length;
-    for (let i = 0; i < maxLength; i++) {
+    for (let i = 0; i < maxLength; i += 1) {
       //       console.log(`    _____________ working on para ${i} == ${elementContent[i]}`);
       // work on a temp copy of description
       // let partialDescription = elementContent[i].innerHTML;
@@ -396,7 +416,7 @@ export default class guCards {
         const newValue = div.innerHTML;
 
         metaDataValues[label] = newValue;
-      } 
+      }
     }
 
     // used to edit the description element and ensure that it is correct HTML
@@ -435,7 +455,8 @@ export default class guCards {
 
   getParameters() {
     // TODO handle multiple Card Interface items
-    const cardInterfaceTitle = this.cardInterface.querySelector('div.item > h3').innerText;
+    const cardInterfaceTitle =
+      this.cardInterface.querySelector('div.item > h3').innerText;
 
     // Extract parameters
     let m = cardInterfaceTitle.match(/Card Interface *([^<]*)/i);
@@ -457,58 +478,58 @@ export default class guCards {
           if (m || m1) {
             this.parameters.template = VERTICAL;
           }
-		  if (element.match(/template=['"]horizontal['"]/i)) {
+          if (element.match(/template=['"]horizontal['"]/i)) {
             this.parameters.template = HORIZONTAL;
           }
-		  if (element.match(/nocardnumber/i)) {
+          if (element.match(/nocardnumber/i)) {
             this.parameters.NO_CARD_NUMBER = true;
           }
-		  if (element.match(/nocomingsoon/i)) {
+          if (element.match(/nocomingsoon/i)) {
             this.parameters.NO_COMING_SOON = true;
           }
-		  if (element.match(/noimages/i)) {
+          if (element.match(/noimages/i)) {
             this.parameters.HIDE_IMAGES = true;
           }
-		  x = element.match(/template=by([2-6])/i);
-		  if (x) {
+          x = element.match(/template=by([2-6])/i);
+          if (x) {
             this.parameters.WIDTH = `md:w-1/${x[1]}`;
           }
-		  x = element.match(/by([2-6])/i);
-		  if (x) {
+          x = element.match(/by([2-6])/i);
+          if (x) {
             this.parameters.WIDTH = 'md:w-1/' + x[1];
           } else {
-			  x = element.match(/[Bb][yY]1/);
-			  if (x){
-            	this.parameters.WIDTH = 'md:w-full';
-			  }
+            x = element.match(/[Bb][yY]1/);
+            if (x) {
+              this.parameters.WIDTH = 'md:w-full';
+            }
           }
-		  if (element.match(/people/i)) {
+          if (element.match(/people/i)) {
             this.parameters.template = PEOPLE;
           }
-		  if (element.match(/noengage/i)) {
+          if (element.match(/noengage/i)) {
             this.parameters.linkTemplate = HORIZONTAL_NOENGAGE;
           }
-		  if (element.match(/logging/i)) {
+          if (element.match(/logging/i)) {
             this.parameters.LOGGING = true;
           }
-		  m = element.match(/engage=([^']*)/);
-		  if (m) {
+          m = element.match(/engage=([^']*)/);
+          if (m) {
             this.parameters.engageVerb = m[1];
           }
-      m = element.match(/template=assessment/i);
-		  if (m) {
+          m = element.match(/template=assessment/i);
+          if (m) {
             this.parameters.template = ASSESSMENT;
           }
-		  m = element.match(/set[Dd]ate=([^\s]*)/);
-		  if (m) {
+          m = element.match(/set[Dd]ate=([^\s]*)/);
+          if (m) {
             this.parameters.SET_DATE = m[1];
           }
-		  m = element.match(/^reviewed=([^']*)/iu);
-		  if (m) {
+          m = element.match(/^reviewed=([^']*)/iu);
+          if (m) {
             this.parameters.REVIEWED = m[1];
           }
-		  m = element.match(/^markReviewed=(.+)/i)
-		  if (m) {
+          m = element.match(/^markReviewed=(.+)/i);
+          if (m) {
             this.parameters.MARK_REVIEWED = m[1];
           }
         }, this);
@@ -548,5 +569,128 @@ export default class guCards {
       args[args.length] = unquoted_arg;
     }
     return args;
+  }
+
+  // handleCardImage()
+  // - given value associated with "card image", could be URL or html
+
+  handleCardImage(param) {
+    let picUrl = ''; 
+    let cardBGcolour = 'black';
+
+    // is it a data URI, just return it
+    const regex = /^data:((?:\w+\/(?:(?!;).)+)?)((?:;[\w\W]*?[^;])*),(.+)$/;
+    if (regex.test(param)) {
+      return [param, cardBGcolour];
+    }
+
+    // check to see if it's a colour, rather than an image
+    // TODO might need to modify identifyPicUrl to remove extraneous
+    // lead html if there is a href?? after img src is checked??
+    picUrl = this.identifyPicUrl(param);
+    cardBGcolour = this.identifyCardBackgroundColour(param);
+
+    // TODO/CHECK previously there was a test to remove a trainling </p> from end
+    // Maybe this should be handled in the picURL
+
+    return [picUrl.trim(), cardBGcolour];
+  }
+
+  // handleCardImageIframe
+  // - given the HTML for an iframe, modify any height/width params
+  //   to be more responsive
+
+  handleCardImageIframe(param) {
+    // replace the width and height
+    let x = param.match(/width="[^"]+"/i);
+    if (x) {
+      param = param.replace(x[0], 'width="100%"');
+    }
+    x = param.match(/height="[^"]+"/i);
+    if (x) {
+      param = param.replace(x[0], 'height="auto"');
+    }
+    return param;
+  }
+
+  // handleCardImageSize
+  // - return contain if set
+
+  handleCardImageSize(param) {
+    if (param.includes('contain')) {
+      return 'contain';
+    }
+    return '';
+  }
+
+  //* *************************************************************
+  // picUrl = identifyPicUrl( value )
+  // TODO - return "" if value is not a valid URI
+  //   Otherwise return the value
+
+  identifyPicUrl(value) {
+    let re = new RegExp(/img src="([^"]*)/, 'i');
+    let m = value.match(re);
+
+    // found an image
+    if (m) {
+      // not a BBIMG, then return it
+      if (!m[1].includes(BBIMG)) {
+        console.log("-- doens't include BBIMG");
+        return m[1];
+      }
+      // is a BBIMG try extract the link
+      // kludge because I couldn't get registers to work in JS REs
+      re = new RegExp(/<a href="([^"]*)">([^>]*)<\/a>/, 'i');
+      m = value.match(re);
+      if (m) {
+        if (m[1] === m[2]) {
+          return m[1];
+        }
+      }
+    }
+
+    // is there a link to the image
+    re = new RegExp('href="([^"]*)', 'i');
+    m = value.match(re);
+
+    // if it's a <a href="picUrl"></a> return the picUrl
+    if (m) {
+      return m[1];
+    }
+
+    // remove all html and just use the text content that's left
+    let tmp = document.createElement('DIV');
+    tmp.innerHTML = value;
+    value = tmp.textContent || tmp.innerText || '';
+    // must be just a lone URL TODO check it actually does
+    return value;
+  }
+
+  //* *************************************************************
+  // cardBGcolour = identifyCardBackgroundColour( value );
+  // return undefined if value is not a valid CSS colour
+  // Otherwise return rgb(X,Y,Z)
+
+  identifyCardBackgroundColour(input) {
+    // don't both if it's an empty string or a URL (or relative URL)
+    let url = input.match(/^\s*http/i) || input.match(/^\//);
+    if (input === '' || url) {
+      return undefined;
+    }
+    var div = document.createElement('div'),
+      m;
+    div.style.color = input;
+    // add to DOMTree to work
+    document.body.appendChild(div);
+
+    // extract the rgb numbers
+    m = getComputedStyle(div).color.match(
+      /^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i
+    );
+    if (m) {
+      return 'rgb(' + m[1] + ',' + m[2] + ',' + m[3] + ')';
+    }
+    return undefined;
   }
 }

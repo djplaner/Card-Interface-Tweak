@@ -29,5 +29,5 @@ Slowly converting to new method.  Up to the stage of correctly extract cardMetaD
 To do
 - finish the getParameters in guCards - TEST
 - finish the extractCardMeta data harness functions in guCards
-	- starting on the individual handlers Question is whether they should be in objects of their own
+	- working on handleCardImage
 - start view render
