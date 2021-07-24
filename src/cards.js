@@ -473,7 +473,6 @@ var LOCATION = 1;
 
 // GLOBALS
 
-const DEFAULT_CARD_LABEL = 'Module';
 
 // Big kludge for HDR
 
@@ -557,9 +556,12 @@ export default function cardsInterface() {
   let display = new guCardsView(cards);
   // html is a lit object
   const html = display.render()
-
+ 
   console.log("PARAMTERES");
   console.log(cards.parameters);
+
+  console.log("CARDS");
+  console.log(cards.cards);
 
 
   /*window.addEventListener('load', (event) => {

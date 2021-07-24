@@ -27,6 +27,7 @@ Slowly converting to new method.  Up to the stage of correctly extract cardMetaD
 - guCards.js
 
 To do
-- finish the getParameters in guCards
+- finish the getParameters in guCards - TEST
 - finish the extractCardMeta data harness functions in guCards
+	- starting on the individual handlers Question is whether they should be in objects of their own
 - start view render
