@@ -2503,7 +2503,7 @@ function generateDateHtml(
     "month" in date.start
   ) {
     // Do we have dual dates - both start and stop?
-    if (date.stop.month) {
+    if (date.stop.month ) {
       // start and stop dates
       //cardHtml = cardHtml.replace('{DATE}', dualDateHtmlTemplate[template]);
       cardHtml = dualTemplate;
@@ -2516,17 +2516,22 @@ function generateDateHtml(
 
       //-- handle the {WEEK} variable for dual dates
       if (!date.start.hasOwnProperty("week")) {
+        // no start week, so week is empty
         cardHtml = cardHtml.replace("{WEEK}", "");
       } else {
         // if exam, use that template
         // other wise construct dual week
         let weekHtml = examPeriodTemplate;
         if (date.start.week !== "exam") {
-          weekHtml = dualWeekHtmlTemplate.replace(
-            "{WEEK_START}",
-            date.start.week
-          );
-          weekHtml = weekHtml.replace("{WEEK_STOP}", date.stop.week);
+          // not exam, then set to dualWeekHtml
+          if ( date.start.week!==date.stop.week) {
+            weekHtml = dualWeekHtmlTemplate.replace(
+              "{WEEK_START}", date.start.week);
+            weekHtml = weekHtml.replace("{WEEK_STOP}", date.stop.week);
+          } else {
+            // same week, so using single week template
+            weekHtml = weekHtmlTemplate.replace("{WEEK}", `Week ${date.start.week}`);
+          }
         }
         cardHtml = cardHtml.replace("{WEEK}", weekHtml);
       }
