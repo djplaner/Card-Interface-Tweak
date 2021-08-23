@@ -1366,8 +1366,8 @@ function calculateTermYear(courseTitle) {
     // if this is a QCM course (either offering of joined), then update term
     let qcmRe = new RegExp("^([0-9]+QCM)_([0-9][0-9][0-9][0-9])");
     let qcmRe2 = new RegExp("^([0-9]+QCM)_(Y[0-9])_([0-9][0-9][0-9][0-9])");
-    m = qcmRe.match(id);
-    let m2 = qcmRe2.match(id);
+    m = id.match(qcmRe);
+    let m2 = id.match(qcmRe2);
     if (m || m2) {
       term = term + "QCM";
     }
