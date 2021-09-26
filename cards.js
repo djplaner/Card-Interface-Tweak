@@ -1314,7 +1314,7 @@ function calculateTermYear(courseTitle) {
       //  course code_STRM_offering - 1731QCM_3211_SB
       //
       breakIdRe = new RegExp(
-        "^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z])$"
+        "^([0-9]+[A-Z]+)_([0-9][0-9][0-9][0-9])_([A-Z][A-Z0-9])$"
       );
       m = id.match(breakIdRe);
 
