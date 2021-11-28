@@ -959,6 +959,8 @@ DOCUMENTATION_LINKS = {
     "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-change-the-number-of-cards-per-row-using-templateb1y123456",
   assessment:
     "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-use-the-assessment-template-templateassessment",
+  downloadButton: 
+    "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-add-a-download-button",
 };
 
 INTRO_HTML = `
@@ -1075,7 +1077,7 @@ DOCUMENTATION_HTML = `
            </li> 
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardNumber}">Change the card number</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.noCardNumber}">Remove the card number</a>. </li>
-           <li> <i class="fa fa-plus-square text-green"></i><a target="_blank" href="${DOCUMENTATION_LINKS.changeCardEngage}">Change a card's engage button</a>. </li>
+           <li> <a target="_blank" href="${DOCUMENTATION_LINKS.changeCardEngage}">Change a card's engage button</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.hideCard}">Hide a card</a>. </li>
            <li> Turn a card to a <a target="_blank" href="${DOCUMENTATION_LINKS.comingSoon}">"Coming Soon" (🚧) card</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.enableReview}">Enable "Review Status"</a>. </li>
@@ -1100,6 +1102,9 @@ DOCUMENTATION_HTML = `
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.cardsPerRow}">Change the number of cards per row</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.assessment}">Use the assessment template</a>. </li>
            <li> <a target="_blank" href="${DOCUMENTATION_LINKS.templatesAndAttributes}">Learn about templates and attributes</a>. </li>
+           <li>  <i class="fa fa-plus-square text-green"></i> Add a 
+               <a target="_blank" href="${DOCUMENTATION_LINKS.downloadButton}">"download button"</a>. </li>
+               
           </ul>
                 </div>
             </article>
