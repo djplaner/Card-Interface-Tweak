@@ -18,6 +18,10 @@
  *     Specify the label for the date - default Commencing
  */
 
+var PARAMS = {}
+var TOOLTIPSTER_ADDED = false;
+var DOWNLOAD_LABEL = "Download File"
+
 /* Griffith Calendar Term dates
  * 2021
  * - OUA Study Periods 1-4
@@ -37,6 +41,7 @@
  * - GU T1, T2, T3
  *   3191 3195 319
  */
+
 
 var TERM_DATES = {
   2211: {
@@ -1163,6 +1168,7 @@ function cardsInterface($) {
     $(".gutweak").parents("li").hide();
   }
 
+
   //
   jQuery("#gu_card_docs").html(DOCUMENTATION_HTML);
   jQuery("#gu_card_intro").html(INTRO_HTML);
@@ -1196,6 +1202,8 @@ function cardsInterface($) {
   if (cardInterface.length === 0) {
     return false;
   }
+
+  PARAMS = checkParams(cardInterface)
   /* Get the titles and descriptions of the items on the page */
   var items = getCardItems($);
 
@@ -1252,6 +1260,7 @@ function cardsInterface($) {
     );
   }
 
+  addButtons();
   // if we want the images to be hidden, hide them at the end
   if (HIDE_IMAGES) {
     jQuery(".bg-cover").hide();
@@ -2176,6 +2185,8 @@ function addCardInterface(cardInterface, items) {
             REVIEWED = m[1];
           } else if ((m = element.match(/^markReviewed=(.+)/i))) {
             MARK_REVIEWED = m[1];
+          } else if ((m = element.match(/^downloadButtonLabel=(.+)/i))) {
+            DOWNLOAD_LABEL = m[1];
           }
         });
       }
@@ -2968,4 +2979,156 @@ function parse_parameters(cmdline) {
     args[args.length] = unquoted_arg;
   }
   return args;
+}
+
+
+/****
+ * function addExpandPrintButtons
+ * - add buttons (only downloadButton) to top of card interface
+ * - adapted from similar for Content Interface
+ */
+
+function addButtons() {
+//  jQuery("#GU_ContentInterface").prepend(EXPAND_COLLAPSE_BUTTON_HTML);
+
+  // show downloadButton for downloadButtonURL and downloadButtonLabel
+  if (PARAMS.downloadButtonURL) {
+    let tooltip = "";
+    let tt_class = "";
+    if (PARAMS.downloadButtonTip) {
+      tooltip = `data-tooltip-content="${PARAMS.downloadButtonTip}"`;
+      tt_class = 'class="ci-tooltip"';
+      addToolTipster();   // ** where's this
+    }
+    const download_button = `
+    <button href="" type="button" id="gu_download" ${tooltip} ${tt_class} 
+        onclick="window.open('${PARAMS.downloadButtonURL}', '_blank'); return false;"
+       style="padding:0.3em 1.2em;margin:0 0.3em 0.3em 0;border-radius:2em;border:2px solid;box-sizing: border-box;text-decoration:none;text-align:center"
+      >${DOWNLOAD_LABEL}</button>
+    `;
+    // add the expand buttons - only Content Interface
+    // insert before #guCardInterface
+    let buttonDiv = document.createElement("div");
+    buttonDiv.id = "guCardButtons";
+    buttonDiv.style.paddingBottom="1em"; 
+    let cardInterface = document.getElementById("guCardInterface");
+    cardInterface.parentElement.insertBefore(buttonDiv,cardInterface)
+
+    buttonDiv.insertAdjacentHTML('beforeend',download_button);
+
+//    jQuery("div#guCardButtons").prepend(download_button);
+
+    return true;
+  }
+}
+
+/************************************************
+ * checkParams
+ * - given the card interfaace element check for paraemters
+ * - set object attributes and return it
+ * - parameters come from both
+ *   - the title of the Content Interface content item
+ *   - a Web Link content item that has Content Document in the title
+ */
+
+ function checkParams(cardInterface) {
+  var paramsObj = {};
+
+  // checking parameters in the card interface title is done elsewhere
+
+  /**********
+   * * check other content items for other parameters that are Content Items
+   * - Only look for those defined in global ITEM_LINK_PARAMETERS
+   * - Looking for the link associated with item, what they are pointing to
+   * - ITEM_PARAMS defines
+   *   - key - is the expected title of the Blackboard item
+   *   - element - define attribute name to add to paramsObj to contain jQuery element
+   *              to find in the Blackboard item
+   *   - item - define pramsObj attribute name for the actual value
+   */
+
+  let ITEM_LINK_PARAMETERS = {
+    downloadButtonURL: {
+      element: "downloadButtonElement",
+      item: "downloadButtonURL",
+    },
+    downloadButtonTip: {
+      element: "downloadButtonTipElement",
+      item: "downloadButtonTip",
+      type: "contentItem",
+    },
+  };
+
+  for (let paramKey in ITEM_LINK_PARAMETERS) {
+    const obj = ITEM_LINK_PARAMETERS[paramKey];
+
+    // element is the h3 wrapped around the link
+    element = jQuery(tweak_bb.page_id + " > " + tweak_bb.row_element)
+      .find(".item h3")
+      .filter(':contains("' + paramKey + '")')
+      .eq(0);
+    // only if it's found
+    if (element.length > 0) {
+      paramsObj[obj.element] = element;
+      // the type of content, depends on the type
+      if (obj.type === "contentItem") {
+        // content is element.parent.sibling(div.details)
+        // and then remove all the vtbgenertedt_div crap
+        let tipContent = jQuery(paramsObj[obj.element])
+          .parent()
+          .next("div.details")
+          .html();
+        tipContent = tipContent.replace(/class="vtbegenerated_div"/g, "");
+        tipContent = tipContent.replace(/class="vtbegenerated"/g, "");
+        tipContent = tipContent.replace(/(?:\r\n|\r|\n)/g, " ");
+        paramsObj[obj.item] = tipContent;
+      } else {
+        // assume a link item
+        paramsObj[obj.element] = element;
+        paramsObj[obj.item] = jQuery(paramsObj[obj.element])
+          .children("a")
+          .attr("href");
+      }
+      // hide the elements
+      jQuery(paramsObj[obj.element]).parents("li").hide();
+    }
+  }
+
+  //console.log(paramsObj);
+  return paramsObj;
+}
+
+/**
+ * function addToolTipster
+ * - add the JS for tooltips 
+ */
+
+function addToolTipster() {
+  if (!TOOLTIPSTER_ADDED) {
+    // add tooltipster if there are footnotes
+    jQuery("head").append(
+      "<link id='tooltipstercss' href='https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/css/tooltipster.bundle.min.css' type='text/css' rel='stylesheet' />"
+    );
+    getScript(
+      //"https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/js/tooltipster.bundle.js",
+      "https://cdn.jsdelivr.net/npm/tooltipster@4.2.8/dist/js/tooltipster.bundle.min.js",
+      onScriptLoad
+    );
+    TOOLTIPSTER_ADDED = true;
+  }
+}
+
+// https://blog.kevinchisholm.com/javascript/jquery-getscript-alternatives/
+
+function getScript(scriptUrl, callback) {
+  const script = document.createElement('script');
+  script.src = scriptUrl;
+  script.onload = callback;
+
+  document.body.appendChild(script);
+}
+
+function onScriptLoad() {
+  docWidth = Math.floor(jQuery(document).width() / 2);
+  jQuery(".ci-tooltip").tooltipster({ maxWidth: docWidth });
 }
