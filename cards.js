@@ -960,7 +960,7 @@ DOCUMENTATION_LINKS = {
   assessment:
     "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-use-the-assessment-template-templateassessment",
   downloadButton: 
-    "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-add-a-download-button",
+    "https://djplaner.github.io/Card-Interface-Tweak/customiseAllCards/#how-to-add-a-download-button",
 };
 
 INTRO_HTML = `
