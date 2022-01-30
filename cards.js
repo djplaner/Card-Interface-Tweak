@@ -49,6 +49,8 @@ var DOWNLOAD_LABEL = "Download File"
 
 
 var TERM_DATES = {
+  // From 2022 OUA study periods match GU trimesters
+  // These added by assignment below
   3221: {
     0: { start: "2022-03-07", stop: "2022-03-13" },
     1: { start: "2022-03-14", stop: "2022-03-20" },
@@ -528,6 +530,10 @@ var TERM_DATES = {
     exam: { start: "2019-05-30", stop: "2019-06-08" },
   },
 };
+
+TERM_DATES[2222] = TERM_DATES[3221];
+TERM_DATES[2224] = TERM_DATES[3225];
+TERM_DATES[2226] = TERM_DATES[3228];
 
 // TERM/YEAR specify default period
 // SET_DATE is used for testing activePic, specify a date strong for now
