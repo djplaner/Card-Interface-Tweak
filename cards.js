@@ -1018,6 +1018,7 @@ var LOCATION = 1;
 
 // Github version
 DOCUMENTATION_LINKS = {
+  replaceCode: "https://djplaner.github.io/Card-Interface-Tweak/createCards/#do-you-need-to-update-the-card-interface-tweak-code",
   imageProblem:
     "https://djplaner.github.io/Card-Interface-Tweak/customiseACard/#problem-with-image-appearing-in-the-description",
   what: "https://djplaner.github.io/Card-Interface-Tweak/whatWhy/",
@@ -1075,6 +1076,8 @@ INTRO_HTML = `
   <h3>Note</h3>
 
   <p><br /></p>
+  <p> <i class="fa fa-exclamation-triangle text-red"></i>
+<a target="_blank" href="${DOCUMENTATION_LINKS.replaceCode}">Do you need to update the Card Interface tweak code?</a></p>
   <p> <i class="fa fa-exclamation-triangle text-red"></i> 
   Are your card images appearing in wrong place (in the description)? 
   <a target="_blank" href="${DOCUMENTATION_LINKS.imageProblem}">This solution</a> might help</p>
